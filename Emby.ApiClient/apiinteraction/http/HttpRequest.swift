@@ -14,15 +14,15 @@ import Foundation
 
 public class HttpRequest
 {
-//    private String Method;
-//    public final String getMethod()
-//    {
-//    return Method;
-//    }
-//    public final void setMethod(String value)
-//    {
-//    Method = value;
-//    }
+    private var Method: String?
+    public final func getMethod() -> String?
+    {
+        return Method;
+    }
+    public final func setMethod(value: String)
+    {
+        Method = value;
+    }
 //    private String RequestContent;
 //    public final String getRequestContent()
 //    {
@@ -41,25 +41,25 @@ public class HttpRequest
 //    {
 //    RequestContentType = value;
 //    }
-//    private HttpHeaders RequestHeaders;
-//    public final HttpHeaders getRequestHeaders()
-//    {
-//    return RequestHeaders;
-//    }
-//    public final void setRequestHeaders(HttpHeaders value)
-//    {
-//    RequestHeaders = value;
-//    }
-    private Url: String
-    public final getUrl() -> String
+    private var RequestHeaders: HttpHeaders?
+    public final func getRequestHeaders() -> HttpHeaders?
+    {
+        return RequestHeaders
+    }
+    public final func setRequestHeaders(value: HttpHeaders)
+    {
+        RequestHeaders = value;
+    }
+    private var Url: String?
+    public final func getUrl() -> String?
     {
         return Url;
     }
-//    public final void setUrl(String value)
-//    {
-//    Url = value;
-//    }
-//    
+    public final func setUrl(value: String)
+    {
+        Url = value;
+    }
+    
 //    private int Timeout;
 //    public final int getTimeout()
 //    {
@@ -70,19 +70,19 @@ public class HttpRequest
 //    Timeout = value;
 //    }
 //    
-//    private QueryStringDictionary postData;
-//    public final QueryStringDictionary getPostData()
-//    {
-//    return postData;
-//    }
-//    public final void setPostData(QueryStringDictionary value)
-//    {
-//    postData = value;
-//    }
-//    
-//    public HttpRequest()
-//    {
-//    setRequestHeaders(new HttpHeaders());
-//    setTimeout(30000);
-//    }
+    private var postData: QueryStringDictionary?
+    public final func getPostData() -> QueryStringDictionary?
+    {
+        return postData;
+    }
+    public final func setPostData(value: QueryStringDictionary)
+    {
+        postData = value;
+    }
+    
+    public init()
+    {
+//        setRequestHeaders(new HttpHeaders());
+//        setTimeout(30000);
+    }
 }

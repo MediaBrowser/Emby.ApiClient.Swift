@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Alamofire
 //package mediabrowser.apiinteraction.android;
 //
 //import android.graphics.Bitmap;
@@ -106,76 +107,76 @@ public class VolleyHttpClient : IAsyncHttpClient {
 //        }
 //    }
     
-    public func Send(/*final*/  request: HttpRequest, /*final*/ response: Response<String> )
+    public func Send(/*final*/  request: HttpRequest, /*final*/ response: Emby_ApiClient.Response<String> )
     {
         var method = Method.GET;
         
-        if (StringHelper.EqualsIgnoreCase(request.getMethod(), "POST")){
+        if (request.getMethod() == "POST"){
             method = Method.POST;
         }
-        else if (StringHelper.EqualsIgnoreCase(request.getMethod(), "DELETE")){
+        else if (request.getMethod() == "DELETE"){
             method = Method.DELETE;
         }
         
         /*final*/ let url = request.getUrl();
         
-        // TODO:
-        StringRequest req = new VolleyStringRequest(method, url, new VolleyResponseListener(response, logger, url), new VolleyErrorListener(response, logger), request);
-
-//        if (method != Method.GET) {
-//            req.setShouldCache(false);
-//        }
+//        // TODO:
+//        StringRequest req = new VolleyStringRequest(method, url, new VolleyResponseListener(response, logger, url), new VolleyErrorListener(response, logger), request);
+//
+////        if (method != Method.GET) {
+////            req.setShouldCache(false);
+////        }
+////        
+////        req.setRetryPolicy(new DefaultRetryPolicy(
+////            request.getTimeout(), // timeout in ms
+////            0, // num of retries
+////            DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+////            ));
+//
+//        // TODO: use HTTP request (serial) queue
+////        // add the request object to the queue to be executed
+////        addToRequestQueue(req);
 //        
-//        req.setRetryPolicy(new DefaultRetryPolicy(
-//            request.getTimeout(), // timeout in ms
-//            0, // num of retries
-//            DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
-//            ));
-
-        // TODO: use HTTP request (serial) queue
-//        // add the request object to the queue to be executed
-//        addToRequestQueue(req);
-        
-        Alamofire.request(method, url, parameters: nil).responseJSON { (response: Response<AnyObject, NSError>) -> Void in
-            
-            // To update anything on the main thread, just jump back on like so.
-            dispatch_async(dispatch_get_main_queue()) {
-                
-                if response.result.isSuccess {
-                    
-                    let dict = response.result.value as? Dictionary<String, AnyObject>
-                    
-                    if let
-                        dict = dict,
-                        status = dict["status"] as? String,
-                        userid = dict["userid"] as? String {
-                            
-                            if status == "ok" {
-                                
-                                success(userid: userid)
-                                
-                            } else {
-                                
-                                failure(error: response.result.error)
-                            }
-                    } else if let
-                        dict = dict,
-                        status = dict["status"] as? String,
-                        error_code = dict["error_code"] as? String,
-                        error_description = dict["error_description"] as? String {
-                            
-                            failure(error: NSError(domain: "application", code: 10000, userInfo: ["status": status, "error_code": error_code, "error_description": error_description]))
-                            
-                    } else {
-                        
-                        failure(error: response.result.error)
-                    }
-                } else {
-                    
-                    failure(error: response.result.error)
-                }
-            }
-        }
+//        Alamofire.request(method, url, parameters: nil).responseJSON { (response: Response<AnyObject, NSError>) -> Void in
+//            
+//            // To update anything on the main thread, just jump back on like so.
+//            dispatch_async(dispatch_get_main_queue()) {
+//                
+//                if response.result.isSuccess {
+//                    
+//                    let dict = response.result.value as? Dictionary<String, AnyObject>
+//                    
+//                    if let
+//                        dict = dict,
+//                        status = dict["status"] as? String,
+//                        userid = dict["userid"] as? String {
+//                            
+//                            if status == "ok" {
+//                                
+//                                success(userid: userid)
+//                                
+//                            } else {
+//                                
+//                                failure(error: response.result.error)
+//                            }
+//                    } else if let
+//                        dict = dict,
+//                        status = dict["status"] as? String,
+//                        error_code = dict["error_code"] as? String,
+//                        error_description = dict["error_description"] as? String {
+//                            
+//                            failure(error: NSError(domain: "application", code: 10000, userInfo: ["status": status, "error_code": error_code, "error_description": error_description]))
+//                            
+//                    } else {
+//                        
+//                        failure(error: response.result.error)
+//                    }
+//                } else {
+//                    
+//                    failure(error: response.result.error)
+//                }
+//            }
+//        }
         
     }
     

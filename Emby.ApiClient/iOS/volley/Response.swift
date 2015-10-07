@@ -8,9 +8,14 @@
 
 import Foundation
 
-class Response {
+public class Response<T> {
     
-    class Listener<T> {
-        
-    }
+}
+
+public class Response_Listener<T> {
+    
+}
+
+public class Response_ErrorListener {
+    
 }

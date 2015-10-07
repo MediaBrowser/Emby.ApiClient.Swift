@@ -12,7 +12,7 @@ import Foundation
 //
 //import mediabrowser.apiinteraction.Response;
 
-protocol IAsyncHttpClient {
+public protocol IAsyncHttpClient {
     
-    public func Send(request: HttpRequest, response: Response<String>)
+    /*public*/ func Send(request: HttpRequest, response: Emby_ApiClient.Response<String>)
 }

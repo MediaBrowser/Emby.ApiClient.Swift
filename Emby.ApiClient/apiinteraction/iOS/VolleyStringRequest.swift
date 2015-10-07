@@ -23,11 +23,11 @@ import Foundation
 
 public class VolleyStringRequest /*extends StringRequest*/ {
     
-//    private HttpRequest request;
+    private let request: HttpRequest
     
-    public init( method: Int, url: String, listener: Response.Listener<String>, errorListener: Response.ErrorListener, request: HttpRequest) {
+    public init( method: Int, url: String, listener: Response_Listener<String>, errorListener: Response_ErrorListener, request: HttpRequest) {
 //        super(method, url, listener, errorListener);
-        this.request = request;
+        self.request = request;
     }
     
 //    public VolleyStringRequest(String url, Response.Listener<String> listener, Response.ErrorListener errorListener, HttpRequest request) {

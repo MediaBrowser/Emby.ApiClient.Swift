@@ -44,19 +44,22 @@ class Md5 {
 
 public class ConnectService {
     
-//    public func ConnectService(IJsonSerializer jsonSerializer, ILogger logger, IAsyncHttpClient httpClient, String appName, String appVersion) {
-//    JsonSerializer = jsonSerializer;
-//    _logger = logger;
-//    _httpClient = httpClient;
-//    this.appName = appName;
-//    this.appVersion = appVersion;
-//    }
+    public let JsonSerializer: IJsonSerializer
+    private let _logger: ILogger
+    private let _httpClient: IAsyncHttpClient
+    private let appName: String
+    private let appVersion: String
+    
+    public init(jsonSerializer: IJsonSerializer, logger: ILogger, httpClient: IAsyncHttpClient, appName: String, appVersion: String) {
+    self.JsonSerializer = jsonSerializer;
+    self._logger = logger;
+    self._httpClient = httpClient;
+    self.appName = appName;
+    self.appVersion = appVersion;
+    }
 
-    public func Authenticate(username: String, password: String
-        
-//        , final Response<ConnectAuthenticationResult> response
-        
-        ) throws { // UnsupportedEncodingException, NoSuchAlgorithmException {
+    public func Authenticate(username: String, password: String, /*final*/ response: Emby_ApiClient.Response<ConnectAuthenticationResult>) throws {
+        // UnsupportedEncodingException, NoSuchAlgorithmException {
         
         let args = QueryStringDictionary()
         
@@ -73,7 +76,7 @@ public class ConnectService {
         
         AddXApplicationName(request);
         
-        _httpClient.Send(request, new SerializedResponse<ConnectAuthenticationResult>(response, JsonSerializer, ConnectAuthenticationResult.class));
+        _httpClient.Send(request, response: SerializedResponse<ConnectAuthenticationResult>(innerResponse: response, jsonSerializer: JsonSerializer, type: ConnectAuthenticationResult.self));
     }
     
 //    public void CreatePin(String deviceId, final Response<PinCreationResult> response)
@@ -221,9 +224,9 @@ public class ConnectService {
 //    request.getRequestHeaders().put("X-Connect-UserToken", accessToken);
 //    }
     
-    private func AddXApplicationName(HttpRequest request)
+    private func AddXApplicationName(request: HttpRequest)
     {
-        request.getRequestHeaders().put("X-Application", appName + "/" + appVersion);
+        request.getRequestHeaders()?.put("X-Application", value: appName + "/" + appVersion);
     }
     
 //    public void GetRegistrationInfo(String userId, String feature, String connectAccessToken, final Response<RegistrationInfo> response)

@@ -18,7 +18,6 @@ Class QueryStringDictionary
 */
 public class QueryStringDictionary //extends java.util.HashMap<String, String>
 {
-//    var Dictionary<String, String>
     var data: [String: String] = [:]
     
 //    /**

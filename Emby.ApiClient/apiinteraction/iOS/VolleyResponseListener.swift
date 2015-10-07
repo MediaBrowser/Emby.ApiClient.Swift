@@ -15,14 +15,14 @@ import Foundation
 
 public class VolleyResponseListener<T> /*implements Response.Listener<T>*/ {
     
-//    private mediabrowser.apiinteraction.Response<T> outerResponse;
-//    private ILogger logger;
-//    private String url;
+    private let outerResponse: Emby_ApiClient.Response<T>
+    private let logger: ILogger
+    private let url: String
     
-    public init(outerResponse: Response<T>, logger: ILogger, url: String) {
-        this.outerResponse = outerResponse;
-        this.logger = logger;
-        this.url = url;
+    public init(outerResponse: Emby_ApiClient.Response<T>, logger: ILogger, url: String) {
+        self.outerResponse = outerResponse;
+        self.logger = logger;
+        self.url = url;
     }
     
 //    @Override
