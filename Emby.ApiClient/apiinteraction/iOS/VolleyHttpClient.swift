@@ -41,16 +41,16 @@ public class VolleyHttpClient : IAsyncHttpClient {
 //    private RequestQueue mRequestQueue;
 //    private ImageLoader mImageLoader;
 //    
-//    private ILogger logger;
-//    private Context context;
-//    
+    private let logger: ILogger
+    private let context: Context
+
 //    private ImageCacheManager cacheManager;
-//    
-//    public VolleyHttpClient(ILogger logger, Context context) {
-//        this.logger = logger;
-//        this.context = context;
-//    }
-//    
+    
+    public init(logger: ILogger, context: Context) {
+        self.logger = logger;
+        self.context = context;
+    }
+    
 //    /** Default maximum disk usage in bytes. */
 //    private static final int DEFAULT_DISK_USAGE_BYTES = 100 * 1024 * 1024;
 //    
@@ -79,22 +79,41 @@ public class VolleyHttpClient : IAsyncHttpClient {
 //        
 //        return cacheManager.getImageLoader();
 //    }
-//    
-//    /**
-//    * Adds the specified request to the global queue using the Default TAG.
-//    *
-//    * @param req
-//    */
-//    public <T> void addToRequestQueue(Request<T> req) {
-//        
-//        // set the default tag if tag is empty
-//        //req.setTag(TAG);
-//        
-//        logger.Debug("Adding request to queue: %s", req.getUrl());
-//        
+    
+    /**
+    * Adds the specified request to the global queue using the Default TAG.
+    *
+    * @param req
+    */
+//    public func addToRequestQueue(req: Emby_ApiClient.Request<String>) {
+    public func addToRequestQueue(req: Emby_ApiClient.StringRequest) {
+        
+        // set the default tag if tag is empty
+        //req.setTag(TAG);
+        
+        logger.Debug("Adding request to queue: %s", req.getUrl());
+        
+        // TODO:
 //        getRequestQueue().add(req);
-//    }
-//    
+
+        Alamofire.request(Alamofire.Method(rawValue: req.getMethod())!, req.getUrl(), parameters: nil)
+            .responseString { (response: Alamofire.Response<String, NSError>) -> Void in
+                
+                // To update anything on the main thread, just jump back on like so.
+                dispatch_async(dispatch_get_main_queue()) {
+    
+                    if response.result.isSuccess {
+    
+                        req.deliverResponse(String(response.data))
+                        
+                    } else {
+                        
+//                        failure(error: response.result.error)
+                    }
+                }
+            }
+    }
+    
 //    /**
 //    * Cancels all pending requests by the specified TAG, it is important
 //    * to specify a TAG so that the pending/ongoing requests can be cancelled.
@@ -107,22 +126,22 @@ public class VolleyHttpClient : IAsyncHttpClient {
 //        }
 //    }
     
-    public func Send(/*final*/  request: HttpRequest, /*final*/ response: Emby_ApiClient.Response<String> )
+    public func Send<T>(/*final*/  request: HttpRequest, /*final*/ response: Emby_ApiClient.Response<T> )
     {
-        var method = Method.GET;
-        
-        if (request.getMethod() == "POST"){
-            method = Method.POST;
-        }
-        else if (request.getMethod() == "DELETE"){
-            method = Method.DELETE;
-        }
+//        var method = Request_Method.GET;
+//        
+//        if (request.getMethod() == "POST"){
+//            method = Request_Method.POST;
+//        }
+//        else if (request.getMethod() == "DELETE"){
+//            method = Request_Method.DELETE;
+//        }
         
         /*final*/ let url = request.getUrl();
         
-//        // TODO:
-//        StringRequest req = new VolleyStringRequest(method, url, new VolleyResponseListener(response, logger, url), new VolleyErrorListener(response, logger), request);
-//
+        let req = VolleyStringRequest(method: (request.getMethod())!, url: url!, listener: VolleyResponseListener(outerResponse: response, logger: logger, url: url!), errorListener: VolleyErrorListener(outerResponse: response, logger: logger), request: request)
+
+        // TODO:
 ////        if (method != Method.GET) {
 ////            req.setShouldCache(false);
 ////        }
@@ -133,51 +152,8 @@ public class VolleyHttpClient : IAsyncHttpClient {
 ////            DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
 ////            ));
 //
-//        // TODO: use HTTP request (serial) queue
-////        // add the request object to the queue to be executed
-////        addToRequestQueue(req);
-//        
-//        Alamofire.request(method, url, parameters: nil).responseJSON { (response: Response<AnyObject, NSError>) -> Void in
-//            
-//            // To update anything on the main thread, just jump back on like so.
-//            dispatch_async(dispatch_get_main_queue()) {
-//                
-//                if response.result.isSuccess {
-//                    
-//                    let dict = response.result.value as? Dictionary<String, AnyObject>
-//                    
-//                    if let
-//                        dict = dict,
-//                        status = dict["status"] as? String,
-//                        userid = dict["userid"] as? String {
-//                            
-//                            if status == "ok" {
-//                                
-//                                success(userid: userid)
-//                                
-//                            } else {
-//                                
-//                                failure(error: response.result.error)
-//                            }
-//                    } else if let
-//                        dict = dict,
-//                        status = dict["status"] as? String,
-//                        error_code = dict["error_code"] as? String,
-//                        error_description = dict["error_description"] as? String {
-//                            
-//                            failure(error: NSError(domain: "application", code: 10000, userInfo: ["status": status, "error_code": error_code, "error_description": error_description]))
-//                            
-//                    } else {
-//                        
-//                        failure(error: response.result.error)
-//                    }
-//                } else {
-//                    
-//                    failure(error: response.result.error)
-//                }
-//            }
-//        }
-        
+        // add the request object to the queue to be executed
+        addToRequestQueue(req);
     }
     
 //    public void getBitmap(String url, final Response<Bitmap> outerResponse) {

@@ -14,13 +14,13 @@ Interface ILogger
 */
 public protocol ILogger
 {
-//    /**
-//    Infoes the specified message.
-//    @param message The message.
-//    @param paramList The param list.
-//    */
-//    void Info(String message, Object... paramList);
-//    
+    /**
+    Infoes the specified message.
+    @param message The message.
+    @param paramList The param list.
+    */
+    func Info(message: String, _: AnyObject...)
+    
 //    /**
 //    Errors the specified message.
 //    @param message The message.
@@ -34,14 +34,14 @@ public protocol ILogger
 //    @param paramList The param list.
 //    */
 //    void Warn(String message, Object... paramList);
-//    
-//    /**
-//    Debugs the specified message.
-//    @param message The message.
-//    @param paramList The param list.
-//    */
-//    void Debug(String message, Object... paramList);
-//    
+    
+    /**
+    Debugs the specified message.
+    @param message The message.
+    @param paramList The param list.
+    */
+    func Debug(message: String, _: AnyObject...)
+    
 //    /**
 //    Fatals the specified message.
 //    @param message The message.

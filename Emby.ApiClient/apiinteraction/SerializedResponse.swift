@@ -14,15 +14,16 @@ import Foundation
 //import mediabrowser.model.logging.ILogger;
 //import mediabrowser.model.serialization.IJsonSerializer;
 
-public class SerializedResponse<T>: Emby_ApiClient.Response<String> {
+public class SerializedResponse: Emby_ApiClient.Response<Any> {
+//    func onResponse(response: Any) {}
     
     private let jsonSerializer: IJsonSerializer
-    private let type: AnyClass
-    /*protected*/ let innerResponse: Emby_ApiClient.Response<T>
+    private let type: Any
+    /*protected*/ let innerResponse: Emby_ApiClient.Response<Any>
     private let url: String? = nil
 //    private ILogger logger;
     
-    public init(innerResponse: Emby_ApiClient.Response<T>, jsonSerializer: IJsonSerializer, type: AnyClass) {
+    public init(innerResponse: Emby_ApiClient.Response<Any>, jsonSerializer: IJsonSerializer, type: Any) {
 //        super(innerResponse);
         self.jsonSerializer = jsonSerializer;
         self.type = type;

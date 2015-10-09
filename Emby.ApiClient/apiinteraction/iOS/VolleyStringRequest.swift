@@ -21,13 +21,13 @@ import Foundation
 //import java.util.HashMap;
 //import java.util.Map;
 
-public class VolleyStringRequest /*extends StringRequest*/ {
+public class VolleyStringRequest: StringRequest {
     
     private let request: HttpRequest
     
-    public init( method: Int, url: String, listener: Response_Listener<String>, errorListener: Response_ErrorListener, request: HttpRequest) {
-//        super(method, url, listener, errorListener);
+    /*public*/ init( method: String, url: String, listener: Response_Listener/*<String>*/, errorListener: Response_ErrorListener, request: HttpRequest) {
         self.request = request;
+        super.init(method: method, url: url, listener: listener, errorListener: errorListener);
     }
     
 //    public VolleyStringRequest(String url, Response.Listener<String> listener, Response.ErrorListener errorListener, HttpRequest request) {

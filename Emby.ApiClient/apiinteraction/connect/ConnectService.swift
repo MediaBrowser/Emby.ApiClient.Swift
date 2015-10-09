@@ -25,6 +25,11 @@ import Foundation
 //import java.io.UnsupportedEncodingException;
 //import java.security.NoSuchAlgorithmException;
 
+enum Error:ErrorType {
+    case IllegalArgumentException(String)
+    case LowBridge
+}
+
 class Md5 {
     static func getHash(from: String) -> String! {
         let str = from.cStringUsingEncoding(NSUTF8StringEncoding)
@@ -51,14 +56,15 @@ public class ConnectService {
     private let appVersion: String
     
     public init(jsonSerializer: IJsonSerializer, logger: ILogger, httpClient: IAsyncHttpClient, appName: String, appVersion: String) {
-    self.JsonSerializer = jsonSerializer;
-    self._logger = logger;
-    self._httpClient = httpClient;
-    self.appName = appName;
-    self.appVersion = appVersion;
+        self.JsonSerializer = jsonSerializer;
+        self._logger = logger;
+        self._httpClient = httpClient;
+        self.appName = appName;
+        self.appVersion = appVersion;
     }
-
-    public func Authenticate(username: String, password: String, /*final*/ response: Emby_ApiClient.Response<ConnectAuthenticationResult>) throws {
+    
+    //    Response<ConnectAuthenticationResult>
+    public func Authenticate(username: String, password: String, /*final*/ response: Emby_ApiClient.Response) {
         // UnsupportedEncodingException, NoSuchAlgorithmException {
         
         let args = QueryStringDictionary()
@@ -76,176 +82,192 @@ public class ConnectService {
         
         AddXApplicationName(request);
         
-        _httpClient.Send(request, response: SerializedResponse<ConnectAuthenticationResult>(innerResponse: response, jsonSerializer: JsonSerializer, type: ConnectAuthenticationResult.self));
+        //        SerializedResponse<ConnectAuthenticationResult>
+        _httpClient.Send(request, response: SerializedResponse(innerResponse: response, jsonSerializer: JsonSerializer, type: ConnectAuthenticationResult.self));
     }
     
-//    public void CreatePin(String deviceId, final Response<PinCreationResult> response)
-//    {
-//    QueryStringDictionary args = new QueryStringDictionary();
-//    
-//    args.Add("deviceId", deviceId);
-//    
-//    String url = GetConnectUrl("pin") + "?" + args.GetQueryString();
-//    
-//    HttpRequest request = new HttpRequest();
-//    
-//    request.setMethod("POST");
-//    request.setUrl(url);
-//    request.setPostData(args);
-//    
-//    AddXApplicationName(request);
-//    
-//    _httpClient.Send(request, new SerializedResponse<PinCreationResult>(response, JsonSerializer, PinCreationResult.class));
-//    }
-//    
-//    public void GetPinStatus(PinCreationResult pin, final Response<PinStatusResult> response)
-//    {
-//    QueryStringDictionary dict = new QueryStringDictionary();
-//    
-//    dict.Add("deviceId", pin.getDeviceId());
-//    dict.Add("pin", pin.getPin());
-//    
-//    String url = GetConnectUrl("pin") + "?" + dict.GetQueryString();
-//    
-//    HttpRequest request = new HttpRequest();
-//    
-//    request.setMethod("GET");
-//    request.setUrl(url);
-//    
-//    AddXApplicationName(request);
-//    
-//    _httpClient.Send(request, new SerializedResponse<PinStatusResult>(response, JsonSerializer, PinStatusResult.class));
-//    }
-//    
-//    public void ExchangePin(PinCreationResult pin, final Response<PinExchangeResult> response)
-//    {
-//    QueryStringDictionary args = new QueryStringDictionary();
-//    
-//    args.Add("deviceId", pin.getDeviceId());
-//    args.Add("pin", pin.getPin());
-//    
-//    String url = GetConnectUrl("pin/authenticate");
-//    
-//    HttpRequest request = new HttpRequest();
-//    
-//    request.setMethod("POST");
-//    request.setUrl(url);
-//    request.setPostData(args);
-//    
-//    AddXApplicationName(request);
-//    
-//    _httpClient.Send(request, new SerializedResponse<PinExchangeResult>(response, JsonSerializer, PinExchangeResult.class));
-//    }
-//    
-//    public void GetConnectUser(ConnectUserQuery query, String connectAccessToken, final Response<ConnectUser> response)
-//    {
-//    QueryStringDictionary dict = new QueryStringDictionary();
-//    
-//    if (!tangible.DotNetToJavaStringHelper.isNullOrEmpty(query.getId()))
-//    {
-//    dict.Add("id", query.getId());
-//    }
-//    else if (!tangible.DotNetToJavaStringHelper.isNullOrEmpty(query.getName()))
-//    {
-//    dict.Add("name", query.getName());
-//    }
-//    else if (!tangible.DotNetToJavaStringHelper.isNullOrEmpty(query.getEmail()))
-//    {
-//    dict.Add("email", query.getEmail());
-//    }
-//    else if (!tangible.DotNetToJavaStringHelper.isNullOrEmpty(query.getNameOrEmail()))
-//    {
-//    dict.Add("nameOrEmail", query.getNameOrEmail());
-//    }
-//    else
-//    {
-//    throw new IllegalArgumentException("Empty ConnectUserQuery");
-//    }
-//    
-//    String url = GetConnectUrl("user") + "?" + dict.GetQueryString();
-//    
-//    HttpRequest request = new HttpRequest();
-//    
-//    request.setMethod("GET");
-//    request.setUrl(url);
-//    
-//    AddUserAccessToken(request, connectAccessToken);
-//    AddXApplicationName(request);
-//    
-//    _httpClient.Send(request, new SerializedResponse<ConnectUser>(response, JsonSerializer, ConnectUser.class));
-//    }
-//    
-//    public void GetServers(String userId, String connectAccessToken, final Response<ConnectUserServer[]> response)
-//    {
-//    QueryStringDictionary dict = new QueryStringDictionary();
-//    
-//    dict.Add("userId", userId);
-//    
-//    String url = GetConnectUrl("servers") + "?" + dict.GetQueryString();
-//    
-//    HttpRequest request = new HttpRequest();
-//    
-//    request.setMethod("GET");
-//    request.setUrl(url);
-//    
-//    AddUserAccessToken(request, connectAccessToken);
-//    AddXApplicationName(request);
-//    
-//    _httpClient.Send(request, new SerializedResponse<ConnectUserServer[]>(response, JsonSerializer, new ConnectUserServer[]{}.getClass()));
-//    }
-//    
-//    public void Logout(String connectAccessToken, final EmptyResponse response)
-//    {
-//    String url = GetConnectUrl("user/logout");
-//    
-//    HttpRequest request = new HttpRequest();
-//    
-//    request.setMethod("POST");
-//    request.setUrl(url);
-//    
-//    AddUserAccessToken(request, connectAccessToken);
-//    AddXApplicationName(request);
-//    
-//    _httpClient.Send(request, new Response<String>(response));
-//    }
+    //    public func CreatePin(deviceId: String, final response: Response<PinCreationResult>)
+    public func CreatePin(deviceId: String, final response: Emby_ApiClient.Response)
+    {
+        let args = QueryStringDictionary()
+        
+        args.Add("deviceId", value: deviceId);
+        
+        let url = GetConnectUrl("pin") + "?" + args.GetQueryString();
+        
+        let request = HttpRequest();
+        
+        request.setMethod("POST");
+        request.setUrl(url);
+        request.setPostData(args);
+        
+        AddXApplicationName(request);
+        
+        //        _httpClient.Send(request, SerializedResponse<PinCreationResult>(response, JsonSerializer, PinCreationResult.class))
+        _httpClient.Send(request, response: SerializedResponse(innerResponse: response, jsonSerializer: JsonSerializer, type: PinCreationResult.self));
+    }
+    
+    //    public func GetPinStatus(pin: PinCreationResult, final response: Response<PinStatusResult>)
+    public func GetPinStatus(pin: PinCreationResult, final response: Emby_ApiClient.Response)
+    {
+        let dict = QueryStringDictionary();
+        
+        dict.Add("deviceId", value: pin.getDeviceId());
+        dict.Add("pin", value: pin.getPin());
+        
+        let url = GetConnectUrl("pin") + "?" + dict.GetQueryString();
+        
+        let request = HttpRequest()
+        
+        request.setMethod("GET");
+        request.setUrl(url);
+        
+        AddXApplicationName(request);
+        
+        //        _httpClient.Send(request, new SerializedResponse<PinStatusResult>(response, JsonSerializer, PinStatusResult.class));
+        _httpClient.Send(request, response: SerializedResponse(innerResponse: response, jsonSerializer: JsonSerializer, type: PinStatusResult.self));
+    }
+    
+    //    public func ExchangePin(PinCreationResult pin, final Response<PinExchangeResult> response)
+    public func ExchangePin(pin: PinCreationResult, final response: Emby_ApiClient.Response)
+    {
+        let args = QueryStringDictionary();
+        
+        args.Add("deviceId", value: pin.getDeviceId());
+        args.Add("pin", value: pin.getPin());
+        
+        let url = GetConnectUrl("pin/authenticate");
+        
+        let request = HttpRequest()
+        
+        request.setMethod("POST");
+        request.setUrl(url);
+        request.setPostData(args);
+        
+        AddXApplicationName(request);
+        
+        //    _httpClient.Send(request, new SerializedResponse<PinExchangeResult>(response, JsonSerializer, PinExchangeResult.class));
+        _httpClient.Send(request, response: SerializedResponse(innerResponse: response, jsonSerializer: JsonSerializer, type: PinExchangeResult.self));
+    }
+    
+    //    public func GetConnectUser(ConnectUserQuery query, String connectAccessToken, final Response<ConnectUser> response)
+    public func GetConnectUser(query: ConnectUserQuery, connectAccessToken: String?, final response: Emby_ApiClient.Response) throws
+    {
+        let dict = QueryStringDictionary();
+        
+        if let id = query.getId()
+        {
+            dict.Add("id", value: id);
+        }
+        else if let name = query.getName()
+        {
+            dict.Add("name", value: name);
+        }
+        else if let email = query.getEmail()
+        {
+            dict.Add("email", value: email);
+        }
+        else if let nameOrEmail = query.getNameOrEmail()
+        {
+            dict.Add("nameOrEmail", value: nameOrEmail);
+        }
+        else
+        {
+            throw Error.IllegalArgumentException("Empty ConnectUserQuery")
+        }
+        
+        let url = GetConnectUrl("user") + "?" + dict.GetQueryString();
+        
+        let request = HttpRequest()
+        
+        request.setMethod("GET");
+        request.setUrl(url);
+        
+        try AddUserAccessToken(request, accessToken: connectAccessToken)
+        AddXApplicationName(request);
+        
+        //    _httpClient.Send(request, new SerializedResponse<ConnectUser>(response, JsonSerializer, ConnectUser.class));
+        _httpClient.Send(request, response: SerializedResponse(innerResponse: response, jsonSerializer: JsonSerializer, type: ConnectUser.self));
+    }
+    
+    //    public func GetServers(String userId, String connectAccessToken, final Response<ConnectUserServer[]> response)
+    public func GetPinStatus(userId: String, connectAccessToken: String, final response: Emby_ApiClient.Response) throws
+    {
+        let dict = QueryStringDictionary();
+        
+        dict.Add("userId", value: userId)
+        
+        let url = GetConnectUrl("servers") + "?" + dict.GetQueryString();
+        
+        let request = HttpRequest()
+        
+        request.setMethod("GET");
+        request.setUrl(url);
+        
+        try AddUserAccessToken(request, accessToken: connectAccessToken)
+        AddXApplicationName(request);
+        
+        //    _httpClient.Send(request, new SerializedResponse<ConnectUserServer[]>(response, JsonSerializer, new ConnectUserServer[]{}.getClass()));
+        _httpClient.Send(request, response: SerializedResponse(innerResponse: response, jsonSerializer: JsonSerializer, type: [ConnectUserServer].self));
+    }
+    
+    //    public func Logout(String connectAccessToken, final EmptyResponse response)
+    public func Logout(connectAccessToken: String, final response: Emby_ApiClient.Response) throws
+    {
+        let url = GetConnectUrl("user/logout");
+        
+        let request = HttpRequest()
+        
+        request.setMethod("POST");
+        request.setUrl(url);
+        
+        try AddUserAccessToken(request, accessToken: connectAccessToken)
+        AddXApplicationName(request);
+        
+        //    _httpClient.Send(request, new Response<String>(response));
+        _httpClient.Send(request, response: SerializedResponse(innerResponse: response, jsonSerializer: JsonSerializer, type: Response<String>.self));
+    }
     
     private func GetConnectUrl(handler: String) -> String
     {
         return "https://connect.mediabrowser.tv/service/" + handler;
     }
     
-//    private void AddUserAccessToken(HttpRequest request, String accessToken)
-//    {
-//    if (tangible.DotNetToJavaStringHelper.isNullOrEmpty(accessToken))
-//    {
-//    throw new IllegalArgumentException("accessToken");
-//    }
-//    
-//    request.getRequestHeaders().put("X-Connect-UserToken", accessToken);
-//    }
+    private func AddUserAccessToken(request: HttpRequest, accessToken: String?) throws
+    {
+        if let accessToken = accessToken
+        {
+            request.getRequestHeaders()?.put("X-Connect-UserToken", value: accessToken);
+        } else {
+            throw Error.IllegalArgumentException("accessToken")
+        }
+    }
     
     private func AddXApplicationName(request: HttpRequest)
     {
         request.getRequestHeaders()?.put("X-Application", value: appName + "/" + appVersion);
     }
     
-//    public void GetRegistrationInfo(String userId, String feature, String connectAccessToken, final Response<RegistrationInfo> response)
-//    {
-//    QueryStringDictionary dict = new QueryStringDictionary();
-//    
-//    dict.Add("userId", userId);
-//    dict.Add("feature", feature);
-//    
-//    String url = GetConnectUrl("registrationInfo") + "?" + dict.GetQueryString();
-//    
-//    HttpRequest request = new HttpRequest();
-//    
-//    request.setMethod("GET");
-//    request.setUrl(url);
-//    
-//    AddUserAccessToken(request, connectAccessToken);
-//    AddXApplicationName(request);
-//    
-//    _httpClient.Send(request, new SerializedResponse<RegistrationInfo>(response, JsonSerializer, new RegistrationInfo().getClass()));
-//    }
+    //    public func GetRegistrationInfo(String userId, String feature, String connectAccessToken, final Response<RegistrationInfo> response)
+    public func GetRegistrationInfo(userId: String, feature: String, connectAccessToken: String, final response: Emby_ApiClient.Response) throws
+    {
+        let dict = QueryStringDictionary();
+        
+        dict.Add("userId", value: userId)
+        dict.Add("feature", value: feature);
+        
+        let url = GetConnectUrl("registrationInfo") + "?" + dict.GetQueryString();
+        
+        let request = HttpRequest()
+        
+        request.setMethod("GET");
+        request.setUrl(url);
+        
+        try AddUserAccessToken(request, accessToken: connectAccessToken)
+        
+        AddXApplicationName(request);
+        
+        //    _httpClient.Send(request, new SerializedResponse<RegistrationInfo>(response, JsonSerializer, new RegistrationInfo().getClass()));
+        _httpClient.Send(request, response: SerializedResponse(innerResponse: response, jsonSerializer: JsonSerializer, type: RegistrationInfo.self));
+    }
 }

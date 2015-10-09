@@ -28,25 +28,25 @@ public class QueryStringDictionary //extends java.util.HashMap<String, String>
 //        super();
 //    }
     
-//    /**
-//    Adds the specified name.
-//    
-//    @param name The name.
-//    @param value The value.
-//    */
-//    public final void Add(String name, int value)
-//    {
-//        this.put(name, (new Integer(value)).toString());
-//    }
-//    
+    /**
+    Adds the specified name.
+    
+    @param name The name.
+    @param value The value.
+    */
+    public final func Add(name: String, value: Int)
+    {
+        data[name] = String(value)
+    }
+    
     /**
     Adds the specified name.
     @param name The name.
     @param value The value.
     */
-    public final func Add(name: String, value: String)
+    public final func Add(name: String, value: String?)
     {
-        data[name] = value
+        data[name] = value ?? ""
     }
 
 //    /**
@@ -57,7 +57,7 @@ public class QueryStringDictionary //extends java.util.HashMap<String, String>
 //    */
 //    public final void Add(String name, long value)
 //    {
-//        this.put(name, (new Long(value)).toString());
+//        self.put(name, (new Long(value)).toString());
 //    }
 //    
 //    /**
@@ -68,7 +68,7 @@ public class QueryStringDictionary //extends java.util.HashMap<String, String>
 //    */
 //    public final void Add(String name, double value)
 //    {
-//        this.put(name, (new Double(value)).toString());
+//        self.put(name, (new Double(value)).toString());
 //    }
 //    
 //    /**
@@ -81,7 +81,7 @@ public class QueryStringDictionary //extends java.util.HashMap<String, String>
 //    {
 //        if (!tangible.DotNetToJavaStringHelper.isNullOrEmpty(value))
 //        {
-//            this.put(name, value);
+//            self.put(name, value);
 //        }
 //    }
 //    
@@ -95,7 +95,7 @@ public class QueryStringDictionary //extends java.util.HashMap<String, String>
 //    {
 //        if (value != null)
 //        {
-//            this.Add(name, value);
+//            self.Add(name, value);
 //        }
 //    }
 //    
@@ -109,7 +109,7 @@ public class QueryStringDictionary //extends java.util.HashMap<String, String>
 //    {
 //        if (value != null)
 //        {
-//            this.Add(name, value);
+//            self.Add(name, value);
 //        }
 //    }
 //    
@@ -123,7 +123,7 @@ public class QueryStringDictionary //extends java.util.HashMap<String, String>
 //    {
 //        if (value != null)
 //        {
-//            this.Add(name, value);
+//            self.Add(name, value);
 //        }
 //    }
 //    
@@ -135,7 +135,7 @@ public class QueryStringDictionary //extends java.util.HashMap<String, String>
 //    */
 //    public final void Add(String name, boolean value)
 //    {
-//        this.put(name, (new Boolean(value)).toString());
+//        self.put(name, (new Boolean(value)).toString());
 //    }
 //    
 //    /**
@@ -148,7 +148,7 @@ public class QueryStringDictionary //extends java.util.HashMap<String, String>
 //    {
 //        if (value != null)
 //        {
-//            this.Add(name, value);
+//            self.Add(name, value);
 //        }
 //    }
 //    
@@ -168,7 +168,7 @@ public class QueryStringDictionary //extends java.util.HashMap<String, String>
 //        
 //        String attValue = tangible.DotNetToJavaStringHelper.join(",", GetStrings(value));
 //        
-//        this.put(name, attValue);
+//        self.put(name, attValue);
 //    }
 //    
 //    private String[] GetStrings(Integer[] value)
@@ -191,7 +191,7 @@ public class QueryStringDictionary //extends java.util.HashMap<String, String>
 //        
 //        String attValue = tangible.DotNetToJavaStringHelper.join(",", GetStrings(value));
 //        
-//        this.put(name, attValue);
+//        self.put(name, attValue);
 //    }
 //    
 //    private String[] GetStrings(int[] value)
@@ -214,7 +214,7 @@ public class QueryStringDictionary //extends java.util.HashMap<String, String>
 //    {
 //        if (value != null)
 //        {
-//            this.Add(name, value);
+//            self.Add(name, value);
 //        }
 //    }
 //    
@@ -228,7 +228,7 @@ public class QueryStringDictionary //extends java.util.HashMap<String, String>
 //    {
 //        if (value != null)
 //        {
-//            this.Add(name, value);
+//            self.Add(name, value);
 //        }
 //    }
 //    
@@ -277,7 +277,7 @@ public class QueryStringDictionary //extends java.util.HashMap<String, String>
 //    {
 //        if (value != null)
 //        {
-//            this.Add(name, value);
+//            self.Add(name, value);
 //        }
 //    }
 //    
@@ -297,7 +297,7 @@ public class QueryStringDictionary //extends java.util.HashMap<String, String>
 //        
 //        String paramValue = tangible.DotNetToJavaStringHelper.join(delimiter, value);
 //        
-//        this.put(name, paramValue);
+//        self.put(name, paramValue);
 //    }
 //    
 //    /**
@@ -311,7 +311,7 @@ public class QueryStringDictionary //extends java.util.HashMap<String, String>
 //    {
 //        if (value != null)
 //        {
-//            this.Add(name, value, delimiter);
+//            self.Add(name, value, delimiter);
 //        }
 //    }
 //    
@@ -324,42 +324,43 @@ public class QueryStringDictionary //extends java.util.HashMap<String, String>
 //    {
 //        if (value != null)
 //        {
-//            this.Add(name, value);
+//            self.Add(name, value);
 //        }
 //    }
-//    
-//    /**
-//    Gets the query string.
-//    
-//    @return System.String.
-//    */
-//    public final String GetQueryString()
-//    {
-//        int size = this.size();
-//        String[] vals = new String[size];
-//        
-//        int index = 0;
-//        for(String key : this.keySet())
-//        {
-//            String paramValue = this.get(key);
+    
+    /**
+    Gets the query string.
+    
+    @return System.String.
+    */
+    public final func GetQueryString() -> String
+    {
+        var vals = [String]()
+        
+        for (index, value) in data
+        {
+//            let paramValue = data[index];
 //            vals[index] = String.format("%1$s=%2$s", key, GetEncodedValue(paramValue));
+            vals.append("\(index)=\(GetEncodedValue(value))")
 //            index++;
-//        }
-//        
+        }
+        
 //        return tangible.DotNetToJavaStringHelper.join("&", vals);
-//    }
-//    
-//    /**
-//    Gets the encoded value.
-//    
-//    @param value The value.
-//    @return System.String.
-//    */
-//    private String GetEncodedValue(String value)
-//    {
+        return vals.joinWithSeparator("&")
+    }
+    
+    /**
+    Gets the encoded value.
+    
+    @param value The value.
+    @return System.String.
+    */
+    private func GetEncodedValue(value: String) -> String?
+    {
 //        return URLEncoder.encode(value);
-//    }
-//    
+        return value.stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet())
+    }
+    
 //    /**
 //    Gets the URL.
 //    
@@ -380,38 +381,38 @@ public class QueryStringDictionary //extends java.util.HashMap<String, String>
 //    
 //    public final <T extends Enum<T>> void Add(String name, T value)
 //    {
-//        this.Add(name, value.toString());
+//        self.Add(name, value.toString());
 //    }
 //    
 //    public final <T extends Enum<T>> void AddIfNotNull(String name, T value)
 //    {
 //        if (value != null)
 //        {
-//            this.Add(name, value);
+//            self.Add(name, value);
 //        }
 //    }
 //    
 //    public final <T extends Enum<T>> void Add(String name, T[] values, String delimiter)
 //    {
-//        this.Add(name, GetStrings(values), delimiter);
+//        self.Add(name, GetStrings(values), delimiter);
 //    }
 //    
 //    public final <T extends Enum<T>> void AddIfNotNull(String name, T[] values, String delimiter)
 //    {
 //        if (values != null)
 //        {
-//            this.Add(name, values, delimiter);
+//            self.Add(name, values, delimiter);
 //        }
 //    }
 //    
 //    public final <T extends Enum<T>> void Add(String name, T[] values)
 //    {
-//        this.Add(name, values, ",");
+//        self.Add(name, values, ",");
 //    }
 //    
 //    public final <T extends Enum<T>> void AddIfNotNull(String name, T[] values)
 //    {
-//        this.AddIfNotNull(name, values, ",");
+//        self.AddIfNotNull(name, values, ",");
 //    }
 //    
 //    private <T extends Enum<T>> String[] GetStrings(T[] value)

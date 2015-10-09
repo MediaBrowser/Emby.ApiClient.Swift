@@ -13,7 +13,7 @@ import Foundation
 //import com.android.volley.Response;
 //import mediabrowser.model.logging.ILogger;
 
-public class VolleyResponseListener<T> /*implements Response.Listener<T>*/ {
+public class VolleyResponseListener<T: Any>: Response_Listener {
     
     private let outerResponse: Emby_ApiClient.Response<T>
     private let logger: ILogger
@@ -26,11 +26,12 @@ public class VolleyResponseListener<T> /*implements Response.Listener<T>*/ {
     }
     
 //    @Override
-//    public void onResponse(T s) {
-//        
-//        logger.Info("Response received from: %s", url);
-//        
-//        outerResponse.onResponse(s);
-//    }
+//    public func onResponse(s: T) {
+    public func onResponse(s: Any) {
+        
+        logger.Info("Response received from: " + url);
+        
+        outerResponse.onResponse(s);
+    }
     
 }
