@@ -15,12 +15,12 @@ import Foundation
 //import mediabrowser.model.logging.ILogger;
 //import mediabrowser.model.net.HttpException;
 
-public class VolleyErrorListener<T>: Response_ErrorListener {
+public class VolleyErrorListener<T:JSONSerializable>: Response_ErrorListener {
     
-    private let outerResponse: Emby_ApiClient.Response<T>
+    private let outerResponse: Emby_Response<T>
     private let logger: ILogger
     
-    public init(outerResponse: Emby_ApiClient.Response<T>, logger: ILogger) {
+    public init(outerResponse: Emby_Response<T>, logger: ILogger) {
         self.outerResponse = outerResponse;
         self.logger = logger;
     }

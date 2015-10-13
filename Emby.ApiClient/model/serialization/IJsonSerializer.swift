@@ -11,9 +11,15 @@ import Foundation
 //
 //import java.io.InputStream;
 
+public typealias JSON = [String : AnyObject]
+
+public protocol JSONSerializable {
+
+    init(jSON: JSON)
+}
+
 //interface
-public class
-IJsonSerializer
+public protocol IJsonSerializer
 {
 //    /**
 //    Serializes to stream.
@@ -60,17 +66,19 @@ IJsonSerializer
 //    @exception System.ArgumentNullException stream
 //    */
 //    <T> T DeserializeFromStream(InputStream stream);
-//    
-//    /**
-//    Deserializes from string.
-//    
-//    <typeparam name="T"></typeparam>
-//    @param text The text.
-//    @return ``0.
-//    @exception System.ArgumentNullException text
-//    */
+    
+    /**
+    Deserializes from string.
+    
+    <typeparam name="T"></typeparam>
+    @param text The text.
+    @return ``0.
+    @exception System.ArgumentNullException text
+    */
 //    <T> T DeserializeFromString(String text, java.lang.Class type);
-//    
+//    func DeserializeFromString(text: String, type: Any) throws -> JSON?
+    func DeserializeFromString<T: JSONSerializable>(text: String, type: Any) throws -> T?
+    
 //    /**
 //    Deserializes from stream.
 //    @param stream The stream.

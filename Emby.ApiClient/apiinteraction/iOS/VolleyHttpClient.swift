@@ -86,17 +86,18 @@ public class VolleyHttpClient : IAsyncHttpClient {
     * @param req
     */
 //    public func addToRequestQueue(req: Emby_ApiClient.Request<String>) {
-    public func addToRequestQueue(req: Emby_ApiClient.StringRequest) {
-        
+//    public func addToRequestQueue(req: Emby_ApiClient.StringRequest) {
+    public func addToRequestQueue<T:JSONSerializable>(req: VolleyStringRequest<T>)  {
+    
         // set the default tag if tag is empty
         //req.setTag(TAG);
         
-        logger.Debug("Adding request to queue: %s", req.getUrl());
+        logger.Debug("Adding request to queue: " + req.getUrl());
         
         // TODO:
 //        getRequestQueue().add(req);
-
-        Alamofire.request(Alamofire.Method(rawValue: req.getMethod())!, req.getUrl(), parameters: nil)
+        
+        Alamofire.request(Alamofire.Method(rawValue: req.getMethod())!, req.getUrl(), parameters: req.request.getPostData()?.data)
             .responseString { (response: Alamofire.Response<String, NSError>) -> Void in
                 
                 // To update anything on the main thread, just jump back on like so.
@@ -104,11 +105,19 @@ public class VolleyHttpClient : IAsyncHttpClient {
     
                     if response.result.isSuccess {
     
-                        req.deliverResponse(String(response.data))
-                        
+                        do {
+                            
+                            if let
+                                response = NSString(data: response.data!, encoding: NSUTF8StringEncoding) {
+                            
+                                try req.deliverResponse(response as String)
+                            }
+                        } catch {
+                            print(error)
+                        }
                     } else {
-                        
-//                        failure(error: response.result.error)
+                 
+                        req.deliverError(VolleyError(cause: response.result.error))
                     }
                 }
             }
@@ -126,20 +135,11 @@ public class VolleyHttpClient : IAsyncHttpClient {
 //        }
 //    }
     
-    public func Send<T>(/*final*/  request: HttpRequest, /*final*/ response: Emby_ApiClient.Response<T> )
+    public func Send<T>(/*final*/  request: HttpRequest, /*final*/ response: Emby_Response<T> )
     {
-//        var method = Request_Method.GET;
-//        
-//        if (request.getMethod() == "POST"){
-//            method = Request_Method.POST;
-//        }
-//        else if (request.getMethod() == "DELETE"){
-//            method = Request_Method.DELETE;
-//        }
-        
         /*final*/ let url = request.getUrl();
         
-        let req = VolleyStringRequest(method: (request.getMethod())!, url: url!, listener: VolleyResponseListener(outerResponse: response, logger: logger, url: url!), errorListener: VolleyErrorListener(outerResponse: response, logger: logger), request: request)
+        let req = VolleyStringRequest<T>(method: (request.getMethod())!, url: url!, listener: VolleyResponseListener<T>(outerResponse: response, logger: logger, url: url!), errorListener: VolleyErrorListener(outerResponse: response, logger: logger), request: request)
 
         // TODO:
 ////        if (method != Method.GET) {

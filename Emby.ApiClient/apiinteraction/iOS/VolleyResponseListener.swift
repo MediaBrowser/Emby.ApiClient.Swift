@@ -13,13 +13,14 @@ import Foundation
 //import com.android.volley.Response;
 //import mediabrowser.model.logging.ILogger;
 
-public class VolleyResponseListener<T: Any>: Response_Listener {
+//public class VolleyResponseListener<T> implements Response.Listener<T> {
+public class VolleyResponseListener<T:JSONSerializable>: Response_Listener<T> {
     
-    private let outerResponse: Emby_ApiClient.Response<T>
+    private let outerResponse: Emby_Response<T>
     private let logger: ILogger
     private let url: String
     
-    public init(outerResponse: Emby_ApiClient.Response<T>, logger: ILogger, url: String) {
+    public init(outerResponse: Emby_Response<T>, logger: ILogger, url: String) {
         self.outerResponse = outerResponse;
         self.logger = logger;
         self.url = url;
@@ -27,11 +28,33 @@ public class VolleyResponseListener<T: Any>: Response_Listener {
     
 //    @Override
 //    public func onResponse(s: T) {
-    public func onResponse(s: Any) {
+//    public func onResponse(s: Any) {
+    public override func onResponse(s: Any) throws -> T? {
+//    let a = outerResponse as? Emby_Response
+        logger.Info("Response received from: '" + url + "'");
+//        logger.Debug("Response received from: " + url + " is " + s.description);
         
-        logger.Info("Response received from: " + url);
-        
-        outerResponse.onResponse(s);
+        return try outerResponse.onResponse(s);
     }
+    
+
+    
+//    private mediabrowser.apiinteraction.Response<T> outerResponse;
+//    private ILogger logger;
+//    private String url;
+//    
+//    public VolleyResponseListener(mediabrowser.apiinteraction.Response<T> outerResponse, ILogger logger, String url) {
+//        this.outerResponse = outerResponse;
+//        this.logger = logger;
+//        this.url = url;
+//    }
+//    
+//    @Override
+//    public void onResponse(T s) {
+//        
+//        logger.Info("Response received from: %s", url);
+//        
+//        outerResponse.onResponse(s);
+//    }
     
 }

@@ -46,7 +46,7 @@ public /*abstract*/ class Request<T> { // implements Comparable<Request<T>> {
 //    /** URL of this request. */
     private final let mUrl: String
 //    /** Listener interface for errors. */
-    private final let mErrorListener: Response_ErrorListener
+    private final let mErrorListener: Response_ErrorListener?
 //    /** Sequence number of this request, used to enforce FIFO ordering. */
 //    private Integer mSequence;
 //    /** The request queue this request is associated with. */
@@ -427,17 +427,17 @@ public /*abstract*/ class Request<T> { // implements Comparable<Request<T>> {
 //    * {@link #parseNetworkResponse(NetworkResponse)}
 //    */
 //    abstract protected void deliverResponse(T response);
-//    /**
-//    * Delivers error message to the ErrorListener that the Request was
-//    * initialized with.
-//    *
-//    * @param error Error details
-//    */
-//    public void deliverError(VolleyError error) {
-//        if (mErrorListener != null) {
-//            mErrorListener.onErrorResponse(error);
+    /**
+    * Delivers error message to the ErrorListener that the Request was
+    * initialized with.
+    *
+    * @param error Error details
+    */
+    public func deliverError(error: VolleyError) {
+//        if (mErrorListener != nil) {
+            mErrorListener?.onErrorResponse(error);
 //        }
-//    }
+    }
 //    /**
 //    * Our comparator sorts from high to low priority, and secondarily by
 //    * sequence number to provide FIFO ordering.

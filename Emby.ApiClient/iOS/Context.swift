@@ -9,5 +9,8 @@
 import Foundation
 
 public class Context {
-    
+
+    public init() {
+        
+    }
 }

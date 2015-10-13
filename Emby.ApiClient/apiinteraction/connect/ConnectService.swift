@@ -63,8 +63,7 @@ public class ConnectService {
         self.appVersion = appVersion;
     }
     
-    //    Response<ConnectAuthenticationResult>
-    public func Authenticate(username: String, password: String, /*final*/ response: Emby_ApiClient.Response) {
+    public func Authenticate<T:ConnectAuthenticationResult>(username: String, password: String, /*final*/ response: Emby_Response<T>) {
         // UnsupportedEncodingException, NoSuchAlgorithmException {
         
         let args = QueryStringDictionary()
@@ -73,21 +72,24 @@ public class ConnectService {
         args.Add("password", value: Md5.getHash(ConnectPassword.PerformPreHashFilter(password)));
         
         let url = GetConnectUrl("user/authenticate");
+//        let url = GetConnectUrl("");
         
         let request = HttpRequest();
         
         request.setMethod("POST");
+//        request.setMethod("GET");
         request.setUrl(url);
         request.setPostData(args);
-        
+
         AddXApplicationName(request);
         
-        //        SerializedResponse<ConnectAuthenticationResult>
-        _httpClient.Send(request, response: SerializedResponse(innerResponse: response, jsonSerializer: JsonSerializer, type: ConnectAuthenticationResult.self));
+        _httpClient.Send(request, response: SerializedResponse<T>(innerResponse: response, jsonSerializer: JsonSerializer, type: ConnectAuthenticationResult.self));
+        
+// response: {"AccessToken":"cbaf9bc613780f8e90e64532857dae01","User":{"Id":"79718","Name":"vedrano","DisplayName":"vedrano","Email":"vedran.ozir@gmail.com","IsActive":"true","ImageUrl":"http:\/\/www.gravatar.com\/avatar\/1231d710dfba30dd91868a20f737e0db?s=200&d=http%3A%2F%2Fmb3admin.com%2Fimages%2Fuser.png"}}
+        
     }
     
-    //    public func CreatePin(deviceId: String, final response: Response<PinCreationResult>)
-    public func CreatePin(deviceId: String, final response: Emby_ApiClient.Response)
+    public func CreatePin<T:PinCreationResult>(deviceId: String, final response: Emby_Response<T>)
     {
         let args = QueryStringDictionary()
         
@@ -103,12 +105,10 @@ public class ConnectService {
         
         AddXApplicationName(request);
         
-        //        _httpClient.Send(request, SerializedResponse<PinCreationResult>(response, JsonSerializer, PinCreationResult.class))
-        _httpClient.Send(request, response: SerializedResponse(innerResponse: response, jsonSerializer: JsonSerializer, type: PinCreationResult.self));
+        _httpClient.Send(request, response: SerializedResponse<T>(innerResponse: response, jsonSerializer: JsonSerializer, type: PinCreationResult.self));
     }
     
-    //    public func GetPinStatus(pin: PinCreationResult, final response: Response<PinStatusResult>)
-    public func GetPinStatus(pin: PinCreationResult, final response: Emby_ApiClient.Response)
+    public func GetPinStatus<T:PinStatusResult>(pin: PinCreationResult, final response: Emby_Response<T>)
     {
         let dict = QueryStringDictionary();
         
@@ -124,12 +124,10 @@ public class ConnectService {
         
         AddXApplicationName(request);
         
-        //        _httpClient.Send(request, new SerializedResponse<PinStatusResult>(response, JsonSerializer, PinStatusResult.class));
-        _httpClient.Send(request, response: SerializedResponse(innerResponse: response, jsonSerializer: JsonSerializer, type: PinStatusResult.self));
+        _httpClient.Send(request, response: SerializedResponse<T>(innerResponse: response, jsonSerializer: JsonSerializer, type: PinStatusResult.self));
     }
     
-    //    public func ExchangePin(PinCreationResult pin, final Response<PinExchangeResult> response)
-    public func ExchangePin(pin: PinCreationResult, final response: Emby_ApiClient.Response)
+    public func ExchangePin<T:PinExchangeResult>(pin: PinCreationResult, final response: Emby_Response<T>)
     {
         let args = QueryStringDictionary();
         
@@ -146,12 +144,10 @@ public class ConnectService {
         
         AddXApplicationName(request);
         
-        //    _httpClient.Send(request, new SerializedResponse<PinExchangeResult>(response, JsonSerializer, PinExchangeResult.class));
-        _httpClient.Send(request, response: SerializedResponse(innerResponse: response, jsonSerializer: JsonSerializer, type: PinExchangeResult.self));
+        _httpClient.Send(request, response: SerializedResponse<T>(innerResponse: response, jsonSerializer: JsonSerializer, type: PinExchangeResult.self));
     }
     
-    //    public func GetConnectUser(ConnectUserQuery query, String connectAccessToken, final Response<ConnectUser> response)
-    public func GetConnectUser(query: ConnectUserQuery, connectAccessToken: String?, final response: Emby_ApiClient.Response) throws
+    public func GetConnectUser<T:ConnectUser>(query: ConnectUserQuery, connectAccessToken: String?, final response: Emby_Response<T>) throws
     {
         let dict = QueryStringDictionary();
         
@@ -186,12 +182,11 @@ public class ConnectService {
         try AddUserAccessToken(request, accessToken: connectAccessToken)
         AddXApplicationName(request);
         
-        //    _httpClient.Send(request, new SerializedResponse<ConnectUser>(response, JsonSerializer, ConnectUser.class));
-        _httpClient.Send(request, response: SerializedResponse(innerResponse: response, jsonSerializer: JsonSerializer, type: ConnectUser.self));
+        _httpClient.Send(request, response: SerializedResponse<T>(innerResponse: response, jsonSerializer: JsonSerializer, type: ConnectUser.self));
     }
     
     //    public func GetServers(String userId, String connectAccessToken, final Response<ConnectUserServer[]> response)
-    public func GetPinStatus(userId: String, connectAccessToken: String, final response: Emby_ApiClient.Response) throws
+    public func GetPinStatus<T:ConnectUserServer>(userId: String, connectAccessToken: String, final response: Emby_Response<T>) throws
     {
         let dict = QueryStringDictionary();
         
@@ -208,11 +203,11 @@ public class ConnectService {
         AddXApplicationName(request);
         
         //    _httpClient.Send(request, new SerializedResponse<ConnectUserServer[]>(response, JsonSerializer, new ConnectUserServer[]{}.getClass()));
-        _httpClient.Send(request, response: SerializedResponse(innerResponse: response, jsonSerializer: JsonSerializer, type: [ConnectUserServer].self));
+        _httpClient.Send(request, response: SerializedResponse<T>(innerResponse: response, jsonSerializer: JsonSerializer, type: [ConnectUserServer].self));
     }
     
     //    public func Logout(String connectAccessToken, final EmptyResponse response)
-    public func Logout(connectAccessToken: String, final response: Emby_ApiClient.Response) throws
+    public func Logout<T:EmptyResponse>(connectAccessToken: String, final response: Emby_Response<T>) throws
     {
         let url = GetConnectUrl("user/logout");
         
@@ -225,12 +220,12 @@ public class ConnectService {
         AddXApplicationName(request);
         
         //    _httpClient.Send(request, new Response<String>(response));
-        _httpClient.Send(request, response: SerializedResponse(innerResponse: response, jsonSerializer: JsonSerializer, type: Response<String>.self));
+        _httpClient.Send(request, response: SerializedResponse<T>(innerResponse: response, jsonSerializer: JsonSerializer, type: EmptyResponse.self));
     }
     
     private func GetConnectUrl(handler: String) -> String
     {
-        return "https://connect.mediabrowser.tv/service/" + handler;
+        return Configuration.mediaBrowserTV_APIServer + handler;
     }
     
     private func AddUserAccessToken(request: HttpRequest, accessToken: String?) throws
@@ -249,7 +244,7 @@ public class ConnectService {
     }
     
     //    public func GetRegistrationInfo(String userId, String feature, String connectAccessToken, final Response<RegistrationInfo> response)
-    public func GetRegistrationInfo(userId: String, feature: String, connectAccessToken: String, final response: Emby_ApiClient.Response) throws
+    public func GetRegistrationInfo<T:RegistrationInfo>(userId: String, feature: String, connectAccessToken: String, final response: Emby_Response<T>) throws
     {
         let dict = QueryStringDictionary();
         
@@ -268,6 +263,6 @@ public class ConnectService {
         AddXApplicationName(request);
         
         //    _httpClient.Send(request, new SerializedResponse<RegistrationInfo>(response, JsonSerializer, new RegistrationInfo().getClass()));
-        _httpClient.Send(request, response: SerializedResponse(innerResponse: response, jsonSerializer: JsonSerializer, type: RegistrationInfo.self));
+        _httpClient.Send(request, response: SerializedResponse<T>(innerResponse: response, jsonSerializer: JsonSerializer, type: RegistrationInfo.self));
     }
 }

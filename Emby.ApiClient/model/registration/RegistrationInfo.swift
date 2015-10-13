@@ -9,7 +9,7 @@
 import Foundation
 //package mediabrowser.model.registration;
 
-public class RegistrationInfo
+public class RegistrationInfo: GenericResult
 {
 //    /**
 //    Gets or sets the name.

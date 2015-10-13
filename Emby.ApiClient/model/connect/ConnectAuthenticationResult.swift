@@ -9,34 +9,51 @@
 import Foundation
 //package mediabrowser.model.connect;
 
-public class ConnectAuthenticationResult
+public class GenericResult: JSONSerializable
 {
-//    /**
-//    Gets or sets the user.
-//    
-//    <value>The user.</value>
-//    */
-//    private ConnectUser User;
-//    public final ConnectUser getUser()
-//    {
-//    return User;
-//    }
-//    public final void setUser(ConnectUser value)
-//    {
-//    User = value;
-//    }
-//    /**
-//    Gets or sets the access token.
-//    
-//    <value>The access token.</value>
-//    */
-//    private String AccessToken;
-//    public final String getAccessToken()
-//    {
-//    return AccessToken;
-//    }
-//    public final void setAccessToken(String value)
-//    {
-//    AccessToken = value;
-//    }
+    public required init(jSON: JSON) {
+    }
+}
+
+public class ConnectAuthenticationResult: GenericResult
+{
+    public required init(jSON: JSON) {
+        super.init(jSON: jSON)
+        
+        if let user = jSON["User"] as? JSON {
+            self.User = ConnectUser(jSON: user)
+        }
+        
+        if let accessToken = jSON["AccessToken"] as? String {
+            self.AccessToken = accessToken
+        }
+    }
+    /**
+    Gets or sets the user.
+    
+    <value>The user.</value>
+    */
+    private var User: ConnectUser?
+    public func getUser() -> ConnectUser?
+    {
+        return User
+    }
+    public final func setUser(value: ConnectUser)
+    {
+        User = value
+    }
+    /**
+    Gets or sets the access token.
+    
+    <value>The access token.</value>
+    */
+    private var AccessToken: String?
+    public final func getAccessToken() -> String?
+    {
+        return AccessToken
+    }
+    public final func setAccessToken(value: String)
+    {
+        AccessToken = value
+    }
 }

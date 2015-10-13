@@ -21,11 +21,12 @@ import Foundation
 //import java.util.HashMap;
 //import java.util.Map;
 
-public class VolleyStringRequest: StringRequest {
+public class VolleyStringRequest<T:JSONSerializable>: StringRequest<T> {
     
-    private let request: HttpRequest
+//    private let request: HttpRequest
+    let request: HttpRequest
     
-    /*public*/ init( method: String, url: String, listener: Response_Listener/*<String>*/, errorListener: Response_ErrorListener, request: HttpRequest) {
+    /*public*/ init( method: String, url: String, listener: Response_Listener<T>/*<String>*/, errorListener: Response_ErrorListener, request: HttpRequest) {
         self.request = request;
         super.init(method: method, url: url, listener: listener, errorListener: errorListener);
     }

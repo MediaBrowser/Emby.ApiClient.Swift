@@ -19,8 +19,8 @@ import Foundation
 * A canned request for retrieving the response body at a given URL as a String.
 */
 
-public class StringRequest: Request<String> {
-    private final let mListener: Response_Listener
+public class StringRequest<T:JSONSerializable>: Request<String> {
+    private final let mListener: Response_Listener<T>
 //    /**
 //    * Creates a new request with the given method.
 //    *
@@ -29,7 +29,7 @@ public class StringRequest: Request<String> {
 //    * @param listener Listener to receive the String response
 //    * @param errorListener Error listener, or null to ignore errors
 //    */
-    /*public*/ init(method: String, url: String, listener: Response_Listener, errorListener: Response_ErrorListener/*Listener<String>,
+    /*public*/ init(method: String, url: String, listener: Response_Listener<T>, errorListener: Response_ErrorListener/*Listener<String>,
         errorListener: ErrorListener*/) {
         mListener = listener;
         super.init(method: method, url: url, listener: errorListener);
@@ -45,8 +45,13 @@ public class StringRequest: Request<String> {
 //        this(Method.GET, url, listener, errorListener);
 //    }
 //    @Override
-    internal func deliverResponse(response: String) {
-        mListener.onResponse(response);
+    internal func deliverResponse(response: String) throws {
+
+        let responseAsString = response as NSString
+        
+        print("received response '\(response)'")
+        let _: T? = try mListener.onResponse(responseAsString);
+
     }
 //    @Override
 //    protected Response<String> parseNetworkResponse(NetworkResponse response) {

@@ -19,7 +19,8 @@ public protocol ILogger
     @param message The message.
     @param paramList The param list.
     */
-    func Info(message: String, _: AnyObject...)
+//    func Info(message: String, _: AnyObject...)
+    func Info(message: String)
     
 //    /**
 //    Errors the specified message.
@@ -40,7 +41,8 @@ public protocol ILogger
     @param message The message.
     @param paramList The param list.
     */
-    func Debug(message: String, _: AnyObject...)
+//    func Debug(message: String, _: AnyObject...)
+    func Debug(message: String)
     
 //    /**
 //    Fatals the specified message.

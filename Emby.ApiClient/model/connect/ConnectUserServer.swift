@@ -9,7 +9,7 @@
 import Foundation
 //package mediabrowser.model.connect;
 
-public class ConnectUserServer
+public class ConnectUserServer: GenericResult
 {
 //    private String Id;
 //    public final String getId()

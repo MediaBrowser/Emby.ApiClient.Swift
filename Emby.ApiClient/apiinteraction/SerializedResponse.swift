@@ -14,20 +14,25 @@ import Foundation
 //import mediabrowser.model.logging.ILogger;
 //import mediabrowser.model.serialization.IJsonSerializer;
 
-public class SerializedResponse: Emby_ApiClient.Response<Any> {
+//public class SerializedResponse: Emby_ApiClient.Response<Any> {
+public class SerializedResponse<T: JSONSerializable>: Emby_Response<T> {
+//public class SerializedResponse: Emby_ResponseX<T> {
+
 //    func onResponse(response: Any) {}
     
     private let jsonSerializer: IJsonSerializer
     private let type: Any
-    /*protected*/ let innerResponse: Emby_ApiClient.Response<Any>
+//    /*protected*/ let innerResponse: Emby_Response?
     private let url: String? = nil
 //    private ILogger logger;
     
-    public init(innerResponse: Emby_ApiClient.Response<Any>, jsonSerializer: IJsonSerializer, type: Any) {
-//        super(innerResponse);
+    public init(innerResponse: Emby_Response<T>, jsonSerializer: IJsonSerializer, type: Any) {
+        
         self.jsonSerializer = jsonSerializer;
         self.type = type;
-        self.innerResponse = innerResponse;
+//        self.innerResponse = innerResponse;
+        
+        super.init(innerResponse: innerResponse)
     }
     
 //    public SerializedResponse(Emby_ApiClient.Response<T> innerResponse, IJsonSerializer jsonSerializer, String url, ILogger logger, Class type) {
@@ -41,19 +46,26 @@ public class SerializedResponse: Emby_ApiClient.Response<Any> {
 //    
 //    
 //    @Override
-//    public void onResponse(String result) {
-//        
-//        if (url != null){
+//    override public func onResponse<T: JSONSerializable>(result: Any) throws -> T? {
+    override public func onResponse(result: Any) throws -> T? {
+    
+//        if (url != nil){
 //            logger.Debug("Received response from %s", url);
 //        }
-//        
-//        T obj = jsonSerializer.DeserializeFromString(result, type);
-//        
-//        onSerializedResponse(obj);
-//    }
-//    
-//    protected void onSerializedResponse(T obj){
-//        innerResponse.onResponse(obj);
-//    }
+        
+        var obj: T? = nil
+        
+        if let string = result as? NSString {
+            obj = try jsonSerializer.DeserializeFromString(string as String, type: type)
+        }
+        
+        try onSerializedResponse(obj);
+        
+        return obj
+    }
+    
+    /*protected*/ func onSerializedResponse(obj: T?) throws -> T? {
+        return try self.innerResponse?.onResponse(obj);
+    }
     
 }

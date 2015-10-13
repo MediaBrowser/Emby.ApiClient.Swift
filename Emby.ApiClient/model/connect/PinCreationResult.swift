@@ -9,7 +9,7 @@
 import Foundation
 //package mediabrowser.model.connect;
 
-public class PinCreationResult
+public class PinCreationResult: GenericResult
 {
     private var Pin: String?
     public final func getPin() -> String?
