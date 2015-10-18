@@ -140,7 +140,6 @@
 			isa = PBXGroup;
 			children = (
 				04AFCAD71BD33E0500C95C88 /* ServerLocatorProtocol.swift */,
-				04AFCADA1BD33FEA00C95C88 /* apiclient */,
 			);
 			path = discovery;
 			sourceTree = "<group>";
@@ -213,6 +212,7 @@
 		8838C5681BC51FD900587F8E /* model */ = {
 			isa = PBXGroup;
 			children = (
+				04AFCADA1BD33FEA00C95C88 /* apiclient */,
 				88CF7E561BC5BEFC00A33B72 /* logging */,
 				8838C5691BC51FD900587F8E /* connect */,
 				888EFC621BC859D000546DB3 /* registration */,
