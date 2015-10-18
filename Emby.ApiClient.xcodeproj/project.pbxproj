@@ -7,46 +7,59 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04AFCAD81BD33E0500C95C88 /* ServerLocatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFCAD71BD33E0500C95C88 /* ServerLocatorProtocol.swift */; };
+		04AFCADC1BD33FEA00C95C88 /* ServerDiscoveryInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFCADB1BD33FEA00C95C88 /* ServerDiscoveryInfo.swift */; };
+		04AFCAE21BD3436600C95C88 /* ConnectionManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFCAE11BD3436600C95C88 /* ConnectionManagerProtocol.swift */; };
+		04AFCAE61BD3453400C95C88 /* ClientCapabilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFCAE51BD3453400C95C88 /* ClientCapabilities.swift */; };
+		04AFCAE91BD346F200C95C88 /* DeviceProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFCAE81BD346F200C95C88 /* DeviceProfile.swift */; };
+		04AFCAEC1BD347EE00C95C88 /* IHasServerId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFCAEB1BD347EE00C95C88 /* IHasServerId.swift */; };
+		04AFCAEE1BD3489C00C95C88 /* ServerInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFCAED1BD3489C00C95C88 /* ServerInfo.swift */; };
+		04AFCAF01BD3490A00C95C88 /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFCAEF1BD3490A00C95C88 /* ApiClient.swift */; };
+		04AFCAF31BD3497000C95C88 /* DeviceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFCAF21BD3497000C95C88 /* DeviceProtocol.swift */; };
+		04AFCAF61BD34A0A00C95C88 /* LocalFileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFCAF51BD34A0A00C95C88 /* LocalFileInfo.swift */; };
+		04AFCAF91BD34B4800C95C88 /* ProgressProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFCAF81BD34B4800C95C88 /* ProgressProtocol.swift */; };
+		04AFCAFB1BD34B9900C95C88 /* CancellationToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFCAFA1BD34B9900C95C88 /* CancellationToken.swift */; };
+		04AFCAFD1BD34C9F00C95C88 /* ConnectionOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFCAFC1BD34C9F00C95C88 /* ConnectionOptions.swift */; };
 		8838C55B1BC514B500587F8E /* Emby.ApiClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 8838C55A1BC514B500587F8E /* Emby.ApiClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		884EBEDD1BCD912B0032E7F3 /* EmptyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884EBEDC1BCD912B0032E7F3 /* EmptyResponse.swift */; settings = {ASSET_TAGS = (); }; };
-		8857F86D1BCC633F00ADFA8A /* VolleyError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8857F86C1BCC633F00ADFA8A /* VolleyError.swift */; settings = {ASSET_TAGS = (); }; };
-		8857F86F1BCD4B5500ADFA8A /* IResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8857F86E1BCD4B5500ADFA8A /* IResponse.swift */; settings = {ASSET_TAGS = (); }; };
-		888EFC651BC859E100546DB3 /* RegistrationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888EFC641BC859E100546DB3 /* RegistrationInfo.swift */; settings = {ASSET_TAGS = (); }; };
-		888EFC6D1BCC3DA600546DB3 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888EFC6C1BCC3DA600546DB3 /* Configuration.swift */; settings = {ASSET_TAGS = (); }; };
-		888EFC7E1BCC4DB700546DB3 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888EFC7D1BCC4DB700546DB3 /* Logger.swift */; settings = {ASSET_TAGS = (); }; };
-		888EFC811BCC4EDC00546DB3 /* JsonSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888EFC801BCC4EDC00546DB3 /* JsonSerializer.swift */; settings = {ASSET_TAGS = (); }; };
+		884EBEDD1BCD912B0032E7F3 /* EmptyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884EBEDC1BCD912B0032E7F3 /* EmptyResponse.swift */; };
+		8857F86D1BCC633F00ADFA8A /* VolleyError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8857F86C1BCC633F00ADFA8A /* VolleyError.swift */; };
+		8857F86F1BCD4B5500ADFA8A /* IResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8857F86E1BCD4B5500ADFA8A /* IResponse.swift */; };
+		888EFC651BC859E100546DB3 /* RegistrationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888EFC641BC859E100546DB3 /* RegistrationInfo.swift */; };
+		888EFC6D1BCC3DA600546DB3 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888EFC6C1BCC3DA600546DB3 /* Configuration.swift */; };
+		888EFC7E1BCC4DB700546DB3 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888EFC7D1BCC4DB700546DB3 /* Logger.swift */; };
+		888EFC811BCC4EDC00546DB3 /* JsonSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888EFC801BCC4EDC00546DB3 /* JsonSerializer.swift */; };
 		888EFC9A1BCC52CD00546DB3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888EFC991BCC52CD00546DB3 /* AppDelegate.swift */; };
 		888EFC9C1BCC52CD00546DB3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888EFC9B1BCC52CD00546DB3 /* ViewController.swift */; };
 		888EFC9F1BCC52CD00546DB3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 888EFC9D1BCC52CD00546DB3 /* Main.storyboard */; };
 		888EFCA11BCC52CD00546DB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 888EFCA01BCC52CD00546DB3 /* Assets.xcassets */; };
 		888EFCA41BCC52CD00546DB3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 888EFCA21BCC52CD00546DB3 /* LaunchScreen.storyboard */; };
-		88CF7C111BC5248E00A33B72 /* Emby.ApiClient-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = 88CF7C101BC5248E00A33B72 /* Emby.ApiClient-Bridging-Header.h */; settings = {ASSET_TAGS = (); }; };
-		88CF7E371BC5B8DF00A33B72 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7CCE1BC59D0500A33B72 /* Response.swift */; settings = {ASSET_TAGS = (); }; };
-		88CF7E381BC5B94500A33B72 /* HttpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7CC51BC5873A00A33B72 /* HttpRequest.swift */; settings = {ASSET_TAGS = (); }; };
-		88CF7E391BC5B9AE00A33B72 /* SerializedResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7E311BC5B08300A33B72 /* SerializedResponse.swift */; settings = {ASSET_TAGS = (); }; };
-		88CF7E3C1BC5BB5600A33B72 /* IJsonSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7E3B1BC5BB5600A33B72 /* IJsonSerializer.swift */; settings = {ASSET_TAGS = (); }; };
-		88CF7E3E1BC5BC8800A33B72 /* IAsyncHttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7CC31BC586BC00A33B72 /* IAsyncHttpClient.swift */; settings = {ASSET_TAGS = (); }; };
-		88CF7E3F1BC5BCA800A33B72 /* VolleyHttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7CC81BC5888300A33B72 /* VolleyHttpClient.swift */; settings = {ASSET_TAGS = (); }; };
+		88CF7C111BC5248E00A33B72 /* Emby.ApiClient-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = 88CF7C101BC5248E00A33B72 /* Emby.ApiClient-Bridging-Header.h */; };
+		88CF7E371BC5B8DF00A33B72 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7CCE1BC59D0500A33B72 /* Response.swift */; };
+		88CF7E381BC5B94500A33B72 /* HttpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7CC51BC5873A00A33B72 /* HttpRequest.swift */; };
+		88CF7E391BC5B9AE00A33B72 /* SerializedResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7E311BC5B08300A33B72 /* SerializedResponse.swift */; };
+		88CF7E3C1BC5BB5600A33B72 /* IJsonSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7E3B1BC5BB5600A33B72 /* IJsonSerializer.swift */; };
+		88CF7E3E1BC5BC8800A33B72 /* IAsyncHttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7CC31BC586BC00A33B72 /* IAsyncHttpClient.swift */; };
+		88CF7E3F1BC5BCA800A33B72 /* VolleyHttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7CC81BC5888300A33B72 /* VolleyHttpClient.swift */; };
 		88CF7E541BC5BDA000A33B72 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88CF7E491BC5BD0700A33B72 /* Alamofire.framework */; };
-		88CF7E551BC5BE9600A33B72 /* VolleyResponseListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7CD01BC59EA500A33B72 /* VolleyResponseListener.swift */; settings = {ASSET_TAGS = (); }; };
-		88CF7E581BC5BF0300A33B72 /* ILogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7E571BC5BF0300A33B72 /* ILogger.swift */; settings = {ASSET_TAGS = (); }; };
-		88CF7E591BC5BF8C00A33B72 /* QueryStringDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8838C5661BC5197900587F8E /* QueryStringDictionary.swift */; settings = {ASSET_TAGS = (); }; };
-		88CF7E5A1BC5BF9E00A33B72 /* ConnectPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8838C56A1BC51FFA00587F8E /* ConnectPassword.swift */; settings = {ASSET_TAGS = (); }; };
-		88CF7E5B1BC5BFA300A33B72 /* ConnectAuthorizationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7E331BC5B14F00A33B72 /* ConnectAuthorizationRequest.swift */; settings = {ASSET_TAGS = (); }; };
-		88CF7E5C1BC5BFA700A33B72 /* ConnectAuthenticationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7E351BC5B2E800A33B72 /* ConnectAuthenticationResult.swift */; settings = {ASSET_TAGS = (); }; };
-		88CF7E5D1BC5BFC000A33B72 /* VolleyStringRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7CCA1BC59AC600A33B72 /* VolleyStringRequest.swift */; settings = {ASSET_TAGS = (); }; };
-		88CF7E5E1BC5C15D00A33B72 /* ConnectService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8838C5641BC5180100587F8E /* ConnectService.swift */; settings = {ASSET_TAGS = (); }; };
-		88CF7E601BC5C37D00A33B72 /* HttpHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7E5F1BC5C37D00A33B72 /* HttpHeaders.swift */; settings = {ASSET_TAGS = (); }; };
-		88CF7E621BC5C72700A33B72 /* VolleyErrorListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7E611BC5C72700A33B72 /* VolleyErrorListener.swift */; settings = {ASSET_TAGS = (); }; };
-		88CF7E641BC5C85A00A33B72 /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7E631BC5C85A00A33B72 /* Context.swift */; settings = {ASSET_TAGS = (); }; };
-		88CF7E671BC5CB4B00A33B72 /* StringRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7E661BC5CB4B00A33B72 /* StringRequest.swift */; settings = {ASSET_TAGS = (); }; };
-		88CF7E691BC5CBDB00A33B72 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7E681BC5CBDB00A33B72 /* Request.swift */; settings = {ASSET_TAGS = (); }; };
-		88CF7E6E1BC6E05C00A33B72 /* PinCreationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7E6D1BC6E05C00A33B72 /* PinCreationResult.swift */; settings = {ASSET_TAGS = (); }; };
-		88CF7E701BC6E0C100A33B72 /* PinStatusResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7E6F1BC6E0C100A33B72 /* PinStatusResult.swift */; settings = {ASSET_TAGS = (); }; };
-		88CF7E721BC6E49F00A33B72 /* PinExchangeResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7E711BC6E49F00A33B72 /* PinExchangeResult.swift */; settings = {ASSET_TAGS = (); }; };
-		88CF7E741BC6E5B500A33B72 /* ConnectUserQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7E731BC6E5B500A33B72 /* ConnectUserQuery.swift */; settings = {ASSET_TAGS = (); }; };
-		88CF7E761BC6E71200A33B72 /* ConnectUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7E751BC6E71200A33B72 /* ConnectUser.swift */; settings = {ASSET_TAGS = (); }; };
-		88CF7E781BC6E86F00A33B72 /* ConnectUserServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7E771BC6E86F00A33B72 /* ConnectUserServer.swift */; settings = {ASSET_TAGS = (); }; };
+		88CF7E551BC5BE9600A33B72 /* VolleyResponseListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7CD01BC59EA500A33B72 /* VolleyResponseListener.swift */; };
+		88CF7E581BC5BF0300A33B72 /* ILogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7E571BC5BF0300A33B72 /* ILogger.swift */; };
+		88CF7E591BC5BF8C00A33B72 /* QueryStringDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8838C5661BC5197900587F8E /* QueryStringDictionary.swift */; };
+		88CF7E5A1BC5BF9E00A33B72 /* ConnectPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8838C56A1BC51FFA00587F8E /* ConnectPassword.swift */; };
+		88CF7E5B1BC5BFA300A33B72 /* ConnectAuthorizationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7E331BC5B14F00A33B72 /* ConnectAuthorizationRequest.swift */; };
+		88CF7E5C1BC5BFA700A33B72 /* ConnectAuthenticationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7E351BC5B2E800A33B72 /* ConnectAuthenticationResult.swift */; };
+		88CF7E5D1BC5BFC000A33B72 /* VolleyStringRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7CCA1BC59AC600A33B72 /* VolleyStringRequest.swift */; };
+		88CF7E5E1BC5C15D00A33B72 /* ConnectService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8838C5641BC5180100587F8E /* ConnectService.swift */; };
+		88CF7E601BC5C37D00A33B72 /* HttpHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7E5F1BC5C37D00A33B72 /* HttpHeaders.swift */; };
+		88CF7E621BC5C72700A33B72 /* VolleyErrorListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7E611BC5C72700A33B72 /* VolleyErrorListener.swift */; };
+		88CF7E641BC5C85A00A33B72 /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7E631BC5C85A00A33B72 /* Context.swift */; };
+		88CF7E671BC5CB4B00A33B72 /* StringRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7E661BC5CB4B00A33B72 /* StringRequest.swift */; };
+		88CF7E691BC5CBDB00A33B72 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7E681BC5CBDB00A33B72 /* Request.swift */; };
+		88CF7E6E1BC6E05C00A33B72 /* PinCreationResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7E6D1BC6E05C00A33B72 /* PinCreationResult.swift */; };
+		88CF7E701BC6E0C100A33B72 /* PinStatusResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7E6F1BC6E0C100A33B72 /* PinStatusResult.swift */; };
+		88CF7E721BC6E49F00A33B72 /* PinExchangeResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7E711BC6E49F00A33B72 /* PinExchangeResult.swift */; };
+		88CF7E741BC6E5B500A33B72 /* ConnectUserQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7E731BC6E5B500A33B72 /* ConnectUserQuery.swift */; };
+		88CF7E761BC6E71200A33B72 /* ConnectUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7E751BC6E71200A33B72 /* ConnectUser.swift */; };
+		88CF7E781BC6E86F00A33B72 /* ConnectUserServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7E771BC6E86F00A33B72 /* ConnectUserServer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +80,19 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		04AFCAD71BD33E0500C95C88 /* ServerLocatorProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerLocatorProtocol.swift; sourceTree = "<group>"; };
+		04AFCADB1BD33FEA00C95C88 /* ServerDiscoveryInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerDiscoveryInfo.swift; sourceTree = "<group>"; };
+		04AFCAE11BD3436600C95C88 /* ConnectionManagerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionManagerProtocol.swift; sourceTree = "<group>"; };
+		04AFCAE51BD3453400C95C88 /* ClientCapabilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ClientCapabilities.swift; path = session/ClientCapabilities.swift; sourceTree = "<group>"; };
+		04AFCAE81BD346F200C95C88 /* DeviceProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DeviceProfile.swift; path = dlna/DeviceProfile.swift; sourceTree = "<group>"; };
+		04AFCAEB1BD347EE00C95C88 /* IHasServerId.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IHasServerId.swift; path = dto/IHasServerId.swift; sourceTree = "<group>"; };
+		04AFCAED1BD3489C00C95C88 /* ServerInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerInfo.swift; sourceTree = "<group>"; };
+		04AFCAEF1BD3490A00C95C88 /* ApiClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
+		04AFCAF21BD3497000C95C88 /* DeviceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DeviceProtocol.swift; path = device/DeviceProtocol.swift; sourceTree = "<group>"; };
+		04AFCAF51BD34A0A00C95C88 /* LocalFileInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocalFileInfo.swift; path = devices/LocalFileInfo.swift; sourceTree = "<group>"; };
+		04AFCAF81BD34B4800C95C88 /* ProgressProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProgressProtocol.swift; path = Emby.ApiClient/tasks/ProgressProtocol.swift; sourceTree = SOURCE_ROOT; };
+		04AFCAFA1BD34B9900C95C88 /* CancellationToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CancellationToken.swift; path = Emby.ApiClient/tasks/CancellationToken.swift; sourceTree = SOURCE_ROOT; };
+		04AFCAFC1BD34C9F00C95C88 /* ConnectionOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionOptions.swift; sourceTree = "<group>"; };
 		8838C5571BC514B500587F8E /* Emby_ApiClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Emby_ApiClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8838C55A1BC514B500587F8E /* Emby.ApiClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Emby.ApiClient.h; sourceTree = "<group>"; };
 		8838C55C1BC514B500587F8E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -132,6 +158,74 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04AFCAD61BD33E0500C95C88 /* discovery */ = {
+			isa = PBXGroup;
+			children = (
+				04AFCAD71BD33E0500C95C88 /* ServerLocatorProtocol.swift */,
+			);
+			path = discovery;
+			sourceTree = "<group>";
+		};
+		04AFCADA1BD33FEA00C95C88 /* apiclient */ = {
+			isa = PBXGroup;
+			children = (
+				04AFCADB1BD33FEA00C95C88 /* ServerDiscoveryInfo.swift */,
+				04AFCAED1BD3489C00C95C88 /* ServerInfo.swift */,
+				04AFCAFC1BD34C9F00C95C88 /* ConnectionOptions.swift */,
+			);
+			name = apiclient;
+			path = Emby.ApiClient/model/apiclient;
+			sourceTree = SOURCE_ROOT;
+		};
+		04AFCAE41BD3451000C95C88 /* session */ = {
+			isa = PBXGroup;
+			children = (
+				04AFCAE51BD3453400C95C88 /* ClientCapabilities.swift */,
+			);
+			name = session;
+			sourceTree = "<group>";
+		};
+		04AFCAE71BD346C600C95C88 /* dlna */ = {
+			isa = PBXGroup;
+			children = (
+				04AFCAE81BD346F200C95C88 /* DeviceProfile.swift */,
+			);
+			name = dlna;
+			sourceTree = "<group>";
+		};
+		04AFCAEA1BD347DD00C95C88 /* dto */ = {
+			isa = PBXGroup;
+			children = (
+				04AFCAEB1BD347EE00C95C88 /* IHasServerId.swift */,
+			);
+			name = dto;
+			sourceTree = "<group>";
+		};
+		04AFCAF11BD3496100C95C88 /* device */ = {
+			isa = PBXGroup;
+			children = (
+				04AFCAF21BD3497000C95C88 /* DeviceProtocol.swift */,
+			);
+			name = device;
+			sourceTree = "<group>";
+		};
+		04AFCAF41BD349FA00C95C88 /* devices */ = {
+			isa = PBXGroup;
+			children = (
+				04AFCAF51BD34A0A00C95C88 /* LocalFileInfo.swift */,
+			);
+			name = devices;
+			sourceTree = "<group>";
+		};
+		04AFCAF71BD34B0900C95C88 /* tasks */ = {
+			isa = PBXGroup;
+			children = (
+				04AFCAF81BD34B4800C95C88 /* ProgressProtocol.swift */,
+				04AFCAFA1BD34B9900C95C88 /* CancellationToken.swift */,
+			);
+			name = tasks;
+			sourceTree = "<group>";
+		};
 		8838C54D1BC514B500587F8E = {
 			isa = PBXGroup;
 			children = (
@@ -168,6 +262,9 @@
 		8838C5621BC517E300587F8E /* apiinteraction */ = {
 			isa = PBXGroup;
 			children = (
+				04AFCAF71BD34B0900C95C88 /* tasks */,
+				04AFCAF11BD3496100C95C88 /* device */,
+				04AFCAD61BD33E0500C95C88 /* discovery */,
 				8838C5631BC517E300587F8E /* connect */,
 				88CF7CC21BC586AE00A33B72 /* http */,
 				88CF7CC71BC5887100A33B72 /* iOS */,
@@ -175,6 +272,8 @@
 				88CF7E311BC5B08300A33B72 /* SerializedResponse.swift */,
 				8857F86E1BCD4B5500ADFA8A /* IResponse.swift */,
 				884EBEDC1BCD912B0032E7F3 /* EmptyResponse.swift */,
+				04AFCAE11BD3436600C95C88 /* ConnectionManagerProtocol.swift */,
+				04AFCAEF1BD3490A00C95C88 /* ApiClient.swift */,
 			);
 			path = apiinteraction;
 			sourceTree = "<group>";
@@ -190,6 +289,11 @@
 		8838C5681BC51FD900587F8E /* model */ = {
 			isa = PBXGroup;
 			children = (
+				04AFCAF41BD349FA00C95C88 /* devices */,
+				04AFCAEA1BD347DD00C95C88 /* dto */,
+				04AFCAE71BD346C600C95C88 /* dlna */,
+				04AFCAE41BD3451000C95C88 /* session */,
+				04AFCADA1BD33FEA00C95C88 /* apiclient */,
 				88CF7E561BC5BEFC00A33B72 /* logging */,
 				8838C5691BC51FD900587F8E /* connect */,
 				888EFC621BC859D000546DB3 /* registration */,
@@ -449,10 +553,15 @@
 			files = (
 				88CF7E641BC5C85A00A33B72 /* Context.swift in Sources */,
 				88CF7E721BC6E49F00A33B72 /* PinExchangeResult.swift in Sources */,
+				04AFCAF91BD34B4800C95C88 /* ProgressProtocol.swift in Sources */,
 				88CF7E391BC5B9AE00A33B72 /* SerializedResponse.swift in Sources */,
 				8857F86D1BCC633F00ADFA8A /* VolleyError.swift in Sources */,
+				04AFCAE61BD3453400C95C88 /* ClientCapabilities.swift in Sources */,
+				04AFCAE91BD346F200C95C88 /* DeviceProfile.swift in Sources */,
 				88CF7E581BC5BF0300A33B72 /* ILogger.swift in Sources */,
 				88CF7E3C1BC5BB5600A33B72 /* IJsonSerializer.swift in Sources */,
+				04AFCAEE1BD3489C00C95C88 /* ServerInfo.swift in Sources */,
+				04AFCAFD1BD34C9F00C95C88 /* ConnectionOptions.swift in Sources */,
 				88CF7E671BC5CB4B00A33B72 /* StringRequest.swift in Sources */,
 				88CF7E5C1BC5BFA700A33B72 /* ConnectAuthenticationResult.swift in Sources */,
 				88CF7E5E1BC5C15D00A33B72 /* ConnectService.swift in Sources */,
@@ -461,13 +570,18 @@
 				88CF7E3E1BC5BC8800A33B72 /* IAsyncHttpClient.swift in Sources */,
 				884EBEDD1BCD912B0032E7F3 /* EmptyResponse.swift in Sources */,
 				888EFC7E1BCC4DB700546DB3 /* Logger.swift in Sources */,
+				04AFCAEC1BD347EE00C95C88 /* IHasServerId.swift in Sources */,
 				88CF7E6E1BC6E05C00A33B72 /* PinCreationResult.swift in Sources */,
+				04AFCAF61BD34A0A00C95C88 /* LocalFileInfo.swift in Sources */,
+				04AFCAF01BD3490A00C95C88 /* ApiClient.swift in Sources */,
 				88CF7E3F1BC5BCA800A33B72 /* VolleyHttpClient.swift in Sources */,
 				88CF7E551BC5BE9600A33B72 /* VolleyResponseListener.swift in Sources */,
+				04AFCAFB1BD34B9900C95C88 /* CancellationToken.swift in Sources */,
 				8857F86F1BCD4B5500ADFA8A /* IResponse.swift in Sources */,
 				88CF7E781BC6E86F00A33B72 /* ConnectUserServer.swift in Sources */,
 				88CF7E591BC5BF8C00A33B72 /* QueryStringDictionary.swift in Sources */,
 				88CF7E691BC5CBDB00A33B72 /* Request.swift in Sources */,
+				04AFCADC1BD33FEA00C95C88 /* ServerDiscoveryInfo.swift in Sources */,
 				88CF7E371BC5B8DF00A33B72 /* Response.swift in Sources */,
 				88CF7E741BC6E5B500A33B72 /* ConnectUserQuery.swift in Sources */,
 				88CF7E601BC5C37D00A33B72 /* HttpHeaders.swift in Sources */,
@@ -477,8 +591,11 @@
 				88CF7E5A1BC5BF9E00A33B72 /* ConnectPassword.swift in Sources */,
 				88CF7E761BC6E71200A33B72 /* ConnectUser.swift in Sources */,
 				888EFC811BCC4EDC00546DB3 /* JsonSerializer.swift in Sources */,
+				04AFCAD81BD33E0500C95C88 /* ServerLocatorProtocol.swift in Sources */,
+				04AFCAE21BD3436600C95C88 /* ConnectionManagerProtocol.swift in Sources */,
 				88CF7E5D1BC5BFC000A33B72 /* VolleyStringRequest.swift in Sources */,
 				88CF7E621BC5C72700A33B72 /* VolleyErrorListener.swift in Sources */,
+				04AFCAF31BD3497000C95C88 /* DeviceProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
