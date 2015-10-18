@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		04AFCAD81BD33E0500C95C88 /* ServerLocatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFCAD71BD33E0500C95C88 /* ServerLocatorProtocol.swift */; };
+		04AFCADC1BD33FEA00C95C88 /* ServerDiscoveryInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFCADB1BD33FEA00C95C88 /* ServerDiscoveryInfo.swift */; };
 		8838C55B1BC514B500587F8E /* Emby.ApiClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 8838C55A1BC514B500587F8E /* Emby.ApiClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		884EBEDD1BCD912B0032E7F3 /* EmptyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884EBEDC1BCD912B0032E7F3 /* EmptyResponse.swift */; };
 		8857F86D1BCC633F00ADFA8A /* VolleyError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8857F86C1BCC633F00ADFA8A /* VolleyError.swift */; };
@@ -69,6 +70,7 @@
 
 /* Begin PBXFileReference section */
 		04AFCAD71BD33E0500C95C88 /* ServerLocatorProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerLocatorProtocol.swift; sourceTree = "<group>"; };
+		04AFCADB1BD33FEA00C95C88 /* ServerDiscoveryInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerDiscoveryInfo.swift; sourceTree = "<group>"; };
 		8838C5571BC514B500587F8E /* Emby_ApiClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Emby_ApiClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8838C55A1BC514B500587F8E /* Emby.ApiClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Emby.ApiClient.h; sourceTree = "<group>"; };
 		8838C55C1BC514B500587F8E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -138,9 +140,19 @@
 			isa = PBXGroup;
 			children = (
 				04AFCAD71BD33E0500C95C88 /* ServerLocatorProtocol.swift */,
+				04AFCADA1BD33FEA00C95C88 /* apiclient */,
 			);
 			path = discovery;
 			sourceTree = "<group>";
+		};
+		04AFCADA1BD33FEA00C95C88 /* apiclient */ = {
+			isa = PBXGroup;
+			children = (
+				04AFCADB1BD33FEA00C95C88 /* ServerDiscoveryInfo.swift */,
+			);
+			name = apiclient;
+			path = Emby.ApiClient/model/apiclient;
+			sourceTree = SOURCE_ROOT;
 		};
 		8838C54D1BC514B500587F8E = {
 			isa = PBXGroup;
@@ -479,6 +491,7 @@
 				88CF7E781BC6E86F00A33B72 /* ConnectUserServer.swift in Sources */,
 				88CF7E591BC5BF8C00A33B72 /* QueryStringDictionary.swift in Sources */,
 				88CF7E691BC5CBDB00A33B72 /* Request.swift in Sources */,
+				04AFCADC1BD33FEA00C95C88 /* ServerDiscoveryInfo.swift in Sources */,
 				88CF7E371BC5B8DF00A33B72 /* Response.swift in Sources */,
 				88CF7E741BC6E5B500A33B72 /* ConnectUserQuery.swift in Sources */,
 				88CF7E601BC5C37D00A33B72 /* HttpHeaders.swift in Sources */,
