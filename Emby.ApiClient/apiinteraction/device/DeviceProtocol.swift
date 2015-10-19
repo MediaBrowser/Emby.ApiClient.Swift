@@ -6,10 +6,10 @@
 import Foundation
 
 public protocol DeviceProtocol {
-    let deviceName: String
-    let deviceId: String
+    var deviceName: String { get set }
+    var deviceId: String { get set }
     
     func getLocalPhotos() -> [LocalFileInfo]
-    func getLocalVideos)() -> [LocalFileInfo]
+    func getLocalVideos() -> [LocalFileInfo]
     func uploadFile(file: LocalFileInfo, apiClient: ApiClient, progress: ProgressProtocol<Double>, cancellationToken: CancellationToken )
 }

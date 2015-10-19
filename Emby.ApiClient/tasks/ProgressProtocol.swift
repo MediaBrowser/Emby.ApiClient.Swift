@@ -5,9 +5,36 @@
 
 import Foundation
 
-public protocol ProgressProtocol<T> {
-    func report(T progress) -> Void
-    func reportComplete() -> Void
-    func reportCancelled() -> Void
-    func reportError(error: ErrorType) -> Void
+public class ProgressProtocol<T> {
+    func report(progress: T) {
+        onProgress(progress)
+    }
+    
+    func reportComplete() {
+        onComplete()
+    }
+    
+    func reportCancelled() {
+        onComplete()
+    }
+    
+    func reportError(error: ErrorType) {
+        onError(error)
+    }
+    
+    func onProgress(progress: T) {
+        
+    }
+    
+    func onComplete() {
+        
+    }
+    
+    func onCancelled() {
+        
+    }
+    
+    func onError(error: ErrorType) {
+        
+    }
 }

@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0416439C1BD41FA600873FAB /* ServerUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0416439B1BD41FA600873FAB /* ServerUserInfo.swift */; };
+		0416439F1BD4204300873FAB /* WakeOnLanInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0416439E1BD4204300873FAB /* WakeOnLanInfo.swift */; };
+		041643A11BD4216100873FAB /* UserLinkType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041643A01BD4216100873FAB /* UserLinkType.swift */; };
+		041643A31BD4233800873FAB /* ConnectionMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041643A21BD4233800873FAB /* ConnectionMode.swift */; };
+		041643A61BD424F400873FAB /* PublicSystemInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041643A51BD424F400873FAB /* PublicSystemInfo.swift */; };
+		041643A81BD4280600873FAB /* SystemInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041643A71BD4280600873FAB /* SystemInfo.swift */; };
+		041643AA1BD48E6100873FAB /* ConnectionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041643A91BD48E6100873FAB /* ConnectionResult.swift */; };
+		041643AD1BD495A700873FAB /* InstallationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041643AC1BD495A700873FAB /* InstallationInfo.swift */; };
+		041643AF1BD4962100873FAB /* PackageVersionClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041643AE1BD4962100873FAB /* PackageVersionClass.swift */; };
 		04AFCAD81BD33E0500C95C88 /* ServerLocatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFCAD71BD33E0500C95C88 /* ServerLocatorProtocol.swift */; };
 		04AFCADC1BD33FEA00C95C88 /* ServerDiscoveryInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFCADB1BD33FEA00C95C88 /* ServerDiscoveryInfo.swift */; };
 		04AFCAE21BD3436600C95C88 /* ConnectionManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFCAE11BD3436600C95C88 /* ConnectionManagerProtocol.swift */; };
@@ -80,6 +89,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0416439B1BD41FA600873FAB /* ServerUserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerUserInfo.swift; sourceTree = "<group>"; };
+		0416439E1BD4204300873FAB /* WakeOnLanInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WakeOnLanInfo.swift; sourceTree = "<group>"; };
+		041643A01BD4216100873FAB /* UserLinkType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLinkType.swift; sourceTree = "<group>"; };
+		041643A21BD4233800873FAB /* ConnectionMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionMode.swift; sourceTree = "<group>"; };
+		041643A51BD424F400873FAB /* PublicSystemInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PublicSystemInfo.swift; path = system/PublicSystemInfo.swift; sourceTree = "<group>"; };
+		041643A71BD4280600873FAB /* SystemInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SystemInfo.swift; path = system/SystemInfo.swift; sourceTree = "<group>"; };
+		041643A91BD48E6100873FAB /* ConnectionResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionResult.swift; sourceTree = "<group>"; };
+		041643AC1BD495A700873FAB /* InstallationInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InstallationInfo.swift; path = updates/InstallationInfo.swift; sourceTree = "<group>"; };
+		041643AE1BD4962100873FAB /* PackageVersionClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PackageVersionClass.swift; path = updates/PackageVersionClass.swift; sourceTree = "<group>"; };
 		04AFCAD71BD33E0500C95C88 /* ServerLocatorProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerLocatorProtocol.swift; sourceTree = "<group>"; };
 		04AFCADB1BD33FEA00C95C88 /* ServerDiscoveryInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerDiscoveryInfo.swift; sourceTree = "<group>"; };
 		04AFCAE11BD3436600C95C88 /* ConnectionManagerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionManagerProtocol.swift; sourceTree = "<group>"; };
@@ -158,6 +176,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		041643A41BD424E500873FAB /* system */ = {
+			isa = PBXGroup;
+			children = (
+				041643A51BD424F400873FAB /* PublicSystemInfo.swift */,
+				041643A71BD4280600873FAB /* SystemInfo.swift */,
+			);
+			name = system;
+			sourceTree = "<group>";
+		};
+		041643AB1BD4959700873FAB /* updates */ = {
+			isa = PBXGroup;
+			children = (
+				041643AC1BD495A700873FAB /* InstallationInfo.swift */,
+				041643AE1BD4962100873FAB /* PackageVersionClass.swift */,
+			);
+			name = updates;
+			sourceTree = "<group>";
+		};
 		04AFCAD61BD33E0500C95C88 /* discovery */ = {
 			isa = PBXGroup;
 			children = (
@@ -172,6 +208,9 @@
 				04AFCADB1BD33FEA00C95C88 /* ServerDiscoveryInfo.swift */,
 				04AFCAED1BD3489C00C95C88 /* ServerInfo.swift */,
 				04AFCAFC1BD34C9F00C95C88 /* ConnectionOptions.swift */,
+				0416439B1BD41FA600873FAB /* ServerUserInfo.swift */,
+				0416439E1BD4204300873FAB /* WakeOnLanInfo.swift */,
+				041643A21BD4233800873FAB /* ConnectionMode.swift */,
 			);
 			name = apiclient;
 			path = Emby.ApiClient/model/apiclient;
@@ -274,6 +313,7 @@
 				884EBEDC1BCD912B0032E7F3 /* EmptyResponse.swift */,
 				04AFCAE11BD3436600C95C88 /* ConnectionManagerProtocol.swift */,
 				04AFCAEF1BD3490A00C95C88 /* ApiClient.swift */,
+				041643A91BD48E6100873FAB /* ConnectionResult.swift */,
 			);
 			path = apiinteraction;
 			sourceTree = "<group>";
@@ -289,6 +329,8 @@
 		8838C5681BC51FD900587F8E /* model */ = {
 			isa = PBXGroup;
 			children = (
+				041643AB1BD4959700873FAB /* updates */,
+				041643A41BD424E500873FAB /* system */,
 				04AFCAF41BD349FA00C95C88 /* devices */,
 				04AFCAEA1BD347DD00C95C88 /* dto */,
 				04AFCAE71BD346C600C95C88 /* dlna */,
@@ -314,6 +356,7 @@
 				88CF7E731BC6E5B500A33B72 /* ConnectUserQuery.swift */,
 				88CF7E751BC6E71200A33B72 /* ConnectUser.swift */,
 				88CF7E771BC6E86F00A33B72 /* ConnectUserServer.swift */,
+				041643A01BD4216100873FAB /* UserLinkType.swift */,
 			);
 			path = connect;
 			sourceTree = "<group>";
@@ -552,7 +595,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				88CF7E641BC5C85A00A33B72 /* Context.swift in Sources */,
+				041643A81BD4280600873FAB /* SystemInfo.swift in Sources */,
+				0416439F1BD4204300873FAB /* WakeOnLanInfo.swift in Sources */,
 				88CF7E721BC6E49F00A33B72 /* PinExchangeResult.swift in Sources */,
+				041643AF1BD4962100873FAB /* PackageVersionClass.swift in Sources */,
 				04AFCAF91BD34B4800C95C88 /* ProgressProtocol.swift in Sources */,
 				88CF7E391BC5B9AE00A33B72 /* SerializedResponse.swift in Sources */,
 				8857F86D1BCC633F00ADFA8A /* VolleyError.swift in Sources */,
@@ -560,7 +606,9 @@
 				04AFCAE91BD346F200C95C88 /* DeviceProfile.swift in Sources */,
 				88CF7E581BC5BF0300A33B72 /* ILogger.swift in Sources */,
 				88CF7E3C1BC5BB5600A33B72 /* IJsonSerializer.swift in Sources */,
+				041643AD1BD495A700873FAB /* InstallationInfo.swift in Sources */,
 				04AFCAEE1BD3489C00C95C88 /* ServerInfo.swift in Sources */,
+				041643A31BD4233800873FAB /* ConnectionMode.swift in Sources */,
 				04AFCAFD1BD34C9F00C95C88 /* ConnectionOptions.swift in Sources */,
 				88CF7E671BC5CB4B00A33B72 /* StringRequest.swift in Sources */,
 				88CF7E5C1BC5BFA700A33B72 /* ConnectAuthenticationResult.swift in Sources */,
@@ -570,13 +618,16 @@
 				88CF7E3E1BC5BC8800A33B72 /* IAsyncHttpClient.swift in Sources */,
 				884EBEDD1BCD912B0032E7F3 /* EmptyResponse.swift in Sources */,
 				888EFC7E1BCC4DB700546DB3 /* Logger.swift in Sources */,
+				041643A61BD424F400873FAB /* PublicSystemInfo.swift in Sources */,
 				04AFCAEC1BD347EE00C95C88 /* IHasServerId.swift in Sources */,
 				88CF7E6E1BC6E05C00A33B72 /* PinCreationResult.swift in Sources */,
+				0416439C1BD41FA600873FAB /* ServerUserInfo.swift in Sources */,
 				04AFCAF61BD34A0A00C95C88 /* LocalFileInfo.swift in Sources */,
 				04AFCAF01BD3490A00C95C88 /* ApiClient.swift in Sources */,
 				88CF7E3F1BC5BCA800A33B72 /* VolleyHttpClient.swift in Sources */,
 				88CF7E551BC5BE9600A33B72 /* VolleyResponseListener.swift in Sources */,
 				04AFCAFB1BD34B9900C95C88 /* CancellationToken.swift in Sources */,
+				041643A11BD4216100873FAB /* UserLinkType.swift in Sources */,
 				8857F86F1BCD4B5500ADFA8A /* IResponse.swift in Sources */,
 				88CF7E781BC6E86F00A33B72 /* ConnectUserServer.swift in Sources */,
 				88CF7E591BC5BF8C00A33B72 /* QueryStringDictionary.swift in Sources */,
@@ -589,6 +640,7 @@
 				888EFC6D1BCC3DA600546DB3 /* Configuration.swift in Sources */,
 				88CF7E701BC6E0C100A33B72 /* PinStatusResult.swift in Sources */,
 				88CF7E5A1BC5BF9E00A33B72 /* ConnectPassword.swift in Sources */,
+				041643AA1BD48E6100873FAB /* ConnectionResult.swift in Sources */,
 				88CF7E761BC6E71200A33B72 /* ConnectUser.swift in Sources */,
 				888EFC811BCC4EDC00546DB3 /* JsonSerializer.swift in Sources */,
 				04AFCAD81BD33E0500C95C88 /* ServerLocatorProtocol.swift in Sources */,
