@@ -32,15 +32,15 @@ public class HttpRequest
 //    {
 //    RequestContent = value;
 //    }
-//    private String RequestContentType;
-//    public final String getRequestContentType()
-//    {
-//    return RequestContentType;
-//    }
-//    public final void setRequestContentType(String value)
-//    {
-//    RequestContentType = value;
-//    }
+    private var RequestContentType: String?
+    public final func getRequestContentType() -> String?
+    {
+    return RequestContentType;
+    }
+    public final func setRequestContentType(value: String)
+    {
+    RequestContentType = value;
+    }
     private var RequestHeaders: HttpHeaders?
     public final func getRequestHeaders() -> HttpHeaders?
     {
@@ -79,10 +79,10 @@ public class HttpRequest
     {
         postData = value;
     }
-    
+
     public init()
     {
-//        setRequestHeaders(new HttpHeaders());
+        setRequestHeaders(HttpHeaders());
 //        setTimeout(30000);
     }
 }

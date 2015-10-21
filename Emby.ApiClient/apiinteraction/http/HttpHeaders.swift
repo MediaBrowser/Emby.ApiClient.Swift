@@ -22,29 +22,29 @@ public class HttpHeaders //extends java.util.HashMap<String,String>
 //    Gets or sets the authorization scheme.
 //    <value>The authorization scheme.</value>
 //    */
-//    private String privateAuthorizationScheme;
-//    public final String getAuthorizationScheme()
-//    {
-//        return privateAuthorizationScheme;
-//    }
-//    public final void setAuthorizationScheme(String value)
-//    {
-//        privateAuthorizationScheme = value;
-//    }
+    private var privateAuthorizationScheme: String?
+    public final func getAuthorizationScheme() -> String?
+    {
+        return privateAuthorizationScheme;
+    }
+    public final func setAuthorizationScheme(value: String)
+    {
+        privateAuthorizationScheme = value;
+    }
 //    /**
 //    Gets or sets the authorization parameter.
 //    <value>The authorization parameter.</value>
 //    */
-//    private String privateAuthorizationParameter;
-//    public final String getAuthorizationParameter()
-//    {
-//        return privateAuthorizationParameter;
-//    }
-//    public final void setAuthorizationParameter(String value)
-//    {
-//        privateAuthorizationParameter = value;
-//    }
-//    
+    private var privateAuthorizationParameter: String?
+    public final func getAuthorizationParameter() -> String?
+    {
+        return privateAuthorizationParameter;
+    }
+    public final func setAuthorizationParameter(value: String)
+    {
+        privateAuthorizationParameter = value;
+    }
+
 //    /**
 //    Sets the access token.
 //    @param token The token.

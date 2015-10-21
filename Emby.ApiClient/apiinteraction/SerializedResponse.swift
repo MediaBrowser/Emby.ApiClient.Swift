@@ -65,7 +65,10 @@ public class SerializedResponse<T: JSONSerializable>: Emby_Response<T> {
     }
     
     /*protected*/ func onSerializedResponse(obj: T?) throws -> T? {
-        return try self.innerResponse?.onResponse(obj);
+        
+        let result = try self.innerResponse?.onResponse(obj);
+        
+        return result
     }
     
 }

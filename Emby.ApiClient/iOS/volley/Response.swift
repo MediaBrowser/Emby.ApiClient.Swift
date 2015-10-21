@@ -19,6 +19,8 @@ import Foundation
 
 public class Emby_Response<T: JSONSerializable>: Response_Listener<T> {
     
+    public var completion: ((object: T?) -> Void)?
+    
     public override init() {
     }
     
@@ -33,14 +35,18 @@ public class Emby_Response<T: JSONSerializable>: Response_Listener<T> {
 //    public Response(){
 //
 //    }
-
-//    public void onResponse(T response)
-    public override func onResponse(result: Any) throws -> T? {
-        print("onResponse 2 \(result)")
-//        triggerInnerResponse();
-        return try innerResponse?.onResponse(result);
+    public func onResponse(response: T?) throws -> T? {
+        completion?(object: response)
         
-//        return nil
+        return response
+    }
+    
+    public override func onResponse(response: Any) throws -> T? {
+//        triggerInnerResponse();
+        
+        let result = try innerResponse?.onResponse(response);
+        
+        return result
     }
 
 //    internal func triggerInnerResponse(){

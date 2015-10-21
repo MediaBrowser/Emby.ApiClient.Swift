@@ -229,8 +229,9 @@ public /*abstract*/ class Request<T> { // implements Comparable<Request<T>> {
 //    * @throws AuthFailureError In the event of auth failure
 //    */
 //    public Map<String, String> getHeaders() throws AuthFailureError {
-//        return Collections.emptyMap();
-//    }
+    public func getHeaders() throws -> [String: String] {
+        return [String: String]();
+    }
 //    /**
 //    * Returns a Map of POST parameters to be used for this request, or null if
 //    * a simple GET should be used.  Can throw {@link AuthFailureError} as

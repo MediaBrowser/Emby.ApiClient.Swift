@@ -97,7 +97,15 @@ public class VolleyHttpClient : IAsyncHttpClient {
         // TODO:
 //        getRequestQueue().add(req);
         
-        Alamofire.request(Alamofire.Method(rawValue: req.getMethod())!, req.getUrl(), parameters: req.request.getPostData()?.data)
+        var headers: [String: String]?
+        
+        do {
+            headers = try req.getHeaders()
+        } catch {
+            print(error)
+        }
+        
+        Alamofire.request(Alamofire.Method(rawValue: req.getMethod())!, req.getUrl(), parameters: req.request.getPostData()?.data, encoding: .URL, headers: headers)
             .responseString { (response: Alamofire.Response<String, NSError>) -> Void in
                 
                 // To update anything on the main thread, just jump back on like so.

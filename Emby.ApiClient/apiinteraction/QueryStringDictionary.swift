@@ -355,10 +355,9 @@ public class QueryStringDictionary //extends java.util.HashMap<String, String>
     @param value The value.
     @return System.String.
     */
-    private func GetEncodedValue(value: String) -> String?
+    private func GetEncodedValue(value: String) -> String
     {
-//        return URLEncoder.encode(value);
-        return value.stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet())
+        return value.stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet()) ?? ""
     }
     
 //    /**

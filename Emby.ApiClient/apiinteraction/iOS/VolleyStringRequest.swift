@@ -38,11 +38,12 @@ public class VolleyStringRequest<T:JSONSerializable>: StringRequest<T> {
 //    
 //    @Override
 //    public Map<String, String> getHeaders() throws AuthFailureError {
-//        Map<String, String> headers = new HashMap<String,String>();
-//        AddHeaders(headers, request);
-//        return headers;
-//    }
-//    
+    public override func getHeaders() throws -> [String: String] {
+        var headers = [String: String]();
+        AddHeaders(&headers, request: request);
+        return headers;
+    }
+
 //    @Override
 //    public Map<String, String> getParams() throws AuthFailureError {
 //        
@@ -100,30 +101,34 @@ public class VolleyStringRequest<T:JSONSerializable>: StringRequest<T> {
 //        
 //        return super.parseNetworkResponse(response);
 //    }
-//    
+    
 //    private void AddHeaders(Map<String, String> headers, HttpRequest request)
-//    {
-//        HttpHeaders requestHeaders = request.getRequestHeaders();
-//        
-//        for (String key : requestHeaders.keySet()){
-//            headers.put(key, requestHeaders.get(key));
-//        }
-//        
-//        if (!tangible.DotNetToJavaStringHelper.isNullOrEmpty(request.getRequestContentType()))
-//        {
-//            headers.put("Content-Type", request.getRequestContentType());
-//        }
-//        
-//        String parameter = requestHeaders.getAuthorizationParameter();
-//        
-//        if (!tangible.DotNetToJavaStringHelper.isNullOrEmpty(parameter))
-//        {
-//            String value = requestHeaders.getAuthorizationScheme() + " " + parameter;
-//            
-//            headers.put("X-Emby-Authorization", value);
-//        }
-//    }
-//    
+    private func AddHeaders(inout headers: [String: String], request: HttpRequest)
+    {
+        let requestHeaders = request.getRequestHeaders();
+        
+        if let data = requestHeaders?.data {
+            
+            for (index, value) in data {
+                headers[index] = value
+            }
+        }
+        
+        if let RequestContentType = request.getRequestContentType()
+        {
+            headers["Content-Type"] = RequestContentType
+        }
+        
+        if let
+            parameter = requestHeaders?.getAuthorizationParameter(),
+            authorizationScheme = requestHeaders?.getAuthorizationScheme()
+        {
+            let value = authorizationScheme + " " + parameter;
+            
+            headers["X-Emby-Authorization"] = value
+        }
+    }
+    
 //    private void AddData(Map<String, String> postParams, HttpRequest request)
 //    {
 //        if (request.getPostData() == null){

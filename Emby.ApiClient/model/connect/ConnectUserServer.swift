@@ -11,67 +11,79 @@ import Foundation
 
 public class ConnectUserServer: GenericResult
 {
-//    private String Id;
-//    public final String getId()
-//    {
-//    return Id;
-//    }
-//    public final void setId(String value)
-//    {
-//    Id = value;
-//    }
-//    private String Url;
-//    public final String getUrl()
-//    {
-//    return Url;
-//    }
-//    public final void setUrl(String value)
-//    {
-//    Url = value;
-//    }
-//    private String Name;
-//    public final String getName()
-//    {
-//    return Name;
-//    }
-//    public final void setName(String value)
-//    {
-//    Name = value;
-//    }
-//    private String AccessKey;
-//    public final String getAccessKey()
-//    {
-//    return AccessKey;
-//    }
-//    public final void setAccessKey(String value)
-//    {
-//    AccessKey = value;
-//    }
-//    private String SystemId;
-//    public final String getSystemId()
-//    {
-//    return SystemId;
-//    }
-//    public final void setSystemId(String value)
-//    {
-//    SystemId = value;
-//    }
-//    private String LocalAddress;
-//    public final String getLocalAddress()
-//    {
-//    return LocalAddress;
-//    }
-//    public final void setLocalAddress(String value)
-//    {
-//    LocalAddress = value;
-//    }
-//    private String UserType;
-//    public final String getUserType()
-//    {
-//    return UserType;
-//    }
-//    public final void setUserType(String value)
-//    {
-//    UserType = value;
-//    }
+    public required init(jSON: JSON) {
+        super.init(jSON: jSON)
+        
+//        if let user = jSON["User"] as? JSON {
+//            self.User = ConnectUser(jSON: user)
+//        }
+//        
+//        if let accessToken = jSON["AccessToken"] as? String {
+//            self.AccessToken = accessToken
+//        }
+    }
+    
+    private var Id: String?
+    public final func getId() -> String?
+    {
+        return Id;
+    }
+    public final func setId(value: String)
+    {
+        Id = value;
+    }
+    private var Url: String?
+    public final func getUrl() -> String?
+    {
+        return Url;
+    }
+    public final func setUrl(value: String)
+    {
+        Url = value;
+    }
+    private var Name: String?
+    public final func getName() -> String?
+    {
+        return Name;
+    }
+    public final func setName(value: String)
+    {
+        Name = value;
+    }
+    private var AccessKey: String?
+    public final func getAccessKey() -> String?
+    {
+        return AccessKey;
+    }
+    public final func setAccessKey(value: String)
+    {
+        AccessKey = value;
+    }
+    private var SystemId: String?
+    public final func getSystemId() -> String?
+    {
+        return SystemId;
+    }
+    public final func setSystemId(value: String)
+    {
+        SystemId = value;
+    }
+    private var LocalAddress: String?
+    public final func getLocalAddress() -> String?
+    {
+        return LocalAddress;
+    }
+    public final func setLocalAddress(value: String)
+    {
+        LocalAddress = value;
+    }
+    private var UserType: String?
+    public final func getUserType() -> String?
+    {
+        return UserType;
+    }
+    public final func setUserType(value: String)
+    {
+        UserType = value;
+    }
 }
