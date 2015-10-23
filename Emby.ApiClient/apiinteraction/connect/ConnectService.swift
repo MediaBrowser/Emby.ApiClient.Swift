@@ -72,21 +72,16 @@ public class ConnectService {
         args.Add("password", value: Md5.getHash(ConnectPassword.PerformPreHashFilter(password)));
         
         let url = GetConnectUrl("user/authenticate");
-//        let url = GetConnectUrl("");
         
         let request = HttpRequest();
         
         request.setMethod("POST");
-//        request.setMethod("GET");
         request.setUrl(url);
         request.setPostData(args);
 
         AddXApplicationName(request);
         
         _httpClient.Send(request, response: SerializedResponse<T>(innerResponse: response, jsonSerializer: JsonSerializer, type: ConnectAuthenticationResult.self));
-        
-// response: {"AccessToken":"cbaf9bc613780f8e90e64532857dae01","User":{"Id":"79718","Name":"vedrano","DisplayName":"vedrano","Email":"vedran.ozir@gmail.com","IsActive":"true","ImageUrl":"http:\/\/www.gravatar.com\/avatar\/1231d710dfba30dd91868a20f737e0db?s=200&d=http%3A%2F%2Fmb3admin.com%2Fimages%2Fuser.png"}}
-        
     }
     
     public func CreatePin<T:PinCreationResult>(deviceId: String, final response: Emby_Response<T>)

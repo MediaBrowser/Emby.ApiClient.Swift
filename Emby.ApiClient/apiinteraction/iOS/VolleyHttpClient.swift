@@ -124,7 +124,8 @@ public class VolleyHttpClient : IAsyncHttpClient {
                             print(error)
                         }
                     } else {
-                 
+                        print("HTTP Error happened statusCode(\(response.response?.statusCode ?? 0)) allHeaderFields(\(response.response?.allHeaderFields))")
+                        
                         req.deliverError(VolleyError(cause: response.result.error))
                     }
                 }
