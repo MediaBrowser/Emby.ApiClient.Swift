@@ -5,8 +5,8 @@
 
 import Foundation
 
-public class ServerInfo {
-    var users = [ServerUserInfo]()
+public class ServerInfo: Hashable {
+    var users = Set<ServerUserInfo>()
     var name: String = ""
     var id: String = ""
     var localAddress: String?
@@ -19,11 +19,12 @@ public class ServerInfo {
     var exchangeToken: String = ""
     var userLinkType: UserLinkType?
     var lastConnectionMode: ConnectionMode?
-    
-    init() {
-        
+    public var hashValue: Int {
+        get {
+            return id.hashValue
+        }
     }
-
+    
     func importInfo(systemInfo: PublicSystemInfo) {
         name = systemInfo.serverName
         id = systemInfo.id
@@ -48,6 +49,15 @@ public class ServerInfo {
     }
     
     func addOrUpdate(user: ServerUserInfo) {
-        //TODO
+        if ( users.contains(user)) {
+            users.remove(user)
+        }
+        
+        users.insert(user)
     }
+}
+
+//MARK: - Equatable
+public func ==(lhs: ServerInfo, rhs: ServerInfo) -> Bool {
+    return lhs.id == rhs.id
 }
