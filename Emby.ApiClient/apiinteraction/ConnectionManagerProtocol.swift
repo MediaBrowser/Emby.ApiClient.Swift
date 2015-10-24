@@ -6,11 +6,9 @@
 import Foundation
 
 public protocol ConnectionManagerProtocol {
-    func getClientCapabilities() -> ClientCapabilities
-    func getApiClient(item: IHasServerId) -> ApiClient
-    func getApiClient(serverId: String) -> ApiClient
-    func getServerInfo(serverId: String) -> ServerInfo
-    func getDevice() -> DeviceProtocol
+    func getApiClient(item: IHasServerId) -> ApiClient?
+    func getApiClient(serverId: String) -> ApiClient?
+    func getServerInfo(serverId: String) -> ServerInfo?
     func connect(onSuccess: (ConnectionResult) -> Void, onError: (ErrorType) -> Void)
     func connect(server: ServerInfo, onSuccess: (ConnectionResult) -> Void, onError: (ErrorType) -> Void)
     func connect(server: ServerInfo, options: ConnectionOptions, onSuccess: (ConnectionResult) -> Void, onError: (ErrorType) -> Void)

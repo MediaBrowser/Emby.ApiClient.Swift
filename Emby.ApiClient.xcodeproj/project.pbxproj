@@ -29,6 +29,9 @@
 		04AFCAF91BD34B4800C95C88 /* ProgressProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFCAF81BD34B4800C95C88 /* ProgressProtocol.swift */; };
 		04AFCAFB1BD34B9900C95C88 /* CancellationToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFCAFA1BD34B9900C95C88 /* CancellationToken.swift */; };
 		04AFCAFD1BD34C9F00C95C88 /* ConnectionOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFCAFC1BD34C9F00C95C88 /* ConnectionOptions.swift */; };
+		04B8AB311BDB293200ED19CA /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B8AB301BDB293200ED19CA /* ConnectionManager.swift */; };
+		04B8AB331BDB2D1700ED19CA /* CredentialProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B8AB321BDB2D1700ED19CA /* CredentialProviderProtocol.swift */; };
+		04B8AB351BDB2E8D00ED19CA /* ServerCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B8AB341BDB2E8D00ED19CA /* ServerCredentials.swift */; };
 		8838C55B1BC514B500587F8E /* Emby.ApiClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 8838C55A1BC514B500587F8E /* Emby.ApiClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		884EBEDD1BCD912B0032E7F3 /* EmptyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884EBEDC1BCD912B0032E7F3 /* EmptyResponse.swift */; };
 		8857F86D1BCC633F00ADFA8A /* VolleyError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8857F86C1BCC633F00ADFA8A /* VolleyError.swift */; };
@@ -111,6 +114,9 @@
 		04AFCAF81BD34B4800C95C88 /* ProgressProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProgressProtocol.swift; path = Emby.ApiClient/tasks/ProgressProtocol.swift; sourceTree = SOURCE_ROOT; };
 		04AFCAFA1BD34B9900C95C88 /* CancellationToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CancellationToken.swift; path = Emby.ApiClient/tasks/CancellationToken.swift; sourceTree = SOURCE_ROOT; };
 		04AFCAFC1BD34C9F00C95C88 /* ConnectionOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionOptions.swift; sourceTree = "<group>"; };
+		04B8AB301BDB293200ED19CA /* ConnectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConnectionManager.swift; path = connectionmanager/ConnectionManager.swift; sourceTree = "<group>"; };
+		04B8AB321BDB2D1700ED19CA /* CredentialProviderProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CredentialProviderProtocol.swift; sourceTree = "<group>"; };
+		04B8AB341BDB2E8D00ED19CA /* ServerCredentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerCredentials.swift; sourceTree = "<group>"; };
 		8838C5571BC514B500587F8E /* Emby_ApiClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Emby_ApiClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8838C55A1BC514B500587F8E /* Emby.ApiClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Emby.ApiClient.h; sourceTree = "<group>"; };
 		8838C55C1BC514B500587F8E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -211,6 +217,7 @@
 				0416439B1BD41FA600873FAB /* ServerUserInfo.swift */,
 				0416439E1BD4204300873FAB /* WakeOnLanInfo.swift */,
 				041643A21BD4233800873FAB /* ConnectionMode.swift */,
+				04B8AB341BDB2E8D00ED19CA /* ServerCredentials.swift */,
 			);
 			name = apiclient;
 			path = Emby.ApiClient/model/apiclient;
@@ -265,6 +272,14 @@
 			name = tasks;
 			sourceTree = "<group>";
 		};
+		04B8AB2E1BDB291E00ED19CA /* connectionmanager */ = {
+			isa = PBXGroup;
+			children = (
+				04B8AB301BDB293200ED19CA /* ConnectionManager.swift */,
+			);
+			name = connectionmanager;
+			sourceTree = "<group>";
+		};
 		8838C54D1BC514B500587F8E = {
 			isa = PBXGroup;
 			children = (
@@ -301,6 +316,7 @@
 		8838C5621BC517E300587F8E /* apiinteraction */ = {
 			isa = PBXGroup;
 			children = (
+				04B8AB2E1BDB291E00ED19CA /* connectionmanager */,
 				04AFCAF71BD34B0900C95C88 /* tasks */,
 				04AFCAF11BD3496100C95C88 /* device */,
 				04AFCAD61BD33E0500C95C88 /* discovery */,
@@ -314,6 +330,7 @@
 				04AFCAE11BD3436600C95C88 /* ConnectionManagerProtocol.swift */,
 				04AFCAEF1BD3490A00C95C88 /* ApiClient.swift */,
 				041643A91BD48E6100873FAB /* ConnectionResult.swift */,
+				04B8AB321BDB2D1700ED19CA /* CredentialProviderProtocol.swift */,
 			);
 			path = apiinteraction;
 			sourceTree = "<group>";
@@ -608,18 +625,21 @@
 				88CF7E3C1BC5BB5600A33B72 /* IJsonSerializer.swift in Sources */,
 				041643AD1BD495A700873FAB /* InstallationInfo.swift in Sources */,
 				04AFCAEE1BD3489C00C95C88 /* ServerInfo.swift in Sources */,
+				04B8AB331BDB2D1700ED19CA /* CredentialProviderProtocol.swift in Sources */,
 				041643A31BD4233800873FAB /* ConnectionMode.swift in Sources */,
 				04AFCAFD1BD34C9F00C95C88 /* ConnectionOptions.swift in Sources */,
 				88CF7E671BC5CB4B00A33B72 /* StringRequest.swift in Sources */,
 				88CF7E5C1BC5BFA700A33B72 /* ConnectAuthenticationResult.swift in Sources */,
 				88CF7E5E1BC5C15D00A33B72 /* ConnectService.swift in Sources */,
 				888EFC651BC859E100546DB3 /* RegistrationInfo.swift in Sources */,
+				04B8AB311BDB293200ED19CA /* ConnectionManager.swift in Sources */,
 				88CF7E5B1BC5BFA300A33B72 /* ConnectAuthorizationRequest.swift in Sources */,
 				88CF7E3E1BC5BC8800A33B72 /* IAsyncHttpClient.swift in Sources */,
 				884EBEDD1BCD912B0032E7F3 /* EmptyResponse.swift in Sources */,
 				888EFC7E1BCC4DB700546DB3 /* Logger.swift in Sources */,
 				041643A61BD424F400873FAB /* PublicSystemInfo.swift in Sources */,
 				04AFCAEC1BD347EE00C95C88 /* IHasServerId.swift in Sources */,
+				04B8AB351BDB2E8D00ED19CA /* ServerCredentials.swift in Sources */,
 				88CF7E6E1BC6E05C00A33B72 /* PinCreationResult.swift in Sources */,
 				0416439C1BD41FA600873FAB /* ServerUserInfo.swift in Sources */,
 				04AFCAF61BD34A0A00C95C88 /* LocalFileInfo.swift in Sources */,
