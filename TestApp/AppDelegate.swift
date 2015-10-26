@@ -30,10 +30,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         Authenticate(httpClient, logger: logger, jsonSerializer: jsonSerializer, service: service)
         
-//        let deviceId = UIDevice.currentDevice().identifierForVendor?.UUIDString ?? "<<unknown device>>"
-//        
-//        self.CreatePin(deviceId, httpClient: httpClient, logger: logger, jsonSerializer: jsonSerializer, service: service)
-
         return true
     }
 
@@ -45,10 +41,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             print("Authenticate finished with \(result) \(result?.getAccessToken())")
             
-            if let
-                userId = result?.getUser()?.getId(),
-                accessToken = result?.getAccessToken() {
-                    
+//            if let
+//                userId = result?.getUser()?.getId(),
+//                accessToken = result?.getAccessToken() {
+            
 //                    self.GetPinStatus(userId, connectAccessToken: accessToken, httpClient: httpClient, logger: logger, jsonSerializer: jsonSerializer, service: service)
                     
 //                    self.userId = userId
@@ -56,11 +52,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //                    
 //                    NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: Selector("GetPinStatus"), userInfo: nil, repeats: true)
                     
-                    let deviceId = UIDevice.currentDevice().identifierForVendor?.UUIDString ?? "<<unknown device>>"
-                    let pin = "93185"
+//                    let deviceId = UIDevice.currentDevice().identifierForVendor?.UUIDString ?? "<<unknown device>>"
+//                    let pin = "93185"
+//                    
+//                    self.ExchangePin(deviceId, pin: pin, httpClient: httpClient, logger: logger, jsonSerializer: jsonSerializer, service: service)
                     
-                    self.ExchangePin(deviceId, pin: pin, httpClient: httpClient, logger: logger, jsonSerializer: jsonSerializer, service: service)
-            }
+                let deviceId = UIDevice.currentDevice().identifierForVendor?.UUIDString ?? "<<unknown device>>"
+        
+                self.CreatePin(deviceId, httpClient: httpClient, logger: logger, jsonSerializer: jsonSerializer, service: service)
+        
+//            }
             
         }
         
