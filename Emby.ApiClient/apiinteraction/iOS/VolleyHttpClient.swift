@@ -106,17 +106,20 @@ public class VolleyHttpClient : IAsyncHttpClient {
         }
         
         Alamofire.request(Alamofire.Method(rawValue: req.getMethod())!, req.getUrl(), parameters: req.request.getPostData()?.data, encoding: .URL, headers: headers)
-            .responseString { (response: Alamofire.Response<String, NSError>) -> Void in
-                
+            
+        .validate()
+
+            .response(completionHandler: { (requestBase: NSURLRequest?, resp: NSHTTPURLResponse?, data: NSData?, error: NSError?) -> Void in
+            
                 // To update anything on the main thread, just jump back on like so.
                 dispatch_async(dispatch_get_main_queue()) {
     
-                    if response.result.isSuccess {
+                    if resp?.statusCode >= 200 && resp?.statusCode < 300 {
     
                         do {
                             
                             if let
-                                response = NSString(data: response.data!, encoding: NSUTF8StringEncoding) {
+                                response = NSString(data: data!, encoding: NSUTF8StringEncoding) {
                             
                                 try req.deliverResponse(response as String)
                             }
@@ -124,12 +127,12 @@ public class VolleyHttpClient : IAsyncHttpClient {
                             print(error)
                         }
                     } else {
-                        print("HTTP Error happened statusCode(\(response.response?.statusCode ?? 0)) allHeaderFields(\(response.response?.allHeaderFields))")
+                        print("HTTP Error happened statusCode(\(resp?.statusCode ?? 0)) allHeaderFields(\(resp?.allHeaderFields))")
                         
-                        req.deliverError(VolleyError(cause: response.result.error))
+                        req.deliverError(VolleyError(cause: error))
                     }
                 }
-            }
+            })
     }
     
 //    /**

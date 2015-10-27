@@ -11,6 +11,9 @@ import Foundation
 
 public class GenericResult: JSONSerializable
 {
+    public init() {
+    }
+    
     public required init(jSON: JSON) {
     }
 }

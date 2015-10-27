@@ -15,7 +15,7 @@ public class JsonSerializer: IJsonSerializer {
     
     public func DeserializeFromString<T: JSONSerializable>(text: String, type: Any) throws -> T? {
         
-        if let data = text.dataUsingEncoding(NSUTF8StringEncoding) {
+        if let data = text.dataUsingEncoding(NSUTF8StringEncoding) where !text.isEmpty {
             
             if let jsonDictionary = try NSJSONSerialization.JSONObjectWithData( data, options: []) as? [String : AnyObject] {
             
@@ -27,6 +27,8 @@ public class JsonSerializer: IJsonSerializer {
             }
             
         } else {
+            print("no response: '\(text)'")
+            
             return nil
         }
     }

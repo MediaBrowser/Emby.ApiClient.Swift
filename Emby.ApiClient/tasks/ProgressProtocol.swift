@@ -18,7 +18,7 @@ public class ProgressProtocol<T> {
         onComplete()
     }
     
-    func reportError(error: ErrorType) {
+    func reportError(error: NSError?) {
         onError(error)
     }
     
@@ -34,7 +34,7 @@ public class ProgressProtocol<T> {
         
     }
     
-    func onError(error: ErrorType) {
+    func onError(error: NSError?) {
         
     }
 }

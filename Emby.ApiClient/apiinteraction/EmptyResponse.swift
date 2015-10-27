@@ -11,13 +11,18 @@ import Foundation
 
 public class EmptyResponse: GenericResult {
     
-//    private IResponse innerResponse;
-//    
-//    public EmptyResponse(IResponse innerResponse){
-//        
-//        this.innerResponse = innerResponse;
-//    }
-//    
+    private var innerResponse: IResponse?
+    
+    init(innerResponse: IResponse? = nil){
+        
+        self.innerResponse = innerResponse;
+        super.init()
+    }
+
+    public required init(jSON: JSON) {
+        super.init(jSON: jSON)
+    }
+
 //    public EmptyResponse(){
 //        
 //    }
@@ -36,10 +41,8 @@ public class EmptyResponse: GenericResult {
 //    }
 //    
 //    @Override
-//    public void onError(Exception ex)
-//    {
-//        if (innerResponse != null){
-//            innerResponse.onError(ex);
-//        }
-//    }
+    public func onError(error: NSError)
+    {
+        innerResponse?.onError(error)
+    }
 }

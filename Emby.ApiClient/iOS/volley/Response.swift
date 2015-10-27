@@ -20,6 +20,7 @@ import Foundation
 public class Emby_Response<T: JSONSerializable>: Response_Listener<T> {
     
     public var completion: ((object: T?) -> Void)?
+    public var completionError: ((error: NSError?) -> Void)?
     
     public override init() {
     }
@@ -58,12 +59,11 @@ public class Emby_Response<T: JSONSerializable>: Response_Listener<T> {
 //    }
 
 //    @Override
-//    public void onError(Exception exception)
-//    {
-//        if (innerResponse != null){
-//            innerResponse.onError(exception);
-//        }
-//    }
+    public func onError(error: NSError?)
+    {
+        innerResponse?.onError(error)
+        completionError?(error: error)
+    }
 }
 
 //public class Response<T>: Response_Listener {

@@ -41,9 +41,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             print("Authenticate finished with \(result) \(result?.getAccessToken())")
             
-//            if let
-//                userId = result?.getUser()?.getId(),
-//                accessToken = result?.getAccessToken() {
+            if let
+                userId = result?.getUser()?.getId(),
+                accessToken = result?.getAccessToken() {
             
 //                    self.GetPinStatus(userId, connectAccessToken: accessToken, httpClient: httpClient, logger: logger, jsonSerializer: jsonSerializer, service: service)
                     
@@ -57,11 +57,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //                    
 //                    self.ExchangePin(deviceId, pin: pin, httpClient: httpClient, logger: logger, jsonSerializer: jsonSerializer, service: service)
                     
-                let deviceId = UIDevice.currentDevice().identifierForVendor?.UUIDString ?? "<<unknown device>>"
-        
-                self.CreatePin(deviceId, httpClient: httpClient, logger: logger, jsonSerializer: jsonSerializer, service: service)
-        
-//            }
+//                let deviceId = UIDevice.currentDevice().identifierForVendor?.UUIDString ?? "<<unknown device>>"
+//        
+//                self.CreatePin(deviceId, httpClient: httpClient, logger: logger, jsonSerializer: jsonSerializer, service: service)
+
+                self.Logout(accessToken, httpClient: httpClient, logger: logger, jsonSerializer: jsonSerializer, service: service)
+            
+            }
             
         }
         
@@ -160,5 +162,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         service.ExchangePin(pinCreationResult, final: response)
     }
+
+    func Logout(connectAccessToken: String, httpClient: VolleyHttpClient, logger: Logger, jsonSerializer: JsonSerializer, service: ConnectService) {
+        
+        let response = Emby_Response<EmptyResponse>()
+        
+        response.completion = { (result: EmptyResponse?) -> Void in
+            
+            print("Logout finished with \(result))")
+            
+            //            if let
+            //                Id = result?.getUser()?.getId(),
+            //                accessToken = result?.getAccessToken() {
+            //
+            //                    self.GetPinStatus(Id, connectAccessToken: accessToken)
+            //            }
+            
+        }
+        response.completionError = { (error) in
+            
+            print("response error \(error)")
+        }
+        
+        print("response \(response)")
+        
+        do {
+            try service.Logout(connectAccessToken, final: response)
+        } catch {
+            print("error \(error)")
+        }
+    }
+    
 }
 

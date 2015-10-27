@@ -11,5 +11,5 @@ import Foundation
 //package mediabrowser.apiinteraction;
 
 protocol IResponse {
-    func onError(exception: Error)
+    func onError(exception: NSError?)
 }

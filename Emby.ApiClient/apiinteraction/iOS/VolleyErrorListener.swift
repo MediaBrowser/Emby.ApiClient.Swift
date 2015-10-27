@@ -25,6 +25,10 @@ public class VolleyErrorListener<T:JSONSerializable>: Response_ErrorListener {
         self.logger = logger;
     }
     
+    public override func onErrorResponse(error: VolleyError) {
+        print("VolleyErrorListener onErrorResponse")
+        outerResponse.onError(error.cause);
+    }
 //    @Override
 //    public void onErrorResponse(VolleyError error) {
 //        
