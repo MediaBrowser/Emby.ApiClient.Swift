@@ -181,7 +181,7 @@ public class ConnectService {
     }
     
     //    public func GetServers(String userId, String connectAccessToken, final Response<ConnectUserServer[]> response)
-    public func GetPinStatus<T:ConnectUserServer>(userId: String, connectAccessToken: String, final response: Emby_Response<T>) throws
+    public func GetServers<T:ConnectUserServer>(userId: String, connectAccessToken: String, final response: Emby_Response<T>) throws
     {
         let dict = QueryStringDictionary();
         
@@ -197,11 +197,9 @@ public class ConnectService {
         try AddUserAccessToken(request, accessToken: connectAccessToken)
         AddXApplicationName(request);
         
-        //    _httpClient.Send(request, new SerializedResponse<ConnectUserServer[]>(response, JsonSerializer, new ConnectUserServer[]{}.getClass()));
         _httpClient.Send(request, response: SerializedResponse<T>(innerResponse: response, jsonSerializer: JsonSerializer, type: [ConnectUserServer].self));
     }
     
-    //    public func Logout(String connectAccessToken, final EmptyResponse response)
     public func Logout<T:EmptyResponse>(connectAccessToken: String, final response: Emby_Response<T>) throws
     {
         let url = GetConnectUrl("user/logout");
@@ -214,7 +212,6 @@ public class ConnectService {
         try AddUserAccessToken(request, accessToken: connectAccessToken)
         AddXApplicationName(request);
         
-        //    _httpClient.Send(request, new Response<String>(response));
         _httpClient.Send(request, response: SerializedResponse<T>(innerResponse: response, jsonSerializer: JsonSerializer, type: EmptyResponse.self));
     }
     
@@ -238,7 +235,6 @@ public class ConnectService {
         request.getRequestHeaders()?.put("X-Application", value: appName + "/" + appVersion);
     }
     
-    //    public func GetRegistrationInfo(String userId, String feature, String connectAccessToken, final Response<RegistrationInfo> response)
     public func GetRegistrationInfo<T:RegistrationInfo>(userId: String, feature: String, connectAccessToken: String, final response: Emby_Response<T>) throws
     {
         let dict = QueryStringDictionary();
@@ -257,7 +253,6 @@ public class ConnectService {
         
         AddXApplicationName(request);
         
-        //    _httpClient.Send(request, new SerializedResponse<RegistrationInfo>(response, JsonSerializer, new RegistrationInfo().getClass()));
         _httpClient.Send(request, response: SerializedResponse<T>(innerResponse: response, jsonSerializer: JsonSerializer, type: RegistrationInfo.self));
     }
 }

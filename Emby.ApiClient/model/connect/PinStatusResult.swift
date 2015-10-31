@@ -9,33 +9,49 @@
 import Foundation
 //package mediabrowser.model.connect;
 
-public class PinStatusResult
+public class PinStatusResult: GenericResult
 {
-//    private String Pin;
-//    public final String getPin()
-//    {
-//    return Pin;
-//    }
-//    public final void setPin(String value)
-//    {
-//    Pin = value;
-//    }
-//    private boolean IsConfirmed;
-//    public final boolean getIsConfirmed()
-//    {
-//    return IsConfirmed;
-//    }
-//    public final void setIsConfirmed(boolean value)
-//    {
-//    IsConfirmed = value;
-//    }
-//    private boolean IsExpired;
-//    public final boolean getIsExpired()
-//    {
-//    return IsExpired;
-//    }
-//    public final void setIsExpired(boolean value)
-//    {
-//    IsExpired = value;
-//    }
+    public required init(jSON: JSON) {
+        super.init(jSON: jSON)
+        
+        if let Pin = jSON["Pin"] as? String {
+            self.Pin = Pin
+        }
+        
+        if let IsExpired = jSON["IsExpired"] as? Bool {
+            self.IsExpired = IsExpired
+        }
+        
+        if let IsConfirmed = jSON["IsConfirmed"] as? Bool {
+            self.IsConfirmed = IsConfirmed
+        }
+    }
+    
+    private var Pin: String?
+    public final func getPin() -> String?
+    {
+        return Pin;
+    }
+    public final func setPin(value: String)
+    {
+        Pin = value;
+    }
+    private var IsConfirmed: Bool?
+    public final func getIsConfirmed() -> Bool?
+    {
+        return IsConfirmed;
+    }
+    public final func setIsConfirmed(value: Bool)
+    {
+        IsConfirmed = value;
+    }
+    private var IsExpired: Bool?
+    public final func getIsExpired() -> Bool?
+    {
+        return IsExpired;
+    }
+    public final func setIsExpired(value: Bool)
+    {
+        IsExpired = value;
+    }
 }

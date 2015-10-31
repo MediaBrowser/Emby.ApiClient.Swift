@@ -14,6 +14,10 @@ public class PinCreationResult: GenericResult
     public required init(jSON: JSON) {
         super.init(jSON: jSON)
         
+//{"Id":null,"Pin":"09751","DeviceId":"203AD7FD-333B-4926-A2EF-414748DF8FCF","IsExpired":false,"IsConfirmed":false,"AccessToken":null}        
+        
+//{"Id":"465875","Pin":"09751","DeviceId":"203AD7FD-333B-4926-A2EF-414748DF8FCF","IsExpired":false,"IsConfirmed":true,"AccessToken":"dd8a4f34dc2ed55765c21b217134f509"}
+        
         if let DeviceId = jSON["DeviceId"] as? String {
             self.DeviceId = DeviceId
         }

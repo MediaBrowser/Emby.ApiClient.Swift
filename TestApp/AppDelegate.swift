@@ -14,8 +14,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    var userId: String?
-    var accessToken: String?
+    var timerFor_GetPinStatus: NSTimer?
+    
+    var deviceId: String?
+    var pin: String?
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
@@ -36,6 +38,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func Authenticate(httpClient: VolleyHttpClient, logger: Logger, jsonSerializer: JsonSerializer, service: ConnectService) {
         
         let response = Emby_Response<ConnectAuthenticationResult>()
+
+        let test_CreatePin = false
+        let test_GetPinStatus = true
+        let test_GetRegistrationInfo = false
         
         response.completion = { (result: ConnectAuthenticationResult?) -> Void in
             
@@ -45,28 +51,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 userId = result?.getUser()?.getId(),
                 connectAccessToken = result?.getAccessToken() {
             
-//                    self.GetPinStatus(userId, connectAccessToken: connectAccessToken, httpClient: httpClient, logger: logger, jsonSerializer: jsonSerializer, service: service)
+                    let deviceId = UIDevice.currentDevice().identifierForVendor?.UUIDString ?? "<<unknown device>>"
+                    let pin = "09751"
                     
-//                    self.userId = userId
-//                    self.accessToken = connectAccessToken
-//                    
-//                    NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: Selector("GetPinStatus"), userInfo: nil, repeats: true)
+                    if test_CreatePin {
+                        self.CreatePin(deviceId, httpClient: httpClient, logger: logger, jsonSerializer: jsonSerializer, service: service)
+                    }
                     
-//                    let deviceId = UIDevice.currentDevice().identifierForVendor?.UUIDString ?? "<<unknown device>>"
-//                    let pin = "93185"
-//                    
+                    if test_GetPinStatus {
+
+                        self.deviceId = deviceId
+                        self.pin = pin
+                        
+//                        self.GetPinStatus(deviceId, pin: pin, httpClient: httpClient, logger: logger, jsonSerializer: jsonSerializer, service: service)
+                        
+                        self.timerFor_GetPinStatus = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: Selector("GetPinStatus"), userInfo: nil, repeats: true)
+                    }
+                    
 //                    self.ExchangePin(deviceId, pin: pin, httpClient: httpClient, logger: logger, jsonSerializer: jsonSerializer, service: service)
                     
-//                let deviceId = UIDevice.currentDevice().identifierForVendor?.UUIDString ?? "<<unknown device>>"
-//        
-//                self.CreatePin(deviceId, httpClient: httpClient, logger: logger, jsonSerializer: jsonSerializer, service: service)
-
 //                self.Logout(connectAccessToken, httpClient: httpClient, logger: logger, jsonSerializer: jsonSerializer, service: service)
   
-                    
-                    let feature = "TV"
-                    
-                    self.GetRegistrationInfo(userId, connectAccessToken: connectAccessToken, feature: feature, httpClient: httpClient, logger: logger, jsonSerializer: jsonSerializer, service: service)
+                    if test_GetRegistrationInfo {
+                        
+                        let feature = "TV"
+                        
+                        self.GetRegistrationInfo(userId, connectAccessToken: connectAccessToken, feature: feature, httpClient: httpClient, logger: logger, jsonSerializer: jsonSerializer, service: service)
+                    }
             }
             
         }
@@ -103,10 +114,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let service = ConnectService(jsonSerializer: jsonSerializer, logger: logger, httpClient: httpClient, appName: "Emby_ApiClient iOS", appVersion: "1.0")
         
         if let
-            userId = self.userId,
-            accessToken = self.accessToken {
+            deviceId = self.deviceId,
+            pin = self.pin {
                 
-                self.GetPinStatus(userId, connectAccessToken: accessToken, httpClient: httpClient, logger: logger, jsonSerializer: jsonSerializer, service: service)
+                self.GetPinStatus(deviceId, pin: pin, httpClient: httpClient, logger: logger, jsonSerializer: jsonSerializer, service: service)
         }
     }
     
@@ -118,13 +129,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             print("CreatePin finished with \(result))")
             
-            //            if let
-            //                Id = result?.getUser()?.getId(),
-            //                accessToken = result?.getAccessToken() {
-            //
-            //                    self.GetPinStatus(Id, connectAccessToken: accessToken)
-            //            }
-            
         }
         
         print("response \(response)")
@@ -132,30 +136,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         service.CreatePin(deviceId, final: response)
     }
     
-    func GetPinStatus(userId: String, connectAccessToken: String, httpClient: VolleyHttpClient, logger: Logger, jsonSerializer: JsonSerializer, service: ConnectService) {
+    func GetPinStatus(deviceId: String, pin: String, httpClient: VolleyHttpClient, logger: Logger, jsonSerializer: JsonSerializer, service: ConnectService) {
         
-        let response = Emby_Response<ConnectUserServer>()
+        let response = Emby_Response<PinStatusResult>()
         
-        response.completion = { (result: ConnectUserServer?) -> Void in
+        let pinCreationResult = PinCreationResult(jSON: JSON())
+        
+        pinCreationResult.setDeviceId(deviceId)
+        pinCreationResult.setPin(pin)
+        
+        response.completion = { (result: PinStatusResult?) -> Void in
             
             print("GetPinStatus finished with \(result))")
             
-//            if let
-//                Id = result?.getUser()?.getId(),
-//                accessToken = result?.getAccessToken() {
-//                    
-//                    self.GetPinStatus(Id, connectAccessToken: accessToken)
-//            }
+            if result?.getIsConfirmed() == true {
+                
+                print("stop GetPinStatus timer")
+                
+                self.timerFor_GetPinStatus?.invalidate()
+                
+                self.timerFor_GetPinStatus = nil
+            }
             
         }
         
         print("response \(response)")
         
-        do {
-            try service.GetPinStatus(userId, connectAccessToken: connectAccessToken, final: response)
-        } catch {
-            print("error \(error)")
-        }
+        service.GetPinStatus(pinCreationResult, final: response)
     }
     
     func ExchangePin(deviceId: String, pin: String, httpClient: VolleyHttpClient, logger: Logger, jsonSerializer: JsonSerializer, service: ConnectService) {
@@ -171,13 +178,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             print("ExchangePin finished with \(result))")
             
-            //            if let
-            //                Id = result?.getUser()?.getId(),
-            //                accessToken = result?.getAccessToken() {
-            //
-            //                    self.GetPinStatus(Id, connectAccessToken: accessToken)
-            //            }
-            
         }
         
         print("response \(response)")
@@ -192,14 +192,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         response.completion = { (result: EmptyResponse?) -> Void in
             
             print("Logout finished with \(result))")
-            
-            //            if let
-            //                Id = result?.getUser()?.getId(),
-            //                accessToken = result?.getAccessToken() {
-            //
-            //                    self.GetPinStatus(Id, connectAccessToken: accessToken)
-            //            }
-            
         }
         response.completionError = { (error) in
             
