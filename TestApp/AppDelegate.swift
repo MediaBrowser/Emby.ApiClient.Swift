@@ -43,12 +43,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             if let
                 userId = result?.getUser()?.getId(),
-                accessToken = result?.getAccessToken() {
+                connectAccessToken = result?.getAccessToken() {
             
-//                    self.GetPinStatus(userId, connectAccessToken: accessToken, httpClient: httpClient, logger: logger, jsonSerializer: jsonSerializer, service: service)
+//                    self.GetPinStatus(userId, connectAccessToken: connectAccessToken, httpClient: httpClient, logger: logger, jsonSerializer: jsonSerializer, service: service)
                     
 //                    self.userId = userId
-//                    self.accessToken = accessToken
+//                    self.accessToken = connectAccessToken
 //                    
 //                    NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: Selector("GetPinStatus"), userInfo: nil, repeats: true)
                     
@@ -61,13 +61,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        
 //                self.CreatePin(deviceId, httpClient: httpClient, logger: logger, jsonSerializer: jsonSerializer, service: service)
 
-                self.Logout(accessToken, httpClient: httpClient, logger: logger, jsonSerializer: jsonSerializer, service: service)
-            
+//                self.Logout(connectAccessToken, httpClient: httpClient, logger: logger, jsonSerializer: jsonSerializer, service: service)
+  
+                    
+                    let feature = "TV"
+                    
+                    self.GetRegistrationInfo(userId, connectAccessToken: connectAccessToken, feature: feature, httpClient: httpClient, logger: logger, jsonSerializer: jsonSerializer, service: service)
             }
             
         }
         
         service.Authenticate("vedrano", password: "123456", response: response)
+    }
+
+    func GetRegistrationInfo(userId: String, connectAccessToken: String, feature: String, httpClient: VolleyHttpClient, logger: Logger, jsonSerializer: JsonSerializer, service: ConnectService) {
+        
+        let response = Emby_Response<RegistrationInfo>()
+        
+        response.completion = { (result: RegistrationInfo?) -> Void in
+            
+            print("GetRegistrationInfo finished with \(result))")
+        }
+        
+        print("response \(response)")
+        
+        do {
+            try service.GetRegistrationInfo(userId, feature: feature, connectAccessToken: connectAccessToken, final: response)
+        } catch {
+            print("error \(error)")
+        }
     }
 
     func GetPinStatus() {
