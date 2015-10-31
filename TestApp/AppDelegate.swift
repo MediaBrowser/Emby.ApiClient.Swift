@@ -40,8 +40,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let response = Emby_Response<ConnectAuthenticationResult>()
 
         let test_CreatePin = false
-        let test_GetPinStatus = true
+        let test_GetPinStatus = false
         let test_GetRegistrationInfo = false
+        let test_GetConnectUser = true
         
         response.completion = { (result: ConnectAuthenticationResult?) -> Void in
             
@@ -78,6 +79,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         
                         self.GetRegistrationInfo(userId, connectAccessToken: connectAccessToken, feature: feature, httpClient: httpClient, logger: logger, jsonSerializer: jsonSerializer, service: service)
                     }
+                    
+                    if test_GetConnectUser {
+                        
+                        self.GetConnectUser(userId, connectAccessToken: connectAccessToken, httpClient: httpClient, logger: logger, jsonSerializer: jsonSerializer, service: service)
+                    }
             }
             
         }
@@ -85,6 +91,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         service.Authenticate("vedrano", password: "123456", response: response)
     }
 
+    func GetConnectUser(userId: String, connectAccessToken: String, httpClient: VolleyHttpClient, logger: Logger, jsonSerializer: JsonSerializer, service: ConnectService) {
+        
+        let response = Emby_Response<ConnectUser>()
+        
+        let connectUserQuery = ConnectUserQuery(jSON: JSON())
+        
+        connectUserQuery.setId(userId)
+        
+        response.completion = { (result: ConnectUser?) -> Void in
+            
+            print("GetConnectUser finished with \(result))")
+            
+        }
+        
+        print("response \(response)")
+        
+        do {
+            try service.GetConnectUser(connectUserQuery, connectAccessToken: connectAccessToken, final: response)
+        } catch {
+            print("error \(error)")
+        }
+    }
+    
     func GetRegistrationInfo(userId: String, connectAccessToken: String, feature: String, httpClient: VolleyHttpClient, logger: Logger, jsonSerializer: JsonSerializer, service: ConnectService) {
         
         let response = Emby_Response<RegistrationInfo>()

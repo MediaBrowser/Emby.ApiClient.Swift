@@ -9,42 +9,62 @@
 import Foundation
 //package mediabrowser.model.connect;
 
-public class ConnectUserQuery
+public class ConnectUserQuery: GenericResult
 {
+    public required init(jSON: JSON) {
+        super.init(jSON: jSON)
+        
+        if let Id = jSON["Id"] as? String {
+            self.Id = Id
+        }
+        
+        if let Name = jSON["Name"] as? String {
+            self.Name = Name
+        }
+        
+        if let Email = jSON["Email"] as? String {
+            self.Email = Email
+        }
+        
+        if let NameOrEmail = jSON["NameOrEmail"] as? String {
+            self.NameOrEmail = NameOrEmail
+        }
+    }
+    
     private var Id: String?
     public final func getId() -> String?
     {
-    return Id;
+        return Id;
     }
     public final func setId(value: String)
     {
-    Id = value;
+        Id = value;
     }
     private var Name: String?
     public final func getName() -> String?
     {
-    return Name;
+        return Name;
     }
     public final func setName(value: String)
     {
-    Name = value;
+        Name = value;
     }
     private var Email: String?
     public final func getEmail() -> String?
     {
-    return Email;
+        return Email;
     }
     public final func setEmail(value: String)
     {
-    Email = value;
+        Email = value;
     }
     private var NameOrEmail: String?
     public final func getNameOrEmail() -> String?
     {
-    return NameOrEmail;
+        return NameOrEmail;
     }
     public final func setNameOrEmail(value: String)
     {
-    NameOrEmail = value;
+        NameOrEmail = value;
     }
 }
