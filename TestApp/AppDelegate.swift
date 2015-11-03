@@ -30,7 +30,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let service = ConnectService(jsonSerializer: jsonSerializer, logger: logger, httpClient: httpClient, appName: "Emby_ApiClient iOS", appVersion: "1.0")
         
-        Authenticate(httpClient, logger: logger, jsonSerializer: jsonSerializer, service: service)
+//        Authenticate(httpClient, logger: logger, jsonSerializer: jsonSerializer, service: service)
+
+        let clientCapabilities = ClientCapabilities()
+        let credentialProvider = CredentialProvider(jsonSerializer: jsonSerializer, filePath: "")
+        let device = iOSDevice()
+        let serverDiscovery = ServerLocator(logger: logger, jsonSerializer: jsonSerializer)
+        
+        let connectionManager = ConnectionManager(clientCapabilities: clientCapabilities,
+            credentialProvider: credentialProvider,
+            device: device,
+            serverDiscovery: serverDiscovery)
         
         return true
     }
@@ -42,7 +52,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let test_CreatePin = false
         let test_GetPinStatus = false
         let test_GetRegistrationInfo = false
-        let test_GetConnectUser = true
+        let test_GetConnectUser = false
+        let test_GetServers = true
         
         response.completion = { (result: ConnectAuthenticationResult?) -> Void in
             
@@ -54,6 +65,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
                     let deviceId = UIDevice.currentDevice().identifierForVendor?.UUIDString ?? "<<unknown device>>"
                     let pin = "09751"
+
+                    if test_GetServers {
+                        
+                        self.GetServers(userId, connectAccessToken: connectAccessToken, httpClient: httpClient, logger: logger, jsonSerializer: jsonSerializer, service: service)
+                    }
                     
                     if test_CreatePin {
                         self.CreatePin(deviceId, httpClient: httpClient, logger: logger, jsonSerializer: jsonSerializer, service: service)
@@ -63,8 +79,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
                         self.deviceId = deviceId
                         self.pin = pin
-                        
-//                        self.GetPinStatus(deviceId, pin: pin, httpClient: httpClient, logger: logger, jsonSerializer: jsonSerializer, service: service)
                         
                         self.timerFor_GetPinStatus = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: Selector("GetPinStatus"), userInfo: nil, repeats: true)
                     }
@@ -90,7 +104,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         service.Authenticate("vedrano", password: "123456", response: response)
     }
-
+    
+    func GetServers(userId: String, connectAccessToken: String, httpClient: VolleyHttpClient, logger: Logger, jsonSerializer: JsonSerializer, service: ConnectService) {
+        
+        let response = Emby_Response<ConnectUserServer>()
+        
+        response.completion = { (result: ConnectUserServer?) -> Void in
+            
+            print("GetServers finished with \(result))")
+            
+        }
+        
+        print("response \(response)")
+        
+        do {
+            try service.GetServers(userId, connectAccessToken: connectAccessToken, final: response)
+        } catch {
+            print("error \(error)")
+        }
+    }
+    
     func GetConnectUser(userId: String, connectAccessToken: String, httpClient: VolleyHttpClient, logger: Logger, jsonSerializer: JsonSerializer, service: ConnectService) {
         
         let response = Emby_Response<ConnectUser>()

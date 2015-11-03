@@ -12,11 +12,12 @@ public class ConnectionManager: ConnectionManagerProtocol {
     let credentialProvider: CredentialProviderProtocol
     let device: DeviceProtocol
     let serverDiscovery: ServerDiscoveryProtocol
-    
-    init(clientCapabilities: ClientCapabilities,
+
+    public init(clientCapabilities: ClientCapabilities,
         credentialProvider: CredentialProviderProtocol,
         device: DeviceProtocol,
         serverDiscovery: ServerDiscoveryProtocol) {
+            
         self.clientCapabilities = clientCapabilities
         self.credentialProvider = credentialProvider
         self.device = device

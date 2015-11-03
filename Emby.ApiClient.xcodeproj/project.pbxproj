@@ -45,6 +45,12 @@
 		888EFC9F1BCC52CD00546DB3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 888EFC9D1BCC52CD00546DB3 /* Main.storyboard */; };
 		888EFCA11BCC52CD00546DB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 888EFCA01BCC52CD00546DB3 /* Assets.xcassets */; };
 		888EFCA41BCC52CD00546DB3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 888EFCA21BCC52CD00546DB3 /* LaunchScreen.storyboard */; };
+		889288CB1BE7FF0000DAD65F /* CredentialProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889288CA1BE7FF0000DAD65F /* CredentialProvider.swift */; settings = {ASSET_TAGS = (); }; };
+		889288CD1BE7FF8B00DAD65F /* ICredentialProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889288CC1BE7FF8B00DAD65F /* ICredentialProvider.swift */; settings = {ASSET_TAGS = (); }; };
+		889288CF1BE8D9B400DAD65F /* iOSDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889288CE1BE8D9B400DAD65F /* iOSDevice.swift */; settings = {ASSET_TAGS = (); }; };
+		889288D31BE8DCE700DAD65F /* FileUploadProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889288D21BE8DCE700DAD65F /* FileUploadProgress.swift */; settings = {ASSET_TAGS = (); }; };
+		889288D51BE908A500DAD65F /* BaseApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889288D41BE908A500DAD65F /* BaseApiClient.swift */; settings = {ASSET_TAGS = (); }; };
+		889288D71BE90D8000DAD65F /* ServerLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889288D61BE90D8000DAD65F /* ServerLocator.swift */; settings = {ASSET_TAGS = (); }; };
 		88CF7C111BC5248E00A33B72 /* Emby.ApiClient-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = 88CF7C101BC5248E00A33B72 /* Emby.ApiClient-Bridging-Header.h */; };
 		88CF7E371BC5B8DF00A33B72 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7CCE1BC59D0500A33B72 /* Response.swift */; };
 		88CF7E381BC5B94500A33B72 /* HttpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7CC51BC5873A00A33B72 /* HttpRequest.swift */; };
@@ -137,6 +143,12 @@
 		888EFCA01BCC52CD00546DB3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		888EFCA31BCC52CD00546DB3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		888EFCA51BCC52CD00546DB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		889288CA1BE7FF0000DAD65F /* CredentialProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CredentialProvider.swift; sourceTree = "<group>"; };
+		889288CC1BE7FF8B00DAD65F /* ICredentialProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ICredentialProvider.swift; sourceTree = "<group>"; };
+		889288CE1BE8D9B400DAD65F /* iOSDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iOSDevice.swift; sourceTree = "<group>"; };
+		889288D21BE8DCE700DAD65F /* FileUploadProgress.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileUploadProgress.swift; sourceTree = "<group>"; };
+		889288D41BE908A500DAD65F /* BaseApiClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseApiClient.swift; sourceTree = "<group>"; };
+		889288D61BE90D8000DAD65F /* ServerLocator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerLocator.swift; sourceTree = "<group>"; };
 		88CF7C101BC5248E00A33B72 /* Emby.ApiClient-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Emby.ApiClient-Bridging-Header.h"; sourceTree = "<group>"; };
 		88CF7CC31BC586BC00A33B72 /* IAsyncHttpClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAsyncHttpClient.swift; sourceTree = "<group>"; };
 		88CF7CC51BC5873A00A33B72 /* HttpRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpRequest.swift; sourceTree = "<group>"; };
@@ -204,6 +216,7 @@
 			isa = PBXGroup;
 			children = (
 				04AFCAD71BD33E0500C95C88 /* ServerLocatorProtocol.swift */,
+				889288D61BE90D8000DAD65F /* ServerLocator.swift */,
 			);
 			path = discovery;
 			sourceTree = "<group>";
@@ -316,6 +329,8 @@
 		8838C5621BC517E300587F8E /* apiinteraction */ = {
 			isa = PBXGroup;
 			children = (
+				889288D01BE8DCC800DAD65F /* sync */,
+				889288C81BE7FED400DAD65F /* credentials */,
 				04B8AB2E1BDB291E00ED19CA /* connectionmanager */,
 				04AFCAF71BD34B0900C95C88 /* tasks */,
 				04AFCAF11BD3496100C95C88 /* device */,
@@ -331,6 +346,8 @@
 				04AFCAEF1BD3490A00C95C88 /* ApiClient.swift */,
 				041643A91BD48E6100873FAB /* ConnectionResult.swift */,
 				04B8AB321BDB2D1700ED19CA /* CredentialProviderProtocol.swift */,
+				889288CC1BE7FF8B00DAD65F /* ICredentialProvider.swift */,
+				889288D41BE908A500DAD65F /* BaseApiClient.swift */,
 			);
 			path = apiinteraction;
 			sourceTree = "<group>";
@@ -399,6 +416,30 @@
 			path = TestApp;
 			sourceTree = "<group>";
 		};
+		889288C81BE7FED400DAD65F /* credentials */ = {
+			isa = PBXGroup;
+			children = (
+				889288CA1BE7FF0000DAD65F /* CredentialProvider.swift */,
+			);
+			path = credentials;
+			sourceTree = "<group>";
+		};
+		889288D01BE8DCC800DAD65F /* sync */ = {
+			isa = PBXGroup;
+			children = (
+				889288D11BE8DCC800DAD65F /* server */,
+			);
+			path = sync;
+			sourceTree = "<group>";
+		};
+		889288D11BE8DCC800DAD65F /* server */ = {
+			isa = PBXGroup;
+			children = (
+				889288D21BE8DCE700DAD65F /* FileUploadProgress.swift */,
+			);
+			path = server;
+			sourceTree = "<group>";
+		};
 		88CF7CC21BC586AE00A33B72 /* http */ = {
 			isa = PBXGroup;
 			children = (
@@ -417,6 +458,7 @@
 				88CF7CD01BC59EA500A33B72 /* VolleyResponseListener.swift */,
 				88CF7E611BC5C72700A33B72 /* VolleyErrorListener.swift */,
 				8857F86C1BCC633F00ADFA8A /* VolleyError.swift */,
+				889288CE1BE8D9B400DAD65F /* iOSDevice.swift */,
 			);
 			path = iOS;
 			sourceTree = "<group>";
@@ -612,6 +654,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				88CF7E641BC5C85A00A33B72 /* Context.swift in Sources */,
+				889288D31BE8DCE700DAD65F /* FileUploadProgress.swift in Sources */,
 				041643A81BD4280600873FAB /* SystemInfo.swift in Sources */,
 				0416439F1BD4204300873FAB /* WakeOnLanInfo.swift in Sources */,
 				88CF7E721BC6E49F00A33B72 /* PinExchangeResult.swift in Sources */,
@@ -639,6 +682,7 @@
 				888EFC7E1BCC4DB700546DB3 /* Logger.swift in Sources */,
 				041643A61BD424F400873FAB /* PublicSystemInfo.swift in Sources */,
 				04AFCAEC1BD347EE00C95C88 /* IHasServerId.swift in Sources */,
+				889288CD1BE7FF8B00DAD65F /* ICredentialProvider.swift in Sources */,
 				04B8AB351BDB2E8D00ED19CA /* ServerCredentials.swift in Sources */,
 				88CF7E6E1BC6E05C00A33B72 /* PinCreationResult.swift in Sources */,
 				0416439C1BD41FA600873FAB /* ServerUserInfo.swift in Sources */,
@@ -650,8 +694,10 @@
 				041643A11BD4216100873FAB /* UserLinkType.swift in Sources */,
 				8857F86F1BCD4B5500ADFA8A /* IResponse.swift in Sources */,
 				88CF7E781BC6E86F00A33B72 /* ConnectUserServer.swift in Sources */,
+				889288CB1BE7FF0000DAD65F /* CredentialProvider.swift in Sources */,
 				88CF7E591BC5BF8C00A33B72 /* QueryStringDictionary.swift in Sources */,
 				88CF7E691BC5CBDB00A33B72 /* Request.swift in Sources */,
+				889288D51BE908A500DAD65F /* BaseApiClient.swift in Sources */,
 				04AFCADC1BD33FEA00C95C88 /* ServerDiscoveryInfo.swift in Sources */,
 				88CF7E371BC5B8DF00A33B72 /* Response.swift in Sources */,
 				88CF7E741BC6E5B500A33B72 /* ConnectUserQuery.swift in Sources */,
@@ -662,6 +708,8 @@
 				88CF7E5A1BC5BF9E00A33B72 /* ConnectPassword.swift in Sources */,
 				041643AA1BD48E6100873FAB /* ConnectionResult.swift in Sources */,
 				88CF7E761BC6E71200A33B72 /* ConnectUser.swift in Sources */,
+				889288D71BE90D8000DAD65F /* ServerLocator.swift in Sources */,
+				889288CF1BE8D9B400DAD65F /* iOSDevice.swift in Sources */,
 				888EFC811BCC4EDC00546DB3 /* JsonSerializer.swift in Sources */,
 				04AFCAD81BD33E0500C95C88 /* ServerLocatorProtocol.swift in Sources */,
 				04AFCAE21BD3436600C95C88 /* ConnectionManagerProtocol.swift in Sources */,
