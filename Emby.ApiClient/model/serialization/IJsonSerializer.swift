@@ -11,11 +11,47 @@ import Foundation
 //
 //import java.io.InputStream;
 
-public typealias JSON = [String : AnyObject]
+public typealias JSON_Dictionary = [String : AnyObject]
+public typealias JSON_Array = [AnyObject]
 
 public protocol JSONSerializable {
+    
+    init(jSON: JSON_Object)
+}
 
-    init(jSON: JSON)
+public class JSON_Object {
+    let jSON_Dictionary: JSON_Dictionary?
+    let jSON_Array: JSON_Array?
+    
+    public init() {
+        self.jSON_Dictionary = nil
+        self.jSON_Array = nil
+    }
+    
+    init(jSON_Dictionary: JSON_Dictionary?) {
+        self.jSON_Dictionary = jSON_Dictionary
+        self.jSON_Array = nil
+    }
+    
+    init(jSON_Array: JSON_Array?) {
+        self.jSON_Dictionary = nil
+        self.jSON_Array = jSON_Array
+    }
+    
+    subscript(name: String) -> AnyObject? {
+        
+        let value = jSON_Dictionary?[name]
+        
+        if let dict = value as? JSON_Dictionary {
+            return JSON_Object(jSON_Dictionary: dict)
+            
+        } else if let string = value as? String {
+            return string
+            
+        } else {
+            return nil
+        }
+    }
 }
 
 //interface
@@ -78,6 +114,7 @@ public protocol IJsonSerializer
 //    <T> T DeserializeFromString(String text, java.lang.Class type);
 //    func DeserializeFromString(text: String, type: Any) throws -> JSON?
     func DeserializeFromString<T: JSONSerializable>(text: String, type: Any) throws -> T?
+//    func DeserializeFromString<T: GenericResult<JSON_Dictionary>>(text: String, type: Any) throws -> T?
     
 //    /**
 //    Deserializes from stream.

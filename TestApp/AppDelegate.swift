@@ -30,17 +30,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let service = ConnectService(jsonSerializer: jsonSerializer, logger: logger, httpClient: httpClient, appName: "Emby_ApiClient iOS", appVersion: "1.0")
         
-//        Authenticate(httpClient, logger: logger, jsonSerializer: jsonSerializer, service: service)
+        Authenticate(httpClient, logger: logger, jsonSerializer: jsonSerializer, service: service)
 
-        let clientCapabilities = ClientCapabilities()
-        let credentialProvider = CredentialProvider(jsonSerializer: jsonSerializer, filePath: "")
-        let device = iOSDevice()
-        let serverDiscovery = ServerLocator(logger: logger, jsonSerializer: jsonSerializer)
-        
-        let connectionManager = ConnectionManager(clientCapabilities: clientCapabilities,
-            credentialProvider: credentialProvider,
-            device: device,
-            serverDiscovery: serverDiscovery)
+//        let clientCapabilities = ClientCapabilities()
+//        let credentialProvider = CredentialProvider(jsonSerializer: jsonSerializer, filePath: "")
+//        let device = iOSDevice()
+//        let serverDiscovery = ServerLocator(logger: logger, jsonSerializer: jsonSerializer)
+//        
+//        let connectionManager = ConnectionManager(clientCapabilities: clientCapabilities,
+//            credentialProvider: credentialProvider,
+//            device: device,
+//            serverDiscovery: serverDiscovery)
         
         return true
     }
@@ -107,9 +107,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func GetServers(userId: String, connectAccessToken: String, httpClient: VolleyHttpClient, logger: Logger, jsonSerializer: JsonSerializer, service: ConnectService) {
         
-        let response = Emby_Response<ConnectUserServer>()
+        let response = Emby_Response<ConnectUserServers>()
         
-        response.completion = { (result: ConnectUserServer?) -> Void in
+        response.completion = { (result: ConnectUserServers?) -> Void in
             
             print("GetServers finished with \(result))")
             
@@ -128,7 +128,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let response = Emby_Response<ConnectUser>()
         
-        let connectUserQuery = ConnectUserQuery(jSON: JSON())
+        let connectUserQuery = ConnectUserQuery(jSON: JSON_Object())
         
         connectUserQuery.setId(userId)
         
@@ -202,7 +202,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let response = Emby_Response<PinStatusResult>()
         
-        let pinCreationResult = PinCreationResult(jSON: JSON())
+        let pinCreationResult = PinCreationResult(jSON: JSON_Object())
         
         pinCreationResult.setDeviceId(deviceId)
         pinCreationResult.setPin(pin)
@@ -231,7 +231,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let response = Emby_Response<PinExchangeResult>()
         
-        let pinCreationResult = PinCreationResult(jSON: JSON())
+        let pinCreationResult = PinCreationResult(jSON: JSON_Object())
         
         pinCreationResult.setDeviceId(deviceId)
         pinCreationResult.setPin(pin)

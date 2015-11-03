@@ -9,18 +9,68 @@
 import Foundation
 //package mediabrowser.model.connect;
 
-public class ConnectUserServer: GenericResult
-{
-    public required init(jSON: JSON) {
+public class ConnectUserServers: GenericResult {
+
+    var servers = [ConnectUserServer]()
+
+    public required init(jSON: JSON_Object) {
         super.init(jSON: jSON)
         
-//        if let user = jSON["User"] as? JSON {
-//            self.User = ConnectUser(jSON: user)
-//        }
-//        
-//        if let accessToken = jSON["AccessToken"] as? String {
-//            self.AccessToken = accessToken
-//        }
+        //[{"Id":"776fb00e3fae53fc00ad8f44090eeacb","Url":"http:\/\/109.227.62.202:8096","Name":"Vedrans-Mini.lan","SystemId":"acd3038ee3c44fd2b475fc1cd2aa1f76","AccessKey":"3c3c65d756ef4bfa9a2a9c2c8d0fd147","LocalAddress":"http:\/\/192.168.1.66:8096","UserType":"Linked","SupporterKey":""}]
+        
+        if let jSON_Array = jSON.jSON_Array {
+            
+            for server in jSON_Array {
+                
+                if let serverDict = server as? JSON_Dictionary {
+                    
+                    let server = ConnectUserServer(jSON: JSON_Object(jSON_Dictionary: serverDict ))
+                    
+                    servers.append(server)
+                }
+                
+            }
+        }
+        
+    }
+}
+
+public class ConnectUserServer: GenericResult
+{
+    public required init(jSON: JSON_Object) {
+        super.init(jSON: jSON)
+        
+        if let Id = jSON["Id"] as? String {
+            self.Id = Id
+        }
+        
+        if let Url = jSON["Url"] as? String {
+            self.Url = Url
+        }
+        
+        if let Name = jSON["Name"] as? String {
+            self.Name = Name
+        }
+        
+        if let SystemId = jSON["SystemId"] as? String {
+            self.SystemId = SystemId
+        }
+        
+        if let AccessKey = jSON["AccessKey"] as? String {
+            self.AccessKey = AccessKey
+        }
+        
+        if let LocalAddress = jSON["LocalAddress"] as? String {
+            self.LocalAddress = LocalAddress
+        }
+        
+        if let UserType = jSON["UserType"] as? String {
+            self.UserType = UserType
+        }
+        
+        if let SupporterKey = jSON["SupporterKey"] as? String {
+            self.SupporterKey = SupporterKey
+        }
     }
     
     private var Id: String?
@@ -86,4 +136,6 @@ public class ConnectUserServer: GenericResult
     {
         UserType = value;
     }
+    
+    private var SupporterKey: String?
 }

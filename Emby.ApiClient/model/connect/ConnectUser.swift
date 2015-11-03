@@ -11,7 +11,7 @@ import Foundation
 
 public class ConnectUser: GenericResult
 {
-    public required init(jSON: JSON) {
+    public required init(jSON: JSON_Object) {
         super.init(jSON: jSON)
     
 //{"Id":"79718","Name":"vedrano","DisplayName":"vedrano","Email":"vedran.ozir@gmail.com","IsActive":"true","ImageUrl":"http:\/\/www.gravatar.com\/avatar\/1231d710dfba30dd91868a20f737e0db?s=200&d=http%3A%2F%2Fmb3admin.com%2Fimages%2Fuser.png"}

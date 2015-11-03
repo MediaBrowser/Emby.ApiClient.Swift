@@ -11,7 +11,7 @@ import Foundation
 
 public class PinCreationResult: GenericResult
 {
-    public required init(jSON: JSON) {
+    public required init(jSON: JSON_Object) {
         super.init(jSON: jSON)
         
 //{"Id":null,"Pin":"09751","DeviceId":"203AD7FD-333B-4926-A2EF-414748DF8FCF","IsExpired":false,"IsConfirmed":false,"AccessToken":null}        

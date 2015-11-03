@@ -9,17 +9,17 @@
 import Foundation
 //package mediabrowser.apiinteraction;
 
-public class EmptyResponse: GenericResult {
-    
+public class EmptyResponse: GenericResult
+{
     private var innerResponse: IResponse?
     
-    init(innerResponse: IResponse? = nil){
-        
-        self.innerResponse = innerResponse;
-        super.init()
-    }
+//    init(innerResponse: IResponse? = nil){
+//        
+//        self.innerResponse = innerResponse;
+//        super.init(jSON: JSON_Object())
+//    }
 
-    public required init(jSON: JSON) {
+    public required init(jSON: JSON_Object) {
         super.init(jSON: jSON)
     }
 

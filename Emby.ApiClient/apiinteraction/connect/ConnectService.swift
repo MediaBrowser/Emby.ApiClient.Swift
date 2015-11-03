@@ -180,8 +180,7 @@ public class ConnectService {
         _httpClient.Send(request, response: SerializedResponse<T>(innerResponse: response, jsonSerializer: JsonSerializer, type: ConnectUser.self));
     }
     
-    //    public func GetServers(String userId, String connectAccessToken, final Response<ConnectUserServer[]> response)
-    public func GetServers<T:ConnectUserServer>(userId: String, connectAccessToken: String, final response: Emby_Response<T>) throws
+    public func GetServers<T:ConnectUserServers>(userId: String, connectAccessToken: String, final response: Emby_Response<T>) throws
     {
         let dict = QueryStringDictionary();
         
@@ -197,7 +196,7 @@ public class ConnectService {
         try AddUserAccessToken(request, accessToken: connectAccessToken)
         AddXApplicationName(request);
         
-        _httpClient.Send(request, response: SerializedResponse<T>(innerResponse: response, jsonSerializer: JsonSerializer, type: [ConnectUserServer].self));
+        _httpClient.Send(request, response: SerializedResponse<T>(innerResponse: response, jsonSerializer: JsonSerializer, type: ConnectUserServers.self));
     }
     
     public func Logout<T:EmptyResponse>(connectAccessToken: String, final response: Emby_Response<T>) throws

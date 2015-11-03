@@ -11,7 +11,7 @@ import Foundation
 
 public class PinStatusResult: GenericResult
 {
-    public required init(jSON: JSON) {
+    public required init(jSON: JSON_Object) {
         super.init(jSON: jSON)
         
         if let Pin = jSON["Pin"] as? String {

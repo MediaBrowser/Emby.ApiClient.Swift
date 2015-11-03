@@ -11,19 +11,16 @@ import Foundation
 
 public class GenericResult: JSONSerializable
 {
-    public init() {
-    }
-    
-    public required init(jSON: JSON) {
+    public required init(jSON: JSON_Object) {
     }
 }
 
 public class ConnectAuthenticationResult: GenericResult
 {
-    public required init(jSON: JSON) {
+    public required init(jSON: JSON_Object) {
         super.init(jSON: jSON)
         
-        if let user = jSON["User"] as? JSON {
+        if let user = jSON["User"] as? JSON_Object {
             self.User = ConnectUser(jSON: user)
         }
         

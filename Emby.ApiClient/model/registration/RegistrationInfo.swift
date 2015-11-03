@@ -11,7 +11,7 @@ import Foundation
 
 public class RegistrationInfo: GenericResult
 {
-    public required init(jSON: JSON) {
+    public required init(jSON: JSON_Object) {
         super.init(jSON: jSON)
  
         //{"Name":"TV","ExpirationDate":"2015-11-15","IsTrial":true,"IsRegistered":false}

@@ -17,11 +17,18 @@ public class JsonSerializer: IJsonSerializer {
         
         if let data = text.dataUsingEncoding(NSUTF8StringEncoding) where !text.isEmpty {
             
-            if let jsonDictionary = try NSJSONSerialization.JSONObjectWithData( data, options: []) as? [String : AnyObject] {
-            
-            let obj = T(jSON: jsonDictionary)
-            
-            return obj
+            if let jsonDictionary = try NSJSONSerialization.JSONObjectWithData( data, options: []) as? JSON_Dictionary {
+                
+                let obj = T(jSON: JSON_Object(jSON_Dictionary: jsonDictionary))
+                
+                return obj
+                
+            } else if let jsonArray = try NSJSONSerialization.JSONObjectWithData( data, options: []) as? JSON_Array {
+
+                let obj = T(jSON: JSON_Object(jSON_Array: jsonArray))
+                
+                return obj
+                
             } else {
                 return nil
             }

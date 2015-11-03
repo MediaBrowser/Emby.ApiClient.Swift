@@ -11,7 +11,7 @@ import Foundation
 
 public class PinExchangeResult: GenericResult
 {
-    public required init(jSON: JSON) {
+    public required init(jSON: JSON_Object) {
         super.init(jSON: jSON)
         
         if let Id = jSON["Id"] as? String {
