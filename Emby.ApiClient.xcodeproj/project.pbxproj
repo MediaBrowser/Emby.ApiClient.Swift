@@ -32,6 +32,7 @@
 		04B8AB311BDB293200ED19CA /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B8AB301BDB293200ED19CA /* ConnectionManager.swift */; };
 		04B8AB331BDB2D1700ED19CA /* CredentialProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B8AB321BDB2D1700ED19CA /* CredentialProviderProtocol.swift */; };
 		04B8AB351BDB2E8D00ED19CA /* ServerCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B8AB341BDB2E8D00ED19CA /* ServerCredentials.swift */; };
+		5DD39A821BE9E6AD00B2D09A /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DD39A811BE9E6AD00B2D09A /* Alamofire.framework */; };
 		8838C55B1BC514B500587F8E /* Emby.ApiClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 8838C55A1BC514B500587F8E /* Emby.ApiClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		884EBEDD1BCD912B0032E7F3 /* EmptyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884EBEDC1BCD912B0032E7F3 /* EmptyResponse.swift */; };
 		8857F86D1BCC633F00ADFA8A /* VolleyError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8857F86C1BCC633F00ADFA8A /* VolleyError.swift */; };
@@ -45,12 +46,12 @@
 		888EFC9F1BCC52CD00546DB3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 888EFC9D1BCC52CD00546DB3 /* Main.storyboard */; };
 		888EFCA11BCC52CD00546DB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 888EFCA01BCC52CD00546DB3 /* Assets.xcassets */; };
 		888EFCA41BCC52CD00546DB3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 888EFCA21BCC52CD00546DB3 /* LaunchScreen.storyboard */; };
-		889288CB1BE7FF0000DAD65F /* CredentialProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889288CA1BE7FF0000DAD65F /* CredentialProvider.swift */; settings = {ASSET_TAGS = (); }; };
-		889288CD1BE7FF8B00DAD65F /* ICredentialProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889288CC1BE7FF8B00DAD65F /* ICredentialProvider.swift */; settings = {ASSET_TAGS = (); }; };
-		889288CF1BE8D9B400DAD65F /* iOSDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889288CE1BE8D9B400DAD65F /* iOSDevice.swift */; settings = {ASSET_TAGS = (); }; };
-		889288D31BE8DCE700DAD65F /* FileUploadProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889288D21BE8DCE700DAD65F /* FileUploadProgress.swift */; settings = {ASSET_TAGS = (); }; };
-		889288D51BE908A500DAD65F /* BaseApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889288D41BE908A500DAD65F /* BaseApiClient.swift */; settings = {ASSET_TAGS = (); }; };
-		889288D71BE90D8000DAD65F /* ServerLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889288D61BE90D8000DAD65F /* ServerLocator.swift */; settings = {ASSET_TAGS = (); }; };
+		889288CB1BE7FF0000DAD65F /* CredentialProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889288CA1BE7FF0000DAD65F /* CredentialProvider.swift */; };
+		889288CD1BE7FF8B00DAD65F /* ICredentialProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889288CC1BE7FF8B00DAD65F /* ICredentialProvider.swift */; };
+		889288CF1BE8D9B400DAD65F /* iOSDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889288CE1BE8D9B400DAD65F /* iOSDevice.swift */; };
+		889288D31BE8DCE700DAD65F /* FileUploadProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889288D21BE8DCE700DAD65F /* FileUploadProgress.swift */; };
+		889288D51BE908A500DAD65F /* BaseApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889288D41BE908A500DAD65F /* BaseApiClient.swift */; };
+		889288D71BE90D8000DAD65F /* ServerLocator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889288D61BE90D8000DAD65F /* ServerLocator.swift */; };
 		88CF7C111BC5248E00A33B72 /* Emby.ApiClient-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = 88CF7C101BC5248E00A33B72 /* Emby.ApiClient-Bridging-Header.h */; };
 		88CF7E371BC5B8DF00A33B72 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7CCE1BC59D0500A33B72 /* Response.swift */; };
 		88CF7E381BC5B94500A33B72 /* HttpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7CC51BC5873A00A33B72 /* HttpRequest.swift */; };
@@ -58,7 +59,6 @@
 		88CF7E3C1BC5BB5600A33B72 /* IJsonSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7E3B1BC5BB5600A33B72 /* IJsonSerializer.swift */; };
 		88CF7E3E1BC5BC8800A33B72 /* IAsyncHttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7CC31BC586BC00A33B72 /* IAsyncHttpClient.swift */; };
 		88CF7E3F1BC5BCA800A33B72 /* VolleyHttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7CC81BC5888300A33B72 /* VolleyHttpClient.swift */; };
-		88CF7E541BC5BDA000A33B72 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88CF7E491BC5BD0700A33B72 /* Alamofire.framework */; };
 		88CF7E551BC5BE9600A33B72 /* VolleyResponseListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7CD01BC59EA500A33B72 /* VolleyResponseListener.swift */; };
 		88CF7E581BC5BF0300A33B72 /* ILogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7E571BC5BF0300A33B72 /* ILogger.swift */; };
 		88CF7E591BC5BF8C00A33B72 /* QueryStringDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8838C5661BC5197900587F8E /* QueryStringDictionary.swift */; };
@@ -88,13 +88,6 @@
 			remoteGlobalIDString = 8838C5561BC514B500587F8E;
 			remoteInfo = Emby_ApiClient;
 		};
-		88CF7E481BC5BD0700A33B72 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 88CF7E401BC5BCFA00A33B72 /* Alamofire.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F8111E3319A95C8B0040E7D1;
-			remoteInfo = "Alamofire iOS";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -123,6 +116,7 @@
 		04B8AB301BDB293200ED19CA /* ConnectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConnectionManager.swift; path = connectionmanager/ConnectionManager.swift; sourceTree = "<group>"; };
 		04B8AB321BDB2D1700ED19CA /* CredentialProviderProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CredentialProviderProtocol.swift; sourceTree = "<group>"; };
 		04B8AB341BDB2E8D00ED19CA /* ServerCredentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerCredentials.swift; sourceTree = "<group>"; };
+		5DD39A811BE9E6AD00B2D09A /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		8838C5571BC514B500587F8E /* Emby_ApiClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Emby_ApiClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8838C55A1BC514B500587F8E /* Emby.ApiClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Emby.ApiClient.h; sourceTree = "<group>"; };
 		8838C55C1BC514B500587F8E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -160,7 +154,6 @@
 		88CF7E331BC5B14F00A33B72 /* ConnectAuthorizationRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectAuthorizationRequest.swift; sourceTree = "<group>"; };
 		88CF7E351BC5B2E800A33B72 /* ConnectAuthenticationResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectAuthenticationResult.swift; sourceTree = "<group>"; };
 		88CF7E3B1BC5BB5600A33B72 /* IJsonSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IJsonSerializer.swift; sourceTree = "<group>"; };
-		88CF7E401BC5BCFA00A33B72 /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
 		88CF7E571BC5BF0300A33B72 /* ILogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ILogger.swift; sourceTree = "<group>"; };
 		88CF7E5F1BC5C37D00A33B72 /* HttpHeaders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpHeaders.swift; sourceTree = "<group>"; };
 		88CF7E611BC5C72700A33B72 /* VolleyErrorListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolleyErrorListener.swift; sourceTree = "<group>"; };
@@ -180,7 +173,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				88CF7E541BC5BDA000A33B72 /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,6 +180,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5DD39A821BE9E6AD00B2D09A /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,8 +291,8 @@
 			children = (
 				8838C5591BC514B500587F8E /* Emby.ApiClient */,
 				888EFC981BCC52CD00546DB3 /* TestApp */,
-				88CF7D831BC5A42E00A33B72 /* Frameworks */,
 				8838C5581BC514B500587F8E /* Products */,
+				5DD39A811BE9E6AD00B2D09A /* Alamofire.framework */,
 			);
 			sourceTree = "<group>";
 		};
@@ -484,28 +477,12 @@
 			path = volley;
 			sourceTree = "<group>";
 		};
-		88CF7D831BC5A42E00A33B72 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				88CF7E401BC5BCFA00A33B72 /* Alamofire.xcodeproj */,
-			);
-			path = Frameworks;
-			sourceTree = "<group>";
-		};
 		88CF7E3A1BC5BB4A00A33B72 /* serialization */ = {
 			isa = PBXGroup;
 			children = (
 				88CF7E3B1BC5BB5600A33B72 /* IJsonSerializer.swift */,
 			);
 			path = serialization;
-			sourceTree = "<group>";
-		};
-		88CF7E411BC5BCFA00A33B72 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				88CF7E491BC5BD0700A33B72 /* Alamofire.framework */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		88CF7E561BC5BEFC00A33B72 /* logging */ = {
@@ -564,6 +541,7 @@
 				888EFC931BCC52CD00546DB3 /* Sources */,
 				888EFC941BCC52CD00546DB3 /* Frameworks */,
 				888EFC951BCC52CD00546DB3 /* Resources */,
+				5DD39A831BE9E6E600B2D09A /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -604,12 +582,6 @@
 			mainGroup = 8838C54D1BC514B500587F8E;
 			productRefGroup = 8838C5581BC514B500587F8E /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 88CF7E411BC5BCFA00A33B72 /* Products */;
-					ProjectRef = 88CF7E401BC5BCFA00A33B72 /* Alamofire.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				8838C5561BC514B500587F8E /* Emby_ApiClient */,
@@ -617,16 +589,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		88CF7E491BC5BD0700A33B72 /* Alamofire.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Alamofire.framework;
-			remoteRef = 88CF7E481BC5BD0700A33B72 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		8838C5551BC514B500587F8E /* Resources */ = {
@@ -647,6 +609,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5DD39A831BE9E6E600B2D09A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8838C5521BC514B500587F8E /* Sources */ = {
@@ -890,6 +869,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = TestApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = QoT.TestApp;
@@ -901,6 +884,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = TestApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = QoT.TestApp;
