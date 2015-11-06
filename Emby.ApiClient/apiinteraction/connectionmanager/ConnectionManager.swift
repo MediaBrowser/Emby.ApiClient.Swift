@@ -10,12 +10,12 @@ public class ConnectionManager: ConnectionManagerProtocol {
     let clientCapabilities: ClientCapabilities
     let apiClients = [String: ApiClient]()
     let credentialProvider: CredentialProviderProtocol
-    let device: DeviceProtocol
+    let device: IDevice
     let serverDiscovery: ServerDiscoveryProtocol
 
     public init(clientCapabilities: ClientCapabilities,
         credentialProvider: CredentialProviderProtocol,
-        device: DeviceProtocol,
+        device: IDevice,
         serverDiscovery: ServerDiscoveryProtocol) {
             
         self.clientCapabilities = clientCapabilities
