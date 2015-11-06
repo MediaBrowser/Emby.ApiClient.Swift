@@ -23,7 +23,7 @@ import Foundation
 * @param <T> The type of parsed response this request expects.
 */
 
-public /*abstract*/ class Request { // implements Comparable<Request<T>> {
+public /*abstract*/ class Request<T> { // implements Comparable<Request<T>> {
     
 //    /**
 //    * Default encoding for POST or PUT parameters. See {@link #getParamsEncoding()}.

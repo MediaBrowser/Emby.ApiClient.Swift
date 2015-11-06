@@ -19,7 +19,7 @@ import Foundation
 * A canned request for retrieving the response body at a given URL as a String.
 */
 
-public class StringRequest<T>: Request {
+public class StringRequest<T>: Request<T> {
     private final let mListener: Response_Listener<T>
 //    /**
 //    * Creates a new request with the given method.

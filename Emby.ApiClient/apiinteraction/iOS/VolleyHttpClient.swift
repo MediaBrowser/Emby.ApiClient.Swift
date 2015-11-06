@@ -147,7 +147,7 @@ public class VolleyHttpClient : IAsyncHttpClient {
 //        }
 //    }
     
-    public func Send<T>(/*final*/  request: HttpRequest, /*final*/ response: Emby_Response<T> )
+    public func Send<T>(/*final*/  request: HttpRequest, /*final*/ response: Emby.Response<T> )
     {
         /*final*/ let url = request.getUrl();
         

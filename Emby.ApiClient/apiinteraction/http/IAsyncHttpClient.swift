@@ -14,5 +14,5 @@ import Foundation
 
 public protocol IAsyncHttpClient {
     
-    /*public*/ func Send<T>(request: HttpRequest, response: Emby_Response<T>)
+    /*public*/ func Send<T>(request: HttpRequest, response: Emby.Response<T>)
 }

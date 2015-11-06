@@ -16,11 +16,11 @@ import Foundation
 //public class VolleyResponseListener<T> implements Response.Listener<T> {
 public class VolleyResponseListener<T>: Response_Listener<T> {
     
-    private let outerResponse: Emby_Response<T>
+    private let outerResponse: Emby.Response<T>
     private let logger: ILogger
     private let url: String
     
-    public init(outerResponse: Emby_Response<T>, logger: ILogger, url: String) {
+    public init(outerResponse: Emby.Response<T>, logger: ILogger, url: String) {
         self.outerResponse = outerResponse;
         self.logger = logger;
         self.url = url;
@@ -30,7 +30,7 @@ public class VolleyResponseListener<T>: Response_Listener<T> {
 //    public func onResponse(s: T) {
 //    public func onResponse(s: Any) {
     public override func onResponse(s: Any) throws -> T? {
-//    let a = outerResponse as? Emby_Response
+//    let a = outerResponse as? Emby.Response
         logger.Info("Response received from: '" + url + "'");
 //        logger.Debug("Response received from: " + url + " is " + s.description);
         
