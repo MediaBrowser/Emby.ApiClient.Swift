@@ -43,97 +43,172 @@ public class BaseApiClient// implements IDisposable
 //        //}
 //    }
 //    
-//    protected ILogger Logger;
-//    
-//    /**
-//    Gets the json serializer.
-//    
-//    <value>The json serializer.</value>
-//    */
-//    protected IJsonSerializer jsonSerializer;
-//    public final IJsonSerializer getJsonSerializer()
-//    {
-//        return jsonSerializer;
-//    }
-//    public final void setJsonSerializer(IJsonSerializer value)
-//    {
-//        jsonSerializer = value;
-//    }
-//    
-//    /**
-//    If specified this will be used as a default when an explicit value is not specified.
-//    */
-//    private Integer privateImageQuality = null;
-//    public final Integer getImageQuality()
-//    {
-//        return privateImageQuality;
-//    }
-//    public final void setImageQuality(Integer value)
-//    {
-//        privateImageQuality = value;
-//    }
-//    
-//    protected BaseApiClient(ILogger logger, IJsonSerializer jsonSerializer, String serverAddress, String clientName, IDevice device, String applicationVersion)
-//    {
-//        if (logger == null)
-//        {
-//            throw new IllegalArgumentException("logger");
-//        }
-//        if (jsonSerializer == null)
-//        {
-//            throw new IllegalArgumentException("jsonSerializer");
-//        }
-//        if (tangible.DotNetToJavaStringHelper.isNullOrEmpty(serverAddress))
-//        {
-//            throw new IllegalArgumentException("serverAddress");
-//        }
-//        
-//        setJsonSerializer(jsonSerializer);
-//        Logger = logger;
-//        
-//        setClientName(clientName);
-//        this.device = device;
-//        setApplicationVersion(applicationVersion);
-//        setServerAddress(serverAddress);
-//    }
-//    
-//    protected BaseApiClient(ILogger logger, IJsonSerializer jsonSerializer, String serverAddress, String accessToken)
-//    {
-//        if (logger == null)
-//        {
-//            throw new IllegalArgumentException("logger");
-//        }
-//        if (jsonSerializer == null)
-//        {
-//            throw new IllegalArgumentException("jsonSerializer");
-//        }
-//        if (tangible.DotNetToJavaStringHelper.isNullOrEmpty(serverAddress))
-//        {
-//            throw new IllegalArgumentException("serverAddress");
-//        }
-//        
-//        setJsonSerializer(jsonSerializer);
-//        Logger = logger;
-//        
-//        setAccessToken(accessToken);
-//        setServerAddress(serverAddress);
-//    }
-//    
-//    /**
-//    Gets the name of the server host.
-//    
-//    <value>The name of the server host.</value>
-//    */
-//    private String privateServerAddress;
-//    public final String getServerAddress()
-//    {
-//        return privateServerAddress;
-//    }
-//    protected void setServerAddress(String value)
-//    {
-//        privateServerAddress = value;
-//    }
-//    
+    private var logger: ILogger
+    private var jsonSerializer: IJsonSerializer
+    private var clientName: String?
+    private var device: IDevice?
+    private var privateApplicationVersion: String?
+    private var privateServerAddress: String
+    private var privateAccessToken: String?
+    private var privateImageQuality: Int?
+    private var privateCurrentUserId: String?
+    private let httpHeaders = HttpHeaders()
+    
+    internal init(logger: ILogger, jsonSerializer: IJsonSerializer, serverAddress: String, clientName: String,
+        device: IDevice, applicationVersion: String) {
+        self.logger = logger
+        self.jsonSerializer = jsonSerializer
+        self.clientName = clientName
+        self.device = device
+        self.privateApplicationVersion = applicationVersion
+        self.privateServerAddress = serverAddress
+    }
+    
+    internal init(logger: ILogger, jsonSerializer: IJsonSerializer, serverAddress: String, accessToken: String) {
+        self.logger = logger
+        self.jsonSerializer = jsonSerializer
+        self.privateServerAddress = serverAddress
+        self.privateAccessToken = accessToken
+    }
+    
+    public final func setJsonSerializer(value: IJsonSerializer) {
+        self.jsonSerializer = value
+    }
+    
+    public final func getJsonSerializer() -> IJsonSerializer? {
+        return jsonSerializer
+    }
+    
+    public final func setClientName(value: String) {
+        self.clientName = value
+    }
+    
+    public final func getClientName() -> String? {
+        return clientName
+    }
+    
+    public final func setApplicationVersion(value: String) {
+        self.privateApplicationVersion = value
+    }
+    
+    public final func getApplicationVersion() -> String? {
+        return privateApplicationVersion
+    }
+    
+    public final func setServerAddress(value: String) {
+        self.privateServerAddress = value
+    }
+    
+    public final func getServerAddress() -> String {
+        return privateServerAddress
+    }
+    
+    public final func setAccessToken(value: String?) {
+        self.privateAccessToken = value
+    }
+    
+    public final func getAccessToken() -> String? {
+        return privateAccessToken
+    }
+    
+    public final func getDevice() -> IDevice? {
+        return device
+    }
+    
+    public final func getDeviceName() -> String? {
+        return getDevice()?.deviceName
+    }
+    
+    public final func getDeviceId() -> String? {
+        return getDevice()?.deviceId
+    }
+    
+    public final func setImageQuality(value: Int) {
+        self.privateImageQuality = value
+    }
+    
+    public final func getImageQuality() -> Int? {
+        return privateImageQuality
+    }
+    
+    public final func setCurrentUserId(value: String?) {
+        self.privateCurrentUserId = value
+    }
+    
+    public final func getCurrentUserId() -> String? {
+        return privateCurrentUserId
+    }
+    
+    public final func getApiUrl() -> String {
+        return getServerAddress() + "/mediabrowser"
+    }
+    
+    internal final func getAuthorizationScheme() -> String {
+        return "MediaBrowser"
+    }
+    
+    public final func changeServerLocation(address: String) {
+        setServerAddress(address)
+        
+        setAuthenticationInfo(nil, userId: nil)
+    }
+    
+    public func setAuthenticationInfo(accessToken: String?, userId: String?) {
+        setCurrentUserId(userId)
+        setAccessToken(accessToken)
+        resetHttpHeaders()
+    }
+    
+    public func setAuthenticationInfo(accessToken: String?) {
+        setCurrentUserId(nil)
+        setAccessToken(accessToken)
+        resetHttpHeaders()
+    }
+    
+    public func clearAuthenticationInfo() {
+        setCurrentUserId(nil)
+        setAccessToken(nil)
+        resetHttpHeaders()
+    }
+    
+    internal func resetHttpHeaders() {
+        httpHeaders.setAccessToken(getAccessToken())
+        
+        if let authValue = getAuthorizationParameter() {
+            setAuthorizationHttpRequestHeader(getAuthorizationScheme(), parameter: authValue)
+        } else {
+            clearHttpRequestHeader("Authorization")
+            setAuthorizationHttpRequestHeader(nil, parameter: nil)
+        }
+    }
+    
+    internal func setAuthorizationHttpRequestHeader(scheme: String?, parameter: String?) {
+        httpHeaders.setAuthorizationScheme(scheme)
+        httpHeaders.setAuthorizationParameter(parameter)
+    }
+    
+    private func clearHttpRequestHeader(name: String) {
+        httpHeaders.remove(name)
+    }
+    
+    internal func getAuthorizationParameter() -> String? {
+        if let clientName = getClientName(),
+            let deviceId = getDeviceId(),
+            let deviceName = getDeviceName() {
+                var header = "Client=\"\(clientName)\", DeviceId=\"\(deviceId)\", Device=\"\(deviceName)\", Version=\"\(getApplicationVersion())\""
+                
+                if let currentUserId = getCurrentUserId() {
+                    header += ", UserId=\"\(currentUserId)\""
+                }
+                
+                return header
+        } else {
+            return nil
+        }
+    }
+    
+
+//
 //    /**
 //    Changes the server location.
 //    
@@ -148,91 +223,10 @@ public class BaseApiClient// implements IDisposable
 //        OnServerLocationChanged();
 //    }
 //    
-//    private IDevice device;
-//    public final IDevice getDevice()
-//    {
-//        return device;
-//    }
+
+//
 //    
-//    /**
-//    Gets or sets the type of the client.
-//    
-//    <value>The type of the client.</value>
-//    */
-//    private String privateClientName;
-//    public final String getClientName()
-//    {
-//        return privateClientName;
-//    }
-//    public final void setClientName(String value)
-//    {
-//        privateClientName = value;
-//    }
-//    
-//    public final String getDeviceName()
-//    {
-//        return getDevice().getDeviceName();
-//    }
-//    
-//    /**
-//    Gets or sets the application version.
-//    
-//    <value>The application version.</value>
-//    */
-//    private String privateApplicationVersion;
-//    public final String getApplicationVersion()
-//    {
-//        return privateApplicationVersion;
-//    }
-//    public final void setApplicationVersion(String value)
-//    {
-//        privateApplicationVersion = value;
-//    }
-//    
-//    public final String getDeviceId()
-//    {
-//        return getDevice().getDeviceId();
-//    }
-//    
-//    /**
-//    Gets or sets the access token.
-//    
-//    <value>The access token.</value>
-//    */
-//    private String privateAccessToken;
-//    public final String getAccessToken()
-//    {
-//        return privateAccessToken;
-//    }
-//    private void setAccessToken(String value)
-//    {
-//        privateAccessToken = value;
-//    }
-//    
-//    /**
-//    Gets or sets the current user id.
-//    
-//    <value>The current user id.</value>
-//    */
-//    private String privateCurrentUserId;
-//    public final String getCurrentUserId()
-//    {
-//        return privateCurrentUserId;
-//    }
-//    private void setCurrentUserId(String value)
-//    {
-//        privateCurrentUserId = value;
-//    }
-//    
-//    /**
-//    Gets the current api url based on hostname and port.
-//    
-//    <value>The API URL.</value>
-//    */
-//    public final String getApiUrl()
-//    {
-//        return getServerAddress() + "/mediabrowser";
-//    }
+
 //    
 //    /**
 //    Gets the name of the slug.
@@ -244,39 +238,8 @@ public class BaseApiClient// implements IDisposable
 //    {
 //        return ApiHelpers.GetSlugName(name);
 //    }
-//    
-//    /**
-//    Gets the name of the authorization scheme.
-//    
-//    <value>The name of the authorization scheme.</value>
-//    */
-//    protected final String getAuthorizationScheme()
-//        {
-//            return "MediaBrowser";
-//    }
-//    
-//    /**
-//    Gets the authorization header parameter.
-//    
-//    <value>The authorization header parameter.</value>
-//    */
-//    protected final String getAuthorizationParameter()
-//        {
-//            if (tangible.DotNetToJavaStringHelper.isNullOrEmpty(getClientName()) && tangible.DotNetToJavaStringHelper.isNullOrEmpty(getDeviceId()) && tangible.DotNetToJavaStringHelper.isNullOrEmpty(getDeviceName()))
-//            {
-//                return "";
-//            }
-//            
-//            //C# TO JAVA CONVERTER TODO TASK: There is no equivalent to implicit typing in Java:
-//            String header = String.format("Client=\"%1$s\", DeviceId=\"%2$s\", Device=\"%3$s\", Version=\"%4$s\"", getClientName(), getDeviceId(), getDeviceName(), getApplicationVersion());
-//            
-//            if (!tangible.DotNetToJavaStringHelper.isNullOrEmpty(getCurrentUserId()))
-//            {
-//                header += String.format(", UserId=\"%1$s\"", getCurrentUserId());
-//            }
-//            
-//            return header;
-//    }
+//
+//
 //    
 //    /**
 //    Gets the API URL.
@@ -299,46 +262,9 @@ public class BaseApiClient// implements IDisposable
 //        ResetHttpHeaders();
 //    }
 //    
-//    public void ClearAuthenticationInfo()
-//    {
-//        setCurrentUserId(null);
-//        setAccessToken(null);
-//        ResetHttpHeaders();
-//    }
-//    
-//    public void SetAuthenticationInfo(String accessToken)
-//    {
-//        setCurrentUserId(null);
-//        setAccessToken(accessToken);
-//        ResetHttpHeaders();
-//    }
-//    
-//    protected void ResetHttpHeaders()
-//        {
-//            HttpHeaders.SetAccessToken(getAccessToken());
-//            
-//            String authValue = getAuthorizationParameter();
-//            
-//            if (tangible.DotNetToJavaStringHelper.isNullOrEmpty(authValue))
-//            {
-//                ClearHttpRequestHeader("Authorization");
-//                SetAuthorizationHttpRequestHeader(null, null);
-//            }
-//            else
-//            {
-//                SetAuthorizationHttpRequestHeader(getAuthorizationScheme(), authValue);
-//            }
-//    }
-//    
-//    protected void SetAuthorizationHttpRequestHeader(String scheme, String parameter){
-//        HttpHeaders.setAuthorizationScheme(scheme);
-//        HttpHeaders.setAuthorizationParameter(parameter);
-//    }
-//    
-//    private void ClearHttpRequestHeader(String name)
-//    {
-//        HttpHeaders.remove(name);
-//    }
+
+//
+//
 //    
 //    /**
 //    Gets the API URL.
