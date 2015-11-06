@@ -24,7 +24,7 @@
 		04AFCAEC1BD347EE00C95C88 /* IHasServerId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFCAEB1BD347EE00C95C88 /* IHasServerId.swift */; };
 		04AFCAEE1BD3489C00C95C88 /* ServerInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFCAED1BD3489C00C95C88 /* ServerInfo.swift */; };
 		04AFCAF01BD3490A00C95C88 /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFCAEF1BD3490A00C95C88 /* ApiClient.swift */; };
-		04AFCAF31BD3497000C95C88 /* DeviceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFCAF21BD3497000C95C88 /* DeviceProtocol.swift */; };
+		04AFCAF31BD3497000C95C88 /* IDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFCAF21BD3497000C95C88 /* IDevice.swift */; };
 		04AFCAF61BD34A0A00C95C88 /* LocalFileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFCAF51BD34A0A00C95C88 /* LocalFileInfo.swift */; };
 		04AFCAF91BD34B4800C95C88 /* ProgressProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFCAF81BD34B4800C95C88 /* ProgressProtocol.swift */; };
 		04AFCAFB1BD34B9900C95C88 /* CancellationToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFCAFA1BD34B9900C95C88 /* CancellationToken.swift */; };
@@ -108,7 +108,7 @@
 		04AFCAEB1BD347EE00C95C88 /* IHasServerId.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IHasServerId.swift; path = dto/IHasServerId.swift; sourceTree = "<group>"; };
 		04AFCAED1BD3489C00C95C88 /* ServerInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerInfo.swift; sourceTree = "<group>"; };
 		04AFCAEF1BD3490A00C95C88 /* ApiClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
-		04AFCAF21BD3497000C95C88 /* DeviceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DeviceProtocol.swift; path = device/DeviceProtocol.swift; sourceTree = "<group>"; };
+		04AFCAF21BD3497000C95C88 /* IDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IDevice.swift; path = device/IDevice.swift; sourceTree = "<group>"; };
 		04AFCAF51BD34A0A00C95C88 /* LocalFileInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocalFileInfo.swift; path = devices/LocalFileInfo.swift; sourceTree = "<group>"; };
 		04AFCAF81BD34B4800C95C88 /* ProgressProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProgressProtocol.swift; path = Emby.ApiClient/tasks/ProgressProtocol.swift; sourceTree = SOURCE_ROOT; };
 		04AFCAFA1BD34B9900C95C88 /* CancellationToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CancellationToken.swift; path = Emby.ApiClient/tasks/CancellationToken.swift; sourceTree = SOURCE_ROOT; };
@@ -256,7 +256,7 @@
 		04AFCAF11BD3496100C95C88 /* device */ = {
 			isa = PBXGroup;
 			children = (
-				04AFCAF21BD3497000C95C88 /* DeviceProtocol.swift */,
+				04AFCAF21BD3497000C95C88 /* IDevice.swift */,
 			);
 			name = device;
 			sourceTree = "<group>";
@@ -694,7 +694,7 @@
 				04AFCAE21BD3436600C95C88 /* ConnectionManagerProtocol.swift in Sources */,
 				88CF7E5D1BC5BFC000A33B72 /* VolleyStringRequest.swift in Sources */,
 				88CF7E621BC5C72700A33B72 /* VolleyErrorListener.swift in Sources */,
-				04AFCAF31BD3497000C95C88 /* DeviceProtocol.swift in Sources */,
+				04AFCAF31BD3497000C95C88 /* IDevice.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

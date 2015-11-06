@@ -27,7 +27,7 @@ public class HttpHeaders //extends java.util.HashMap<String,String>
     {
         return privateAuthorizationScheme;
     }
-    public final func setAuthorizationScheme(value: String)
+    public final func setAuthorizationScheme(value: String?)
     {
         privateAuthorizationScheme = value;
     }
@@ -40,24 +40,20 @@ public class HttpHeaders //extends java.util.HashMap<String,String>
     {
         return privateAuthorizationParameter;
     }
-    public final func setAuthorizationParameter(value: String)
+    public final func setAuthorizationParameter(value: String?)
     {
         privateAuthorizationParameter = value;
     }
 
-//    /**
-//    Sets the access token.
-//    @param token The token.
-//    */
-//    public final void SetAccessToken(String token)
-//    {
-//        if (tangible.DotNetToJavaStringHelper.isNullOrEmpty(token))
-//        {
-//            this.remove("X-MediaBrowser-Token");
-//        }
-//        else
-//        {
-//            this.put("X-MediaBrowser-Token", token);
-//        }
-//    }
+    public final func setAccessToken(token: String?) {
+        if let accessToken = token {
+            self.put("X-MediaBrowser-Token", value: accessToken)
+        } else {
+            remove("X-MediaBrowser-Token")
+        }
+    }
+
+    public final func remove(name: String) {
+        self.data[name] = nil
+    }
 }
