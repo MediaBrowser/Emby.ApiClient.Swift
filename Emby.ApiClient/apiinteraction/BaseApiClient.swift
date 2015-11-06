@@ -192,24 +192,19 @@ public class BaseApiClient// implements IDisposable
     }
     
     internal func getAuthorizationParameter() -> String? {
-        if getClientName() == nil &&
-            getDeviceId() == nil &&
-            getDeviceName() == nil {
-                return nil
-        }
-        
-        var header = "";
         if let clientName = getClientName(),
             let deviceId = getDeviceId(),
             let deviceName = getDeviceName() {
-                header = "Client=\"\(clientName)\", DeviceId=\"\(deviceId)\", Device=\"\(deviceName)\", Version=\"\(getApplicationVersion())\""
+                var header = "Client=\"\(clientName)\", DeviceId=\"\(deviceId)\", Device=\"\(deviceName)\", Version=\"\(getApplicationVersion())\""
+                
+                if let currentUserId = getCurrentUserId() {
+                    header += ", UserId=\"\(currentUserId)\""
+                }
+                
+                return header
+        } else {
+            return nil
         }
-        
-        if let currentUserId = getCurrentUserId() {
-            header += ", UserId=\"\(currentUserId)\""
-        }
-        
-        return header
     }
     
 
