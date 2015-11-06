@@ -15,7 +15,7 @@ import Foundation
 //import mediabrowser.model.logging.ILogger;
 //import mediabrowser.model.net.HttpException;
 
-public class VolleyErrorListener<T:JSONSerializable>: Response_ErrorListener {
+public class VolleyErrorListener<T>: Response_ErrorListener {
     
     private let outerResponse: Emby_Response<T>
     private let logger: ILogger

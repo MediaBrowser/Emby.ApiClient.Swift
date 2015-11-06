@@ -14,7 +14,7 @@ import Foundation
 //import mediabrowser.model.logging.ILogger;
 
 //public class VolleyResponseListener<T> implements Response.Listener<T> {
-public class VolleyResponseListener<T:JSONSerializable>: Response_Listener<T> {
+public class VolleyResponseListener<T>: Response_Listener<T> {
     
     private let outerResponse: Emby_Response<T>
     private let logger: ILogger

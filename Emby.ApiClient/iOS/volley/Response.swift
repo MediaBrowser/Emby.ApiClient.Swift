@@ -17,7 +17,7 @@ import Foundation
 
 //package mediabrowser.apiinteraction;
 
-public class Emby_Response<T: JSONSerializable>: Response_Listener<T> {
+public class Emby_Response<T>: Response_Listener<T> {
     
     public var completion: ((object: T?) -> Void)?
     public var completionError: ((error: NSError?) -> Void)?
