@@ -71,33 +71,17 @@ public class QueryStringDictionary //extends java.util.HashMap<String, String>
 //        self.put(name, (new Double(value)).toString());
 //    }
 //    
-//    /**
-//    Adds if not null or empty.
-//    
-//    @param name The name.
-//    @param value The value.
-//    */
-//    public final void AddIfNotNullOrEmpty(String name, String value)
-//    {
-//        if (!tangible.DotNetToJavaStringHelper.isNullOrEmpty(value))
-//        {
-//            self.put(name, value);
-//        }
-//    }
-//    
-//    /**
-//    Adds if not null.
-//    
-//    @param name The name.
-//    @param value The value.
-//    */
-//    public final void AddIfNotNull(String name, Integer value)
-//    {
-//        if (value != null)
-//        {
-//            self.Add(name, value);
-//        }
-//    }
+    public final func addIfNotNil(name: String, value: String?) {
+        if let val = value {
+            data[name] = val
+        }
+    }
+
+    public final func addIfNotNil(name: String, value: Int?) {
+        if let val = value {
+            data[name] = String(val)
+        }
+    }
 //    
 //    /**
 //    Adds if not null.
@@ -360,24 +344,11 @@ public class QueryStringDictionary //extends java.util.HashMap<String, String>
         return value.stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet()) ?? ""
     }
     
-//    /**
-//    Gets the URL.
-//    
-//    @param prefix The prefix.
-//    @return System.String.
-//    */
-//    public final String GetUrl(String prefix)
-//    {
-//        String query = GetQueryString();
-//        
-//        if (tangible.DotNetToJavaStringHelper.isNullOrEmpty(query))
-//        {
-//            return prefix;
-//        }
-//        
-//        return prefix + "?" + query;
-//    }
-//    
+    public final func getUrl(prefix: String) -> String {
+        return prefix + "?" + GetQueryString()
+    }
+
+//
 //    public final <T extends Enum<T>> void Add(String name, T value)
 //    {
 //        self.Add(name, value.toString());

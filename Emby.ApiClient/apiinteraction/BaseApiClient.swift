@@ -207,7 +207,9 @@ public class BaseApiClient// implements IDisposable
         }
     }
     
-
+    internal final func getSlugName(name: String?) -> String {
+        return ApiHelpers.getSlugName(name)
+    }
 //
 //    /**
 //    Changes the server location.
@@ -223,93 +225,96 @@ public class BaseApiClient// implements IDisposable
 //        OnServerLocationChanged();
 //    }
 //    
+   
+    public final func getApiUrl(handler: String?) -> String {
+        return getApiUrl(handler, queryString: QueryStringDictionary())
+    }
+    
+    internal final func getApiUrl(handler: String?, queryString: QueryStringDictionary?) -> String {
+        return queryString!.getUrl(getApiUrl() + "/" + handler!)
+    }
 
-//
-//    
+    public final func getSubtitleUrl(options: SubtitleDownloadOptions) -> String {
+        let partialUrl: String = "Videos/\(options.itemId)/\(options.mediaSourceId)/Subtitles/\(options.streamIndex)Stream.\(options.format)"
+     
+        return getApiUrl(partialUrl)
+    }
 
-//    
-//    /**
-//    Gets the name of the slug.
-//    
-//    @param name The name.
-//    @return System.String.
-//    */
-//    protected final String GetSlugName(String name)
-//    {
-//        return ApiHelpers.GetSlugName(name);
-//    }
-//
-//
-//    
-//    /**
-//    Gets the API URL.
-//    
-//    @param handler The handler.
-//    @return System.String.
-//    @exception System.ArgumentNullException handler
-//    */
-//    public final String GetApiUrl(String handler)
-//    {
-//        return GetApiUrl(handler, new QueryStringDictionary());
-//    }
-//    
-//    protected mediabrowser.apiinteraction.http.HttpHeaders HttpHeaders = new HttpHeaders();
-//    
-//    public void SetAuthenticationInfo(String accessToken, String userId)
-//    {
-//        setCurrentUserId(userId);
-//        setAccessToken(accessToken);
-//        ResetHttpHeaders();
-//    }
-//    
-
-//
-//
-//    
-//    /**
-//    Gets the API URL.
-//    
-//    @param handler The handler.
-//    @param queryString The query string.
-//    @return System.String.
-//    @exception System.ArgumentNullException handler
-//    */
-//    protected final String GetApiUrl(String handler, QueryStringDictionary queryString)
-//    {
-//        if (tangible.DotNetToJavaStringHelper.isNullOrEmpty(handler))
-//        {
-//            throw new IllegalArgumentException("handler");
-//        }
-//        
-//        if (queryString == null)
-//        {
-//            throw new IllegalArgumentException("queryString");
-//        }
-//        
-//        return queryString.GetUrl(getApiUrl() + "/" + handler);
-//    }
-//    
-//    public final String GetSubtitleUrl(SubtitleDownloadOptions options)
-//    {
-//        if (options == null)
-//        {
-//            throw new IllegalArgumentException("options");
-//        }
-//        if (tangible.DotNetToJavaStringHelper.isNullOrEmpty(options.getMediaSourceId()))
-//        {
-//            throw new IllegalArgumentException("options");
-//        }
-//        if (tangible.DotNetToJavaStringHelper.isNullOrEmpty(options.getItemId()))
-//        {
-//            throw new IllegalArgumentException("options");
-//        }
-//        if (tangible.DotNetToJavaStringHelper.isNullOrEmpty(options.getFormat()))
-//        {
-//            throw new IllegalArgumentException("options");
-//        }
-//        
-//        return GetApiUrl("Videos/" + options.getItemId() + "/" + options.getMediaSourceId() + "/Subtitles/" + options.getStreamIndex() + "/Stream." + options.getFormat());
-//    }
+    internal final func getItemListUrl(query: ItemQuery?) -> String {
+        let unwrappedQuery = query!
+        let dict = QueryStringDictionary()
+        
+        //dict.addIfNotNil("ParentId", value: unwrappedQuery.parentId)
+        //dict.addIfNotNil("ParentId", value: unwrappedQuery.parentId)
+        //dict.addIfNotNil("Limit", value: unwrappedQuery.limit)
+        //dict.addIfNotNil("SortBy", unwrappedQuery.sortBy)
+        //
+        //        dict.addIfNotNil("sortOrder", unwrappedQuery.SortOrder)
+        //
+        //        dict.addIfNotNil("SeriesStatuses", unwrappedQuery.SeriesStatuses)
+        //        dict.addIfNotNil("Fields", unwrappedQuery.Fields)
+        //        dict.addIfNotNil("Filters", unwrappedQuery.Filters)
+        //        dict.addIfNotNil("ImageTypes", unwrappedQuery.ImageTypes)
+        //
+        //        dict.addIfNotNil("Is3D", unwrappedQuery.Is3D)
+        //
+        //        dict.addIfNotNil("AirDays", unwrappedQuery.AirDays)
+        //        dict.addIfNotNil("VideoTypes", unwrappedQuery.VideoTypes)
+        //
+        //        dict.addIfNotNil("MinOfficialRating", unwrappedQuery.MinOfficialRating)
+        //        dict.addIfNotNil("MaxOfficialRating", unwrappedQuery.MaxOfficialRating)
+        //
+        //        dict.Add("recursive", unwrappedQuery.Recursive)
+        //
+        //        dict.addIfNotNil("MinIndexNumber", unwrappedQuery.MinIndexNumber)
+        //
+        //        dict.addIfNotNil("MediaTypes", unwrappedQuery.MediaTypes)
+        //        dict.addIfNotNil("Genres", unwrappedQuery.Genres(), "|")
+        //        dict.addIfNotNil("Ids", unwrappedQuery.Ids)
+        //        dict.addIfNotNil("StudioIds", unwrappedQuery.StudioIds(), "|")
+        //        dict.addIfNotNil("ExcludeItemTypes", unwrappedQuery.ExcludeItemTypes)
+        //        dict.addIfNotNil("IncludeItemTypes", unwrappedQuery.IncludeItemTypes)
+        //        dict.addIfNotNil("ArtistIds", unwrappedQuery.ArtistIds)
+        //
+        //        dict.addIfNotNil("IsPlayed", unwrappedQuery.IsPlayed)
+        //        dict.addIfNotNil("IsInBoxSet", unwrappedQuery.IsInBoxSet)
+        //
+        //        dict.addIfNotNil("PersonIds", unwrappedQuery.PersonIds)
+        //        dict.addIfNotNil("PersonTypes", unwrappedQuery.PersonTypes)
+        //
+        //        dict.addIfNotNil("Years", unwrappedQuery.Years)
+        //
+        //        dict.addIfNotNil("ParentIndexNumber", unwrappedQuery.ParentIndexNumber)
+        //        dict.addIfNotNil("IsHD", unwrappedQuery.IsHD)
+        //        dict.addIfNotNil("HasParentalRating", unwrappedQuery.HasParentalRating)
+        //
+        //        dict.addIfNotNil("SearchTerm", unwrappedQuery.SearchTerm)
+        //
+        //        dict.addIfNotNil("MinCriticRating", unwrappedQuery.MinCriticRating)
+        //        dict.addIfNotNil("MinCommunityRating", unwrappedQuery.MinCommunityRating)
+        //
+        //        dict.addIfNotNil("MinPlayers", unwrappedQuery.MinPlayers)
+        //        dict.addIfNotNil("MaxPlayers", unwrappedQuery.MaxPlayers)
+        //        dict.addIfNotNil("NameStartsWithOrGreater", unwrappedQuery.NameStartsWithOrGreater)
+        //        dict.addIfNotNil("NameStartsWith", unwrappedQuery.NameStartsWith)
+        //        dict.addIfNotNil("NameLessThan", unwrappedQuery.NameLessThan)
+        //        dict.addIfNotNil("AlbumArtistStartsWithOrGreater", unwrappedQuery.AlbumArtistStartsWithOrGreater)
+        //
+        //        dict.addIfNotNil("LocationTypes", unwrappedQuery.LocationTypes)
+        //        dict.addIfNotNil("ExcludeLocationTypes", unwrappedQuery.ExcludeLocationTypes)
+        //
+        //        dict.addIfNotNil("IsMissing", unwrappedQuery.IsMissing)
+        //        dict.addIfNotNil("IsUnaired", unwrappedQuery.IsUnaired)
+        //        dict.addIfNotNil("IsVirtualUnaired", unwrappedQuery.IsVirtualUnaired)
+        //        
+        //        dict.addIfNotNil("EnableImages", unwrappedQuery.EnableImages)
+        //        dict.addIfNotNil("ImageTypeLimit", unwrappedQuery.ImageTypeLimit)
+        //        dict.addIfNotNil("EnableImageTypes", unwrappedQuery.EnableImageTypes)
+        //        
+        //        dict.AddIfNotNull("AiredDuringSeason", unwrappedQuery.AiredDuringSeason)
+        
+        return getApiUrl("Users/\(unwrappedQuery.userId)/Items", queryString: dict)
+    }
 //    
 //    /**
 //    Creates a url to return a list of items
@@ -327,7 +332,7 @@ public class BaseApiClient// implements IDisposable
 //        
 //        QueryStringDictionary dict = new QueryStringDictionary ();
 //        
-//        dict.AddIfNotNullOrEmpty("ParentId", query.getParentId());
+//        dict.AddIfNotNullOrEmpty("ParentId", query.getParentId())
 //        
 //        dict.AddIfNotNull("StartIndex", query.getStartIndex());
 //        
