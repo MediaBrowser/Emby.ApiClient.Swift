@@ -32,6 +32,16 @@
 		04B8AB311BDB293200ED19CA /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B8AB301BDB293200ED19CA /* ConnectionManager.swift */; };
 		04B8AB331BDB2D1700ED19CA /* CredentialProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B8AB321BDB2D1700ED19CA /* CredentialProviderProtocol.swift */; };
 		04B8AB351BDB2E8D00ED19CA /* ServerCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B8AB341BDB2E8D00ED19CA /* ServerCredentials.swift */; };
+		04B8AB371BEDA05900ED19CA /* ApiHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B8AB361BEDA05900ED19CA /* ApiHelpers.swift */; };
+		04B8AB391BEDA45000ED19CA /* SubtitleDownloadOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B8AB381BEDA45000ED19CA /* SubtitleDownloadOptions.swift */; };
+		04B8AB3C1BEDA79A00ED19CA /* ItemQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B8AB3B1BEDA79A00ED19CA /* ItemQuery.swift */; };
+		04B8AB3F1BEDAC8200ED19CA /* SortOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B8AB3E1BEDAC8200ED19CA /* SortOrder.swift */; };
+		04B8AB411BEDACCB00ED19CA /* ItemFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B8AB401BEDACCB00ED19CA /* ItemFilter.swift */; };
+		04B8AB431BEDADBA00ED19CA /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B8AB421BEDADBA00ED19CA /* File.swift */; };
+		04B8AB451BEDAF2D00ED19CA /* VideoType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B8AB441BEDAF2D00ED19CA /* VideoType.swift */; };
+		04B8AB471BEDAF8100ED19CA /* ImageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B8AB461BEDAF8100ED19CA /* ImageType.swift */; };
+		04B8AB491BEDAFE300ED19CA /* SeriesStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B8AB481BEDAFE300ED19CA /* SeriesStatus.swift */; };
+		04B8AB4B1BEDB00D00ED19CA /* LocationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B8AB4A1BEDB00D00ED19CA /* LocationType.swift */; };
 		5DD39A821BE9E6AD00B2D09A /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DD39A811BE9E6AD00B2D09A /* Alamofire.framework */; };
 		8838C55B1BC514B500587F8E /* Emby.ApiClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 8838C55A1BC514B500587F8E /* Emby.ApiClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		884EBEDD1BCD912B0032E7F3 /* EmptyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884EBEDC1BCD912B0032E7F3 /* EmptyResponse.swift */; };
@@ -116,6 +126,16 @@
 		04B8AB301BDB293200ED19CA /* ConnectionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConnectionManager.swift; path = connectionmanager/ConnectionManager.swift; sourceTree = "<group>"; };
 		04B8AB321BDB2D1700ED19CA /* CredentialProviderProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CredentialProviderProtocol.swift; sourceTree = "<group>"; };
 		04B8AB341BDB2E8D00ED19CA /* ServerCredentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerCredentials.swift; sourceTree = "<group>"; };
+		04B8AB361BEDA05900ED19CA /* ApiHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiHelpers.swift; sourceTree = "<group>"; };
+		04B8AB381BEDA45000ED19CA /* SubtitleDownloadOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SubtitleDownloadOptions.swift; path = dto/SubtitleDownloadOptions.swift; sourceTree = "<group>"; };
+		04B8AB3B1BEDA79A00ED19CA /* ItemQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ItemQuery.swift; path = querying/ItemQuery.swift; sourceTree = "<group>"; };
+		04B8AB3E1BEDAC8200ED19CA /* SortOrder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SortOrder.swift; path = entities/SortOrder.swift; sourceTree = "<group>"; };
+		04B8AB401BEDACCB00ED19CA /* ItemFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ItemFilter.swift; path = querying/ItemFilter.swift; sourceTree = "<group>"; };
+		04B8AB421BEDADBA00ED19CA /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = File.swift; path = querying/File.swift; sourceTree = "<group>"; };
+		04B8AB441BEDAF2D00ED19CA /* VideoType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoType.swift; path = entities/VideoType.swift; sourceTree = "<group>"; };
+		04B8AB461BEDAF8100ED19CA /* ImageType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageType.swift; path = entities/ImageType.swift; sourceTree = "<group>"; };
+		04B8AB481BEDAFE300ED19CA /* SeriesStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SeriesStatus.swift; path = entities/SeriesStatus.swift; sourceTree = "<group>"; };
+		04B8AB4A1BEDB00D00ED19CA /* LocationType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationType.swift; path = entities/LocationType.swift; sourceTree = "<group>"; };
 		5DD39A811BE9E6AD00B2D09A /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		8838C5571BC514B500587F8E /* Emby_ApiClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Emby_ApiClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8838C55A1BC514B500587F8E /* Emby.ApiClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Emby.ApiClient.h; sourceTree = "<group>"; };
@@ -224,6 +244,7 @@
 				0416439E1BD4204300873FAB /* WakeOnLanInfo.swift */,
 				041643A21BD4233800873FAB /* ConnectionMode.swift */,
 				04B8AB341BDB2E8D00ED19CA /* ServerCredentials.swift */,
+				04B8AB361BEDA05900ED19CA /* ApiHelpers.swift */,
 			);
 			name = apiclient;
 			path = Emby.ApiClient/model/apiclient;
@@ -249,6 +270,7 @@
 			isa = PBXGroup;
 			children = (
 				04AFCAEB1BD347EE00C95C88 /* IHasServerId.swift */,
+				04B8AB381BEDA45000ED19CA /* SubtitleDownloadOptions.swift */,
 			);
 			name = dto;
 			sourceTree = "<group>";
@@ -284,6 +306,28 @@
 				04B8AB301BDB293200ED19CA /* ConnectionManager.swift */,
 			);
 			name = connectionmanager;
+			sourceTree = "<group>";
+		};
+		04B8AB3A1BEDA78B00ED19CA /* querying */ = {
+			isa = PBXGroup;
+			children = (
+				04B8AB3B1BEDA79A00ED19CA /* ItemQuery.swift */,
+				04B8AB401BEDACCB00ED19CA /* ItemFilter.swift */,
+				04B8AB421BEDADBA00ED19CA /* File.swift */,
+			);
+			name = querying;
+			sourceTree = "<group>";
+		};
+		04B8AB3D1BEDAC7400ED19CA /* entities */ = {
+			isa = PBXGroup;
+			children = (
+				04B8AB3E1BEDAC8200ED19CA /* SortOrder.swift */,
+				04B8AB441BEDAF2D00ED19CA /* VideoType.swift */,
+				04B8AB461BEDAF8100ED19CA /* ImageType.swift */,
+				04B8AB481BEDAFE300ED19CA /* SeriesStatus.swift */,
+				04B8AB4A1BEDB00D00ED19CA /* LocationType.swift */,
+			);
+			name = entities;
 			sourceTree = "<group>";
 		};
 		8838C54D1BC514B500587F8E = {
@@ -356,6 +400,8 @@
 		8838C5681BC51FD900587F8E /* model */ = {
 			isa = PBXGroup;
 			children = (
+				04B8AB3D1BEDAC7400ED19CA /* entities */,
+				04B8AB3A1BEDA78B00ED19CA /* querying */,
 				041643AB1BD4959700873FAB /* updates */,
 				041643A41BD424E500873FAB /* system */,
 				04AFCAF41BD349FA00C95C88 /* devices */,
@@ -644,6 +690,7 @@
 				04AFCAE61BD3453400C95C88 /* ClientCapabilities.swift in Sources */,
 				04AFCAE91BD346F200C95C88 /* DeviceProfile.swift in Sources */,
 				88CF7E581BC5BF0300A33B72 /* ILogger.swift in Sources */,
+				04B8AB491BEDAFE300ED19CA /* SeriesStatus.swift in Sources */,
 				88CF7E3C1BC5BB5600A33B72 /* IJsonSerializer.swift in Sources */,
 				041643AD1BD495A700873FAB /* InstallationInfo.swift in Sources */,
 				04AFCAEE1BD3489C00C95C88 /* ServerInfo.swift in Sources */,
@@ -656,6 +703,8 @@
 				888EFC651BC859E100546DB3 /* RegistrationInfo.swift in Sources */,
 				04B8AB311BDB293200ED19CA /* ConnectionManager.swift in Sources */,
 				88CF7E5B1BC5BFA300A33B72 /* ConnectAuthorizationRequest.swift in Sources */,
+				04B8AB371BEDA05900ED19CA /* ApiHelpers.swift in Sources */,
+				04B8AB3F1BEDAC8200ED19CA /* SortOrder.swift in Sources */,
 				88CF7E3E1BC5BC8800A33B72 /* IAsyncHttpClient.swift in Sources */,
 				884EBEDD1BCD912B0032E7F3 /* EmptyResponse.swift in Sources */,
 				888EFC7E1BCC4DB700546DB3 /* Logger.swift in Sources */,
@@ -677,18 +726,25 @@
 				88CF7E591BC5BF8C00A33B72 /* QueryStringDictionary.swift in Sources */,
 				88CF7E691BC5CBDB00A33B72 /* Request.swift in Sources */,
 				889288D51BE908A500DAD65F /* BaseApiClient.swift in Sources */,
+				04B8AB4B1BEDB00D00ED19CA /* LocationType.swift in Sources */,
+				04B8AB471BEDAF8100ED19CA /* ImageType.swift in Sources */,
 				04AFCADC1BD33FEA00C95C88 /* ServerDiscoveryInfo.swift in Sources */,
 				88CF7E371BC5B8DF00A33B72 /* Response.swift in Sources */,
 				88CF7E741BC6E5B500A33B72 /* ConnectUserQuery.swift in Sources */,
 				88CF7E601BC5C37D00A33B72 /* HttpHeaders.swift in Sources */,
 				88CF7E381BC5B94500A33B72 /* HttpRequest.swift in Sources */,
+				04B8AB431BEDADBA00ED19CA /* File.swift in Sources */,
+				04B8AB3C1BEDA79A00ED19CA /* ItemQuery.swift in Sources */,
 				888EFC6D1BCC3DA600546DB3 /* Configuration.swift in Sources */,
 				88CF7E701BC6E0C100A33B72 /* PinStatusResult.swift in Sources */,
 				88CF7E5A1BC5BF9E00A33B72 /* ConnectPassword.swift in Sources */,
+				04B8AB411BEDACCB00ED19CA /* ItemFilter.swift in Sources */,
 				041643AA1BD48E6100873FAB /* ConnectionResult.swift in Sources */,
 				88CF7E761BC6E71200A33B72 /* ConnectUser.swift in Sources */,
 				889288D71BE90D8000DAD65F /* ServerLocator.swift in Sources */,
+				04B8AB391BEDA45000ED19CA /* SubtitleDownloadOptions.swift in Sources */,
 				889288CF1BE8D9B400DAD65F /* iOSDevice.swift in Sources */,
+				04B8AB451BEDAF2D00ED19CA /* VideoType.swift in Sources */,
 				888EFC811BCC4EDC00546DB3 /* JsonSerializer.swift in Sources */,
 				04AFCAD81BD33E0500C95C88 /* ServerLocatorProtocol.swift in Sources */,
 				04AFCAE21BD3436600C95C88 /* ConnectionManagerProtocol.swift in Sources */,
