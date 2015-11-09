@@ -364,10 +364,8 @@ public class BaseApiClient// implements IDisposable
         queryParams.addIfNotNil("MaxWidth", value: options.maxWidth)
         queryParams.addIfNotNil("MaxHeight", value: options.maxHeight)
         
-        if let quality = options.quality {
+        if let quality = options.quality ?? getImageQuality() {
             queryParams.addIfNotNil("Quality", value: quality)
-        } else {
-            queryParams.addIfNotNil("Quality", value: getImageQuality())
         }
         
         queryParams.addIfNotNil("Tag", value: options.tag)
