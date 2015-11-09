@@ -240,385 +240,148 @@ public class BaseApiClient// implements IDisposable
         return getApiUrl(partialUrl)
     }
 
-    internal final func getItemListUrl(query: ItemQuery?) -> String {
-        let unwrappedQuery = query!
+    internal final func getItemListUrl(query: ItemQuery) -> String {
         let dict = QueryStringDictionary()
         
-        //dict.addIfNotNil("ParentId", value: unwrappedQuery.parentId)
-        //dict.addIfNotNil("ParentId", value: unwrappedQuery.parentId)
-        //dict.addIfNotNil("Limit", value: unwrappedQuery.limit)
-        //dict.addIfNotNil("SortBy", unwrappedQuery.sortBy)
-        //
-        //        dict.addIfNotNil("sortOrder", unwrappedQuery.SortOrder)
-        //
-        //        dict.addIfNotNil("SeriesStatuses", unwrappedQuery.SeriesStatuses)
-        //        dict.addIfNotNil("Fields", unwrappedQuery.Fields)
-        //        dict.addIfNotNil("Filters", unwrappedQuery.Filters)
-        //        dict.addIfNotNil("ImageTypes", unwrappedQuery.ImageTypes)
-        //
-        //        dict.addIfNotNil("Is3D", unwrappedQuery.Is3D)
-        //
-        //        dict.addIfNotNil("AirDays", unwrappedQuery.AirDays)
-        //        dict.addIfNotNil("VideoTypes", unwrappedQuery.VideoTypes)
-        //
-        //        dict.addIfNotNil("MinOfficialRating", unwrappedQuery.MinOfficialRating)
-        //        dict.addIfNotNil("MaxOfficialRating", unwrappedQuery.MaxOfficialRating)
-        //
-        //        dict.Add("recursive", unwrappedQuery.Recursive)
-        //
-        //        dict.addIfNotNil("MinIndexNumber", unwrappedQuery.MinIndexNumber)
-        //
-        //        dict.addIfNotNil("MediaTypes", unwrappedQuery.MediaTypes)
-        //        dict.addIfNotNil("Genres", unwrappedQuery.Genres(), "|")
-        //        dict.addIfNotNil("Ids", unwrappedQuery.Ids)
-        //        dict.addIfNotNil("StudioIds", unwrappedQuery.StudioIds(), "|")
-        //        dict.addIfNotNil("ExcludeItemTypes", unwrappedQuery.ExcludeItemTypes)
-        //        dict.addIfNotNil("IncludeItemTypes", unwrappedQuery.IncludeItemTypes)
-        //        dict.addIfNotNil("ArtistIds", unwrappedQuery.ArtistIds)
-        //
-        //        dict.addIfNotNil("IsPlayed", unwrappedQuery.IsPlayed)
-        //        dict.addIfNotNil("IsInBoxSet", unwrappedQuery.IsInBoxSet)
-        //
-        //        dict.addIfNotNil("PersonIds", unwrappedQuery.PersonIds)
-        //        dict.addIfNotNil("PersonTypes", unwrappedQuery.PersonTypes)
-        //
-        //        dict.addIfNotNil("Years", unwrappedQuery.Years)
-        //
-        //        dict.addIfNotNil("ParentIndexNumber", unwrappedQuery.ParentIndexNumber)
-        //        dict.addIfNotNil("IsHD", unwrappedQuery.IsHD)
-        //        dict.addIfNotNil("HasParentalRating", unwrappedQuery.HasParentalRating)
-        //
-        //        dict.addIfNotNil("SearchTerm", unwrappedQuery.SearchTerm)
-        //
-        //        dict.addIfNotNil("MinCriticRating", unwrappedQuery.MinCriticRating)
-        //        dict.addIfNotNil("MinCommunityRating", unwrappedQuery.MinCommunityRating)
-        //
-        //        dict.addIfNotNil("MinPlayers", unwrappedQuery.MinPlayers)
-        //        dict.addIfNotNil("MaxPlayers", unwrappedQuery.MaxPlayers)
-        //        dict.addIfNotNil("NameStartsWithOrGreater", unwrappedQuery.NameStartsWithOrGreater)
-        //        dict.addIfNotNil("NameStartsWith", unwrappedQuery.NameStartsWith)
-        //        dict.addIfNotNil("NameLessThan", unwrappedQuery.NameLessThan)
-        //        dict.addIfNotNil("AlbumArtistStartsWithOrGreater", unwrappedQuery.AlbumArtistStartsWithOrGreater)
-        //
-        //        dict.addIfNotNil("LocationTypes", unwrappedQuery.LocationTypes)
-        //        dict.addIfNotNil("ExcludeLocationTypes", unwrappedQuery.ExcludeLocationTypes)
-        //
-        //        dict.addIfNotNil("IsMissing", unwrappedQuery.IsMissing)
-        //        dict.addIfNotNil("IsUnaired", unwrappedQuery.IsUnaired)
-        //        dict.addIfNotNil("IsVirtualUnaired", unwrappedQuery.IsVirtualUnaired)
-        //        
-        //        dict.addIfNotNil("EnableImages", unwrappedQuery.EnableImages)
-        //        dict.addIfNotNil("ImageTypeLimit", unwrappedQuery.ImageTypeLimit)
-        //        dict.addIfNotNil("EnableImageTypes", unwrappedQuery.EnableImageTypes)
-        //        
-        //        dict.AddIfNotNull("AiredDuringSeason", unwrappedQuery.AiredDuringSeason)
+        dict.addIfNotNil("ParentId", value: query.parentId)
+        dict.addIfNotNil("StartIndex", value: query.startIndex)
+        dict.addIfNotNil("Limit", value: query.limit)
+        dict.add("SortBy", value: query.sortBy)
+        dict.addIfNotNil("sortOrder", value: query.sortOrder?.rawValue)
+        dict.add("SeriesStatues", value: query.seriesStatus?.map({$0.rawValue}))
+        dict.add("Fields", value: query.fields?.map({$0.rawValue}))
+        dict.add("Filters", value: query.filters?.map({$0.rawValue}))
+        dict.add("ImageTypes", value: query.imageTypes?.map({$0.rawValue}))
+        dict.addIfNotNil("Is3d", value: query.is3d)
+        dict.add("AirDays", value: query.airDays)
+        dict.add("VideoTypes", value: query.videoTypes?.map({$0.rawValue}))
+        dict.addIfNotNil("MinOfficialRating", value: query.minOfficialRating)
+        dict.addIfNotNil("MaxOfficialRating", value: query.maxOfficialRating)
+        dict.addIfNotNil("recursive", value: query.recursive)
+        dict.addIfNotNil("MinIndexNumber", value: query.minIndexNumber)
+        dict.add("MediaTypes", value: query.mediaTypes)
+        dict.addIfNotNil("Genres", value: query.genres?.joinWithSeparator("|"))
+        dict.add("Ids", value: query.ids)
+        dict.addIfNotNil("StudioIds", value: query.studioIds?.joinWithSeparator("|"))
+        dict.add("ExcludeItemTypes", value: query.excludeItemTypes)
+        dict.add("IncludeItemTypes", value: query.includeItemTypes)
+        dict.add("ArtistIds", value: query.artistIds)
+        dict.addIfNotNil("IsPlayed", value: query.isPlayed)
+        dict.addIfNotNil("IsInBoxSet", value: query.isInBoxSet)
+        dict.add("PersonIds", value: query.personIds)
+        dict.add("PersonTypes", value: query.personTypes)
+        dict.add("Years", value: query.years)
+        dict.addIfNotNil("ParentIndexNumber", value: query.parentIndexNumber)
+        dict.addIfNotNil("IsHD", value: query.isHd)
+        dict.addIfNotNil("HasParentalRating", value: query.hasParentRating)
+        dict.addIfNotNil("SearchTerm", value: query.searchTerm)
+        dict.addIfNotNil("MinCriticRating", value: query.minCriticRating)
+        dict.addIfNotNil("MinCommunityRating", value: query.minCommunityRating)
+        dict.addIfNotNil("MinPlayers", value: query.minPlayers)
+        dict.addIfNotNil("MaxPlayers", value: query.maxPlayers)
+        dict.addIfNotNil("NameStartsWithOrGreater", value: query.nameStartsWithOrGreater)
+        dict.addIfNotNil("NameStartsWith", value: query.nameStartsWith)
+        dict.addIfNotNil("NameLessThan", value: query.nameLessThan)
+        dict.addIfNotNil("AlbumArtistStartsWithOrGreater", value: query.albumArtistStartsWithOrGreater)
+        dict.addIfNotNil("LocationTypes", value: query.locationTypes.map({String($0)}))
+        dict.addIfNotNil("ExcludeLocationTypes", value: query.excludeLocationTypes.map({String($0)}))
+        dict.addIfNotNil("IsMissing", value: query.isMissing)
+        dict.addIfNotNil("IsUnaired", value: query.isUnaired)
+        dict.addIfNotNil("IsVirtualUnaired", value: query.isVirtualUnaired)
+        dict.addIfNotNil("EnableImages", value: query.enableImages)
+        dict.addIfNotNil("ImageTypeLimit", value: query.imageTypeLimit)
+        dict.add("EnableImageTypes", value: query.enableImageTypes?.map({$0.rawValue}))
+        dict.addIfNotNil("AiredDuringSeason", value: query.airedDuringSeasion)
         
-        return getApiUrl("Users/\(unwrappedQuery.userId)/Items", queryString: dict)
+        return getApiUrl("Users/\(query.userId)/Items", queryString: dict)
     }
-//    
-//    /**
-//    Creates a url to return a list of items
-//    
-//    @param query The query.
-//    @return System.String.
-//    @exception System.ArgumentNullException query
-//    */
-//    protected final String GetItemListUrl(ItemQuery query)
-//    {
-//        if (query == null)
-//        {
-//            throw new IllegalArgumentException("query");
-//        }
-//        
-//        QueryStringDictionary dict = new QueryStringDictionary ();
-//        
-//        dict.AddIfNotNullOrEmpty("ParentId", query.getParentId())
-//        
-//        dict.AddIfNotNull("StartIndex", query.getStartIndex());
-//        
-//        dict.AddIfNotNull("Limit", query.getLimit());
-//        
-//        dict.AddIfNotNull("SortBy", query.getSortBy());
-//        
-//        dict.AddIfNotNull("sortOrder", query.getSortOrder());
-//        
-//        dict.AddIfNotNull("SeriesStatuses", query.getSeriesStatuses());
-//        dict.AddIfNotNull("Fields", query.getFields());
-//        dict.AddIfNotNull("Filters", query.getFilters());
-//        dict.AddIfNotNull("ImageTypes", query.getImageTypes());
-//        
-//        dict.AddIfNotNull("Is3D", query.getIs3D());
-//        
-//        dict.AddIfNotNull("AirDays", query.getAirDays());
-//        dict.AddIfNotNull("VideoTypes", query.getVideoTypes());
-//        
-//        dict.AddIfNotNullOrEmpty("MinOfficialRating", query.getMinOfficialRating());
-//        dict.AddIfNotNullOrEmpty("MaxOfficialRating", query.getMaxOfficialRating());
-//        
-//        dict.Add("recursive", query.getRecursive());
-//        
-//        dict.AddIfNotNull("MinIndexNumber", query.getMinIndexNumber());
-//        
-//        dict.AddIfNotNull("MediaTypes", query.getMediaTypes());
-//        dict.AddIfNotNull("Genres", query.getGenres(), "|");
-//        dict.AddIfNotNull("Ids", query.getIds());
-//        dict.AddIfNotNull("StudioIds", query.getStudioIds(), "|");
-//        dict.AddIfNotNull("ExcludeItemTypes", query.getExcludeItemTypes());
-//        dict.AddIfNotNull("IncludeItemTypes", query.getIncludeItemTypes());
-//        dict.AddIfNotNull("ArtistIds", query.getArtistIds());
-//        
-//        dict.AddIfNotNull("IsPlayed", query.getIsPlayed());
-//        dict.AddIfNotNull("IsInBoxSet", query.getIsInBoxSet());
-//        
-//        dict.AddIfNotNull("PersonIds", query.getPersonIds());
-//        dict.AddIfNotNull("PersonTypes", query.getPersonTypes());
-//        
-//        dict.AddIfNotNull("Years", query.getYears());
-//        
-//        dict.AddIfNotNull("ParentIndexNumber", query.getParentIndexNumber());
-//        dict.AddIfNotNull("IsHD", query.getIsHD());
-//        dict.AddIfNotNull("HasParentalRating", query.getHasParentalRating());
-//        
-//        dict.AddIfNotNullOrEmpty("SearchTerm", query.getSearchTerm());
-//        
-//        dict.AddIfNotNull("MinCriticRating", query.getMinCriticRating());
-//        dict.AddIfNotNull("MinCommunityRating", query.getMinCommunityRating());
-//        
-//        dict.AddIfNotNull("MinPlayers", query.getMinPlayers());
-//        dict.AddIfNotNull("MaxPlayers", query.getMaxPlayers());
-//        dict.AddIfNotNullOrEmpty("NameStartsWithOrGreater", query.getNameStartsWithOrGreater());
-//        dict.AddIfNotNullOrEmpty("NameStartsWith", query.getNameStartsWith());
-//        dict.AddIfNotNullOrEmpty("NameLessThan", query.getNameLessThan());
-//        dict.AddIfNotNullOrEmpty("AlbumArtistStartsWithOrGreater", query.getAlbumArtistStartsWithOrGreater());
-//        
-//        dict.AddIfNotNull("LocationTypes", query.getLocationTypes());
-//        dict.AddIfNotNull("ExcludeLocationTypes", query.getExcludeLocationTypes());
-//        
-//        dict.AddIfNotNull("IsMissing", query.getIsMissing());
-//        dict.AddIfNotNull("IsUnaired", query.getIsUnaired());
-//        dict.AddIfNotNull("IsVirtualUnaired", query.getIsVirtualUnaired());
-//        
-//        dict.AddIfNotNull("EnableImages", query.getEnableImages());
-//        dict.AddIfNotNull("ImageTypeLimit", query.getImageTypeLimit());
-//        dict.AddIfNotNull("EnableImageTypes", query.getEnableImageTypes());
-//        
-//        dict.AddIfNotNull("AiredDuringSeason", query.getAiredDuringSeason());
-//        
-//        return GetApiUrl("Users/" + query.getUserId() + "/Items", dict);
-//    }
-//    
-//    /**
-//    Gets the next up.
-//    
-//    @param query The query.
-//    @return System.String.
-//    @exception System.ArgumentNullException query
-//    */
-//    protected final String GetNextUpUrl(NextUpQuery query)
-//    {
-//        if (query == null)
-//        {
-//            throw new IllegalArgumentException("query");
-//        }
-//        
-//        QueryStringDictionary dict = new QueryStringDictionary ();
-//        
-//        dict.AddIfNotNull("Fields", query.getFields());
-//        
-//        dict.AddIfNotNull("Limit", query.getLimit());
-//        
-//        dict.AddIfNotNull("StartIndex", query.getStartIndex());
-//        
-//        dict.Add("UserId", query.getUserId());
-//        dict.AddIfNotNullOrEmpty("SeriesId", query.getSeriesId());
-//        
-//        dict.AddIfNotNull("EnableImages", query.getEnableImages());
-//        dict.AddIfNotNull("ImageTypeLimit", query.getImageTypeLimit());
-//        dict.AddIfNotNull("EnableImageTypes", query.getEnableImageTypes());
-//        
-//        return GetApiUrl("Shows/NextUp", dict);
-//    }
-//    
-//    /**
-//    Gets the similar item list URL.
-//    
-//    @param query The query.
-//    @param type The type.
-//    @return System.String.
-//    @exception System.ArgumentNullException
-//    query
-//    or
-//    type
-//    
-//    */
-//    protected final String GetSimilarItemListUrl(SimilarItemsQuery query, String type)
-//    {
-//        if (query == null)
-//        {
-//            throw new IllegalArgumentException("query");
-//        }
-//        if (tangible.DotNetToJavaStringHelper.isNullOrEmpty(type))
-//        {
-//            throw new IllegalArgumentException("type");
-//        }
-//        
-//        QueryStringDictionary dict = new QueryStringDictionary ();
-//        
-//        dict.AddIfNotNull("Limit", query.getLimit());
-//        dict.AddIfNotNullOrEmpty("UserId", query.getUserId());
-//        
-//        dict.AddIfNotNull("Fields", query.getFields());
-//        
-//        if (tangible.DotNetToJavaStringHelper.isNullOrEmpty(query.getId()))
-//        {
-//            throw new IllegalArgumentException("query");
-//        }
-//        
-//        return GetApiUrl(type + "/" + query.getId() + "/Similar", dict);
-//    }
-//    
-//    /**
-//    Gets the instant mix URL.
-//    
-//    @param query The query.
-//    @param type The type.
-//    @return System.String.
-//    @exception System.ArgumentNullException
-//    query
-//    or
-//    type
-//    
-//    */
-//    protected final String GetInstantMixUrl(SimilarItemsQuery query, String type)
-//    {
-//        if (query == null)
-//        {
-//            throw new IllegalArgumentException("query");
-//        }
-//        if (tangible.DotNetToJavaStringHelper.isNullOrEmpty(type))
-//        {
-//            throw new IllegalArgumentException("type");
-//        }
-//        
-//        QueryStringDictionary dict = new QueryStringDictionary ();
-//        
-//        dict.AddIfNotNull("Limit", query.getLimit());
-//        dict.AddIfNotNullOrEmpty("UserId", query.getUserId());
-//        
-//        dict.AddIfNotNull("Fields", query.getFields());
-//        
-//        if (tangible.DotNetToJavaStringHelper.isNullOrEmpty(query.getId()))
-//        {
-//            throw new IllegalArgumentException("query");
-//        }
-//        
-//        return GetApiUrl(type + "/" + query.getId() + "/InstantMix", dict);
-//    }
-//    
-//    /**
-//    Gets the item by name list URL.
-//    
-//    @param type The type.
-//    @param query The query.
-//    @return System.String.
-//    @exception System.ArgumentNullException query
-//    */
-//    protected final String GetItemByNameListUrl(String type, ItemsByNameQuery query)
-//    {
-//        if (query == null)
-//        {
-//            throw new IllegalArgumentException("query");
-//        }
-//        
-//        QueryStringDictionary dict = new QueryStringDictionary();
-//        
-//        dict.AddIfNotNullOrEmpty("ParentId", query.getParentId());
-//        
-//        dict.Add("UserId", query.getUserId());
-//        dict.AddIfNotNull("StartIndex", query.getStartIndex());
-//        
-//        dict.AddIfNotNull("Limit", query.getLimit());
-//        
-//        dict.AddIfNotNull("SortBy", query.getSortBy());
-//        
-//        dict.AddIfNotNull("sortOrder", query.getSortOrder());
-//        
-//        dict.AddIfNotNull("IsPlayed", query.getIsPlayed());
-//        
-//        dict.AddIfNotNull("Fields", query.getFields());
-//        
-//        dict.AddIfNotNull("Filters", query.getFilters());
-//        dict.AddIfNotNull("ImageTypes", query.getImageTypes());
-//        
-//        dict.Add("recursive", query.getRecursive());
-//        
-//        dict.AddIfNotNull("MediaTypes", query.getMediaTypes());
-//        dict.AddIfNotNull("ExcludeItemTypes", query.getExcludeItemTypes());
-//        dict.AddIfNotNull("IncludeItemTypes", query.getIncludeItemTypes());
-//        
-//        dict.AddIfNotNullOrEmpty("NameLessThan", query.getNameLessThan());
-//        dict.AddIfNotNullOrEmpty("NameStartsWith", query.getNameStartsWith());
-//        dict.AddIfNotNullOrEmpty("NameStartsWithOrGreater", query.getNameStartsWithOrGreater());
-//        
-//        dict.AddIfNotNull("EnableImages", query.getEnableImages());
-//        dict.AddIfNotNull("ImageTypeLimit", query.getImageTypeLimit());
-//        dict.AddIfNotNull("EnableImageTypes", query.getEnableImageTypes());
-//        
-//        return GetApiUrl(type, dict);
-//    }
-//    
-//    /**
-//    Gets the image URL.
-//    
-//    @param baseUrl The base URL.
-//    @param options The options.
-//    @param queryParams The query params.
-//    @return System.String.
-//    @exception System.ArgumentNullException options
-//    */
-//    private String GetImageUrl(String baseUrl, ImageOptions options, QueryStringDictionary queryParams)
-//    {
-//        if (options == null)
-//        {
-//            throw new IllegalArgumentException("options");
-//        }
-//        
-//        if (queryParams == null)
-//        {
-//            throw new IllegalArgumentException("queryParams");
-//        }
-//        
-//        if (options.getImageIndex() != null)
-//        {
-//            baseUrl += "/" + options.getImageIndex().intValue();
-//        }
-//        
-//        queryParams.AddIfNotNull("Width", options.getWidth());
-//        queryParams.AddIfNotNull("Height", options.getHeight());
-//        queryParams.AddIfNotNull("MaxWidth", options.getMaxWidth());
-//        queryParams.AddIfNotNull("MaxHeight", options.getMaxHeight());
-//        queryParams.AddIfNotNull("Quality", (options.getQuality() != null) ? options.getQuality() : getImageQuality());
-//        
-//        queryParams.AddIfNotNullOrEmpty("Tag", options.getTag());
-//        
-//        queryParams.AddIfNotNull("CropWhitespace", options.getCropWhitespace());
-//        queryParams.Add("EnableImageEnhancers", options.getEnableImageEnhancers());
-//        
-//        if (options.getFormat() != null)
-//        {
-//            queryParams.Add("Format", options.getFormat().toString());
-//        }
-//        
-//        if (options.getAddPlayedIndicator())
-//        {
-//            queryParams.Add("AddPlayedIndicator", true);
-//        }
-//        queryParams.AddIfNotNull("UnPlayedCount", options.getUnPlayedCount());
-//        queryParams.AddIfNotNull("PercentPlayed", options.getPercentPlayed());
-//        queryParams.AddIfNotNullOrEmpty("BackgroundColor", options.getBackgroundColor());
-//        
-//        return GetApiUrl(baseUrl, queryParams);
-//    }
+    
+    internal final func getNextUpUrl(query: NextUpQuery) -> String {
+        let dict = QueryStringDictionary()
+        
+        dict.add("Fields", value: query.fields?.map({$0.rawValue}))
+        dict.addIfNotNil("Limit", value: query.limit)
+        dict.addIfNotNil("StartIndex", value: query.startIndex)
+        dict.addIfNotNil("UserId", value: query.userId);
+        dict.addIfNotNil("SeriesId", value: query.seriesId);
+        dict.addIfNotNil("EnableImages", value: query.enableImages)
+        dict.addIfNotNil("ImageTypeLimit", value: query.imageTypeLimit)
+        dict.add("EnableImageTypes", value: query.enableImageTypes?.map({$0.rawValue}))
+        
+        return getApiUrl("Shows/NextUp", queryString: dict)
+    }
+
+    internal final func getSimilarItemListUrl(query: SimilarItemsQuery, type: String?) -> String {
+        let dict = QueryStringDictionary()
+        
+        dict.addIfNotNil("Limit", value: query.limit)
+        dict.addIfNotNil("UserId", value: query.userId)
+        dict.add("Fields", value: query.fields?.map({$0.rawValue}))
+        
+        return getApiUrl("\(type!)/\(query.id!)/Similar", queryString: dict)
+    }
+
+    internal final func getInstantMixUrl(query: SimilarItemsQuery, type: String?) -> String {
+        let dict = QueryStringDictionary()
+        
+        dict.addIfNotNil("Limit", value: query.limit)
+        dict.addIfNotNil("UserId", value: query.userId)
+        dict.add("Fields", value: query.fields?.map({$0.rawValue}))
+        
+        return getApiUrl("\(type!)/\(query.id!)/InstantMix", queryString: dict)
+    }
+
+    internal final func getItemByNameListUrl(query: ItemsByNameQuery, type: String?) -> String {
+        let dict = QueryStringDictionary()
+        
+        dict.addIfNotNil("ParentId", value: query.parentId)
+        dict.addIfNotNil("UserId", value: query.userId);
+        dict.addIfNotNil("StartIndex", value: query.startIndex)
+        dict.addIfNotNil("Limit", value: query.limit)
+        dict.add("SortBy", value: query.sortBy)
+        dict.addIfNotNil("sortOrder", value: query.sortOrder?.rawValue)
+        dict.add("Fields", value: query.fields?.map({$0.rawValue}))
+        dict.addIfNotNil("IsPlayed", value: query.isPlayed)
+        dict.add("Filters", value: query.filters?.map({$0.rawValue}))
+        dict.add("ImageTypes", value: query.imageTypes?.map({$0.rawValue}))
+        dict.addIfNotNil("recursive", value: query.recursive)
+        dict.add("MediaTypes", value: query.mediaTypes)
+        dict.add("ExcludeItemTypes", value: query.excludeItemTypes)
+        dict.add("IncludeItemTypes", value: query.includeItemTypes)
+        dict.addIfNotNil("NameStartsWithOrGreater", value: query.nameStartsWithOrGreater)
+        dict.addIfNotNil("NameStartsWith", value: query.nameStartsWith)
+        dict.addIfNotNil("NameLessThan", value: query.nameLessThan)
+        dict.addIfNotNil("EnableImages", value: query.enableImages)
+        dict.addIfNotNil("ImageTypeLimit", value: query.imageTypeLimit)
+        dict.add("EnableImageTypes", value: query.enableImageTypes?.map({$0.rawValue}))
+
+        return getApiUrl(type, queryString: dict)
+    }
+
+    private func getImageUrl(baseUrl: String, options: ImageOptions, queryParams: QueryStringDictionary) -> String {
+        queryParams.addIfNotNil("Width", value: options.width)
+        queryParams.addIfNotNil("Height", value: options.height)
+        queryParams.addIfNotNil("MaxWidth", value: options.maxWidth)
+        queryParams.addIfNotNil("MaxHeight", value: options.maxHeight)
+        
+        if let quality = options.quality ?? getImageQuality() {
+            queryParams.addIfNotNil("Quality", value: quality)
+        }
+        
+        queryParams.addIfNotNil("Tag", value: options.tag)
+        queryParams.addIfNotNil("CropWhitespace", value: options.cropWhiteSpace)
+        queryParams.addIfNotNil("EnableImageEnhancers", value: options.enableImageEnhancers)
+
+        queryParams.addIfNotNil("Format", value: options.imageFormat?.rawValue)
+        queryParams.addIfNotNil("AddPlayedIndicator", value: options.addPlayedIndicator)
+      
+        queryParams.addIfNotNil("UnPlayedCount", value: options.unplayedCount);
+        queryParams.addIfNotNil("PercentPlayed", value: options.percentPlayed);
+        queryParams.addIfNotNil("BackgroundColor", value: options.backgroundColor);
+
+        return getApiUrl(baseUrl, queryString: queryParams);
+    }
+
 //    
 //    /**
 //    Gets the image URL.
@@ -1050,10 +813,13 @@ public class BaseApiClient// implements IDisposable
 //    {
 //        return getJsonSerializer().SerializeToString(obj);
 //    }
+    internal final func serializeToJson(obj: AnyObject) -> String {
+        return getJsonSerializer()!.serializeToString(obj)
+    }
 //    
 //    /** 
 //    Adds the data format.
-//    
+//
 //    @param url The URL.
 //    @return System.String.
 //    */

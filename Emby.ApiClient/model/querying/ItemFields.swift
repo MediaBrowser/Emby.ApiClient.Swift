@@ -5,7 +5,7 @@
 
 import Foundation
 
-public enum ItemFields {
+public enum ItemFields: String {
     case AirTime
     case AlternateEpisodeNumbers
     case AwardsSummary
