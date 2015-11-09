@@ -133,4 +133,5 @@ public protocol IJsonSerializer
 //    @exception System.ArgumentNullException obj
 //    */
 //    String SerializeToString(Object obj);
+    func serializeToString(obj: AnyObject) -> String
 }

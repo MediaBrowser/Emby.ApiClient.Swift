@@ -5,7 +5,7 @@
 
 import Foundation
 
-public enum SortOrder {
+public enum SortOrder: String {
     case Ascending
     case Descending
 }

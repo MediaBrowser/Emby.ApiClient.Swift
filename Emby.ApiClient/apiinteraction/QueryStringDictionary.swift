@@ -96,6 +96,11 @@ public class QueryStringDictionary //extends java.util.HashMap<String, String>
 //            self.Add(name, value);
 //        }
 //    }
+    public final func addIfNotNil(name: String, value: Double?) {
+        if let val = value {
+            data[name] = String(val)
+        }
+    }
 //    
 //    /**
 //    Adds if not null.
@@ -135,6 +140,12 @@ public class QueryStringDictionary //extends java.util.HashMap<String, String>
 //            self.Add(name, value);
 //        }
 //    }
+    
+    public final func addIfNotNil(name: String, value: Bool?) {
+        if let val = value {
+            data[name] = String(val)
+        }
+    }
 //    
 //    /**
 //    Adds the specified name.
@@ -215,6 +226,11 @@ public class QueryStringDictionary //extends java.util.HashMap<String, String>
 //            self.Add(name, value);
 //        }
 //    }
+    public final func add(name: String, value: [Int]?) {
+        if let val = value {
+            data[name] = val.map({String($0)}).joinWithSeparator(",")
+        }
+    }
 //    
 //    /**
 //    Adds the specified name.
@@ -232,6 +248,12 @@ public class QueryStringDictionary //extends java.util.HashMap<String, String>
 //        
 //        Add(name, value, ",");
 //    }
+    
+    public final func add(name: String, value: [String]?) {
+        if let val = value {
+            data[name] = val.joinWithSeparator(",")
+        }
+    }
 //    
 //    /**
 //    Adds the specified name.
@@ -348,6 +370,17 @@ public class QueryStringDictionary //extends java.util.HashMap<String, String>
         return prefix + "?" + GetQueryString()
     }
 
+    //public final func addIfNotNil(name: String, value: CustomStringConvertible?) {
+    //    if let val = value {
+    //        data[name] = val.description
+    //    }
+    //}
+    
+    //public final func addIfNotNil(name: String, value: [CustomStringConvertible]?) {
+    //    if let val = value {
+    //        data[name] = val.map({$0.description}).joinWithSeparator(",")
+    //    }
+    //}
 //
 //    public final <T extends Enum<T>> void Add(String name, T value)
 //    {

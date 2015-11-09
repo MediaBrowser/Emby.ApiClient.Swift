@@ -5,7 +5,7 @@
 
 import Foundation
 
-public enum SeriesStatus {
+public enum SeriesStatus: String {
     case Continuing
     case Ended
 }

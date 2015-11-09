@@ -39,4 +39,13 @@ public class JsonSerializer: IJsonSerializer {
             return nil
         }
     }
+    
+    public func serializeToString(obj: AnyObject) -> String {
+        if let jsonData = try? NSJSONSerialization.dataWithJSONObject(obj, options: []) {
+            return String(NSString(data: jsonData, encoding: NSUTF8StringEncoding))
+        }
+        
+        return ""
+    }
+
 }
