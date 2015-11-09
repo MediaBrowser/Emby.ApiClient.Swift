@@ -13,7 +13,7 @@ public class JsonSerializer: IJsonSerializer {
     public init() {
     }
     
-    public func DeserializeFromString<T: JSONSerializable>(text: String, type: Any) throws -> T? {
+    public func DeserializeFromString<T: JSONSerializable>(text: String, type: Any?) throws -> T? {
         
         if let data = text.dataUsingEncoding(NSUTF8StringEncoding) where !text.isEmpty {
             

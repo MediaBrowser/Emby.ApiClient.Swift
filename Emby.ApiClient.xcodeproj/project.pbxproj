@@ -93,6 +93,10 @@
 		88CF7E741BC6E5B500A33B72 /* ConnectUserQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7E731BC6E5B500A33B72 /* ConnectUserQuery.swift */; };
 		88CF7E761BC6E71200A33B72 /* ConnectUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7E751BC6E71200A33B72 /* ConnectUser.swift */; };
 		88CF7E781BC6E86F00A33B72 /* ConnectUserServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7E771BC6E86F00A33B72 /* ConnectUserServer.swift */; };
+		88D366371BF1021D002F2767 /* FindServersInnerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888E5D551BEBFA2600EDFBC5 /* FindServersInnerResponse.swift */; };
+		88D366391BF121E8002F2767 /* CocoaAsyncSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88D366381BF121E8002F2767 /* CocoaAsyncSocket.framework */; };
+		88D3663B1BF12BEF002F2767 /* CocoaAsyncSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88D3663A1BF12BEF002F2767 /* CocoaAsyncSocket.framework */; };
+		88D3663C1BF12BEF002F2767 /* CocoaAsyncSocket.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 88D3663A1BF12BEF002F2767 /* CocoaAsyncSocket.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		88F411E81BECAA59000A7E7E /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DD39A811BE9E6AD00B2D09A /* Alamofire.framework */; };
 /* End PBXBuildFile section */
 
@@ -105,6 +109,20 @@
 			remoteInfo = Emby_ApiClient;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		88D3663D1BF12BEF002F2767 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				88D3663C1BF12BEF002F2767 /* CocoaAsyncSocket.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0416439B1BD41FA600873FAB /* ServerUserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerUserInfo.swift; sourceTree = "<group>"; };
@@ -198,6 +216,8 @@
 		88CF7E731BC6E5B500A33B72 /* ConnectUserQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectUserQuery.swift; sourceTree = "<group>"; };
 		88CF7E751BC6E71200A33B72 /* ConnectUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectUser.swift; sourceTree = "<group>"; };
 		88CF7E771BC6E86F00A33B72 /* ConnectUserServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectUserServer.swift; sourceTree = "<group>"; };
+		88D366381BF121E8002F2767 /* CocoaAsyncSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaAsyncSocket.framework; path = Carthage/Build/iOS/CocoaAsyncSocket.framework; sourceTree = "<group>"; };
+		88D3663A1BF12BEF002F2767 /* CocoaAsyncSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaAsyncSocket.framework; path = Carthage/Build/iOS/CocoaAsyncSocket.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -206,6 +226,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				88F411E81BECAA59000A7E7E /* Alamofire.framework in Frameworks */,
+				88D366391BF121E8002F2767 /* CocoaAsyncSocket.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,6 +234,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88D3663B1BF12BEF002F2767 /* CocoaAsyncSocket.framework in Frameworks */,
 				5DD39A821BE9E6AD00B2D09A /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -359,6 +381,8 @@
 		8838C54D1BC514B500587F8E = {
 			isa = PBXGroup;
 			children = (
+				88D3663A1BF12BEF002F2767 /* CocoaAsyncSocket.framework */,
+				88D366381BF121E8002F2767 /* CocoaAsyncSocket.framework */,
 				8838C5591BC514B500587F8E /* Emby.ApiClient */,
 				888EFC981BCC52CD00546DB3 /* TestApp */,
 				8838C5581BC514B500587F8E /* Products */,
@@ -615,6 +639,7 @@
 				888EFC941BCC52CD00546DB3 /* Frameworks */,
 				888EFC951BCC52CD00546DB3 /* Resources */,
 				5DD39A831BE9E6E600B2D09A /* ShellScript */,
+				88D3663D1BF12BEF002F2767 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -753,6 +778,7 @@
 				8810B9D91BECB2160062DB8F /* DeviceProtocol.swift in Sources */,
 				8857F86F1BCD4B5500ADFA8A /* IResponse.swift in Sources */,
 				88CF7E781BC6E86F00A33B72 /* ConnectUserServer.swift in Sources */,
+				88D366371BF1021D002F2767 /* FindServersInnerResponse.swift in Sources */,
 				889288CB1BE7FF0000DAD65F /* CredentialProvider.swift in Sources */,
 				88CF7E591BC5BF8C00A33B72 /* QueryStringDictionary.swift in Sources */,
 				88CF7E691BC5CBDB00A33B72 /* Request.swift in Sources */,

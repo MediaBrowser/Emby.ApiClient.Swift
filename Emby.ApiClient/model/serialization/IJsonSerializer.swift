@@ -113,7 +113,7 @@ public protocol IJsonSerializer
     */
 //    <T> T DeserializeFromString(String text, java.lang.Class type);
 //    func DeserializeFromString(text: String, type: Any) throws -> JSON?
-    func DeserializeFromString<T: JSONSerializable>(text: String, type: Any) throws -> T?
+    func DeserializeFromString<T: JSONSerializable>(text: String, type: Any?) throws -> T?
 //    func DeserializeFromString<T: GenericResult<JSON_Dictionary>>(text: String, type: Any) throws -> T?
     
 //    /**

@@ -17,16 +17,18 @@ import Foundation
 //
 //import java.util.ArrayList;
 
-//public class FindServersInnerResponse: Emby_Response<ArrayList<ServerDiscoveryInfo>> {
-//
-//    private ConnectionManager connectionManager;
-//    private Response<ArrayList<ServerInfo>> response;
-//    
-//    public FindServersInnerResponse(ConnectionManager connectionManager, Response<ArrayList<ServerInfo>> response) {
-//        this.connectionManager = connectionManager;
-//        this.response = response;
-//    }
-//    
+public class FindServersInnerResponse: Emby.Response<Array<ServerDiscoveryInfo>> {
+
+    private let connectionManager: ConnectionManager
+    private let response: Emby.Response<Array<ServerInfo>>
+    
+    public init(connectionManager: ConnectionManager, response: Emby.Response<Array<ServerInfo>>) {
+        self.connectionManager = connectionManager;
+        self.response = response;
+        
+        super.init()
+    }
+    
 //    @Override
 //    public void onResponse(ArrayList<ServerDiscoveryInfo> foundServers) {
 //        
@@ -52,7 +54,7 @@ import Foundation
 //    @Override
 //    public void onError(Exception ex) {
 //        
-//        ArrayList<ServerInfo> servers = new ArrayList<ServerInfo>();
+//        Array<ServerInfo> servers = new Array<ServerInfo>();
 //        
 //        response.onResponse(servers);
 //    }
@@ -82,4 +84,4 @@ import Foundation
 //        
 //        return null;
 //    }
-//}
+}

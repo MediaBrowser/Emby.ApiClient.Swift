@@ -9,6 +9,8 @@
 import UIKit
 import Emby
 
+var connectionManager: ConnectionManager?
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -30,17 +32,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let service = ConnectService(jsonSerializer: jsonSerializer, logger: logger, httpClient: httpClient, appName: "Emby_ApiClient iOS", appVersion: "1.0")
         
-        Authenticate(httpClient, logger: logger, jsonSerializer: jsonSerializer, service: service)
+//        Authenticate(httpClient, logger: logger, jsonSerializer: jsonSerializer, service: service)
 
-//        let clientCapabilities = ClientCapabilities()
-//        let credentialProvider = CredentialProvider(jsonSerializer: jsonSerializer, filePath: "")
-//        let device = iOSDevice()
-//        let serverDiscovery = ServerLocator(logger: logger, jsonSerializer: jsonSerializer)
-//        
-//        let connectionManager = ConnectionManager(clientCapabilities: clientCapabilities,
-//            credentialProvider: credentialProvider,
-//            device: device,
-//            serverDiscovery: serverDiscovery)
+        let clientCapabilities = ClientCapabilities()
+        let credentialProvider = CredentialProvider(jsonSerializer: jsonSerializer, filePath: "")
+        let device = iOSDevice()
+        let serverDiscovery = ServerLocator(logger: logger, jsonSerializer: jsonSerializer)
+        
+        connectionManager = ConnectionManager(clientCapabilities: clientCapabilities,
+            credentialProvider: credentialProvider,
+            device: device,
+            serverDiscovery: serverDiscovery)
+        connectionManager?.getAvailableServers({ (serverInfo: [ServerInfo]) -> Void in
+            
+            }) { (ErrorType) -> Void in
+                
+        }
         
         return true
     }

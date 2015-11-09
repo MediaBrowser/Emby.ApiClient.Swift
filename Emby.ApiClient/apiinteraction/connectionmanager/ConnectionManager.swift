@@ -62,6 +62,12 @@ public class ConnectionManager: ConnectionManagerProtocol {
     
     public func getAvailableServers(onSuccess: ([ServerInfo]) -> Void, onError: (ErrorType) -> Void) {
         //TODO
+        
+        serverDiscovery.findServers(1000, onSuccess: { (serverDiscoveryInfo: [ServerDiscoveryInfo]) -> Void in
+            
+            }, onError: { (error) -> Void in
+                
+        } )
     }
     
     public func loginToConnect(username: String, password: String, onSuccess: () -> Void, onError: () -> Void) {
@@ -83,7 +89,7 @@ public class ConnectionManager: ConnectionManagerProtocol {
     public func getResgistrationInfo(featureName: String, connectedServerId: String, onSuccess: (RegistrationInfo) -> Void, onError: (ErrorType) -> Void) {
         //TODO
     }
-}
+//}
 
 
 
@@ -847,4 +853,4 @@ public class ConnectionManager: ConnectionManagerProtocol {
 //        
 //        FindServers(new GetRegistrationInfoFindServersResponse(this, featureName, connectedServerId, logger, response, credentialProvider, connectService));
 //    }
-//}
+}
