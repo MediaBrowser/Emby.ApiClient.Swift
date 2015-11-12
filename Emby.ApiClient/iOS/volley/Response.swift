@@ -17,7 +17,7 @@ import Foundation
 
 //package mediabrowser.apiinteraction;
 
-public class Emby_Response<T: JSONSerializable>: Response_Listener<T> {
+public class Response<T>: Response_Listener<T> {
     
     public var completion: ((object: T?) -> Void)?
     public var completionError: ((error: NSError?) -> Void)?
@@ -26,10 +26,10 @@ public class Emby_Response<T: JSONSerializable>: Response_Listener<T> {
     }
     
 //    private var innerResponse: IResponse?
-    internal var innerResponse: Emby_Response?
+    internal var innerResponse: Response?
 
 //    /*public*/ init(innerResponse: IResponse?){
-    /*public*/ init(innerResponse: Emby_Response?){
+    /*public*/ init(innerResponse: Response?){
         self.innerResponse = innerResponse;
     }
 

@@ -46,7 +46,7 @@ public class BaseApiClient// implements IDisposable
     private var logger: ILogger
     private var jsonSerializer: IJsonSerializer
     private var clientName: String?
-    private var device: IDevice?
+    private var device: DeviceProtocol?
     private var privateApplicationVersion: String?
     private var privateServerAddress: String
     private var privateAccessToken: String?
@@ -55,7 +55,7 @@ public class BaseApiClient// implements IDisposable
     private let httpHeaders = HttpHeaders()
     
     internal init(logger: ILogger, jsonSerializer: IJsonSerializer, serverAddress: String, clientName: String,
-        device: IDevice, applicationVersion: String) {
+        device: DeviceProtocol, applicationVersion: String) {
         self.logger = logger
         self.jsonSerializer = jsonSerializer
         self.clientName = clientName
@@ -111,7 +111,7 @@ public class BaseApiClient// implements IDisposable
         return privateAccessToken
     }
     
-    public final func getDevice() -> IDevice? {
+    public final func getDevice() -> DeviceProtocol? {
         return device
     }
     

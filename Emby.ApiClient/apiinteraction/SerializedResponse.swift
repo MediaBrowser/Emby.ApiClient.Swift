@@ -15,18 +15,18 @@ import Foundation
 //import mediabrowser.model.serialization.IJsonSerializer;
 
 //public class SerializedResponse: Emby_ApiClient.Response<Any> {
-public class SerializedResponse<T: JSONSerializable>: Emby_Response<T> {
-//public class SerializedResponse: Emby_ResponseX<T> {
+public class SerializedResponse<T: JSONSerializable>: Emby.Response<T> {
+//public class SerializedResponse: Emby.ResponseX<T> {
 
 //    func onResponse(response: Any) {}
     
     private let jsonSerializer: IJsonSerializer
     private let type: Any
-//    /*protected*/ let innerResponse: Emby_Response?
+//    /*protected*/ let innerResponse: Emby.Response?
     private let url: String? = nil
 //    private ILogger logger;
     
-    public init(innerResponse: Emby_Response<T>, jsonSerializer: IJsonSerializer, type: Any) {
+    public init(innerResponse: Emby.Response<T>, jsonSerializer: IJsonSerializer, type: Any) {
         
         self.jsonSerializer = jsonSerializer;
         self.type = type;

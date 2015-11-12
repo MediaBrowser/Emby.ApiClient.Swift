@@ -24,7 +24,6 @@
 		04AFCAEC1BD347EE00C95C88 /* IHasServerId.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFCAEB1BD347EE00C95C88 /* IHasServerId.swift */; };
 		04AFCAEE1BD3489C00C95C88 /* ServerInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFCAED1BD3489C00C95C88 /* ServerInfo.swift */; };
 		04AFCAF01BD3490A00C95C88 /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFCAEF1BD3490A00C95C88 /* ApiClient.swift */; };
-		04AFCAF31BD3497000C95C88 /* IDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFCAF21BD3497000C95C88 /* IDevice.swift */; };
 		04AFCAF61BD34A0A00C95C88 /* LocalFileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFCAF51BD34A0A00C95C88 /* LocalFileInfo.swift */; };
 		04AFCAF91BD34B4800C95C88 /* ProgressProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFCAF81BD34B4800C95C88 /* ProgressProtocol.swift */; };
 		04AFCAFB1BD34B9900C95C88 /* CancellationToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFCAFA1BD34B9900C95C88 /* CancellationToken.swift */; };
@@ -75,6 +74,7 @@
 		04B8AB8E1BF443DB00ED19CA /* TransportStreamTimestamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B8AB8D1BF443DB00ED19CA /* TransportStreamTimestamp.swift */; };
 		04B8AB901BF44ADB00ED19CA /* UserItemDataDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B8AB8F1BF44ADB00ED19CA /* UserItemDataDto.swift */; };
 		5DD39A821BE9E6AD00B2D09A /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DD39A811BE9E6AD00B2D09A /* Alamofire.framework */; };
+		8810B9D91BECB2160062DB8F /* DeviceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8810B9D81BECB2160062DB8F /* DeviceProtocol.swift */; };
 		8838C55B1BC514B500587F8E /* Emby.ApiClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 8838C55A1BC514B500587F8E /* Emby.ApiClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		884EBEDD1BCD912B0032E7F3 /* EmptyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884EBEDC1BCD912B0032E7F3 /* EmptyResponse.swift */; };
 		8857F86D1BCC633F00ADFA8A /* VolleyError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8857F86C1BCC633F00ADFA8A /* VolleyError.swift */; };
@@ -120,6 +120,11 @@
 		88CF7E741BC6E5B500A33B72 /* ConnectUserQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7E731BC6E5B500A33B72 /* ConnectUserQuery.swift */; };
 		88CF7E761BC6E71200A33B72 /* ConnectUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7E751BC6E71200A33B72 /* ConnectUser.swift */; };
 		88CF7E781BC6E86F00A33B72 /* ConnectUserServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7E771BC6E86F00A33B72 /* ConnectUserServer.swift */; };
+		88D366371BF1021D002F2767 /* FindServersInnerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888E5D551BEBFA2600EDFBC5 /* FindServersInnerResponse.swift */; };
+		88D366391BF121E8002F2767 /* CocoaAsyncSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88D366381BF121E8002F2767 /* CocoaAsyncSocket.framework */; };
+		88D3663B1BF12BEF002F2767 /* CocoaAsyncSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88D3663A1BF12BEF002F2767 /* CocoaAsyncSocket.framework */; };
+		88D3663C1BF12BEF002F2767 /* CocoaAsyncSocket.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 88D3663A1BF12BEF002F2767 /* CocoaAsyncSocket.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		88F411E81BECAA59000A7E7E /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DD39A811BE9E6AD00B2D09A /* Alamofire.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -131,6 +136,20 @@
 			remoteInfo = Emby_ApiClient;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		88D3663D1BF12BEF002F2767 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				88D3663C1BF12BEF002F2767 /* CocoaAsyncSocket.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0416439B1BD41FA600873FAB /* ServerUserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerUserInfo.swift; sourceTree = "<group>"; };
@@ -150,7 +169,6 @@
 		04AFCAEB1BD347EE00C95C88 /* IHasServerId.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IHasServerId.swift; path = dto/IHasServerId.swift; sourceTree = "<group>"; };
 		04AFCAED1BD3489C00C95C88 /* ServerInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerInfo.swift; sourceTree = "<group>"; };
 		04AFCAEF1BD3490A00C95C88 /* ApiClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
-		04AFCAF21BD3497000C95C88 /* IDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IDevice.swift; path = device/IDevice.swift; sourceTree = "<group>"; };
 		04AFCAF51BD34A0A00C95C88 /* LocalFileInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocalFileInfo.swift; path = devices/LocalFileInfo.swift; sourceTree = "<group>"; };
 		04AFCAF81BD34B4800C95C88 /* ProgressProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProgressProtocol.swift; path = Emby.ApiClient/tasks/ProgressProtocol.swift; sourceTree = SOURCE_ROOT; };
 		04AFCAFA1BD34B9900C95C88 /* CancellationToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CancellationToken.swift; path = Emby.ApiClient/tasks/CancellationToken.swift; sourceTree = SOURCE_ROOT; };
@@ -201,7 +219,8 @@
 		04B8AB8D1BF443DB00ED19CA /* TransportStreamTimestamp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TransportStreamTimestamp.swift; path = mediainfo/TransportStreamTimestamp.swift; sourceTree = "<group>"; };
 		04B8AB8F1BF44ADB00ED19CA /* UserItemDataDto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserItemDataDto.swift; path = dto/UserItemDataDto.swift; sourceTree = "<group>"; };
 		5DD39A811BE9E6AD00B2D09A /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
-		8838C5571BC514B500587F8E /* Emby_ApiClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Emby_ApiClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8810B9D81BECB2160062DB8F /* DeviceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DeviceProtocol.swift; path = device/DeviceProtocol.swift; sourceTree = "<group>"; };
+		8838C5571BC514B500587F8E /* Emby.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Emby.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8838C55A1BC514B500587F8E /* Emby.ApiClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Emby.ApiClient.h; sourceTree = "<group>"; };
 		8838C55C1BC514B500587F8E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8838C5641BC5180100587F8E /* ConnectService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectService.swift; sourceTree = "<group>"; };
@@ -210,6 +229,7 @@
 		884EBEDC1BCD912B0032E7F3 /* EmptyResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyResponse.swift; sourceTree = "<group>"; };
 		8857F86C1BCC633F00ADFA8A /* VolleyError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolleyError.swift; sourceTree = "<group>"; };
 		8857F86E1BCD4B5500ADFA8A /* IResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IResponse.swift; sourceTree = "<group>"; };
+		888E5D551BEBFA2600EDFBC5 /* FindServersInnerResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FindServersInnerResponse.swift; sourceTree = "<group>"; };
 		888EFC641BC859E100546DB3 /* RegistrationInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationInfo.swift; sourceTree = "<group>"; };
 		888EFC6C1BCC3DA600546DB3 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		888EFC7D1BCC4DB700546DB3 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
@@ -250,6 +270,8 @@
 		88CF7E731BC6E5B500A33B72 /* ConnectUserQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectUserQuery.swift; sourceTree = "<group>"; };
 		88CF7E751BC6E71200A33B72 /* ConnectUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectUser.swift; sourceTree = "<group>"; };
 		88CF7E771BC6E86F00A33B72 /* ConnectUserServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectUserServer.swift; sourceTree = "<group>"; };
+		88D366381BF121E8002F2767 /* CocoaAsyncSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaAsyncSocket.framework; path = Carthage/Build/iOS/CocoaAsyncSocket.framework; sourceTree = "<group>"; };
+		88D3663A1BF12BEF002F2767 /* CocoaAsyncSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaAsyncSocket.framework; path = Carthage/Build/iOS/CocoaAsyncSocket.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -257,6 +279,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88F411E81BECAA59000A7E7E /* Alamofire.framework in Frameworks */,
+				88D366391BF121E8002F2767 /* CocoaAsyncSocket.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -264,6 +288,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88D3663B1BF12BEF002F2767 /* CocoaAsyncSocket.framework in Frameworks */,
 				5DD39A821BE9E6AD00B2D09A /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -352,7 +377,7 @@
 		04AFCAF11BD3496100C95C88 /* device */ = {
 			isa = PBXGroup;
 			children = (
-				04AFCAF21BD3497000C95C88 /* IDevice.swift */,
+				8810B9D81BECB2160062DB8F /* DeviceProtocol.swift */,
 			);
 			name = device;
 			sourceTree = "<group>";
@@ -378,6 +403,7 @@
 			isa = PBXGroup;
 			children = (
 				04B8AB301BDB293200ED19CA /* ConnectionManager.swift */,
+				888E5D551BEBFA2600EDFBC5 /* FindServersInnerResponse.swift */,
 			);
 			name = connectionmanager;
 			sourceTree = "<group>";
@@ -463,6 +489,8 @@
 		8838C54D1BC514B500587F8E = {
 			isa = PBXGroup;
 			children = (
+				88D3663A1BF12BEF002F2767 /* CocoaAsyncSocket.framework */,
+				88D366381BF121E8002F2767 /* CocoaAsyncSocket.framework */,
 				8838C5591BC514B500587F8E /* Emby.ApiClient */,
 				888EFC981BCC52CD00546DB3 /* TestApp */,
 				8838C5581BC514B500587F8E /* Products */,
@@ -473,7 +501,7 @@
 		8838C5581BC514B500587F8E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8838C5571BC514B500587F8E /* Emby_ApiClient.framework */,
+				8838C5571BC514B500587F8E /* Emby.framework */,
 				888EFC971BCC52CD00546DB3 /* TestApp.app */,
 			);
 			name = Products;
@@ -698,9 +726,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		8838C5561BC514B500587F8E /* Emby_ApiClient */ = {
+		8838C5561BC514B500587F8E /* Emby */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8838C55F1BC514B500587F8E /* Build configuration list for PBXNativeTarget "Emby_ApiClient" */;
+			buildConfigurationList = 8838C55F1BC514B500587F8E /* Build configuration list for PBXNativeTarget "Emby" */;
 			buildPhases = (
 				8838C5521BC514B500587F8E /* Sources */,
 				8838C5531BC514B500587F8E /* Frameworks */,
@@ -711,9 +739,9 @@
 			);
 			dependencies = (
 			);
-			name = Emby_ApiClient;
+			name = Emby;
 			productName = Emby.ApiClient;
-			productReference = 8838C5571BC514B500587F8E /* Emby_ApiClient.framework */;
+			productReference = 8838C5571BC514B500587F8E /* Emby.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		888EFC961BCC52CD00546DB3 /* TestApp */ = {
@@ -724,6 +752,7 @@
 				888EFC941BCC52CD00546DB3 /* Frameworks */,
 				888EFC951BCC52CD00546DB3 /* Resources */,
 				5DD39A831BE9E6E600B2D09A /* ShellScript */,
+				88D3663D1BF12BEF002F2767 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -766,7 +795,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8838C5561BC514B500587F8E /* Emby_ApiClient */,
+				8838C5561BC514B500587F8E /* Emby */,
 				888EFC961BCC52CD00546DB3 /* TestApp */,
 			);
 		};
@@ -876,9 +905,11 @@
 				04AFCAFB1BD34B9900C95C88 /* CancellationToken.swift in Sources */,
 				041643A11BD4216100873FAB /* UserLinkType.swift in Sources */,
 				04B8AB731BF2EBD400ED19CA /* ImageOrientation.swift in Sources */,
+				04B8AB7F1BF2F31E00ED19CA /* BaseItemPerson.swift in Sources */,
+				8810B9D91BECB2160062DB8F /* DeviceProtocol.swift in Sources */,
 				8857F86F1BCD4B5500ADFA8A /* IResponse.swift in Sources */,
 				88CF7E781BC6E86F00A33B72 /* ConnectUserServer.swift in Sources */,
-				04B8AB7F1BF2F31E00ED19CA /* BaseItemPerson.swift in Sources */,
+				88D366371BF1021D002F2767 /* FindServersInnerResponse.swift in Sources */,
 				889288CB1BE7FF0000DAD65F /* CredentialProvider.swift in Sources */,
 				04B8AB5A1BF18D8D00ED19CA /* ExtraType.swift in Sources */,
 				88CF7E591BC5BF8C00A33B72 /* QueryStringDictionary.swift in Sources */,
@@ -918,7 +949,6 @@
 				88CF7E5D1BC5BFC000A33B72 /* VolleyStringRequest.swift in Sources */,
 				04B8AB711BF2EB9300ED19CA /* ChannelType.swift in Sources */,
 				88CF7E621BC5C72700A33B72 /* VolleyErrorListener.swift in Sources */,
-				04AFCAF31BD3497000C95C88 /* IDevice.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -936,7 +966,7 @@
 /* Begin PBXTargetDependency section */
 		888EFCAA1BCC533B00546DB3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8838C5561BC514B500587F8E /* Emby_ApiClient */;
+			target = 8838C5561BC514B500587F8E /* Emby */;
 			targetProxy = 888EFCA91BCC533B00546DB3 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1058,6 +1088,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Emby.ApiClient/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_DYLIB_INSTALL_NAME = "$(EXECUTABLE_PATH)";
@@ -1078,6 +1112,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Emby.ApiClient/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_DYLIB_INSTALL_NAME = "$(EXECUTABLE_PATH)";
@@ -1131,7 +1169,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8838C55F1BC514B500587F8E /* Build configuration list for PBXNativeTarget "Emby_ApiClient" */ = {
+		8838C55F1BC514B500587F8E /* Build configuration list for PBXNativeTarget "Emby" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8838C5601BC514B500587F8E /* Debug */,

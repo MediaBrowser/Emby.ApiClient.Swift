@@ -1,2 +1,3 @@
 # Alamofire
 github "Alamofire/Alamofire" ~> 3.1
+github "robbiehanson/CocoaAsyncSocket" "master"

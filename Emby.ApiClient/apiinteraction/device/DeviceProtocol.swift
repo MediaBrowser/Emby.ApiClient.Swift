@@ -5,7 +5,7 @@
 
 import Foundation
 
-public protocol IDevice {
+public protocol DeviceProtocol {
     var deviceName: String { get set }
     var deviceId: String { get set }
     

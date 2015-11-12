@@ -21,7 +21,7 @@ import Foundation
 //import java.util.HashMap;
 //import java.util.Map;
 
-public class VolleyStringRequest<T:JSONSerializable>: StringRequest<T> {
+public class VolleyStringRequest<T>: StringRequest<T> {
     
 //    private let request: HttpRequest
     let request: HttpRequest

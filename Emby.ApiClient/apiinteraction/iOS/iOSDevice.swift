@@ -30,7 +30,7 @@ import UIKit
 //import java.util.ArrayList;
 //import java.util.Observable;
 
-public class iOSDevice: IDevice {
+public class iOSDevice: DeviceProtocol {
     
     public final var deviceName: String
     public final var deviceId: String

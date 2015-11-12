@@ -87,7 +87,7 @@ public class VolleyHttpClient : IAsyncHttpClient {
     */
 //    public func addToRequestQueue(req: Emby_ApiClient.Request<String>) {
 //    public func addToRequestQueue(req: Emby_ApiClient.StringRequest) {
-    public func addToRequestQueue<T:JSONSerializable>(req: VolleyStringRequest<T>)  {
+    public func addToRequestQueue<T>(req: VolleyStringRequest<T>)  {
     
         // set the default tag if tag is empty
         //req.setTag(TAG);
@@ -147,7 +147,7 @@ public class VolleyHttpClient : IAsyncHttpClient {
 //        }
 //    }
     
-    public func Send<T>(/*final*/  request: HttpRequest, /*final*/ response: Emby_Response<T> )
+    public func Send<T>(/*final*/  request: HttpRequest, /*final*/ response: Emby.Response<T> )
     {
         /*final*/ let url = request.getUrl();
         
