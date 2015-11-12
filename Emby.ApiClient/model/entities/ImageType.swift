@@ -17,5 +17,5 @@ public enum ImageType: String {
     case Screenshot
     case Menu
     case Chapter
-    case BoxReaer
+    case BoxRear
 }
