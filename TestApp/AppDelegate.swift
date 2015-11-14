@@ -30,9 +30,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let jsonSerializer = JsonSerializer()
         
-        let service = ConnectService(jsonSerializer: jsonSerializer, logger: logger, httpClient: httpClient, appName: "Emby_ApiClient iOS", appVersion: "1.0")
+        let connectService = ConnectService(jsonSerializer: jsonSerializer, logger: logger, httpClient: httpClient, appName: "Emby_ApiClient iOS", appVersion: "1.0")
         
-//        Authenticate(httpClient, logger: logger, jsonSerializer: jsonSerializer, service: service)
+//        Authenticate(httpClient, logger: logger, jsonSerializer: jsonSerializer, service: connectService)
 
         let clientCapabilities = ClientCapabilities()
         let credentialProvider = CredentialProvider(jsonSerializer: jsonSerializer, filePath: "")
@@ -42,8 +42,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         connectionManager = ConnectionManager(clientCapabilities: clientCapabilities,
             credentialProvider: credentialProvider,
             device: device,
-            serverDiscovery: serverDiscovery)
+            serverDiscovery: serverDiscovery,
+            connectService: connectService)
+        
         connectionManager?.getAvailableServers({ (serverInfo: [ServerInfo]) -> Void in
+            
+            print("connectionManager?.getAvailableServers() returns: \(serverInfo)")
             
             }) { (ErrorType) -> Void in
                 

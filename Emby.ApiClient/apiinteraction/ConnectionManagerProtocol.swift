@@ -14,7 +14,7 @@ public protocol ConnectionManagerProtocol {
     func connect(server: ServerInfo, options: ConnectionOptions, onSuccess: (ConnectionResult) -> Void, onError: (ErrorType) -> Void)
     func connect(address: String, onSuccess: (ConnectionResult) -> Void, onError: (ErrorType) -> Void)
     func logout(onSuccess: () -> Void, onError: () -> Void)
-    func getAvailableServers(onSuccess: ([ServerInfo]) -> Void, onError: (ErrorType) -> Void)
+    func getAvailableServers(onSuccess: ([ServerInfo]) -> Void, onError: (ErrorType?) -> Void)
     func loginToConnect(username: String, password: String, onSuccess: () -> Void, onError: () -> Void)
     func createPin(deviceId: String, onSuccess: (PinCreationResult) -> Void, onError: (ErrorType) -> Void)
     func getPinStatus(pin: PinCreationResult, onSuccess: (PinStatusResult) -> Void, onError: (ErrorType) -> Void)

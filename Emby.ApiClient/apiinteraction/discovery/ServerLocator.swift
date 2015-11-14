@@ -27,6 +27,7 @@ public class ServerLocator: ServerDiscoveryProtocol, GCDAsyncUdpSocketDelegate {
     private let logger: ILogger
     private let jsonSerializer: IJsonSerializer
     
+    private var onSuccess: (([ServerDiscoveryInfo]) -> Void)?
     var serverDiscoveryInfo = [ServerDiscoveryInfo]()
     
     public init( logger: ILogger, jsonSerializer: IJsonSerializer) {
@@ -97,7 +98,9 @@ public class ServerLocator: ServerDiscoveryProtocol, GCDAsyncUdpSocketDelegate {
         
         let json = NSString(data: data, encoding: NSUTF8StringEncoding) as? String
         
-        print("didReceiveData \(json)")
+        // We have a response
+        print("ServerLocator >>> Broadcast response from server: \(sock.localAddress())");
+        print("ServerLocator >>> Broadcast response from server: \(json)");
         
         do {
             if let serverInfo: ServerDiscoveryInfo = try JsonSerializer().DeserializeFromString( json!, type:nil) {
@@ -125,39 +128,31 @@ public class ServerLocator: ServerDiscoveryProtocol, GCDAsyncUdpSocketDelegate {
         {
         let udpSocket = GCDAsyncUdpSocket(delegate: self, delegateQueue: dispatch_get_main_queue())
         
+        // Find the server using UDP broadcast
+            
         do {
+            self.onSuccess = onSuccess
+            
             try udpSocket.enableBroadcast(true)
 
             let sendData = "who is EmbyServer?".dataUsingEncoding(NSUTF8StringEncoding);
 
+            //Try the 255.255.255.255 first
+            
             let host = "255.255.255.255"
             let port: UInt16 = 7359;
             
-            udpSocket.sendData(sendData, toHost: host, port: port, withTimeout: NSTimeInterval(timeoutMs), tag: 111)
+            udpSocket.sendData(sendData, toHost: host, port: port, withTimeout: NSTimeInterval(Double(timeoutMs)/1000.0), tag: 1)
 
+            print("ServerLocator >>> Request packet sent to: 255.255.255.255 (DEFAULT)");
+            
         } catch {
-            print("\(error)")
+            print("Error sending DatagramPacket \(error)")
+            
+            onError(error)
         }
         
-//        // Find the server using UDP broadcast
 //        try {
-//            //Open a random port to send the package
-//            DatagramSocket c = new DatagramSocket();
-//            c.setBroadcast(true);
-//            
-//            byte[] sendData = "who is EmbyServer?".getBytes();
-//            
-//            int port = 7359;
-//            
-//            //Try the 255.255.255.255 first
-//            try {
-//                DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, InetAddress.getByName("255.255.255.255"), port);
-//                c.send(sendPacket);
-//                logger.Debug(getClass().getName() + ">>> Request packet sent to: 255.255.255.255 (DEFAULT)");
-//            } catch (Exception e) {
-//                logger.ErrorException("Error sending DatagramPacket", e);
-//            }
-//            
 //            // Broadcast the message over all the network interfaces
 //            Enumeration interfaces = NetworkInterface.getNetworkInterfaces();
 //            while (interfaces.hasMoreElements()) {
@@ -202,8 +197,9 @@ public class ServerLocator: ServerDiscoveryProtocol, GCDAsyncUdpSocketDelegate {
     
     @objc func finished() {
         
-        print("serverDiscoveryInfo \(serverDiscoveryInfo)")
-//        onResponse(self.serverDiscoveryInfo)
+        print("Found \(serverDiscoveryInfo.count) servers");
+        
+        self.onSuccess?(serverDiscoveryInfo)
     }
     
     private func Receive(c: GCDAsyncUdpSocket, timeoutMs: UInt, onResponse: ([ServerDiscoveryInfo]) -> Void) throws { // IOException {

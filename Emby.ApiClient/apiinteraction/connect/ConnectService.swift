@@ -50,15 +50,15 @@ class Md5 {
 public class ConnectService {
     
     public let JsonSerializer: IJsonSerializer
-    private let _logger: ILogger
-    private let _httpClient: IAsyncHttpClient
+    let logger: ILogger
+    let httpClient: IAsyncHttpClient
     private let appName: String
     private let appVersion: String
     
     public init(jsonSerializer: IJsonSerializer, logger: ILogger, httpClient: IAsyncHttpClient, appName: String, appVersion: String) {
         self.JsonSerializer = jsonSerializer;
-        self._logger = logger;
-        self._httpClient = httpClient;
+        self.logger = logger;
+        self.httpClient = httpClient;
         self.appName = appName;
         self.appVersion = appVersion;
     }
@@ -81,7 +81,7 @@ public class ConnectService {
 
         AddXApplicationName(request);
         
-        _httpClient.Send(request, response: SerializedResponse<T>(innerResponse: response, jsonSerializer: JsonSerializer, type: ConnectAuthenticationResult.self));
+        httpClient.Send(request, response: SerializedResponse<T>(innerResponse: response, jsonSerializer: JsonSerializer, type: ConnectAuthenticationResult.self));
     }
     
     public func CreatePin<T:PinCreationResult>(deviceId: String, final response: Emby.Response<T>)
@@ -100,7 +100,7 @@ public class ConnectService {
         
         AddXApplicationName(request);
         
-        _httpClient.Send(request, response: SerializedResponse<T>(innerResponse: response, jsonSerializer: JsonSerializer, type: PinCreationResult.self));
+        httpClient.Send(request, response: SerializedResponse<T>(innerResponse: response, jsonSerializer: JsonSerializer, type: PinCreationResult.self));
     }
     
     public func GetPinStatus<T:PinStatusResult>(pin: PinCreationResult, final response: Emby.Response<T>)
@@ -119,7 +119,7 @@ public class ConnectService {
         
         AddXApplicationName(request);
         
-        _httpClient.Send(request, response: SerializedResponse<T>(innerResponse: response, jsonSerializer: JsonSerializer, type: PinStatusResult.self));
+        httpClient.Send(request, response: SerializedResponse<T>(innerResponse: response, jsonSerializer: JsonSerializer, type: PinStatusResult.self));
     }
     
     public func ExchangePin<T:PinExchangeResult>(pin: PinCreationResult, final response: Emby.Response<T>)
@@ -139,7 +139,7 @@ public class ConnectService {
         
         AddXApplicationName(request);
         
-        _httpClient.Send(request, response: SerializedResponse<T>(innerResponse: response, jsonSerializer: JsonSerializer, type: PinExchangeResult.self));
+        httpClient.Send(request, response: SerializedResponse<T>(innerResponse: response, jsonSerializer: JsonSerializer, type: PinExchangeResult.self));
     }
     
     public func GetConnectUser<T:ConnectUser>(query: ConnectUserQuery, connectAccessToken: String?, final response: Emby.Response<T>) throws
@@ -177,7 +177,7 @@ public class ConnectService {
         try AddUserAccessToken(request, accessToken: connectAccessToken)
         AddXApplicationName(request);
         
-        _httpClient.Send(request, response: SerializedResponse<T>(innerResponse: response, jsonSerializer: JsonSerializer, type: ConnectUser.self));
+        httpClient.Send(request, response: SerializedResponse<T>(innerResponse: response, jsonSerializer: JsonSerializer, type: ConnectUser.self));
     }
     
     public func GetServers<T:ConnectUserServers>(userId: String, connectAccessToken: String, final response: Emby.Response<T>) throws
@@ -196,7 +196,7 @@ public class ConnectService {
         try AddUserAccessToken(request, accessToken: connectAccessToken)
         AddXApplicationName(request);
         
-        _httpClient.Send(request, response: SerializedResponse<T>(innerResponse: response, jsonSerializer: JsonSerializer, type: ConnectUserServers.self));
+        httpClient.Send(request, response: SerializedResponse<T>(innerResponse: response, jsonSerializer: JsonSerializer, type: ConnectUserServers.self));
     }
     
     public func Logout<T:EmptyResponse>(connectAccessToken: String, final response: Emby.Response<T>) throws
@@ -211,7 +211,7 @@ public class ConnectService {
         try AddUserAccessToken(request, accessToken: connectAccessToken)
         AddXApplicationName(request);
         
-        _httpClient.Send(request, response: SerializedResponse<T>(innerResponse: response, jsonSerializer: JsonSerializer, type: EmptyResponse.self));
+        httpClient.Send(request, response: SerializedResponse<T>(innerResponse: response, jsonSerializer: JsonSerializer, type: EmptyResponse.self));
     }
     
     private func GetConnectUrl(handler: String) -> String
@@ -252,6 +252,6 @@ public class ConnectService {
         
         AddXApplicationName(request);
         
-        _httpClient.Send(request, response: SerializedResponse<T>(innerResponse: response, jsonSerializer: JsonSerializer, type: RegistrationInfo.self));
+        httpClient.Send(request, response: SerializedResponse<T>(innerResponse: response, jsonSerializer: JsonSerializer, type: RegistrationInfo.self));
     }
 }

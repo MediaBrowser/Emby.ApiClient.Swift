@@ -12,16 +12,19 @@ public class ConnectionManager: ConnectionManagerProtocol {
     let credentialProvider: CredentialProviderProtocol
     let device: DeviceProtocol
     let serverDiscovery: ServerDiscoveryProtocol
+    let connectService: ConnectService
 
     public init(clientCapabilities: ClientCapabilities,
         credentialProvider: CredentialProviderProtocol,
         device: DeviceProtocol,
-        serverDiscovery: ServerDiscoveryProtocol) {
+        serverDiscovery: ServerDiscoveryProtocol,
+        connectService: ConnectService) {
             
         self.clientCapabilities = clientCapabilities
         self.credentialProvider = credentialProvider
         self.device = device
         self.serverDiscovery = serverDiscovery
+        self.connectService = connectService
     }
 
     public func getApiClient(item: IHasServerId) -> ApiClient? {
@@ -60,14 +63,169 @@ public class ConnectionManager: ConnectionManagerProtocol {
         //TODO
     }
     
-    public func getAvailableServers(onSuccess: ([ServerInfo]) -> Void, onError: (ErrorType) -> Void) {
+    public func getAvailableServers(onSuccess: ([ServerInfo]) -> Void, onError: (ErrorType?) -> Void) {
         //TODO
         
-        serverDiscovery.findServers(1000, onSuccess: { (serverDiscoveryInfo: [ServerDiscoveryInfo]) -> Void in
+        var serverDiscoveryFinished = false
+        var connectedServersFinished = false
+
+        var serverDiscoveryFailed = false
+        var connectedServersFailed = false
+        
+        var results = [ServerInfo]()
+        
+        func appendServerDiscoveryInfo(serverDiscoveryInfo: [ServerDiscoveryInfo]) {
+            
+            for serverDiscoveryInfoEach in serverDiscoveryInfo {
+                
+                let serverInfo = ServerInfo()
+                
+                serverInfo.localAddress = serverDiscoveryInfoEach.address!
+                serverInfo.id = serverDiscoveryInfoEach.id!
+                serverInfo.name = serverDiscoveryInfoEach.name!
+                
+                results.append(serverInfo)
+            }
+        }
+        
+        func appendConnectUserServer(connectUserServer: [ConnectUserServer]?) {
+            
+            if let connectUserServer = connectUserServer {
+                
+                for connectUserServerEach in connectUserServer {
+                    
+                    let serverInfo = ServerInfo()
+                    
+                    serverInfo.localAddress = connectUserServerEach.getLocalAddress()
+                    
+                    if let id = connectUserServerEach.getId() {
+                        serverInfo.id = id
+                    }
+                    
+                    if let name = connectUserServerEach.getName() {
+                        serverInfo.name = name
+                    }
+                    
+                    if let accessToken = connectUserServerEach.getAccessKey() {
+                        serverInfo.accessToken = accessToken
+                    }
+                    
+                    results.append(serverInfo)
+                }
+            }
+        }
+        
+        serverDiscovery.findServers(1000,
+            
+            onSuccess: { (serverDiscoveryInfo: [ServerDiscoveryInfo]) -> Void in
+            
+                print("serverDiscovery.findServers finished with \(serverDiscoveryInfo))")
+                
+                appendServerDiscoveryInfo(serverDiscoveryInfo)
+                
+                serverDiscoveryFinished = true
+                
+                if connectedServersFinished {
+                    
+                    // cannot return error if we have some results from different scan method so return error only if both methods failed
+                    
+                    if connectedServersFailed {
+                        
+                        onError(nil)
+                        
+                    } else {
+                        
+                        onSuccess(results)
+                    }
+                }
             
             }, onError: { (error) -> Void in
                 
+                print("serverDiscovery.findServers failed with \(error))")
+                
+                serverDiscoveryFinished = true
+                serverDiscoveryFailed = true
+                
+                if connectedServersFinished {
+                    
+                    // cannot return error if we have some results from different scan method so return error only if both methods failed
+                    
+                    if connectedServersFailed {
+                        
+                        onError(nil)
+                        
+                    } else {
+                    
+                        onSuccess(results)
+                    }
+                }
+                
         } )
+        
+        self.Authenticate( connectService, onSuccess: { (userId, connectAccessToken) -> Void in
+            
+            let response = Emby.Response<ConnectUserServers>()
+            
+            response.completion = { (result: ConnectUserServers?) -> Void in
+                
+                print("ConnectService.GetServers finished with \(result?.servers))")
+                
+                appendConnectUserServer(result?.servers)
+                
+                connectedServersFinished = true
+                
+                if serverDiscoveryFinished {
+                    
+                    onSuccess(results)
+                }
+                
+            }
+            
+            do {
+                
+                try self.connectService.GetServers(userId, connectAccessToken: connectAccessToken, final: response)
+                
+            } catch {
+                
+                print("Failed to ConnectService.GetServers() \(error)")
+                
+                // cannot return error if we have some results from different scan method so return error only if both methods failed
+                
+                connectedServersFinished = true
+                connectedServersFailed = true
+                
+                if serverDiscoveryFailed {
+                    
+                    onError(error)
+                    
+                } else {
+                    
+                    onSuccess(results)
+                }
+                
+            }
+            
+            }) { () -> Void in
+                
+                connectedServersFinished = true
+                connectedServersFailed = true
+                
+                print("Failed to ConnectService.Authenticate()")
+                
+                if serverDiscoveryFinished {
+                    
+                    // cannot return error if we have some results from different scan method so return error only if both methods failed
+                    
+                    if serverDiscoveryFailed {
+                        
+                        onError(nil)
+                        
+                    } else {
+                    
+                        onSuccess(results)
+                    }
+                }
+        }
     }
     
     public func loginToConnect(username: String, password: String, onSuccess: () -> Void, onError: () -> Void) {
@@ -91,6 +249,29 @@ public class ConnectionManager: ConnectionManagerProtocol {
     }
 //}
 
+    func Authenticate(service: ConnectService,
+        onSuccess:(userId: String, connectAccessToken: String) -> Void, onError:() -> Void) {
+            
+            let response = Emby.Response<ConnectAuthenticationResult>()
+            
+            response.completion = { (result: ConnectAuthenticationResult?) -> Void in
+                
+                print("Authenticate finished with \(result) \(result?.getAccessToken())")
+                
+                if let
+                    userId = result?.getUser()?.getId(),
+                    connectAccessToken = result?.getAccessToken() {
+                        
+                        onSuccess(userId: userId, connectAccessToken: connectAccessToken)
+                        
+                } else {
+                    
+                    onError()
+                }
+            }
+            
+            service.Authenticate("vedrano", password: "123456", response: response)
+    }
 
 
 
@@ -736,7 +917,7 @@ public class ConnectionManager: ConnectionManagerProtocol {
 //    
 //    protected void FindServersInternal(final Response<ArrayList<ServerInfo>> response)
 //    {
-//        serverDiscovery.FindServers(1000, new FindServersInnerResponse(this, response));
+//        serverDiscovery.serverDiscoveryInfo.size()(1000, new FindServersInnerResponse(this, response));
 //    }
 //    
 //    void WakeAllServers()
