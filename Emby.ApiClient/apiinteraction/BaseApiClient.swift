@@ -382,164 +382,57 @@ public class BaseApiClient// implements IDisposable
         return getApiUrl(baseUrl, queryString: queryParams);
     }
 
-//    
-//    /**
-//    Gets the image URL.
-//    
-//    @param item The item.
-//    @param options The options.
-//    @return System.String.
-//    */
-//    public final String GetImageUrl(BaseItemDto item, ImageOptions options)
-//    {
-//        if (item == null)
-//        {
-//            throw new IllegalArgumentException("item");
-//        }
-//        
-//        if (options == null)
-//        {
-//            throw new IllegalArgumentException("options");
-//        }
-//        
-//        options.setTag(GetImageTag(item, options));
-//        
-//        return GetImageUrl(item.getId(), options);
-//    }
-//    
-//    public final String GetImageUrl(ChannelInfoDto item, ImageOptions options)
-//    {
-//        if (item == null)
-//        {
-//            throw new IllegalArgumentException("item");
-//        }
-//        
-//        if (options == null)
-//        {
-//            throw new IllegalArgumentException("options");
-//        }
-//        
-//        options.setTag(item.getImageTags().get(options.getImageType()));
-//        
-//        return GetImageUrl(item.getId(), options);
-//    }
-//    
-//    /**
-//    Gets an image url that can be used to download an image from the api
-//    
-//    @param itemId The Id of the item
-//    @param options The options.
-//    @return System.String.
-//    @exception System.ArgumentNullException itemId
-//    */
-//    public final String GetImageUrl(String itemId, ImageOptions options)
-//    {
-//        if (tangible.DotNetToJavaStringHelper.isNullOrEmpty(itemId))
-//        {
-//            throw new IllegalArgumentException("itemId");
-//        }
-//        
-//        String url = "Items/" + itemId + "/Images/" + options.getImageType();
-//        
-//        return GetImageUrl(url, options, new QueryStringDictionary());
-//    }
-//    
-//    /**
-//    Gets the user image URL.
-//    
-//    @param user The user.
-//    @param options The options.
-//    @return System.String.
-//    @exception System.ArgumentNullException user
-//    */
-//    public final String GetUserImageUrl(UserDto user, ImageOptions options)
-//    {
-//        if (user == null)
-//        {
-//            throw new IllegalArgumentException("user");
-//        }
-//        
-//        if (options == null)
-//        {
-//            throw new IllegalArgumentException("options");
-//        }
-//        
-//        options.setTag(user.getPrimaryImageTag());
-//        
-//        return GetUserImageUrl(user.getId(), options);
-//    }
-//    
-//    /**
-//    Gets an image url that can be used to download an image from the api
-//    
-//    @param userId The Id of the user
-//    @param options The options.
-//    @return System.String.
-//    @exception System.ArgumentNullException userId
-//    */
-//    public final String GetUserImageUrl(String userId, ImageOptions options)
-//    {
-//        if (tangible.DotNetToJavaStringHelper.isNullOrEmpty(userId))
-//        {
-//            throw new IllegalArgumentException("userId");
-//        }
-//        
-//        String url = "Users/" + userId + "/Images/" + options.getImageType();
-//        
-//        return GetImageUrl(url, options, new QueryStringDictionary());
-//    }
-//    
-//    /**
-//    Gets the person image URL.
-//    
-//    @param item The item.
-//    @param options The options.
-//    @return System.String.
-//    @exception System.ArgumentNullException item
-//    */
-//    public final String GetPersonImageUrl(BaseItemPerson item, ImageOptions options)
-//    {
-//        if (item == null)
-//        {
-//            throw new IllegalArgumentException("item");
-//        }
-//        
-//        if (options == null)
-//        {
-//            throw new IllegalArgumentException("options");
-//        }
-//        
-//        options.setTag(item.getPrimaryImageTag());
-//        
-//        return GetImageUrl(item.getId(), options);
-//    }
-//    
-//    /**
-//    Gets the image tag.
-//    
-//    @param item The item.
-//    @param options The options.
-//    @return System.String.
-//    */
-//    private String GetImageTag(BaseItemDto item, ImageOptions options)
-//    {
-//        if (options.getImageType() == ImageType.Backdrop)
-//        {
-//            return item.getBackdropImageTags().get((options.getImageIndex() != null) ? options.getImageIndex() : 0);
-//        }
-//        
-//        if (options.getImageType() == ImageType.Screenshot)
-//        {
-//            return item.getScreenshotImageTags().get((options.getImageIndex() != null) ? options.getImageIndex() : 0);
-//        }
-//        
-//        if (options.getImageType() == ImageType.Chapter)
-//        {
-//            return item.getChapters().get((options.getImageIndex() != null) ? options.getImageIndex() : 0).getImageTag();
-//        }
-//        
-//        return item.getImageTags().get(options.getImageType());
-//    }
+    public final func getImageUrl(item: BaseItemDto, var options: ImageOptions) -> String? {
+        options.tag = getImageTag(item, options: options)
+        
+        return getImageUrl(item.id, options: options)
+    }
+
+    public final func getImageUrl(itemId: String?, options: ImageOptions) -> String? {
+        if let id = itemId {
+            let url = "Items/\(id)/Images/\(options.imageType)";
+            
+            return getImageUrl(url, options: options, queryParams: QueryStringDictionary())
+        }
+        
+        return nil
+    }
+    
+    public final func getUserImageUrl(user: UserDto, var options: ImageOptions) -> String? {
+        options.tag = user.primaryImageTag
+        
+        return getUserImageUrl(user.id, options: options)
+    }
+    
+    public final func getUserImageUrl(userId: String?, options: ImageOptions) -> String? {
+        if let id = userId {
+            let url = "Users/\(id)/Images/\(options.imageType)";
+            
+            return getImageUrl(url, options: options, queryParams: QueryStringDictionary())
+        }
+        
+        return nil
+    }
+
+    public final func getPersonImageUrl(item: BaseItemPerson, var options: ImageOptions) -> String? {
+        options.tag = item.primaryImageTag
+        
+        return getImageUrl(item.id, options: options)
+    }
+
+    private func getImageTag(item: BaseItemDto, options: ImageOptions) -> String? {
+        switch options.imageType {
+        case .Backdrop:
+            return item.backdropImageTags?[options.imageIndex ?? 0]
+        case .Screenshot:
+            return item.screenshotImageTags?[options.imageIndex ?? 0]
+        case .Chapter:
+            return item.chapters?[options.imageIndex ?? 0].imageTag
+        default:
+            return item.imageTags?[options.imageType]
+        }
+    }
+
 //    
 //    /**
 //    Gets an image url that can be used to download an image from the api
