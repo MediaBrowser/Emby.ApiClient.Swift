@@ -16,6 +16,13 @@
 		041643AA1BD48E6100873FAB /* ConnectionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041643A91BD48E6100873FAB /* ConnectionResult.swift */; };
 		041643AD1BD495A700873FAB /* InstallationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041643AC1BD495A700873FAB /* InstallationInfo.swift */; };
 		041643AF1BD4962100873FAB /* PackageVersionClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041643AE1BD4962100873FAB /* PackageVersionClass.swift */; };
+		047B76E81BFACA5D0003A743 /* UserDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047B76E71BFACA5D0003A743 /* UserDto.swift */; };
+		047B76EB1BFACBFD0003A743 /* UserConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047B76EA1BFACBFD0003A743 /* UserConfiguration.swift */; };
+		047B76ED1BFACDA50003A743 /* SubtitlePlaybackMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047B76EC1BFACDA50003A743 /* SubtitlePlaybackMode.swift */; };
+		047B76F01BFACE0F0003A743 /* UserPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047B76EF1BFACE0F0003A743 /* UserPolicy.swift */; };
+		047B76F21BFAD08B0003A743 /* UnratedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047B76F11BFAD08B0003A743 /* UnratedItem.swift */; };
+		047B76F41BFAD1320003A743 /* AccessSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047B76F31BFAD1320003A743 /* AccessSchedule.swift */; };
+		047B76F61BFAD2B60003A743 /* DynamicDayOfWeek.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047B76F51BFAD2B60003A743 /* DynamicDayOfWeek.swift */; };
 		04AFCAD81BD33E0500C95C88 /* ServerLocatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFCAD71BD33E0500C95C88 /* ServerLocatorProtocol.swift */; };
 		04AFCADC1BD33FEA00C95C88 /* ServerDiscoveryInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFCADB1BD33FEA00C95C88 /* ServerDiscoveryInfo.swift */; };
 		04AFCAE21BD3436600C95C88 /* ConnectionManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFCAE11BD3436600C95C88 /* ConnectionManagerProtocol.swift */; };
@@ -161,6 +168,13 @@
 		041643A91BD48E6100873FAB /* ConnectionResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionResult.swift; sourceTree = "<group>"; };
 		041643AC1BD495A700873FAB /* InstallationInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InstallationInfo.swift; path = updates/InstallationInfo.swift; sourceTree = "<group>"; };
 		041643AE1BD4962100873FAB /* PackageVersionClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PackageVersionClass.swift; path = updates/PackageVersionClass.swift; sourceTree = "<group>"; };
+		047B76E71BFACA5D0003A743 /* UserDto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserDto.swift; path = dto/UserDto.swift; sourceTree = "<group>"; };
+		047B76EA1BFACBFD0003A743 /* UserConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserConfiguration.swift; path = configuration/UserConfiguration.swift; sourceTree = "<group>"; };
+		047B76EC1BFACDA50003A743 /* SubtitlePlaybackMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SubtitlePlaybackMode.swift; path = configuration/SubtitlePlaybackMode.swift; sourceTree = "<group>"; };
+		047B76EF1BFACE0F0003A743 /* UserPolicy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserPolicy.swift; path = users/UserPolicy.swift; sourceTree = "<group>"; };
+		047B76F11BFAD08B0003A743 /* UnratedItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UnratedItem.swift; path = configuration/UnratedItem.swift; sourceTree = "<group>"; };
+		047B76F31BFAD1320003A743 /* AccessSchedule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccessSchedule.swift; path = configuration/AccessSchedule.swift; sourceTree = "<group>"; };
+		047B76F51BFAD2B60003A743 /* DynamicDayOfWeek.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DynamicDayOfWeek.swift; path = configuration/DynamicDayOfWeek.swift; sourceTree = "<group>"; };
 		04AFCAD71BD33E0500C95C88 /* ServerLocatorProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerLocatorProtocol.swift; sourceTree = "<group>"; };
 		04AFCADB1BD33FEA00C95C88 /* ServerDiscoveryInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerDiscoveryInfo.swift; sourceTree = "<group>"; };
 		04AFCAE11BD3436600C95C88 /* ConnectionManagerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionManagerProtocol.swift; sourceTree = "<group>"; };
@@ -314,6 +328,26 @@
 			name = updates;
 			sourceTree = "<group>";
 		};
+		047B76E91BFACBEF0003A743 /* configuration */ = {
+			isa = PBXGroup;
+			children = (
+				047B76EA1BFACBFD0003A743 /* UserConfiguration.swift */,
+				047B76EC1BFACDA50003A743 /* SubtitlePlaybackMode.swift */,
+				047B76F11BFAD08B0003A743 /* UnratedItem.swift */,
+				047B76F31BFAD1320003A743 /* AccessSchedule.swift */,
+				047B76F51BFAD2B60003A743 /* DynamicDayOfWeek.swift */,
+			);
+			name = configuration;
+			sourceTree = "<group>";
+		};
+		047B76EE1BFACDFF0003A743 /* users */ = {
+			isa = PBXGroup;
+			children = (
+				047B76EF1BFACE0F0003A743 /* UserPolicy.swift */,
+			);
+			name = users;
+			sourceTree = "<group>";
+		};
 		04AFCAD61BD33E0500C95C88 /* discovery */ = {
 			isa = PBXGroup;
 			children = (
@@ -370,6 +404,7 @@
 				04B8AB801BF4368900ED19CA /* MediaSourceInfo.swift */,
 				04B8AB851BF43ABF00ED19CA /* MediaSourceType.swift */,
 				04B8AB8F1BF44ADB00ED19CA /* UserItemDataDto.swift */,
+				047B76E71BFACA5D0003A743 /* UserDto.swift */,
 			);
 			name = dto;
 			sourceTree = "<group>";
@@ -558,6 +593,8 @@
 		8838C5681BC51FD900587F8E /* model */ = {
 			isa = PBXGroup;
 			children = (
+				047B76EE1BFACDFF0003A743 /* users */,
+				047B76E91BFACBEF0003A743 /* configuration */,
 				04B8AB821BF43A6900ED19CA /* mediainfo */,
 				04B8AB691BF1970E00ED19CA /* livetv */,
 				04B8AB601BF1909000ED19CA /* providers */,
@@ -844,6 +881,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				88CF7E641BC5C85A00A33B72 /* Context.swift in Sources */,
+				047B76ED1BFACDA50003A743 /* SubtitlePlaybackMode.swift in Sources */,
 				889288D31BE8DCE700DAD65F /* FileUploadProgress.swift in Sources */,
 				041643A81BD4280600873FAB /* SystemInfo.swift in Sources */,
 				0416439F1BD4204300873FAB /* WakeOnLanInfo.swift in Sources */,
@@ -852,11 +890,14 @@
 				04AFCAF91BD34B4800C95C88 /* ProgressProtocol.swift in Sources */,
 				88CF7E391BC5B9AE00A33B72 /* SerializedResponse.swift in Sources */,
 				04B8AB8A1BF43D2600ED19CA /* MediaStreamType.swift in Sources */,
+				047B76EB1BFACBFD0003A743 /* UserConfiguration.swift in Sources */,
+				047B76F61BFAD2B60003A743 /* DynamicDayOfWeek.swift in Sources */,
 				04B8AB4D1BF037ED00ED19CA /* NextUpQuery.swift in Sources */,
 				04B8AB7D1BF2F24700ED19CA /* StudioDto.swift in Sources */,
 				8857F86D1BCC633F00ADFA8A /* VolleyError.swift in Sources */,
 				04AFCAE61BD3453400C95C88 /* ClientCapabilities.swift in Sources */,
 				04B8AB751BF2EC1F00ED19CA /* MetadataFields.swift in Sources */,
+				047B76F21BFAD08B0003A743 /* UnratedItem.swift in Sources */,
 				04AFCAE91BD346F200C95C88 /* DeviceProfile.swift in Sources */,
 				88CF7E581BC5BF0300A33B72 /* ILogger.swift in Sources */,
 				04B8AB861BF43ABF00ED19CA /* MediaSourceType.swift in Sources */,
@@ -902,6 +943,7 @@
 				04B8AB641BF1922900ED19CA /* PlayAccess.swift in Sources */,
 				88CF7E3F1BC5BCA800A33B72 /* VolleyHttpClient.swift in Sources */,
 				88CF7E551BC5BE9600A33B72 /* VolleyResponseListener.swift in Sources */,
+				047B76F41BFAD1320003A743 /* AccessSchedule.swift in Sources */,
 				04AFCAFB1BD34B9900C95C88 /* CancellationToken.swift in Sources */,
 				041643A11BD4216100873FAB /* UserLinkType.swift in Sources */,
 				04B8AB731BF2EBD400ED19CA /* ImageOrientation.swift in Sources */,
@@ -915,6 +957,7 @@
 				88CF7E591BC5BF8C00A33B72 /* QueryStringDictionary.swift in Sources */,
 				88CF7E691BC5CBDB00A33B72 /* Request.swift in Sources */,
 				889288D51BE908A500DAD65F /* BaseApiClient.swift in Sources */,
+				047B76E81BFACA5D0003A743 /* UserDto.swift in Sources */,
 				04B8AB4B1BEDB00D00ED19CA /* LocationType.swift in Sources */,
 				04B8AB471BEDAF8100ED19CA /* ImageType.swift in Sources */,
 				04AFCADC1BD33FEA00C95C88 /* ServerDiscoveryInfo.swift in Sources */,
@@ -948,6 +991,7 @@
 				04AFCAE21BD3436600C95C88 /* ConnectionManagerProtocol.swift in Sources */,
 				88CF7E5D1BC5BFC000A33B72 /* VolleyStringRequest.swift in Sources */,
 				04B8AB711BF2EB9300ED19CA /* ChannelType.swift in Sources */,
+				047B76F01BFACE0F0003A743 /* UserPolicy.swift in Sources */,
 				88CF7E621BC5C72700A33B72 /* VolleyErrorListener.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
