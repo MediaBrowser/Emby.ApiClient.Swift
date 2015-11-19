@@ -243,7 +243,7 @@ public class BaseApiClient// implements IDisposable
     internal final func getItemListUrl(query: ItemQuery) -> String {
         let dict = QueryStringDictionary()
         
-        dict.addIfNotNil("ParentId", value: query.parentId)
+        dict.addIfNotNilOrEmpty("ParentId", value: query.parentId)
         dict.addIfNotNil("StartIndex", value: query.startIndex)
         dict.addIfNotNil("Limit", value: query.limit)
         dict.add("SortBy", value: query.sortBy)
@@ -255,8 +255,8 @@ public class BaseApiClient// implements IDisposable
         dict.addIfNotNil("Is3d", value: query.is3d)
         dict.add("AirDays", value: query.airDays)
         dict.add("VideoTypes", value: query.videoTypes?.map({$0.rawValue}))
-        dict.addIfNotNil("MinOfficialRating", value: query.minOfficialRating)
-        dict.addIfNotNil("MaxOfficialRating", value: query.maxOfficialRating)
+        dict.addIfNotNilOrEmpty("MinOfficialRating", value: query.minOfficialRating)
+        dict.addIfNotNilOrEmpty("MaxOfficialRating", value: query.maxOfficialRating)
         dict.addIfNotNil("recursive", value: query.recursive)
         dict.addIfNotNil("MinIndexNumber", value: query.minIndexNumber)
         dict.add("MediaTypes", value: query.mediaTypes)
@@ -274,15 +274,15 @@ public class BaseApiClient// implements IDisposable
         dict.addIfNotNil("ParentIndexNumber", value: query.parentIndexNumber)
         dict.addIfNotNil("IsHD", value: query.isHd)
         dict.addIfNotNil("HasParentalRating", value: query.hasParentRating)
-        dict.addIfNotNil("SearchTerm", value: query.searchTerm)
+        dict.addIfNotNilOrEmpty("SearchTerm", value: query.searchTerm)
         dict.addIfNotNil("MinCriticRating", value: query.minCriticRating)
         dict.addIfNotNil("MinCommunityRating", value: query.minCommunityRating)
         dict.addIfNotNil("MinPlayers", value: query.minPlayers)
         dict.addIfNotNil("MaxPlayers", value: query.maxPlayers)
-        dict.addIfNotNil("NameStartsWithOrGreater", value: query.nameStartsWithOrGreater)
-        dict.addIfNotNil("NameStartsWith", value: query.nameStartsWith)
-        dict.addIfNotNil("NameLessThan", value: query.nameLessThan)
-        dict.addIfNotNil("AlbumArtistStartsWithOrGreater", value: query.albumArtistStartsWithOrGreater)
+        dict.addIfNotNilOrEmpty("NameStartsWithOrGreater", value: query.nameStartsWithOrGreater)
+        dict.addIfNotNilOrEmpty("NameStartsWith", value: query.nameStartsWith)
+        dict.addIfNotNilOrEmpty("NameLessThan", value: query.nameLessThan)
+        dict.addIfNotNilOrEmpty("AlbumArtistStartsWithOrGreater", value: query.albumArtistStartsWithOrGreater)
         dict.addIfNotNil("LocationTypes", value: query.locationTypes.map({String($0)}))
         dict.addIfNotNil("ExcludeLocationTypes", value: query.excludeLocationTypes.map({String($0)}))
         dict.addIfNotNil("IsMissing", value: query.isMissing)
@@ -303,7 +303,7 @@ public class BaseApiClient// implements IDisposable
         dict.addIfNotNil("Limit", value: query.limit)
         dict.addIfNotNil("StartIndex", value: query.startIndex)
         dict.addIfNotNil("UserId", value: query.userId);
-        dict.addIfNotNil("SeriesId", value: query.seriesId);
+        dict.addIfNotNilOrEmpty("SeriesId", value: query.seriesId);
         dict.addIfNotNil("EnableImages", value: query.enableImages)
         dict.addIfNotNil("ImageTypeLimit", value: query.imageTypeLimit)
         dict.add("EnableImageTypes", value: query.enableImageTypes?.map({$0.rawValue}))
@@ -315,7 +315,7 @@ public class BaseApiClient// implements IDisposable
         let dict = QueryStringDictionary()
         
         dict.addIfNotNil("Limit", value: query.limit)
-        dict.addIfNotNil("UserId", value: query.userId)
+        dict.addIfNotNilOrEmpty("UserId", value: query.userId)
         dict.add("Fields", value: query.fields?.map({$0.rawValue}))
         
         return getApiUrl("\(type!)/\(query.id!)/Similar", queryString: dict)
@@ -325,7 +325,7 @@ public class BaseApiClient// implements IDisposable
         let dict = QueryStringDictionary()
         
         dict.addIfNotNil("Limit", value: query.limit)
-        dict.addIfNotNil("UserId", value: query.userId)
+        dict.addIfNotNilOrEmpty("UserId", value: query.userId)
         dict.add("Fields", value: query.fields?.map({$0.rawValue}))
         
         return getApiUrl("\(type!)/\(query.id!)/InstantMix", queryString: dict)
@@ -334,7 +334,7 @@ public class BaseApiClient// implements IDisposable
     internal final func getItemByNameListUrl(query: ItemsByNameQuery, type: String?) -> String {
         let dict = QueryStringDictionary()
         
-        dict.addIfNotNil("ParentId", value: query.parentId)
+        dict.addIfNotNilOrEmpty("ParentId", value: query.parentId)
         dict.addIfNotNil("UserId", value: query.userId);
         dict.addIfNotNil("StartIndex", value: query.startIndex)
         dict.addIfNotNil("Limit", value: query.limit)
@@ -348,9 +348,9 @@ public class BaseApiClient// implements IDisposable
         dict.add("MediaTypes", value: query.mediaTypes)
         dict.add("ExcludeItemTypes", value: query.excludeItemTypes)
         dict.add("IncludeItemTypes", value: query.includeItemTypes)
-        dict.addIfNotNil("NameStartsWithOrGreater", value: query.nameStartsWithOrGreater)
-        dict.addIfNotNil("NameStartsWith", value: query.nameStartsWith)
-        dict.addIfNotNil("NameLessThan", value: query.nameLessThan)
+        dict.addIfNotNilOrEmpty("NameStartsWithOrGreater", value: query.nameStartsWithOrGreater)
+        dict.addIfNotNilOrEmpty("NameStartsWith", value: query.nameStartsWith)
+        dict.addIfNotNilOrEmpty("NameLessThan", value: query.nameLessThan)
         dict.addIfNotNil("EnableImages", value: query.enableImages)
         dict.addIfNotNil("ImageTypeLimit", value: query.imageTypeLimit)
         dict.add("EnableImageTypes", value: query.enableImageTypes?.map({$0.rawValue}))
@@ -368,7 +368,7 @@ public class BaseApiClient// implements IDisposable
             queryParams.addIfNotNil("Quality", value: quality)
         }
         
-        queryParams.addIfNotNil("Tag", value: options.tag)
+        queryParams.addIfNotNilOrEmpty("Tag", value: options.tag)
         queryParams.addIfNotNil("CropWhitespace", value: options.cropWhiteSpace)
         queryParams.addIfNotNil("EnableImageEnhancers", value: options.enableImageEnhancers)
 
@@ -377,7 +377,7 @@ public class BaseApiClient// implements IDisposable
       
         queryParams.addIfNotNil("UnPlayedCount", value: options.unplayedCount);
         queryParams.addIfNotNil("PercentPlayed", value: options.percentPlayed);
-        queryParams.addIfNotNil("BackgroundColor", value: options.backgroundColor);
+        queryParams.addIfNotNilOrEmpty("BackgroundColor", value: options.backgroundColor);
 
         return getApiUrl(baseUrl, queryString: queryParams);
     }

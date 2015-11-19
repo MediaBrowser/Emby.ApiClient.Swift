@@ -50,15 +50,15 @@ public class ServerCredentials {
 
             }
             
-            if let serverRemoteAddress = server.remoteAddress {
-                existingServer.remoteAddress = serverRemoteAddress
+            if let serverRemoteAddress = server.remoteAddress where !serverRemoteAddress.isEmpty {
+                    existingServer.remoteAddress = serverRemoteAddress
             }
 
-            if let serverLocalAddress = server.localAddress {
+            if let serverLocalAddress = server.localAddress where !serverLocalAddress.isEmpty {
                 existingServer.localAddress = serverLocalAddress
             }
  
-            if let serverManualAddress = server.manualAddress {
+            if let serverManualAddress = server.manualAddress where !serverManualAddress.isEmpty {
                 existingServer.manualAddress = serverManualAddress
             }
             
