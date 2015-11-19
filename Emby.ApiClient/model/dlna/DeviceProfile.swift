@@ -6,5 +6,5 @@
 import Foundation
 
 public class DeviceProfile {
-    
+    // TODO: Implement
 }
