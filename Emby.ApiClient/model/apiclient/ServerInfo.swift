@@ -29,8 +29,13 @@ public class ServerInfo: Hashable {
         name = systemInfo.serverName
         id = systemInfo.id
         
-        localAddress = systemInfo.localAddress
-        remoteAddress = systemInfo.wanAddress
+        if let lAddress = systemInfo.localAddress where !lAddress.isEmpty {
+            localAddress = lAddress
+        }
+        
+        if let wAddress = systemInfo.wanAddress where !wAddress.isEmpty {
+            remoteAddress = wAddress
+        }
         
         if let fullSystemInfo = systemInfo as? SystemInfo {
                 wakeOnLanInfos.append(WakeOnLanInfo(macAddress: fullSystemInfo.macAddress))
