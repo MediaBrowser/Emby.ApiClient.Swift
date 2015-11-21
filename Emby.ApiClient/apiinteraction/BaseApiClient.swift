@@ -433,339 +433,158 @@ public class BaseApiClient// implements IDisposable
         }
     }
 
-//    
-//    /**
-//    Gets an image url that can be used to download an image from the api
-//    
-//    @param name The name.
-//    @param options The options.
-//    @return System.String.
-//    @exception System.ArgumentNullException name
-//    */
-//    public final String GetGenreImageUrl(String name, ImageOptions options)
-//    {
-//        if (tangible.DotNetToJavaStringHelper.isNullOrEmpty(name))
-//        {
-//            throw new IllegalArgumentException("name");
-//        }
-//        
-//        String url = "Genres/" + GetSlugName(name) + "/Images/" + options.getImageType();
-//        
-//        return GetImageUrl(url, options, new QueryStringDictionary());
-//    }
-//    
-//    /**
-//    Gets the music genre image URL.
-//    
-//    @param name The name.
-//    @param options The options.
-//    @return System.String.
-//    @exception System.ArgumentNullException name
-//    */
-//    public final String GetMusicGenreImageUrl(String name, ImageOptions options)
-//    {
-//        if (tangible.DotNetToJavaStringHelper.isNullOrEmpty(name))
-//        {
-//            throw new IllegalArgumentException("name");
-//        }
-//        
-//        String url = "MusicGenres/" + GetSlugName(name) + "/Images/" + options.getImageType();
-//        
-//        return GetImageUrl(url, options, new QueryStringDictionary());
-//    }
-//    
-//    /**
-//    Gets the game genre image URL.
-//    
-//    @param name The name.
-//    @param options The options.
-//    @return System.String.
-//    @exception System.ArgumentNullException name
-//    */
-//    public final String GetGameGenreImageUrl(String name, ImageOptions options)
-//    {
-//        if (tangible.DotNetToJavaStringHelper.isNullOrEmpty(name))
-//        {
-//            throw new IllegalArgumentException("name");
-//        }
-//        
-//        String url = "GameGenres/" + GetSlugName(name) + "/Images/" + options.getImageType();
-//        
-//        return GetImageUrl(url, options, new QueryStringDictionary());
-//    }
-//    
-//    /**
-//    Gets an image url that can be used to download an image from the api
-//    
-//    @param name The name.
-//    @param options The options.
-//    @return System.String.
-//    @exception System.ArgumentNullException name
-//    */
-//    public final String GetStudioImageUrl(String name, ImageOptions options)
-//    {
-//        if (tangible.DotNetToJavaStringHelper.isNullOrEmpty(name))
-//        {
-//            throw new IllegalArgumentException("name");
-//        }
-//        
-//        String url = "Studios/" + GetSlugName(name) + "/Images/" + options.getImageType();
-//        
-//        return GetImageUrl(url, options, new QueryStringDictionary());
-//    }
-//    
-//    /**
-//    Gets the artist image URL.
-//    
-//    @param name The name.
-//    @param options The options.
-//    @return System.String.
-//    @exception System.ArgumentNullException name
-//    */
-//    public final String GetArtistImageUrl(String name, ImageOptions options)
-//    {
-//        if (tangible.DotNetToJavaStringHelper.isNullOrEmpty(name))
-//        {
-//            throw new IllegalArgumentException("name");
-//        }
-//        
-//        String url = "Artists/" + GetSlugName(name) + "/Images/" + options.getImageType();
-//        
-//        return GetImageUrl(url, options, new QueryStringDictionary());
-//    }
-//    
-//    /**
-//    This is a helper to get a list of backdrop url's from a given ApiBaseItemWrapper. If the actual item does not have any backdrops it will return backdrops from the first parent that does.
-//    
-//    @param item A given item.
-//    @param options The options.
-//    @return System.String[][].
-//    @exception System.ArgumentNullException item
-//    */
-//    public final String[] GetBackdropImageUrls(BaseItemDto item, ImageOptions options)
-//    {
-//        if (item == null)
-//        {
-//            throw new IllegalArgumentException("item");
-//        }
-//        
-//        if (options == null)
-//        {
-//            throw new IllegalArgumentException("options");
-//        }
-//        
-//        options.setImageType(ImageType.Backdrop);
-//        
-//        String backdropItemId;
-//        java.util.ArrayList<String> backdropImageTags;
-//        
-//        if (item.getBackdropCount() == 0)
-//        {
-//            backdropItemId = item.getParentBackdropItemId();
-//            backdropImageTags = item.getParentBackdropImageTags();
-//        }
-//        else
-//        {
-//            backdropItemId = item.getId();
-//            backdropImageTags = item.getBackdropImageTags();
-//        }
-//        
-//        if (tangible.DotNetToJavaStringHelper.isNullOrEmpty(backdropItemId))
-//        {
-//            return new String[] { };
-//        }
-//        
-//        String[] files = new String[backdropImageTags.size()];
-//        
-//        for (int i = 0; i < backdropImageTags.size(); i++)
-//        {
-//            options.setImageIndex(i);
-//            options.setTag(backdropImageTags.get(i));
-//            
-//            files[i] = GetImageUrl(backdropItemId, options);
-//        }
-//        
-//        return files;
-//    }
-//    
-//    /**
-//    This is a helper to get the logo image url from a given ApiBaseItemWrapper. If the actual item does not have a logo, it will return the logo from the first parent that does, or null.
-//    
-//    @param item A given item.
-//    @param options The options.
-//    @return System.String.
-//    @exception System.ArgumentNullException item
-//    */
-//    public final String GetLogoImageUrl(BaseItemDto item, ImageOptions options)
-//    {
-//        if (item == null)
-//        {
-//            throw new IllegalArgumentException("item");
-//        }
-//        
-//        if (options == null)
-//        {
-//            throw new IllegalArgumentException("options");
-//        }
-//        
-//        options.setImageType(ImageType.Logo);
-//        
-//        //C# TO JAVA CONVERTER TODO TASK: There is no equivalent to implicit typing in Java:
-//        String logoItemId = item.getHasLogo() ? item.getId() : item.getParentLogoItemId();
-//        //C# TO JAVA CONVERTER TODO TASK: There is no equivalent to implicit typing in Java:
-//        String imageTag = item.getHasLogo() ? item.getImageTags().get(ImageType.Logo) : item.getParentLogoImageTag();
-//        
-//        if (!tangible.DotNetToJavaStringHelper.isNullOrEmpty(logoItemId))
-//        {
-//            options.setTag(imageTag);
-//            
-//            return GetImageUrl(logoItemId, options);
-//        }
-//        
-//        return null;
-//    }
-//    
-//    public final String GetThumbImageUrl(BaseItemDto item, ImageOptions options)
-//    {
-//        if (item == null)
-//        {
-//            throw new IllegalArgumentException("item");
-//        }
-//        
-//        if (options == null)
-//        {
-//            throw new IllegalArgumentException("options");
-//        }
-//        
-//        options.setImageType(ImageType.Thumb);
-//        
-//        //C# TO JAVA CONVERTER TODO TASK: There is no equivalent to implicit typing in Java:
-//        String itemId = item.getHasThumb() ? item.getId() : item.getSeriesThumbImageTag() != null ? item.getSeriesId() : item.getParentThumbItemId();
-//        //C# TO JAVA CONVERTER TODO TASK: There is no equivalent to implicit typing in Java:
-//        String imageTag = item.getHasThumb() ? item.getImageTags().get(ImageType.Thumb) : (item.getSeriesThumbImageTag() != null) ? item.getSeriesThumbImageTag() : item.getParentThumbImageTag();
-//        
-//        if (!tangible.DotNetToJavaStringHelper.isNullOrEmpty(itemId))
-//        {
-//            options.setTag(imageTag);
-//            
-//            return GetImageUrl(itemId, options);
-//        }
-//        
-//        return null;
-//    }
-//    
-//    /** 
-//    This is a helper to get the art image url from a given BaseItemDto. If the actual item does not have a logo, it will return the logo from the first parent that does, or null.
-//    
-//    @param item A given item.
-//    @param options The options.
-//    @return System.String.
-//    @exception System.ArgumentNullException item
-//    */
-//    public final String GetArtImageUrl(BaseItemDto item, ImageOptions options)
-//    {
-//        if (item == null)
-//        {
-//            throw new IllegalArgumentException("item");
-//        }
-//        
-//        if (options == null)
-//        {
-//            throw new IllegalArgumentException("options");
-//        }
-//        
-//        options.setImageType(ImageType.Art);
-//        
-//        //C# TO JAVA CONVERTER TODO TASK: There is no equivalent to implicit typing in Java:
-//        String artItemId = item.getHasArtImage() ? item.getId() : item.getParentArtItemId();
-//        //C# TO JAVA CONVERTER TODO TASK: There is no equivalent to implicit typing in Java:
-//        String imageTag = item.getHasArtImage() ? item.getImageTags().get(ImageType.Art) : item.getParentArtImageTag();
-//        
-//        if (!tangible.DotNetToJavaStringHelper.isNullOrEmpty(artItemId))
-//        {
-//            options.setTag(imageTag);
-//            
-//            return GetImageUrl(artItemId, options);
-//        }
-//        
-//        return null;
-//    }
-//    
-//    protected final <T> T DeserializeFromString(String stream, java.lang.Class type)
-//    {
-//        return getJsonSerializer().DeserializeFromString(stream, type);
-//    }
-//    
-//    /** 
-//    Serializers to json.
-//    
-//    @param obj The obj.
-//    @return System.String.
-//    */
-//    protected final String SerializeToJson(Object obj)
-//    {
-//        return getJsonSerializer().SerializeToString(obj);
-//    }
+    public final func getGenreImageUrl(name: String, options: ImageOptions) throws -> String {
+        guard !name.isEmpty else {
+            throw IllegalArgumentError.EmptyString(argumentName: "name")
+        }
+        
+        let url = "Genres/\(getSlugName(name))/Images/\(options.imageType)"
+        
+        return getImageUrl(url, options: options, queryParams: QueryStringDictionary())
+    }
+
+    public final func getMusicGenreImageUrl(name: String, options: ImageOptions) throws -> String {
+        guard !name.isEmpty else {
+            throw IllegalArgumentError.EmptyString(argumentName: "name")
+        }
+        
+        let url = "MusicGenres/\(getSlugName(name))/Images/\(options.imageType)"
+        
+        return getImageUrl(url, options: options, queryParams: QueryStringDictionary())
+    }
+
+    public final func getGameGenreImageUrl(name: String, options: ImageOptions) throws -> String {
+        guard !name.isEmpty else {
+            throw IllegalArgumentError.EmptyString(argumentName: "name")
+        }
+        
+        let url = "GameGenres/\(getSlugName(name))/Images/\(options.imageType)"
+        
+        return getImageUrl(url, options: options, queryParams: QueryStringDictionary())
+    }
+    
+    public final func getStudioImageUrl(name: String, options: ImageOptions) throws -> String {
+        guard !name.isEmpty else {
+            throw IllegalArgumentError.EmptyString(argumentName: "name")
+        }
+        
+        let url = "Studios/\(getSlugName(name))/Images/\(options.imageType)"
+        
+        return getImageUrl(url, options: options, queryParams: QueryStringDictionary())
+    }
+
+    public final func getArtistImageUrl(name: String, options: ImageOptions) throws -> String {
+        guard !name.isEmpty else {
+            throw IllegalArgumentError.EmptyString(argumentName: "name")
+        }
+        
+        let url = "Artists/\(getSlugName(name))/Images/\(options.imageType)"
+        
+        return getImageUrl(url, options: options, queryParams: QueryStringDictionary())
+    }
+    
+    public final func getBackdropImageUrls(item: BaseItemDto, var options: ImageOptions) -> [String]? {
+        options.imageType = ImageType.Backdrop
+        
+        var backdropItemId: String?
+        
+        var backdropImageTags: [String]?
+        
+        if item.backdropCount == 0 {
+            backdropItemId = item.parentBackdropItemId
+            backdropImageTags = item.parentBackdropImageTags
+        } else {
+            backdropItemId = item.id
+            backdropImageTags = item.backdropImageTags
+        }
+        
+        if backdropItemId == nil {
+            return [String]()
+        }
+        
+        if let bImageTags = backdropImageTags {
+            var files = [String]()
+            
+            for var i = 0; i < bImageTags.count; ++i {
+                options.imageIndex = i
+                options.tag = bImageTags[i]
+                
+                files[i] = getImageUrl(backdropItemId, options: options)!
+            }
+            
+            return files
+        }
+        
+        return nil
+    }
+    
+    public final func getLogoImageUrl(item: BaseItemDto, var options: ImageOptions) throws -> String? {
+        options.imageType = ImageType.Logo
+        
+        let logoItemId = item.hasLogo ? item.id : item.parentLogoItemId
+        let imageTag = item.hasLogo ? item.imageTags?[ImageType.Logo] : item.parentLogoImageTag
+        
+        if let lItemId = logoItemId {
+            options.tag = imageTag
+            
+            return getImageUrl(lItemId, options: options)
+        }
+        
+        return nil
+    }
+    
+    public final func getThumbImageUrl(item: BaseItemDto, var options: ImageOptions) throws -> String? {
+        options.imageType = ImageType.Logo
+        
+        let thumbItemId = item.hasThumb ? item.id : item.seriesThumbImageTag != nil ? item.seriesId : item.parentThumbItemId
+        let imageTag = item.hasThumb ? item.imageTags?[ImageType.Thumb] : item.seriesThumbImageTag != nil ? item.seriesThumbImageTag : item.parentThumbImageTag
+        
+        if let tItemId = thumbItemId {
+            options.tag = imageTag
+            
+            return getImageUrl(tItemId, options: options)
+        }
+        
+        return nil
+    }
+    
+    public final func getArtImageUrl(item: BaseItemDto, var options: ImageOptions) throws -> String? {
+        options.imageType = ImageType.Logo
+        
+        let artItemId = item.hasArtImage ? item.id : item.parentArtItemId
+        let imageTag = item.hasArtImage ? item.imageTags?[ImageType.Art] : item.parentArtImageTag
+        
+        if let aItemId = artItemId {
+            options.tag = imageTag
+            
+            return getImageUrl(aItemId, options: options)
+        }
+        
+        return nil
+    }
+
     internal final func serializeToJson(obj: AnyObject) -> String {
         return getJsonSerializer()!.serializeToString(obj)
     }
-//    
-//    /** 
-//    Adds the data format.
-//
-//    @param url The URL.
-//    @return System.String.
-//    */
-//    protected final String AddDataFormat(String url)
-//    {
-//        if (url == null)
-//        {
-//            throw new IllegalArgumentException("url");
-//        }
-//        
-//        final String format = "json";
-//        
-//        if (url.indexOf('?') == -1)
-//        {
-//            url += "?format=" + format;
-//        }
-//        else
-//        {
-//            url += "&format=" + format;
-//        }
-//        
-//        return url;
-//    }
-//    
-//    public String getIsoString(Date date){
-//        
-//        if (date == null)
-//        {
-//            throw new IllegalArgumentException("date");
-//        }
-//        
-//        TimeZone tz = TimeZone.getTimeZone("UTC");
-//        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'");
-//        df.setTimeZone(tz);
-//        
-//        return df.format(date);
-//    }
-//    
-//    /** 
-//    Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
-//    */
-//    public final void Dispose()
-//    {
-//        Dispose(true);
-//    }
-//    
-//    /** 
-//    Releases unmanaged and - optionally - managed resources.
-//    
-//    @param disposing <c>true</c> to release both managed and unmanaged resources; <c>false</c> to release only unmanaged resources.
-//    */
-//    protected void Dispose(boolean disposing)
-//    {
-//        
-//    }
+    
+    internal final func addDataFormat(url: String) -> String {
+        let format = "json"
+        
+        var newUrl = url
+        if url.containsString("?") {
+            newUrl += "&format=" + format
+        } else {
+            newUrl += "?format=" + format
+        }
+        
+        return newUrl
+    }
+    
+    public func getIsoString(date: NSDate) -> String {
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm'Z'"
+        formatter.timeZone = NSTimeZone(forSecondsFromGMT: 0)
+        
+        return formatter.stringFromDate(date)
+    }
 }
