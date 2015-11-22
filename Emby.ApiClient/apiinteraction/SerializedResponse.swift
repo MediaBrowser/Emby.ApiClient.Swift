@@ -15,7 +15,7 @@ import Foundation
 //import mediabrowser.model.serialization.IJsonSerializer;
 
 //public class SerializedResponse: Emby_ApiClient.Response<Any> {
-public class SerializedResponse<T: JSONSerializable>: Emby.Response<T> {
+public class SerializedResponse<T: JSONSerializable>: EmbyApiClient.Response<T> {
 //public class SerializedResponse: Emby.ResponseX<T> {
 
 //    func onResponse(response: Any) {}
@@ -26,7 +26,7 @@ public class SerializedResponse<T: JSONSerializable>: Emby.Response<T> {
     private let url: String? = nil
 //    private ILogger logger;
     
-    public init(innerResponse: Emby.Response<T>, jsonSerializer: IJsonSerializer, type: Any) {
+    public init(innerResponse: EmbyApiClient.Response<T>, jsonSerializer: IJsonSerializer, type: Any) {
         
         self.jsonSerializer = jsonSerializer;
         self.type = type;

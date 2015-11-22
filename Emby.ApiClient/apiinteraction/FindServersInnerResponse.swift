@@ -17,12 +17,12 @@ import Foundation
 //
 //import java.util.ArrayList;
 
-public class FindServersInnerResponse: Emby.Response<Array<ServerDiscoveryInfo>> {
+public class FindServersInnerResponse: EmbyApiClient.Response<Array<ServerDiscoveryInfo>> {
 
     private let connectionManager: ConnectionManager
-    private let response: Emby.Response<Array<ServerInfo>>
+    private let response: EmbyApiClient.Response<Array<ServerInfo>>
     
-    public init(connectionManager: ConnectionManager, response: Emby.Response<Array<ServerInfo>>) {
+    public init(connectionManager: ConnectionManager, response: EmbyApiClient.Response<Array<ServerInfo>>) {
         self.connectionManager = connectionManager;
         self.response = response;
         

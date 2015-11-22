@@ -17,7 +17,7 @@
 		041643AD1BD495A700873FAB /* InstallationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041643AC1BD495A700873FAB /* InstallationInfo.swift */; };
 		041643AF1BD4962100873FAB /* PackageVersionClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041643AE1BD4962100873FAB /* PackageVersionClass.swift */; };
 		0479CFCC1C00191C00DFCEFB /* IllegalArgumentError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0479CFCB1C00191C00DFCEFB /* IllegalArgumentError.swift */; };
-		0479CFDE1C01653800DFCEFB /* Emby.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8838C5571BC514B500587F8E /* Emby.framework */; };
+		0479CFDE1C01653800DFCEFB /* EmbyApiClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8838C5571BC514B500587F8E /* EmbyApiClient.framework */; };
 		0479CFE61C0165CD00DFCEFB /* BaseApiClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0479CFE51C0165CD00DFCEFB /* BaseApiClientTests.swift */; };
 		0479CFEB1C01706000DFCEFB /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DD39A811BE9E6AD00B2D09A /* Alamofire.framework */; };
 		047B76E81BFACA5D0003A743 /* UserDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047B76E71BFACA5D0003A743 /* UserDto.swift */; };
@@ -372,12 +372,12 @@
 		04B8AB8B1BF4437700ED19CA /* SubtitleDeliveryMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SubtitleDeliveryMethod.swift; path = dlna/SubtitleDeliveryMethod.swift; sourceTree = "<group>"; };
 		04B8AB8D1BF443DB00ED19CA /* TransportStreamTimestamp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TransportStreamTimestamp.swift; path = mediainfo/TransportStreamTimestamp.swift; sourceTree = "<group>"; };
 		04B8AB8F1BF44ADB00ED19CA /* UserItemDataDto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserItemDataDto.swift; path = dto/UserItemDataDto.swift; sourceTree = "<group>"; };
-		5D0FBAC41C01B4EB005BB336 /* Emby.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Emby.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5D0FBAC41C01B4EB005BB336 /* EmbyApiClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EmbyApiClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D0FBAC61C01B83C005BB336 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/tvOS/Alamofire.framework; sourceTree = "<group>"; };
 		5D0FBACB1C0258DC005BB336 /* CocoaAsyncSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaAsyncSocket.framework; path = Carthage/Build/tvOS/CocoaAsyncSocket.framework; sourceTree = "<group>"; };
 		5DD39A811BE9E6AD00B2D09A /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		8810B9D81BECB2160062DB8F /* DeviceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DeviceProtocol.swift; path = device/DeviceProtocol.swift; sourceTree = "<group>"; };
-		8838C5571BC514B500587F8E /* Emby.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Emby.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8838C5571BC514B500587F8E /* EmbyApiClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EmbyApiClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8838C55A1BC514B500587F8E /* Emby.ApiClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Emby.ApiClient.h; sourceTree = "<group>"; };
 		8838C55C1BC514B500587F8E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8838C5641BC5180100587F8E /* ConnectService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectService.swift; sourceTree = "<group>"; };
@@ -436,7 +436,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0479CFEB1C01706000DFCEFB /* Alamofire.framework in Frameworks */,
-				0479CFDE1C01653800DFCEFB /* Emby.framework in Frameworks */,
+				0479CFDE1C01653800DFCEFB /* EmbyApiClient.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -723,10 +723,10 @@
 		8838C5581BC514B500587F8E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8838C5571BC514B500587F8E /* Emby.framework */,
+				8838C5571BC514B500587F8E /* EmbyApiClient.framework */,
 				888EFC971BCC52CD00546DB3 /* TestApp.app */,
 				0479CFD91C01653800DFCEFB /* EmbyTests.xctest */,
-				5D0FBAC41C01B4EB005BB336 /* Emby.framework */,
+				5D0FBAC41C01B4EB005BB336 /* EmbyApiClient.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -996,7 +996,7 @@
 			);
 			name = "EmbyApiClient (tvOS)";
 			productName = Emby.ApiClient;
-			productReference = 5D0FBAC41C01B4EB005BB336 /* Emby.framework */;
+			productReference = 5D0FBAC41C01B4EB005BB336 /* EmbyApiClient.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		8838C5561BC514B500587F8E /* EmbyApiClient (iOS) */ = {
@@ -1014,7 +1014,7 @@
 			);
 			name = "EmbyApiClient (iOS)";
 			productName = Emby.ApiClient;
-			productReference = 8838C5571BC514B500587F8E /* Emby.framework */;
+			productReference = 8838C5571BC514B500587F8E /* EmbyApiClient.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		888EFC961BCC52CD00546DB3 /* TestApp */ = {
@@ -1045,7 +1045,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0710;
 				LastUpgradeCheck = 0700;
-				ORGANIZATIONNAME = "Vedran Ozir";
+				ORGANIZATIONNAME = "";
 				TargetAttributes = {
 					0479CFD81C01653800DFCEFB = {
 						CreatedOnToolsVersion = 7.1.1;
@@ -1059,7 +1059,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 8838C5511BC514B500587F8E /* Build configuration list for PBXProject "Emby.ApiClient" */;
+			buildConfigurationList = 8838C5511BC514B500587F8E /* Build configuration list for PBXProject "EmbyApiClient" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1478,7 +1478,7 @@
 				LD_DYLIB_INSTALL_NAME = "$(DYLIB_INSTALL_NAME_BASE:standardizepath)/$(EXECUTABLE_PATH)";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "QoT.Emby-ApiClient";
-				PRODUCT_NAME = Emby;
+				PRODUCT_NAME = EmbyApiClient;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "appletvsimulator appletvos";
@@ -1511,7 +1511,7 @@
 				LD_DYLIB_INSTALL_NAME = "$(DYLIB_INSTALL_NAME_BASE:standardizepath)/$(EXECUTABLE_PATH)";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "QoT.Emby-ApiClient";
-				PRODUCT_NAME = Emby;
+				PRODUCT_NAME = EmbyApiClient;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "appletvsimulator appletvos";
@@ -1633,7 +1633,7 @@
 				LD_DYLIB_INSTALL_NAME = "$(EXECUTABLE_PATH)";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "QoT.Emby-ApiClient";
-				PRODUCT_NAME = Emby;
+				PRODUCT_NAME = EmbyApiClient;
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Emby.ApiClient/Emby.ApiClient-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1660,7 +1660,7 @@
 				LD_DYLIB_INSTALL_NAME = "$(EXECUTABLE_PATH)";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "QoT.Emby-ApiClient";
-				PRODUCT_NAME = Emby;
+				PRODUCT_NAME = EmbyApiClient;
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "Emby.ApiClient/Emby.ApiClient-Bridging-Header.h";
 			};
@@ -1719,7 +1719,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8838C5511BC514B500587F8E /* Build configuration list for PBXProject "Emby.ApiClient" */ = {
+		8838C5511BC514B500587F8E /* Build configuration list for PBXProject "EmbyApiClient" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8838C55D1BC514B500587F8E /* Debug */,

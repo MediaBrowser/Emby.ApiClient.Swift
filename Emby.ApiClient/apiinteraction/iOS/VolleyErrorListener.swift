@@ -17,10 +17,10 @@ import Foundation
 
 public class VolleyErrorListener<T>: Response_ErrorListener {
     
-    private let outerResponse: Emby.Response<T>
+    private let outerResponse: EmbyApiClient.Response<T>
     private let logger: ILogger
     
-    public init(outerResponse: Emby.Response<T>, logger: ILogger) {
+    public init(outerResponse: EmbyApiClient.Response<T>, logger: ILogger) {
         self.outerResponse = outerResponse;
         self.logger = logger;
     }

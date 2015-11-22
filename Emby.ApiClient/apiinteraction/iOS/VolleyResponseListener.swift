@@ -16,11 +16,11 @@ import Foundation
 //public class VolleyResponseListener<T> implements Response.Listener<T> {
 public class VolleyResponseListener<T>: Response_Listener<T> {
     
-    private let outerResponse: Emby.Response<T>
+    private let outerResponse: EmbyApiClient.Response<T>
     private let logger: ILogger
     private let url: String
     
-    public init(outerResponse: Emby.Response<T>, logger: ILogger, url: String) {
+    public init(outerResponse: EmbyApiClient.Response<T>, logger: ILogger, url: String) {
         self.outerResponse = outerResponse;
         self.logger = logger;
         self.url = url;
