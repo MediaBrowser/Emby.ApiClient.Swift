@@ -1471,10 +1471,12 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "QoT.Emby-ApiClient";
 				PRODUCT_NAME = Emby;
+				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "appletvsimulator appletvos";
 				SWIFT_OBJC_BRIDGING_HEADER = "Emby.ApiClient/Emby.ApiClient-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VALID_ARCHS = arm64;
 			};
 			name = Debug;
 		};
@@ -1498,9 +1500,11 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "QoT.Emby-ApiClient";
 				PRODUCT_NAME = Emby;
+				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "appletvsimulator appletvos";
 				SWIFT_OBJC_BRIDGING_HEADER = "Emby.ApiClient/Emby.ApiClient-Bridging-Header.h";
+				VALID_ARCHS = arm64;
 			};
 			name = Release;
 		};
