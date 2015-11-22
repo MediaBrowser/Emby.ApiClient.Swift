@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8838C5561BC514B500587F8E"
-               BuildableName = "Emby.framework"
-               BlueprintName = "Emby"
+               BlueprintIdentifier = "5D0FBA471C01B4EB005BB336"
+               BuildableName = "EmbyApiClient (tvOS).framework"
+               BlueprintName = "EmbyApiClient (tvOS)"
                ReferencedContainer = "container:Emby.ApiClient.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8838C5561BC514B500587F8E"
-            BuildableName = "Emby.framework"
-            BlueprintName = "Emby"
+            BlueprintIdentifier = "5D0FBA471C01B4EB005BB336"
+            BuildableName = "EmbyApiClient (tvOS).framework"
+            BlueprintName = "EmbyApiClient (tvOS)"
             ReferencedContainer = "container:Emby.ApiClient.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -63,9 +63,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8838C5561BC514B500587F8E"
-            BuildableName = "Emby.framework"
-            BlueprintName = "Emby"
+            BlueprintIdentifier = "5D0FBA471C01B4EB005BB336"
+            BuildableName = "EmbyApiClient (tvOS).framework"
+            BlueprintName = "EmbyApiClient (tvOS)"
             ReferencedContainer = "container:Emby.ApiClient.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
