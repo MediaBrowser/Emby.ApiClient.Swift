@@ -20,8 +20,6 @@
 		0479CFDE1C01653800DFCEFB /* Emby.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8838C5571BC514B500587F8E /* Emby.framework */; };
 		0479CFE61C0165CD00DFCEFB /* BaseApiClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0479CFE51C0165CD00DFCEFB /* BaseApiClientTests.swift */; };
 		0479CFEB1C01706000DFCEFB /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DD39A811BE9E6AD00B2D09A /* Alamofire.framework */; };
-		0479CFEC1C01706000DFCEFB /* CocoaAsyncSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88D366381BF121E8002F2767 /* CocoaAsyncSocket.framework */; };
-		0479CFEE1C0170E900DFCEFB /* CocoaAsyncSocket.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 88D366381BF121E8002F2767 /* CocoaAsyncSocket.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		047B76E81BFACA5D0003A743 /* UserDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047B76E71BFACA5D0003A743 /* UserDto.swift */; };
 		047B76EB1BFACBFD0003A743 /* UserConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047B76EA1BFACBFD0003A743 /* UserConfiguration.swift */; };
 		047B76ED1BFACDA50003A743 /* SubtitlePlaybackMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047B76EC1BFACDA50003A743 /* SubtitlePlaybackMode.swift */; };
@@ -134,7 +132,6 @@
 		88CF7E761BC6E71200A33B72 /* ConnectUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7E751BC6E71200A33B72 /* ConnectUser.swift */; };
 		88CF7E781BC6E86F00A33B72 /* ConnectUserServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7E771BC6E86F00A33B72 /* ConnectUserServer.swift */; };
 		88D366371BF1021D002F2767 /* FindServersInnerResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888E5D551BEBFA2600EDFBC5 /* FindServersInnerResponse.swift */; };
-		88D366391BF121E8002F2767 /* CocoaAsyncSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88D366381BF121E8002F2767 /* CocoaAsyncSocket.framework */; };
 		88D3663B1BF12BEF002F2767 /* CocoaAsyncSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88D3663A1BF12BEF002F2767 /* CocoaAsyncSocket.framework */; };
 		88D3663C1BF12BEF002F2767 /* CocoaAsyncSocket.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 88D3663A1BF12BEF002F2767 /* CocoaAsyncSocket.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		88F411E81BECAA59000A7E7E /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DD39A811BE9E6AD00B2D09A /* Alamofire.framework */; };
@@ -164,7 +161,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				0479CFEE1C0170E900DFCEFB /* CocoaAsyncSocket.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,7 +307,6 @@
 		88CF7E731BC6E5B500A33B72 /* ConnectUserQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectUserQuery.swift; sourceTree = "<group>"; };
 		88CF7E751BC6E71200A33B72 /* ConnectUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectUser.swift; sourceTree = "<group>"; };
 		88CF7E771BC6E86F00A33B72 /* ConnectUserServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectUserServer.swift; sourceTree = "<group>"; };
-		88D366381BF121E8002F2767 /* CocoaAsyncSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaAsyncSocket.framework; path = Carthage/Build/iOS/CocoaAsyncSocket.framework; sourceTree = "<group>"; };
 		88D3663A1BF12BEF002F2767 /* CocoaAsyncSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaAsyncSocket.framework; path = Carthage/Build/iOS/CocoaAsyncSocket.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -321,7 +316,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0479CFEB1C01706000DFCEFB /* Alamofire.framework in Frameworks */,
-				0479CFEC1C01706000DFCEFB /* CocoaAsyncSocket.framework in Frameworks */,
 				0479CFDE1C01653800DFCEFB /* Emby.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -331,7 +325,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				88F411E81BECAA59000A7E7E /* Alamofire.framework in Frameworks */,
-				88D366391BF121E8002F2767 /* CocoaAsyncSocket.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -578,12 +571,11 @@
 		8838C54D1BC514B500587F8E = {
 			isa = PBXGroup;
 			children = (
-				88D3663A1BF12BEF002F2767 /* CocoaAsyncSocket.framework */,
-				88D366381BF121E8002F2767 /* CocoaAsyncSocket.framework */,
 				8838C5591BC514B500587F8E /* Emby.ApiClient */,
 				888EFC981BCC52CD00546DB3 /* TestApp */,
 				0479CFDA1C01653800DFCEFB /* EmbyTests */,
 				8838C5581BC514B500587F8E /* Products */,
+				88D3663A1BF12BEF002F2767 /* CocoaAsyncSocket.framework */,
 				5DD39A811BE9E6AD00B2D09A /* Alamofire.framework */,
 			);
 			sourceTree = "<group>";
