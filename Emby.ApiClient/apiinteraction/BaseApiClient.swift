@@ -235,7 +235,7 @@ public class BaseApiClient// implements IDisposable
     }
 
     public final func getSubtitleUrl(options: SubtitleDownloadOptions) -> String {
-        let partialUrl: String = "Videos/\(options.itemId)/\(options.mediaSourceId)/Subtitles/\(options.streamIndex)Stream.\(options.format)"
+        let partialUrl: String = "Videos/\(options.itemId)/\(options.mediaSourceId)/Subtitles/\(options.streamIndex)/Stream.\(options.format)"
      
         return getApiUrl(partialUrl)
     }
