@@ -17,7 +17,7 @@
                BlueprintIdentifier = "5D0FBA471C01B4EB005BB336"
                BuildableName = "Emby.framework"
                BlueprintName = "EmbyApiClient (tvOS)"
-               ReferencedContainer = "container:Emby.ApiClient.xcodeproj">
+               ReferencedContainer = "container:EmbyApiClient.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -48,7 +48,7 @@
             BlueprintIdentifier = "5D0FBA471C01B4EB005BB336"
             BuildableName = "Emby.framework"
             BlueprintName = "EmbyApiClient (tvOS)"
-            ReferencedContainer = "container:Emby.ApiClient.xcodeproj">
+            ReferencedContainer = "container:EmbyApiClient.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -66,7 +66,7 @@
             BlueprintIdentifier = "5D0FBA471C01B4EB005BB336"
             BuildableName = "Emby.framework"
             BlueprintName = "EmbyApiClient (tvOS)"
-            ReferencedContainer = "container:Emby.ApiClient.xcodeproj">
+            ReferencedContainer = "container:EmbyApiClient.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>

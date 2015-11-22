@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Emby
+import EmbyApiClient
 
 var connectionManager: ConnectionManager?
 
@@ -58,7 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func Authenticate(httpClient: VolleyHttpClient, logger: Logger, jsonSerializer: JsonSerializer, service: ConnectService) {
         
-        let response = Emby.Response<ConnectAuthenticationResult>()
+        let response = EmbyApiClient.Response<ConnectAuthenticationResult>()
 
         let test_CreatePin = false
         let test_GetPinStatus = false
@@ -118,7 +118,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func GetServers(userId: String, connectAccessToken: String, httpClient: VolleyHttpClient, logger: Logger, jsonSerializer: JsonSerializer, service: ConnectService) {
         
-        let response = Emby.Response<ConnectUserServers>()
+        let response = EmbyApiClient.Response<ConnectUserServers>()
         
         response.completion = { (result: ConnectUserServers?) -> Void in
             
@@ -137,7 +137,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func GetConnectUser(userId: String, connectAccessToken: String, httpClient: VolleyHttpClient, logger: Logger, jsonSerializer: JsonSerializer, service: ConnectService) {
         
-        let response = Emby.Response<ConnectUser>()
+        let response = EmbyApiClient.Response<ConnectUser>()
         
         let connectUserQuery = ConnectUserQuery(jSON: JSON_Object())
         
@@ -160,7 +160,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func GetRegistrationInfo(userId: String, connectAccessToken: String, feature: String, httpClient: VolleyHttpClient, logger: Logger, jsonSerializer: JsonSerializer, service: ConnectService) {
         
-        let response = Emby.Response<RegistrationInfo>()
+        let response = EmbyApiClient.Response<RegistrationInfo>()
         
         response.completion = { (result: RegistrationInfo?) -> Void in
             
@@ -196,7 +196,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func CreatePin(deviceId: String, httpClient: VolleyHttpClient, logger: Logger, jsonSerializer: JsonSerializer, service: ConnectService) {
         
-        let response = Emby.Response<PinCreationResult>()
+        let response = EmbyApiClient.Response<PinCreationResult>()
         
         response.completion = { (result: PinCreationResult?) -> Void in
             
@@ -211,7 +211,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func GetPinStatus(deviceId: String, pin: String, httpClient: VolleyHttpClient, logger: Logger, jsonSerializer: JsonSerializer, service: ConnectService) {
         
-        let response = Emby.Response<PinStatusResult>()
+        let response = EmbyApiClient.Response<PinStatusResult>()
         
         let pinCreationResult = PinCreationResult(jSON: JSON_Object())
         
@@ -240,7 +240,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func ExchangePin(deviceId: String, pin: String, httpClient: VolleyHttpClient, logger: Logger, jsonSerializer: JsonSerializer, service: ConnectService) {
         
-        let response = Emby.Response<PinExchangeResult>()
+        let response = EmbyApiClient.Response<PinExchangeResult>()
         
         let pinCreationResult = PinCreationResult(jSON: JSON_Object())
         
@@ -260,7 +260,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func Logout(connectAccessToken: String, httpClient: VolleyHttpClient, logger: Logger, jsonSerializer: JsonSerializer, service: ConnectService) {
         
-        let response = Emby.Response<EmptyResponse>()
+        let response = EmbyApiClient.Response<EmptyResponse>()
         
         response.completion = { (result: EmptyResponse?) -> Void in
             

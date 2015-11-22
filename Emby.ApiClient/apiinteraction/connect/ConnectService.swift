@@ -63,7 +63,7 @@ public class ConnectService {
         self.appVersion = appVersion;
     }
     
-    public func Authenticate<T:ConnectAuthenticationResult>(username: String, password: String, /*final*/ response: Emby.Response<T>) {
+    public func Authenticate<T:ConnectAuthenticationResult>(username: String, password: String, /*final*/ response: EmbyApiClient.Response<T>) {
         // UnsupportedEncodingException, NoSuchAlgorithmException {
         
         let args = QueryStringDictionary()
@@ -84,7 +84,7 @@ public class ConnectService {
         httpClient.Send(request, response: SerializedResponse<T>(innerResponse: response, jsonSerializer: JsonSerializer, type: ConnectAuthenticationResult.self));
     }
     
-    public func CreatePin<T:PinCreationResult>(deviceId: String, final response: Emby.Response<T>)
+    public func CreatePin<T:PinCreationResult>(deviceId: String, final response: EmbyApiClient.Response<T>)
     {
         let args = QueryStringDictionary()
         
@@ -103,7 +103,7 @@ public class ConnectService {
         httpClient.Send(request, response: SerializedResponse<T>(innerResponse: response, jsonSerializer: JsonSerializer, type: PinCreationResult.self));
     }
     
-    public func GetPinStatus<T:PinStatusResult>(pin: PinCreationResult, final response: Emby.Response<T>)
+    public func GetPinStatus<T:PinStatusResult>(pin: PinCreationResult, final response: EmbyApiClient.Response<T>)
     {
         let dict = QueryStringDictionary();
         
@@ -122,7 +122,7 @@ public class ConnectService {
         httpClient.Send(request, response: SerializedResponse<T>(innerResponse: response, jsonSerializer: JsonSerializer, type: PinStatusResult.self));
     }
     
-    public func ExchangePin<T:PinExchangeResult>(pin: PinCreationResult, final response: Emby.Response<T>)
+    public func ExchangePin<T:PinExchangeResult>(pin: PinCreationResult, final response: EmbyApiClient.Response<T>)
     {
         let args = QueryStringDictionary();
         
@@ -142,7 +142,7 @@ public class ConnectService {
         httpClient.Send(request, response: SerializedResponse<T>(innerResponse: response, jsonSerializer: JsonSerializer, type: PinExchangeResult.self));
     }
     
-    public func GetConnectUser<T:ConnectUser>(query: ConnectUserQuery, connectAccessToken: String?, final response: Emby.Response<T>) throws
+    public func GetConnectUser<T:ConnectUser>(query: ConnectUserQuery, connectAccessToken: String?, final response: EmbyApiClient.Response<T>) throws
     {
         let dict = QueryStringDictionary();
         
@@ -180,7 +180,7 @@ public class ConnectService {
         httpClient.Send(request, response: SerializedResponse<T>(innerResponse: response, jsonSerializer: JsonSerializer, type: ConnectUser.self));
     }
     
-    public func GetServers<T:ConnectUserServers>(userId: String, connectAccessToken: String, final response: Emby.Response<T>) throws
+    public func GetServers<T:ConnectUserServers>(userId: String, connectAccessToken: String, final response: EmbyApiClient.Response<T>) throws
     {
         let dict = QueryStringDictionary();
         
@@ -199,7 +199,7 @@ public class ConnectService {
         httpClient.Send(request, response: SerializedResponse<T>(innerResponse: response, jsonSerializer: JsonSerializer, type: ConnectUserServers.self));
     }
     
-    public func Logout<T:EmptyResponse>(connectAccessToken: String, final response: Emby.Response<T>) throws
+    public func Logout<T:EmptyResponse>(connectAccessToken: String, final response: EmbyApiClient.Response<T>) throws
     {
         let url = GetConnectUrl("user/logout");
         
@@ -234,7 +234,7 @@ public class ConnectService {
         request.getRequestHeaders()?.put("X-Application", value: appName + "/" + appVersion);
     }
     
-    public func GetRegistrationInfo<T:RegistrationInfo>(userId: String, feature: String, connectAccessToken: String, final response: Emby.Response<T>) throws
+    public func GetRegistrationInfo<T:RegistrationInfo>(userId: String, feature: String, connectAccessToken: String, final response: EmbyApiClient.Response<T>) throws
     {
         let dict = QueryStringDictionary();
         

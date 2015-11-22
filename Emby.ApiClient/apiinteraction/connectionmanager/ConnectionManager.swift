@@ -164,7 +164,7 @@ public class ConnectionManager: ConnectionManagerProtocol {
         
         self.Authenticate( connectService, onSuccess: { (userId, connectAccessToken) -> Void in
             
-            let response = Emby.Response<ConnectUserServers>()
+            let response = EmbyApiClient.Response<ConnectUserServers>()
             
             response.completion = { (result: ConnectUserServers?) -> Void in
                 
@@ -252,7 +252,7 @@ public class ConnectionManager: ConnectionManagerProtocol {
     func Authenticate(service: ConnectService,
         onSuccess:(userId: String, connectAccessToken: String) -> Void, onError:() -> Void) {
             
-            let response = Emby.Response<ConnectAuthenticationResult>()
+            let response = EmbyApiClient.Response<ConnectAuthenticationResult>()
             
             response.completion = { (result: ConnectAuthenticationResult?) -> Void in
                 
