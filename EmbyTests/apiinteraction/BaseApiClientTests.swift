@@ -4,7 +4,7 @@
 //
 
 import XCTest
-@testable import Emby_ApiClient
+@testable import EmbyApiClient
 
 class BaseApiClientTests: XCTestCase {
     let logger = Logger()

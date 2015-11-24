@@ -19,7 +19,6 @@
 		0479CFCC1C00191C00DFCEFB /* IllegalArgumentError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0479CFCB1C00191C00DFCEFB /* IllegalArgumentError.swift */; };
 		0479CFDE1C01653800DFCEFB /* EmbyApiClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8838C5571BC514B500587F8E /* EmbyApiClient.framework */; };
 		0479CFE61C0165CD00DFCEFB /* BaseApiClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0479CFE51C0165CD00DFCEFB /* BaseApiClientTests.swift */; };
-		0479CFEB1C01706000DFCEFB /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DD39A811BE9E6AD00B2D09A /* Alamofire.framework */; };
 		047B76E81BFACA5D0003A743 /* UserDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047B76E71BFACA5D0003A743 /* UserDto.swift */; };
 		047B76EB1BFACBFD0003A743 /* UserConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047B76EA1BFACBFD0003A743 /* UserConfiguration.swift */; };
 		047B76ED1BFACDA50003A743 /* SubtitlePlaybackMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047B76EC1BFACDA50003A743 /* SubtitlePlaybackMode.swift */; };
@@ -263,6 +262,13 @@
 			remoteGlobalIDString = 8838C5561BC514B500587F8E;
 			remoteInfo = Emby;
 		};
+		5D0F16751C042BD90068B6D6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8838C54E1BC514B500587F8E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 888EFC961BCC52CD00546DB3;
+			remoteInfo = TestApp;
+		};
 		888EFCA91BCC533B00546DB3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8838C54E1BC514B500587F8E /* Project object */;
@@ -435,7 +441,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0479CFEB1C01706000DFCEFB /* Alamofire.framework in Frameworks */,
 				0479CFDE1C01653800DFCEFB /* EmbyApiClient.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -970,11 +975,13 @@
 				0479CFD61C01653800DFCEFB /* Frameworks */,
 				0479CFD71C01653800DFCEFB /* Resources */,
 				0479CFED1C0170D400DFCEFB /* CopyFiles */,
+				5D0F16781C042C4E0068B6D6 /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				0479CFE01C01653800DFCEFB /* PBXTargetDependency */,
+				5D0F16761C042BD90068B6D6 /* PBXTargetDependency */,
 			);
 			name = EmbyTests;
 			productName = EmbyTests;
@@ -1115,6 +1122,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		5D0F16781C042C4E0068B6D6 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/CocoaAsyncSocket.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
 		5DD39A831BE9E6E600B2D09A /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1399,6 +1421,11 @@
 			isa = PBXTargetDependency;
 			target = 8838C5561BC514B500587F8E /* EmbyApiClient (iOS) */;
 			targetProxy = 0479CFDF1C01653800DFCEFB /* PBXContainerItemProxy */;
+		};
+		5D0F16761C042BD90068B6D6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 888EFC961BCC52CD00546DB3 /* TestApp */;
+			targetProxy = 5D0F16751C042BD90068B6D6 /* PBXContainerItemProxy */;
 		};
 		888EFCAA1BCC533B00546DB3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
