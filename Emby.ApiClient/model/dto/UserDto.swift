@@ -25,7 +25,7 @@ public struct UserDto {
     let policy = UserPolicy()
     var primaryImageAspectRation: Double?
     var originalPrimaryImageAspectRatio: Double?
-    var hasPrimaryImage: Bool? {
+    var hasPrimaryImage: Bool {
         get {
             return primaryImageTag != nil
         }
