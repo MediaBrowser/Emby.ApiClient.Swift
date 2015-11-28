@@ -30,6 +30,11 @@
 		048E0CB41C06B98C0001081F /* ServerUserInfoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048E0CB31C06B98C0001081F /* ServerUserInfoTests.swift */; };
 		048E0CB61C06BA580001081F /* ServerInfoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048E0CB51C06BA580001081F /* ServerInfoTests.swift */; };
 		048E0CB91C06BE690001081F /* UserDtoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048E0CB81C06BE690001081F /* UserDtoTests.swift */; };
+		048E0CBB1C094CFC0001081F /* ServerCredentialsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048E0CBA1C094CFC0001081F /* ServerCredentialsTests.swift */; };
+		048E0CBD1C0955ED0001081F /* MediaSourceInfoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048E0CBC1C0955ED0001081F /* MediaSourceInfoTests.swift */; };
+		048E0CBF1C095E380001081F /* BaseItemPersonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048E0CBE1C095E380001081F /* BaseItemPersonTests.swift */; };
+		048E0CC11C095EE20001081F /* StudioDtoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048E0CC01C095EE20001081F /* StudioDtoTests.swift */; };
+		048E0CC31C095F700001081F /* ChapterInfoDtoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048E0CC21C095F700001081F /* ChapterInfoDtoTests.swift */; };
 		04AFCAD81BD33E0500C95C88 /* ServerLocatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFCAD71BD33E0500C95C88 /* ServerLocatorProtocol.swift */; };
 		04AFCADC1BD33FEA00C95C88 /* ServerDiscoveryInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFCADB1BD33FEA00C95C88 /* ServerDiscoveryInfo.swift */; };
 		04AFCAE21BD3436600C95C88 /* ConnectionManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFCAE11BD3436600C95C88 /* ConnectionManagerProtocol.swift */; };
@@ -329,6 +334,11 @@
 		048E0CB31C06B98C0001081F /* ServerUserInfoTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ServerUserInfoTests.swift; path = model/apiclient/ServerUserInfoTests.swift; sourceTree = "<group>"; };
 		048E0CB51C06BA580001081F /* ServerInfoTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ServerInfoTests.swift; path = model/apiclient/ServerInfoTests.swift; sourceTree = "<group>"; };
 		048E0CB81C06BE690001081F /* UserDtoTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserDtoTests.swift; path = model/dto/UserDtoTests.swift; sourceTree = "<group>"; };
+		048E0CBA1C094CFC0001081F /* ServerCredentialsTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ServerCredentialsTests.swift; path = model/apiclient/ServerCredentialsTests.swift; sourceTree = "<group>"; };
+		048E0CBC1C0955ED0001081F /* MediaSourceInfoTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MediaSourceInfoTests.swift; path = model/dto/MediaSourceInfoTests.swift; sourceTree = "<group>"; };
+		048E0CBE1C095E380001081F /* BaseItemPersonTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseItemPersonTests.swift; path = model/dto/BaseItemPersonTests.swift; sourceTree = "<group>"; };
+		048E0CC01C095EE20001081F /* StudioDtoTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StudioDtoTests.swift; path = model/dto/StudioDtoTests.swift; sourceTree = "<group>"; };
+		048E0CC21C095F700001081F /* ChapterInfoDtoTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChapterInfoDtoTests.swift; path = model/dto/ChapterInfoDtoTests.swift; sourceTree = "<group>"; };
 		04AFCAD71BD33E0500C95C88 /* ServerLocatorProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerLocatorProtocol.swift; sourceTree = "<group>"; };
 		04AFCADB1BD33FEA00C95C88 /* ServerDiscoveryInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerDiscoveryInfo.swift; sourceTree = "<group>"; };
 		04AFCAE11BD3436600C95C88 /* ConnectionManagerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionManagerProtocol.swift; sourceTree = "<group>"; };
@@ -554,6 +564,7 @@
 				048E0CB11C06B7BE0001081F /* ApiHelpersTests.swift */,
 				048E0CB31C06B98C0001081F /* ServerUserInfoTests.swift */,
 				048E0CB51C06BA580001081F /* ServerInfoTests.swift */,
+				048E0CBA1C094CFC0001081F /* ServerCredentialsTests.swift */,
 			);
 			name = apiclient;
 			sourceTree = "<group>";
@@ -562,6 +573,10 @@
 			isa = PBXGroup;
 			children = (
 				048E0CB81C06BE690001081F /* UserDtoTests.swift */,
+				048E0CBC1C0955ED0001081F /* MediaSourceInfoTests.swift */,
+				048E0CBE1C095E380001081F /* BaseItemPersonTests.swift */,
+				048E0CC01C095EE20001081F /* StudioDtoTests.swift */,
+				048E0CC21C095F700001081F /* ChapterInfoDtoTests.swift */,
 			);
 			name = dto;
 			sourceTree = "<group>";
@@ -1195,11 +1210,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				048E0CBF1C095E380001081F /* BaseItemPersonTests.swift in Sources */,
 				048E0CB41C06B98C0001081F /* ServerUserInfoTests.swift in Sources */,
+				048E0CC31C095F700001081F /* ChapterInfoDtoTests.swift in Sources */,
 				048E0CB21C06B7BE0001081F /* ApiHelpersTests.swift in Sources */,
+				048E0CBD1C0955ED0001081F /* MediaSourceInfoTests.swift in Sources */,
+				048E0CC11C095EE20001081F /* StudioDtoTests.swift in Sources */,
 				048E0CB61C06BA580001081F /* ServerInfoTests.swift in Sources */,
 				048E0CB91C06BE690001081F /* UserDtoTests.swift in Sources */,
 				0479CFE61C0165CD00DFCEFB /* BaseApiClientTests.swift in Sources */,
+				048E0CBB1C094CFC0001081F /* ServerCredentialsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
