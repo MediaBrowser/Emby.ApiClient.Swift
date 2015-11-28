@@ -270,7 +270,7 @@ class BaseApiClientTests: XCTestCase {
         XCTAssertTrue(backdropImageUrls!.isEmpty)
     }
 
-    
+    //TODO: Remaining unit tests
     //public final func getBackdropImageUrls(item: BaseItemDto, var options: ImageOptions) -> [String]? {
     //public final func getLogoImageUrl(item: BaseItemDto, var options: ImageOptions) throws -> String? {
     //public final func getThumbImageUrl(item: BaseItemDto, var options: ImageOptions) throws -> String? {

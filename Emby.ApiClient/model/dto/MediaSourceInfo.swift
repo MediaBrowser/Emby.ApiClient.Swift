@@ -83,13 +83,13 @@ public struct MediaSourceInfo {
             .first
     }
     
-    public func getStreamCount(type: MediaStreamType) -> Int? {
+    public func getStreamCount(type: MediaStreamType) -> Int {
         return mediaStreams
             .filter({ $0.type != nil && $0.type! == type })
             .count
     }
     
-    public func isSecondaryAudio(stream: MediaStream) -> Bool? {
+    public func isSecondaryAudio(stream: MediaStream) -> Bool {
         return mediaStreams
             .filter({$0.type != nil && $0.type! == MediaStreamType.Audio})
             .contains({$0.index != stream.index})
