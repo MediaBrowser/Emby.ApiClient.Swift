@@ -92,6 +92,47 @@
 		04B8AB8C1BF4437700ED19CA /* SubtitleDeliveryMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B8AB8B1BF4437700ED19CA /* SubtitleDeliveryMethod.swift */; };
 		04B8AB8E1BF443DB00ED19CA /* TransportStreamTimestamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B8AB8D1BF443DB00ED19CA /* TransportStreamTimestamp.swift */; };
 		04B8AB901BF44ADB00ED19CA /* UserItemDataDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B8AB8F1BF44ADB00ED19CA /* UserItemDataDto.swift */; };
+		04C23BE91C096ACB006722ED /* DeviceIdentification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C23BE11C096A83006722ED /* DeviceIdentification.swift */; };
+		04C23BEA1C096ACC006722ED /* DeviceIdentification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C23BE11C096A83006722ED /* DeviceIdentification.swift */; };
+		04C23BEB1C096AD4006722ED /* DeviceProfileType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C23BE21C096A83006722ED /* DeviceProfileType.swift */; };
+		04C23BEC1C096AD4006722ED /* HeaderMatchType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C23BE31C096A83006722ED /* HeaderMatchType.swift */; };
+		04C23BED1C096AD4006722ED /* HttpHeaderInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C23BE41C096A83006722ED /* HttpHeaderInfo.swift */; };
+		04C23BEE1C096AD5006722ED /* DeviceProfileType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C23BE21C096A83006722ED /* DeviceProfileType.swift */; };
+		04C23BEF1C096AD5006722ED /* HeaderMatchType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C23BE31C096A83006722ED /* HeaderMatchType.swift */; };
+		04C23BF01C096AD5006722ED /* HttpHeaderInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C23BE41C096A83006722ED /* HttpHeaderInfo.swift */; };
+		04C23BF21C096B18006722ED /* XmlAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C23BF11C096B18006722ED /* XmlAttribute.swift */; };
+		04C23BF31C096B18006722ED /* XmlAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C23BF11C096B18006722ED /* XmlAttribute.swift */; };
+		04C23BF61C0C088A006722ED /* SubtitleProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C23BF51C0C088A006722ED /* SubtitleProfile.swift */; };
+		04C23BF71C0C088A006722ED /* SubtitleProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C23BF51C0C088A006722ED /* SubtitleProfile.swift */; };
+		04C23BFC1C0C0BB1006722ED /* SubtitleProfileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C23BFB1C0C0BB1006722ED /* SubtitleProfileTests.swift */; };
+		04C23C001C167A41006722ED /* StringHelpersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C23BFF1C167A41006722ED /* StringHelpersTests.swift */; };
+		04C23C011C167D19006722ED /* StringHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C23BFD1C167999006722ED /* StringHelpers.swift */; };
+		04C23C021C167D1A006722ED /* StringHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C23BFD1C167999006722ED /* StringHelpers.swift */; };
+		04C23C061C167DF2006722ED /* DlnaProfileType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C23C051C167DF2006722ED /* DlnaProfileType.swift */; };
+		04C23C071C167DF2006722ED /* DlnaProfileType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C23C051C167DF2006722ED /* DlnaProfileType.swift */; };
+		04C23C081C167E91006722ED /* DirectPlayProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C23C031C167D62006722ED /* DirectPlayProfile.swift */; };
+		04C23C091C167E91006722ED /* DirectPlayProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C23C031C167D62006722ED /* DirectPlayProfile.swift */; };
+		04C23C0B1C167F5B006722ED /* TranscodingProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C23C0A1C167F5B006722ED /* TranscodingProfile.swift */; };
+		04C23C0C1C167F5B006722ED /* TranscodingProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C23C0A1C167F5B006722ED /* TranscodingProfile.swift */; };
+		04C23C0E1C16801B006722ED /* TranscodeSeekInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C23C0D1C16801B006722ED /* TranscodeSeekInfo.swift */; };
+		04C23C0F1C16801B006722ED /* TranscodeSeekInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C23C0D1C16801B006722ED /* TranscodeSeekInfo.swift */; };
+		04C23C111C168056006722ED /* EncodingContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C23C101C168056006722ED /* EncodingContext.swift */; };
+		04C23C121C168056006722ED /* EncodingContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C23C101C168056006722ED /* EncodingContext.swift */; };
+		04C23C141C1680E1006722ED /* ContainerProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C23C131C1680E1006722ED /* ContainerProfile.swift */; };
+		04C23C151C1680E1006722ED /* ContainerProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C23C131C1680E1006722ED /* ContainerProfile.swift */; };
+		04C23C171C168133006722ED /* ProfileConditionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C23C161C168133006722ED /* ProfileConditionType.swift */; };
+		04C23C181C168133006722ED /* ProfileConditionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C23C161C168133006722ED /* ProfileConditionType.swift */; };
+		04C23C1A1C16817D006722ED /* ProfileConditionValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C23C191C16817D006722ED /* ProfileConditionValue.swift */; };
+		04C23C1B1C16817D006722ED /* ProfileConditionValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C23C191C16817D006722ED /* ProfileConditionValue.swift */; };
+		04C23C1D1C1681F4006722ED /* ProfileCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C23C1C1C1681F4006722ED /* ProfileCondition.swift */; };
+		04C23C1E1C1681F4006722ED /* ProfileCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C23C1C1C1681F4006722ED /* ProfileCondition.swift */; };
+		04C23C201C1684B7006722ED /* ResponseProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C23C1F1C1684B6006722ED /* ResponseProfile.swift */; };
+		04C23C211C1684B7006722ED /* ResponseProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C23C1F1C1684B6006722ED /* ResponseProfile.swift */; };
+		04C23C231C168561006722ED /* CodecType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C23C221C168561006722ED /* CodecType.swift */; };
+		04C23C241C168561006722ED /* CodecType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C23C221C168561006722ED /* CodecType.swift */; };
+		04C23C261C16858D006722ED /* CodecProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C23C251C16858D006722ED /* CodecProfile.swift */; };
+		04C23C271C16858D006722ED /* CodecProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C23C251C16858D006722ED /* CodecProfile.swift */; };
+		04C23C2A1C16875E006722ED /* CodecProfileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C23C291C16875E006722ED /* CodecProfileTests.swift */; };
 		5D0FBA491C01B4EB005BB336 /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7E631BC5C85A00A33B72 /* Context.swift */; };
 		5D0FBA4A1C01B4EB005BB336 /* SubtitlePlaybackMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 047B76EC1BFACDA50003A743 /* SubtitlePlaybackMode.swift */; };
 		5D0FBA4B1C01B4EB005BB336 /* FileUploadProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889288D21BE8DCE700DAD65F /* FileUploadProgress.swift */; };
@@ -396,6 +437,28 @@
 		04B8AB8B1BF4437700ED19CA /* SubtitleDeliveryMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SubtitleDeliveryMethod.swift; path = dlna/SubtitleDeliveryMethod.swift; sourceTree = "<group>"; };
 		04B8AB8D1BF443DB00ED19CA /* TransportStreamTimestamp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TransportStreamTimestamp.swift; path = mediainfo/TransportStreamTimestamp.swift; sourceTree = "<group>"; };
 		04B8AB8F1BF44ADB00ED19CA /* UserItemDataDto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserItemDataDto.swift; path = dto/UserItemDataDto.swift; sourceTree = "<group>"; };
+		04C23BE11C096A83006722ED /* DeviceIdentification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DeviceIdentification.swift; path = dlna/DeviceIdentification.swift; sourceTree = "<group>"; };
+		04C23BE21C096A83006722ED /* DeviceProfileType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DeviceProfileType.swift; path = dlna/DeviceProfileType.swift; sourceTree = "<group>"; };
+		04C23BE31C096A83006722ED /* HeaderMatchType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HeaderMatchType.swift; path = dlna/HeaderMatchType.swift; sourceTree = "<group>"; };
+		04C23BE41C096A83006722ED /* HttpHeaderInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HttpHeaderInfo.swift; path = dlna/HttpHeaderInfo.swift; sourceTree = "<group>"; };
+		04C23BF11C096B18006722ED /* XmlAttribute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = XmlAttribute.swift; path = dlna/XmlAttribute.swift; sourceTree = "<group>"; };
+		04C23BF51C0C088A006722ED /* SubtitleProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SubtitleProfile.swift; path = extensions/SubtitleProfile.swift; sourceTree = "<group>"; };
+		04C23BFB1C0C0BB1006722ED /* SubtitleProfileTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SubtitleProfileTests.swift; path = model/extensions/SubtitleProfileTests.swift; sourceTree = "<group>"; };
+		04C23BFD1C167999006722ED /* StringHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringHelpers.swift; sourceTree = "<group>"; };
+		04C23BFF1C167A41006722ED /* StringHelpersTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringHelpersTests.swift; sourceTree = "<group>"; };
+		04C23C031C167D62006722ED /* DirectPlayProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DirectPlayProfile.swift; path = dlna/DirectPlayProfile.swift; sourceTree = "<group>"; };
+		04C23C051C167DF2006722ED /* DlnaProfileType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DlnaProfileType.swift; path = dlna/DlnaProfileType.swift; sourceTree = "<group>"; };
+		04C23C0A1C167F5B006722ED /* TranscodingProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TranscodingProfile.swift; path = dlna/TranscodingProfile.swift; sourceTree = "<group>"; };
+		04C23C0D1C16801B006722ED /* TranscodeSeekInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TranscodeSeekInfo.swift; path = dlna/TranscodeSeekInfo.swift; sourceTree = "<group>"; };
+		04C23C101C168056006722ED /* EncodingContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EncodingContext.swift; path = dlna/EncodingContext.swift; sourceTree = "<group>"; };
+		04C23C131C1680E1006722ED /* ContainerProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContainerProfile.swift; path = dlna/ContainerProfile.swift; sourceTree = "<group>"; };
+		04C23C161C168133006722ED /* ProfileConditionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileConditionType.swift; path = dlna/ProfileConditionType.swift; sourceTree = "<group>"; };
+		04C23C191C16817D006722ED /* ProfileConditionValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileConditionValue.swift; path = dlna/ProfileConditionValue.swift; sourceTree = "<group>"; };
+		04C23C1C1C1681F4006722ED /* ProfileCondition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProfileCondition.swift; path = dlna/ProfileCondition.swift; sourceTree = "<group>"; };
+		04C23C1F1C1684B6006722ED /* ResponseProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ResponseProfile.swift; path = dlna/ResponseProfile.swift; sourceTree = "<group>"; };
+		04C23C221C168561006722ED /* CodecType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CodecType.swift; path = dlna/CodecType.swift; sourceTree = "<group>"; };
+		04C23C251C16858D006722ED /* CodecProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CodecProfile.swift; path = dlna/CodecProfile.swift; sourceTree = "<group>"; };
+		04C23C291C16875E006722ED /* CodecProfileTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CodecProfileTests.swift; path = model/dlna/CodecProfileTests.swift; sourceTree = "<group>"; };
 		5D0FBAC41C01B4EB005BB336 /* EmbyApiClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EmbyApiClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D0FBAC61C01B83C005BB336 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/tvOS/Alamofire.framework; sourceTree = "<group>"; };
 		5D0FBACB1C0258DC005BB336 /* CocoaAsyncSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaAsyncSocket.framework; path = Carthage/Build/tvOS/CocoaAsyncSocket.framework; sourceTree = "<group>"; };
@@ -517,6 +580,7 @@
 				048E0CAF1C06B7890001081F /* model */,
 				0479CFE41C0165AC00DFCEFB /* apiinteraction */,
 				0479CFDD1C01653800DFCEFB /* Info.plist */,
+				04C23BFF1C167A41006722ED /* StringHelpersTests.swift */,
 			);
 			path = EmbyTests;
 			sourceTree = "<group>";
@@ -552,6 +616,8 @@
 		048E0CAF1C06B7890001081F /* model */ = {
 			isa = PBXGroup;
 			children = (
+				04C23C281C168748006722ED /* dlna */,
+				04C23BF81C0C0B75006722ED /* extensions */,
 				048E0CB71C06BE550001081F /* dto */,
 				048E0CB01C06B78E0001081F /* apiclient */,
 			);
@@ -617,8 +683,25 @@
 		04AFCAE71BD346C600C95C88 /* dlna */ = {
 			isa = PBXGroup;
 			children = (
+				04C23BE11C096A83006722ED /* DeviceIdentification.swift */,
+				04C23BE21C096A83006722ED /* DeviceProfileType.swift */,
+				04C23BE31C096A83006722ED /* HeaderMatchType.swift */,
+				04C23BE41C096A83006722ED /* HttpHeaderInfo.swift */,
 				04AFCAE81BD346F200C95C88 /* DeviceProfile.swift */,
 				04B8AB8B1BF4437700ED19CA /* SubtitleDeliveryMethod.swift */,
+				04C23BF11C096B18006722ED /* XmlAttribute.swift */,
+				04C23C031C167D62006722ED /* DirectPlayProfile.swift */,
+				04C23C051C167DF2006722ED /* DlnaProfileType.swift */,
+				04C23C0A1C167F5B006722ED /* TranscodingProfile.swift */,
+				04C23C0D1C16801B006722ED /* TranscodeSeekInfo.swift */,
+				04C23C101C168056006722ED /* EncodingContext.swift */,
+				04C23C131C1680E1006722ED /* ContainerProfile.swift */,
+				04C23C161C168133006722ED /* ProfileConditionType.swift */,
+				04C23C191C16817D006722ED /* ProfileConditionValue.swift */,
+				04C23C1C1C1681F4006722ED /* ProfileCondition.swift */,
+				04C23C1F1C1684B6006722ED /* ResponseProfile.swift */,
+				04C23C221C168561006722ED /* CodecType.swift */,
+				04C23C251C16858D006722ED /* CodecProfile.swift */,
 			);
 			name = dlna;
 			sourceTree = "<group>";
@@ -754,6 +837,30 @@
 			name = mediainfo;
 			sourceTree = "<group>";
 		};
+		04C23BF41C0C0871006722ED /* extensions */ = {
+			isa = PBXGroup;
+			children = (
+				04C23BF51C0C088A006722ED /* SubtitleProfile.swift */,
+			);
+			name = extensions;
+			sourceTree = "<group>";
+		};
+		04C23BF81C0C0B75006722ED /* extensions */ = {
+			isa = PBXGroup;
+			children = (
+				04C23BFB1C0C0BB1006722ED /* SubtitleProfileTests.swift */,
+			);
+			name = extensions;
+			sourceTree = "<group>";
+		};
+		04C23C281C168748006722ED /* dlna */ = {
+			isa = PBXGroup;
+			children = (
+				04C23C291C16875E006722ED /* CodecProfileTests.swift */,
+			);
+			name = dlna;
+			sourceTree = "<group>";
+		};
 		5D0FBA461C01B3EB005BB336 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -797,6 +904,7 @@
 				8838C55C1BC514B500587F8E /* Info.plist */,
 				88CF7C101BC5248E00A33B72 /* Emby.ApiClient-Bridging-Header.h */,
 				888EFC6C1BCC3DA600546DB3 /* Configuration.swift */,
+				04C23BFD1C167999006722ED /* StringHelpers.swift */,
 			);
 			path = Emby.ApiClient;
 			sourceTree = "<group>";
@@ -839,6 +947,7 @@
 		8838C5681BC51FD900587F8E /* model */ = {
 			isa = PBXGroup;
 			children = (
+				04C23BF41C0C0871006722ED /* extensions */,
 				047B76EE1BFACDFF0003A743 /* users */,
 				047B76E91BFACBEF0003A743 /* configuration */,
 				04B8AB821BF43A6900ED19CA /* mediainfo */,
@@ -1210,15 +1319,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04C23BFC1C0C0BB1006722ED /* SubtitleProfileTests.swift in Sources */,
 				048E0CBF1C095E380001081F /* BaseItemPersonTests.swift in Sources */,
 				048E0CB41C06B98C0001081F /* ServerUserInfoTests.swift in Sources */,
 				048E0CC31C095F700001081F /* ChapterInfoDtoTests.swift in Sources */,
 				048E0CB21C06B7BE0001081F /* ApiHelpersTests.swift in Sources */,
 				048E0CBD1C0955ED0001081F /* MediaSourceInfoTests.swift in Sources */,
 				048E0CC11C095EE20001081F /* StudioDtoTests.swift in Sources */,
+				04C23C2A1C16875E006722ED /* CodecProfileTests.swift in Sources */,
 				048E0CB61C06BA580001081F /* ServerInfoTests.swift in Sources */,
 				048E0CB91C06BE690001081F /* UserDtoTests.swift in Sources */,
 				0479CFE61C0165CD00DFCEFB /* BaseApiClientTests.swift in Sources */,
+				04C23C001C167A41006722ED /* StringHelpersTests.swift in Sources */,
 				048E0CBB1C094CFC0001081F /* ServerCredentialsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1231,16 +1343,20 @@
 				5D0FBA4A1C01B4EB005BB336 /* SubtitlePlaybackMode.swift in Sources */,
 				5D0FBA4B1C01B4EB005BB336 /* FileUploadProgress.swift in Sources */,
 				5D0FBA4C1C01B4EB005BB336 /* SystemInfo.swift in Sources */,
+				04C23C121C168056006722ED /* EncodingContext.swift in Sources */,
 				5D0FBA4D1C01B4EB005BB336 /* WakeOnLanInfo.swift in Sources */,
 				5D0FBA4E1C01B4EB005BB336 /* PinExchangeResult.swift in Sources */,
 				5D0FBA4F1C01B4EB005BB336 /* PackageVersionClass.swift in Sources */,
+				04C23C021C167D1A006722ED /* StringHelpers.swift in Sources */,
 				5D0FBA501C01B4EB005BB336 /* ProgressProtocol.swift in Sources */,
 				5D0FBA511C01B4EB005BB336 /* SerializedResponse.swift in Sources */,
 				5D0FBA521C01B4EB005BB336 /* MediaStreamType.swift in Sources */,
 				5D0FBA531C01B4EB005BB336 /* UserConfiguration.swift in Sources */,
 				5D0FBA541C01B4EB005BB336 /* DynamicDayOfWeek.swift in Sources */,
 				5D0FBA551C01B4EB005BB336 /* NextUpQuery.swift in Sources */,
+				04C23C181C168133006722ED /* ProfileConditionType.swift in Sources */,
 				5D0FBA561C01B4EB005BB336 /* StudioDto.swift in Sources */,
+				04C23BED1C096AD4006722ED /* HttpHeaderInfo.swift in Sources */,
 				5D0FBA571C01B4EB005BB336 /* VolleyError.swift in Sources */,
 				5D0FBA581C01B4EB005BB336 /* ClientCapabilities.swift in Sources */,
 				5D0FBA591C01B4EB005BB336 /* MetadataFields.swift in Sources */,
@@ -1250,8 +1366,10 @@
 				5D0FBA5D1C01B4EB005BB336 /* MediaSourceType.swift in Sources */,
 				5D0FBA5E1C01B4EB005BB336 /* SeriesStatus.swift in Sources */,
 				5D0FBA5F1C01B4EB005BB336 /* IJsonSerializer.swift in Sources */,
+				04C23C1E1C1681F4006722ED /* ProfileCondition.swift in Sources */,
 				5D0FBA601C01B4EB005BB336 /* InstallationInfo.swift in Sources */,
 				5D0FBA611C01B4EB005BB336 /* ServerInfo.swift in Sources */,
+				04C23C211C1684B7006722ED /* ResponseProfile.swift in Sources */,
 				5D0FBA621C01B4EB005BB336 /* Video3DFormat.swift in Sources */,
 				5D0FBA631C01B4EB005BB336 /* CredentialProviderProtocol.swift in Sources */,
 				5D0FBA641C01B4EB005BB336 /* ConnectionMode.swift in Sources */,
@@ -1280,6 +1398,7 @@
 				5D0FBA7B1C01B4EB005BB336 /* IHasServerId.swift in Sources */,
 				5D0FBA7C1C01B4EB005BB336 /* ICredentialProvider.swift in Sources */,
 				5D0FBA7D1C01B4EB005BB336 /* ServerCredentials.swift in Sources */,
+				04C23BEB1C096AD4006722ED /* DeviceProfileType.swift in Sources */,
 				5D0FBA7E1C01B4EB005BB336 /* PinCreationResult.swift in Sources */,
 				5D0FBA7F1C01B4EB005BB336 /* ServerUserInfo.swift in Sources */,
 				5D0FBA801C01B4EB005BB336 /* LocalFileInfo.swift in Sources */,
@@ -1294,13 +1413,18 @@
 				5D0FBA891C01B4EB005BB336 /* CancellationToken.swift in Sources */,
 				5D0FBA8A1C01B4EB005BB336 /* UserLinkType.swift in Sources */,
 				5D0FBA8B1C01B4EB005BB336 /* ImageOrientation.swift in Sources */,
+				04C23C1B1C16817D006722ED /* ProfileConditionValue.swift in Sources */,
 				5D0FBA8C1C01B4EB005BB336 /* BaseItemPerson.swift in Sources */,
 				5D0FBA8D1C01B4EB005BB336 /* DeviceProtocol.swift in Sources */,
+				04C23C071C167DF2006722ED /* DlnaProfileType.swift in Sources */,
+				04C23C241C168561006722ED /* CodecType.swift in Sources */,
 				5D0FBA8E1C01B4EB005BB336 /* IResponse.swift in Sources */,
+				04C23BF31C096B18006722ED /* XmlAttribute.swift in Sources */,
 				5D0FBA8F1C01B4EB005BB336 /* ConnectUserServer.swift in Sources */,
 				5D0FBA901C01B4EB005BB336 /* FindServersInnerResponse.swift in Sources */,
 				5D0FBA911C01B4EB005BB336 /* CredentialProvider.swift in Sources */,
 				5D0FBA921C01B4EB005BB336 /* ExtraType.swift in Sources */,
+				04C23BF71C0C088A006722ED /* SubtitleProfile.swift in Sources */,
 				5D0FBA931C01B4EB005BB336 /* QueryStringDictionary.swift in Sources */,
 				5D0FBA941C01B4EB005BB336 /* Request.swift in Sources */,
 				5D0FBA951C01B4EB005BB336 /* BaseApiClient.swift in Sources */,
@@ -1310,9 +1434,13 @@
 				5D0FBA991C01B4EB005BB336 /* ServerDiscoveryInfo.swift in Sources */,
 				5D0FBA9A1C01B4EB005BB336 /* Response.swift in Sources */,
 				5D0FBA9B1C01B4EB005BB336 /* ConnectUserQuery.swift in Sources */,
+				04C23C271C16858D006722ED /* CodecProfile.swift in Sources */,
 				5D0FBA9C1C01B4EB005BB336 /* HttpHeaders.swift in Sources */,
 				5D0FBA9D1C01B4EB005BB336 /* SimilarItemsQuery.swift in Sources */,
 				5D0FBA9E1C01B4EB005BB336 /* SubtitleDeliveryMethod.swift in Sources */,
+				04C23C151C1680E1006722ED /* ContainerProfile.swift in Sources */,
+				04C23BEA1C096ACC006722ED /* DeviceIdentification.swift in Sources */,
+				04C23C0F1C16801B006722ED /* TranscodeSeekInfo.swift in Sources */,
 				5D0FBA9F1C01B4EB005BB336 /* IllegalArgumentError.swift in Sources */,
 				5D0FBAA01C01B4EB005BB336 /* HttpRequest.swift in Sources */,
 				5D0FBAA11C01B4EB005BB336 /* ItemFields.swift in Sources */,
@@ -1324,12 +1452,15 @@
 				5D0FBAA71C01B4EB005BB336 /* PinStatusResult.swift in Sources */,
 				5D0FBAA81C01B4EB005BB336 /* RecordingStatus.swift in Sources */,
 				5D0FBAA91C01B4EB005BB336 /* ConnectPassword.swift in Sources */,
+				04C23BEC1C096AD4006722ED /* HeaderMatchType.swift in Sources */,
 				5D0FBAAA1C01B4EB005BB336 /* ItemFilter.swift in Sources */,
 				5D0FBAAB1C01B4EB005BB336 /* ConnectionResult.swift in Sources */,
 				5D0FBAAC1C01B4EB005BB336 /* NameIdPair.swift in Sources */,
+				04C23C091C167E91006722ED /* DirectPlayProfile.swift in Sources */,
 				5D0FBAAD1C01B4EB005BB336 /* ConnectUser.swift in Sources */,
 				5D0FBAAE1C01B4EB005BB336 /* ServerLocator.swift in Sources */,
 				5D0FBAAF1C01B4EB005BB336 /* SubtitleDownloadOptions.swift in Sources */,
+				04C23C0C1C167F5B006722ED /* TranscodingProfile.swift in Sources */,
 				5D0FBAB01C01B4EB005BB336 /* iOSDevice.swift in Sources */,
 				5D0FBAB11C01B4EB005BB336 /* VideoType.swift in Sources */,
 				5D0FBAB21C01B4EB005BB336 /* JsonSerializer.swift in Sources */,
@@ -1352,16 +1483,20 @@
 				047B76ED1BFACDA50003A743 /* SubtitlePlaybackMode.swift in Sources */,
 				889288D31BE8DCE700DAD65F /* FileUploadProgress.swift in Sources */,
 				041643A81BD4280600873FAB /* SystemInfo.swift in Sources */,
+				04C23C111C168056006722ED /* EncodingContext.swift in Sources */,
 				0416439F1BD4204300873FAB /* WakeOnLanInfo.swift in Sources */,
 				88CF7E721BC6E49F00A33B72 /* PinExchangeResult.swift in Sources */,
 				041643AF1BD4962100873FAB /* PackageVersionClass.swift in Sources */,
+				04C23C011C167D19006722ED /* StringHelpers.swift in Sources */,
 				04AFCAF91BD34B4800C95C88 /* ProgressProtocol.swift in Sources */,
 				88CF7E391BC5B9AE00A33B72 /* SerializedResponse.swift in Sources */,
 				04B8AB8A1BF43D2600ED19CA /* MediaStreamType.swift in Sources */,
 				047B76EB1BFACBFD0003A743 /* UserConfiguration.swift in Sources */,
 				047B76F61BFAD2B60003A743 /* DynamicDayOfWeek.swift in Sources */,
 				04B8AB4D1BF037ED00ED19CA /* NextUpQuery.swift in Sources */,
+				04C23C171C168133006722ED /* ProfileConditionType.swift in Sources */,
 				04B8AB7D1BF2F24700ED19CA /* StudioDto.swift in Sources */,
+				04C23BF01C096AD5006722ED /* HttpHeaderInfo.swift in Sources */,
 				8857F86D1BCC633F00ADFA8A /* VolleyError.swift in Sources */,
 				04AFCAE61BD3453400C95C88 /* ClientCapabilities.swift in Sources */,
 				04B8AB751BF2EC1F00ED19CA /* MetadataFields.swift in Sources */,
@@ -1371,8 +1506,10 @@
 				04B8AB861BF43ABF00ED19CA /* MediaSourceType.swift in Sources */,
 				04B8AB491BEDAFE300ED19CA /* SeriesStatus.swift in Sources */,
 				88CF7E3C1BC5BB5600A33B72 /* IJsonSerializer.swift in Sources */,
+				04C23C1D1C1681F4006722ED /* ProfileCondition.swift in Sources */,
 				041643AD1BD495A700873FAB /* InstallationInfo.swift in Sources */,
 				04AFCAEE1BD3489C00C95C88 /* ServerInfo.swift in Sources */,
+				04C23C201C1684B7006722ED /* ResponseProfile.swift in Sources */,
 				04B8AB5F1BF1903400ED19CA /* Video3DFormat.swift in Sources */,
 				04B8AB331BDB2D1700ED19CA /* CredentialProviderProtocol.swift in Sources */,
 				041643A31BD4233800873FAB /* ConnectionMode.swift in Sources */,
@@ -1401,6 +1538,7 @@
 				04AFCAEC1BD347EE00C95C88 /* IHasServerId.swift in Sources */,
 				889288CD1BE7FF8B00DAD65F /* ICredentialProvider.swift in Sources */,
 				04B8AB351BDB2E8D00ED19CA /* ServerCredentials.swift in Sources */,
+				04C23BEE1C096AD5006722ED /* DeviceProfileType.swift in Sources */,
 				88CF7E6E1BC6E05C00A33B72 /* PinCreationResult.swift in Sources */,
 				0416439C1BD41FA600873FAB /* ServerUserInfo.swift in Sources */,
 				04AFCAF61BD34A0A00C95C88 /* LocalFileInfo.swift in Sources */,
@@ -1415,13 +1553,18 @@
 				04AFCAFB1BD34B9900C95C88 /* CancellationToken.swift in Sources */,
 				041643A11BD4216100873FAB /* UserLinkType.swift in Sources */,
 				04B8AB731BF2EBD400ED19CA /* ImageOrientation.swift in Sources */,
+				04C23C1A1C16817D006722ED /* ProfileConditionValue.swift in Sources */,
 				04B8AB7F1BF2F31E00ED19CA /* BaseItemPerson.swift in Sources */,
 				8810B9D91BECB2160062DB8F /* DeviceProtocol.swift in Sources */,
+				04C23C061C167DF2006722ED /* DlnaProfileType.swift in Sources */,
+				04C23C231C168561006722ED /* CodecType.swift in Sources */,
 				8857F86F1BCD4B5500ADFA8A /* IResponse.swift in Sources */,
+				04C23BF21C096B18006722ED /* XmlAttribute.swift in Sources */,
 				88CF7E781BC6E86F00A33B72 /* ConnectUserServer.swift in Sources */,
 				88D366371BF1021D002F2767 /* FindServersInnerResponse.swift in Sources */,
 				889288CB1BE7FF0000DAD65F /* CredentialProvider.swift in Sources */,
 				04B8AB5A1BF18D8D00ED19CA /* ExtraType.swift in Sources */,
+				04C23BF61C0C088A006722ED /* SubtitleProfile.swift in Sources */,
 				88CF7E591BC5BF8C00A33B72 /* QueryStringDictionary.swift in Sources */,
 				88CF7E691BC5CBDB00A33B72 /* Request.swift in Sources */,
 				889288D51BE908A500DAD65F /* BaseApiClient.swift in Sources */,
@@ -1431,9 +1574,13 @@
 				04AFCADC1BD33FEA00C95C88 /* ServerDiscoveryInfo.swift in Sources */,
 				88CF7E371BC5B8DF00A33B72 /* Response.swift in Sources */,
 				88CF7E741BC6E5B500A33B72 /* ConnectUserQuery.swift in Sources */,
+				04C23C261C16858D006722ED /* CodecProfile.swift in Sources */,
 				88CF7E601BC5C37D00A33B72 /* HttpHeaders.swift in Sources */,
 				04B8AB4F1BF039C700ED19CA /* SimilarItemsQuery.swift in Sources */,
 				04B8AB8C1BF4437700ED19CA /* SubtitleDeliveryMethod.swift in Sources */,
+				04C23C141C1680E1006722ED /* ContainerProfile.swift in Sources */,
+				04C23BE91C096ACB006722ED /* DeviceIdentification.swift in Sources */,
+				04C23C0E1C16801B006722ED /* TranscodeSeekInfo.swift in Sources */,
 				0479CFCC1C00191C00DFCEFB /* IllegalArgumentError.swift in Sources */,
 				88CF7E381BC5B94500A33B72 /* HttpRequest.swift in Sources */,
 				04B8AB431BEDADBA00ED19CA /* ItemFields.swift in Sources */,
@@ -1445,12 +1592,15 @@
 				88CF7E701BC6E0C100A33B72 /* PinStatusResult.swift in Sources */,
 				04B8AB6B1BF1971B00ED19CA /* RecordingStatus.swift in Sources */,
 				88CF7E5A1BC5BF9E00A33B72 /* ConnectPassword.swift in Sources */,
+				04C23BEF1C096AD5006722ED /* HeaderMatchType.swift in Sources */,
 				04B8AB411BEDACCB00ED19CA /* ItemFilter.swift in Sources */,
 				041643AA1BD48E6100873FAB /* ConnectionResult.swift in Sources */,
 				04B8AB7B1BF2F11E00ED19CA /* NameIdPair.swift in Sources */,
+				04C23C081C167E91006722ED /* DirectPlayProfile.swift in Sources */,
 				88CF7E761BC6E71200A33B72 /* ConnectUser.swift in Sources */,
 				889288D71BE90D8000DAD65F /* ServerLocator.swift in Sources */,
 				04B8AB391BEDA45000ED19CA /* SubtitleDownloadOptions.swift in Sources */,
+				04C23C0B1C167F5B006722ED /* TranscodingProfile.swift in Sources */,
 				889288CF1BE8D9B400DAD65F /* iOSDevice.swift in Sources */,
 				04B8AB451BEDAF2D00ED19CA /* VideoType.swift in Sources */,
 				888EFC811BCC4EDC00546DB3 /* JsonSerializer.swift in Sources */,
