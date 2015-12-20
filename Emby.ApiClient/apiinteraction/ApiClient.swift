@@ -5,73 +5,8 @@
 
 import Foundation
 
-//package mediabrowser.apiinteraction;
-//
-//import mediabrowser.apiinteraction.cryptography.Md5;
-//import mediabrowser.apiinteraction.cryptography.Sha1;
-//import mediabrowser.apiinteraction.device.IDevice;
-//import mediabrowser.apiinteraction.http.HttpRequest;
-//import mediabrowser.apiinteraction.http.IAsyncHttpClient;
-//import mediabrowser.apiinteraction.network.INetworkConnection;
-//import mediabrowser.apiinteraction.tasks.CancellationToken;
-//import mediabrowser.apiinteraction.tasks.IProgress;
-//import mediabrowser.apiinteraction.websocket.ApiWebSocket;
-//import mediabrowser.model.apiclient.ConnectionMode;
-//import mediabrowser.model.apiclient.RemoteLogoutReason;
-//import mediabrowser.model.apiclient.ServerInfo;
-//import mediabrowser.model.channels.AllChannelMediaQuery;
-//import mediabrowser.model.channels.ChannelFeatures;
-//import mediabrowser.model.channels.ChannelItemQuery;
-//import mediabrowser.model.channels.ChannelQuery;
-//import mediabrowser.model.configuration.ServerConfiguration;
-//import mediabrowser.model.configuration.UserConfiguration;
-//import mediabrowser.model.connect.ConnectPassword;
-//import mediabrowser.model.devices.ContentUploadHistory;
-//import mediabrowser.model.devices.DevicesOptions;
-//import mediabrowser.model.devices.LocalFileInfo;
-//import mediabrowser.model.dto.*;
-//import mediabrowser.model.entities.DisplayPreferences;
-//import mediabrowser.model.entities.ParentalRating;
-//import mediabrowser.model.extensions.StringHelper;
-//import mediabrowser.model.globalization.CountryInfo;
-//import mediabrowser.model.globalization.CultureDto;
-//import mediabrowser.model.livetv.*;
-//import mediabrowser.model.logging.ILogger;
-//import mediabrowser.model.mediainfo.*;
-//import mediabrowser.model.net.HttpException;
-//import mediabrowser.model.notifications.NotificationQuery;
-//import mediabrowser.model.notifications.NotificationResult;
-//import mediabrowser.model.notifications.NotificationsSummary;
-//import mediabrowser.model.playlists.PlaylistCreationRequest;
-//import mediabrowser.model.playlists.PlaylistCreationResult;
-//import mediabrowser.model.playlists.PlaylistItemQuery;
-//import mediabrowser.model.plugins.PluginInfo;
-//import mediabrowser.model.querying.*;
-//import mediabrowser.model.registration.RegistrationInfo;
-//import mediabrowser.model.results.*;
-//import mediabrowser.model.search.SearchHintResult;
-//import mediabrowser.model.search.SearchQuery;
-//import mediabrowser.model.serialization.IJsonSerializer;
-//import mediabrowser.model.session.*;
-//import mediabrowser.model.sync.*;
-//import mediabrowser.model.system.PublicSystemInfo;
-//import mediabrowser.model.system.SystemInfo;
-//import mediabrowser.model.tasks.TaskInfo;
-//import mediabrowser.model.tasks.TaskTriggerInfo;
-//import mediabrowser.model.users.AuthenticationResult;
-//import mediabrowser.model.users.UserAction;
-//
-//import java.io.*;
-//import java.net.HttpURLConnection;
-//import java.net.URL;
-//import java.security.NoSuchAlgorithmException;
-//import java.text.SimpleDateFormat;
-//import java.util.ArrayList;
-//import java.util.Date;
-//import java.util.Observable;
-
 public class ApiClient: BaseApiClient {
-    private let apiEventListener: ApiEventListener
+    private let apiEventListener: ApiEventListener?
     private let httpClient: IAsyncHttpClient
     private var networkConnection: INetworkConnection?
     //private var apiWebSocket: ApiWebSocket?
@@ -102,7 +37,76 @@ public class ApiClient: BaseApiClient {
         
         resetHttpHeaders()
     }
+    
+    init(httpClient: IAsyncHttpClient, jsonSerializer: IJsonSerializer, logger: ILogger, serverAddress: String, appName: String, applicationVersion: String, device: DeviceProtocol) {
+        self.httpClient = httpClient
+        self.apiEventListener = nil
+        
+        super.init(logger: logger, jsonSerializer: jsonSerializer, serverAddress: serverAddress, clientName: appName, device: device, applicationVersion: applicationVersion)
+        
+        resetHttpHeaders()
+    }
 
+    
+    // MARK: - Request Creation and Sending
+    
+    private func sendRequest<T: JSONSerializable>(var request: HttpRequest, success: (T) -> Void, failure: (EmbyError) -> Void) {
+        
+        request.addHeaders(httpHeaders)
+        
+        httpClient.sendRequest(request, success: success, failure: failure)
+    }
+    
+    private func sendCollectionRequest<Value: JSONSerializable>(var request: HttpRequest, success: ([Value]) -> Void, failure: (EmbyError) -> Void) {
+        
+        request.addHeaders(httpHeaders)
+        httpClient.sendCollectionRequest(request, success: success, failure: failure)
+    }
+    
+    
+    // MARK: - Public API Methods
+    
+    /**
+     
+     Authenticates a user and returns the result
+     
+     - Parameter username: The username
+     - Parameter password: The password
+     - Parameter success: Success callback with an AuthenticationResult
+     - Parameter failure: Failure callback with an EmbyError
+     
+     */
+    public func authenticateUserAsync(username: String, password: String, success: (AuthenticationResult) -> Void, failure: (EmbyError) -> Void) {
+        
+        precondition(!username.isEmpty, "Illegal Argument: username")
+        
+        let dict = QueryStringDictionary()
+        dict.Add("Username", value: username)
+        dict.Add("Password", value: password.sha1())
+        dict.Add("PasswordMd5", value: password.md5())
+        
+        let urlString = getApiUrl("Users/AuthenticateByName")
+        let request = HttpRequest(url: urlString, method: .POST, postData: dict)
+        sendRequest(request, success: success, failure: failure)
+    }
+    
+    
+    /**
+     
+     Gets a list of public users
+     
+     - Parameter success: Success callback with an array of UserDto
+     - Parameter failure: Failure callback with an EmbyError
+     
+     */
+    public func getPublicUsersAsync(success: ([UserDto]) -> Void, failure: (EmbyError) -> Void) {
+        let urlString = getApiUrl("Users/Public")
+        
+        let request = HttpRequest(url: urlString, method: .GET)
+        sendCollectionRequest(request, success: success, failure: failure)
+    }
+
+    
     public func enableAutomaticNetworking(info: ServerInfo, initialMode: ConnectionMode, networkConnection: INetworkConnection) {
         self.networkConnection = networkConnection
         self.connectionMode = initialMode
@@ -111,6 +115,8 @@ public class ApiClient: BaseApiClient {
         self.setServerAddress(info.getAddress(initialMode)!)
         
     }
+    
+    
 
 //    
 //    public void OpenWebSocket(){

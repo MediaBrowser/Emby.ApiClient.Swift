@@ -8,13 +8,6 @@
 
 import Foundation
 
-//package mediabrowser.apiinteraction.credentials;
-//
-//import mediabrowser.apiinteraction.ICredentialProvider;
-//import mediabrowser.model.apiclient.ServerCredentials;
-//import mediabrowser.model.logging.ILogger;
-//import mediabrowser.model.serialization.IJsonSerializer;
-
 /**
 * Created by Luke on 4/5/2015.
 */
@@ -28,20 +21,22 @@ public class CredentialProvider: CredentialProviderProtocol { // ICredentialProv
         self.filePath = filePath
     }
     
-//    @Override
-//    public ServerCredentials GetCredentials() {
     public func getCredentials() -> ServerCredentials {
     
-//        return (ServerCredentials)jsonSerializer.DeserializeFromFile(ServerCredentials.class, filePath);
+        if  let data = NSUserDefaults.standardUserDefaults().objectForKey("Emby Server Credentials") as? NSData,
+            let credentials = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? ServerCredentials
+        {
+            return credentials
+        }
         
         return ServerCredentials(connectAccessToken: "", connectUserId: "")
     }
 
-//    @Override
-//    public void SaveCredentials(ServerCredentials credentials) {
     public func saveCredentials(credentials: ServerCredentials) {
-    
-//        jsonSerializer.SerializeToFile(credentials, filePath);
+        
+        let data = NSKeyedArchiver.archivedDataWithRootObject(credentials)
+        NSUserDefaults.standardUserDefaults().setObject(data, forKey: "Emby Server Credentials")
+
     }
     
 }

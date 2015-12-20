@@ -57,4 +57,9 @@ public class SystemInfo: PublicSystemInfo {
         
         super.init(localAddress: localAddress, wanAddress: wanAddress, serverName: serverName, version: version, operatingSystem: operatingSystem, id: id)
     }
+    
+    // TODO: Handle JSON
+    public required init?(jSON: JSON_Object) {
+        fatalError("init(jSON:) has not been implemented: \(jSON)")
+    }
 }

@@ -35,92 +35,6 @@ public class ServerLocator: ServerDiscoveryProtocol, GCDAsyncUdpSocketDelegate {
         self.jsonSerializer = jsonSerializer;
     }
     
-    // MARK: - GCDAsyncUdpSocketDelegate
-    
-    /**
-     * By design, UDP is a connectionless protocol, and connecting is not needed.
-     * However, you may optionally choose to connect to a particular host for reasons
-     * outlined in the documentation for the various connect methods listed above.
-     *
-     * This method is called if one of the connect methods are invoked, and the connection is successful.
-     **/
-    @objc public func udpSocket(sock: GCDAsyncUdpSocket!, didConnectToAddress address: NSData!) {
-        
-        print("didConnectToAddress")
-    }
-
-    
-    /**
-     * By design, UDP is a connectionless protocol, and connecting is not needed.
-     * However, you may optionally choose to connect to a particular host for reasons
-     * outlined in the documentation for the various connect methods listed above.
-     *
-     * This method is called if one of the connect methods are invoked, and the connection fails.
-     * This may happen, for example, if a domain name is given for the host and the domain name is unable to be resolved.
-     **/
-    @objc public func udpSocket(sock: GCDAsyncUdpSocket!, didNotConnect error: NSError!) {
-        
-        print("didNotConnect")
-    }
-
-    
-    /**
-     * Called when the datagram with the given tag has been sent.
-     **/
-    @objc public func udpSocket(sock: GCDAsyncUdpSocket!, didSendDataWithTag tag: Int) {
-        
-        print("didSendDataWithTag")
-        do {
-            try self.Receive(sock, timeoutMs: UInt(1000), onResponse: { (serverDiscoveryInfo: [ServerDiscoveryInfo]) -> Void in
-                
-                print("serverDiscoveryInfo \(serverDiscoveryInfo)")
-            })
-        } catch {
-            print("\(error)")
-        }
-    }
-
-    
-    /**
-     * Called if an error occurs while trying to send a datagram.
-     * This could be due to a timeout, or something more serious such as the data being too large to fit in a sigle packet.
-     **/
-    @objc public func udpSocket(sock: GCDAsyncUdpSocket!, didNotSendDataWithTag tag: Int, dueToError error: NSError!) {
-        
-        print("didNotSendDataWithTag")
-    }
-
-    
-    /**
-     * Called when the socket has received the requested datagram.
-     **/
-    @objc public func udpSocket(sock: GCDAsyncUdpSocket!, didReceiveData data: NSData!, fromAddress address: NSData!, withFilterContext filterContext: AnyObject!) {
-        
-        let json = NSString(data: data, encoding: NSUTF8StringEncoding) as? String
-        
-        // We have a response
-        print("ServerLocator >>> Broadcast response from server: \(sock.localAddress())");
-        print("ServerLocator >>> Broadcast response from server: \(json)");
-        
-        do {
-            if let serverInfo: ServerDiscoveryInfo = try JsonSerializer().DeserializeFromString( json!, type:nil) {
-            
-                self.serverDiscoveryInfo.append(serverInfo)
-            }
-        } catch {
-            print("\(error)")
-        }
-    }
-
-    
-    /**
-     * Called when the socket is closed.
-     **/
-    @objc public func udpSocketDidClose(sock: GCDAsyncUdpSocket!, withError error: NSError!) {
-        
-        print("udpSocketDidClose")
-    }
-    
     
     // MARK: - utility methods
     
@@ -207,6 +121,7 @@ public class ServerLocator: ServerDiscoveryProtocol, GCDAsyncUdpSocketDelegate {
 //        ArrayList<ServerDiscoveryInfo> servers = new ArrayList<ServerDiscoveryInfo>();
 //        ArrayList<String> foundServerIds = new ArrayList<String>();
         
+        serverDiscoveryInfo = []
         let timeout = NSTimeInterval(Double(timeoutMs) / 1000.0)
         
         NSTimer.scheduledTimerWithTimeInterval(timeout, target: self, selector: Selector("finished"), userInfo: nil, repeats: false)
@@ -267,5 +182,91 @@ public class ServerLocator: ServerDiscoveryProtocol, GCDAsyncUdpSocketDelegate {
 //        logger.Debug("Found %d servers", servers.size());
 //        
 //        response.onResponse(servers);
+    }
+    
+    
+    // MARK: - GCDAsyncUdpSocketDelegate
+    
+    /**
+    * By design, UDP is a connectionless protocol, and connecting is not needed.
+    * However, you may optionally choose to connect to a particular host for reasons
+    * outlined in the documentation for the various connect methods listed above.
+    *
+    * This method is called if one of the connect methods are invoked, and the connection is successful.
+    **/
+    @objc public func udpSocket(sock: GCDAsyncUdpSocket!, didConnectToAddress address: NSData!) {
+        
+        print("didConnectToAddress")
+    }
+    
+    
+    /**
+     * By design, UDP is a connectionless protocol, and connecting is not needed.
+     * However, you may optionally choose to connect to a particular host for reasons
+     * outlined in the documentation for the various connect methods listed above.
+     *
+     * This method is called if one of the connect methods are invoked, and the connection fails.
+     * This may happen, for example, if a domain name is given for the host and the domain name is unable to be resolved.
+     **/
+    @objc public func udpSocket(sock: GCDAsyncUdpSocket!, didNotConnect error: NSError!) {
+        
+        print("didNotConnect")
+    }
+    
+    
+    /**
+     * Called when the datagram with the given tag has been sent.
+     **/
+    @objc public func udpSocket(sock: GCDAsyncUdpSocket!, didSendDataWithTag tag: Int) {
+        
+        print("didSendDataWithTag")
+        do {
+            try self.Receive(sock, timeoutMs: UInt(1000), onResponse: { (serverDiscoveryInfo: [ServerDiscoveryInfo]) -> Void in
+                
+                print("serverDiscoveryInfo \(serverDiscoveryInfo)")
+            })
+        } catch {
+            print("\(error)")
+        }
+    }
+    
+    
+    /**
+     * Called if an error occurs while trying to send a datagram.
+     * This could be due to a timeout, or something more serious such as the data being too large to fit in a sigle packet.
+     **/
+    @objc public func udpSocket(sock: GCDAsyncUdpSocket!, didNotSendDataWithTag tag: Int, dueToError error: NSError!) {
+        
+        print("didNotSendDataWithTag")
+    }
+    
+    
+    /**
+     * Called when the socket has received the requested datagram.
+     **/
+    @objc public func udpSocket(sock: GCDAsyncUdpSocket!, didReceiveData data: NSData!, fromAddress address: NSData!, withFilterContext filterContext: AnyObject!) {
+        
+        let json = NSString(data: data, encoding: NSUTF8StringEncoding) as? String
+        
+        // We have a response
+        print("ServerLocator >>> Broadcast response from server: \(sock.localAddress()): \(json)")
+        
+        do {
+            if let serverInfo: ServerDiscoveryInfo = try JsonSerializer().DeserializeFromString( json!, type:nil) {
+                
+                self.serverDiscoveryInfo.append(serverInfo)
+            }
+        } catch {
+            print("\(error)")
+        }
+    }
+    
+    
+    /**
+     * Called when the socket is closed.
+     **/
+    @objc public func udpSocketDidClose(sock: GCDAsyncUdpSocket!, withError error: NSError!) {
+        
+        print("udpSocketDidClose")
     }
 }

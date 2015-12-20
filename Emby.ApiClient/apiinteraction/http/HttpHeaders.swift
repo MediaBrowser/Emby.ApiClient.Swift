@@ -7,53 +7,28 @@
 //
 
 import Foundation
-//package mediabrowser.apiinteraction.http;
 
-public class HttpHeaders //extends java.util.HashMap<String,String>
+public class HttpHeaders
 {
     var data: [String: String] = [:]
     
-    public func put(name: String, value: String)
-    {
-        data[name] = value
-    }
-    
-//    /**
-//    Gets or sets the authorization scheme.
-//    <value>The authorization scheme.</value>
-//    */
-    private var privateAuthorizationScheme: String?
-    public final func getAuthorizationScheme() -> String?
-    {
-        return privateAuthorizationScheme;
-    }
-    public final func setAuthorizationScheme(value: String?)
-    {
-        privateAuthorizationScheme = value;
-    }
-//    /**
-//    Gets or sets the authorization parameter.
-//    <value>The authorization parameter.</value>
-//    */
-    private var privateAuthorizationParameter: String?
-    public final func getAuthorizationParameter() -> String?
-    {
-        return privateAuthorizationParameter;
-    }
-    public final func setAuthorizationParameter(value: String?)
-    {
-        privateAuthorizationParameter = value;
-    }
+    var authorizationScheme: String?
+    var authorizationParameter: String?
 
     public final func setAccessToken(token: String?) {
         if let accessToken = token {
-            self.put("X-MediaBrowser-Token", value: accessToken)
+            self["X-MediaBrowser-Token"] = accessToken
         } else {
-            remove("X-MediaBrowser-Token")
+            self["X-MediaBrowser-Token"] = nil
         }
     }
-
-    public final func remove(name: String) {
-        self.data[name] = nil
+    
+    subscript(index: String) -> String? {
+        get {
+            return data[index]
+        }
+        set(newValue) {
+            data[index] = newValue
+        }
     }
 }
