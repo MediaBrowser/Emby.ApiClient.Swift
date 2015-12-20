@@ -61,6 +61,12 @@
 		040932651C26605B00736C7B /* SessionUpdatesEventArgs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932641C26605B00736C7B /* SessionUpdatesEventArgs.swift */; };
 		040932661C26605B00736C7B /* SessionUpdatesEventArgs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932641C26605B00736C7B /* SessionUpdatesEventArgs.swift */; };
 		040932671C26605B00736C7B /* SessionUpdatesEventArgs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932641C26605B00736C7B /* SessionUpdatesEventArgs.swift */; };
+		0409326A1C26627D00736C7B /* INetworkConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932691C26627D00736C7B /* INetworkConnection.swift */; };
+		0409326B1C26627D00736C7B /* INetworkConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932691C26627D00736C7B /* INetworkConnection.swift */; };
+		0409326C1C26627D00736C7B /* INetworkConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932691C26627D00736C7B /* INetworkConnection.swift */; };
+		0409326E1C2662FF00736C7B /* NetworkStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0409326D1C2662FF00736C7B /* NetworkStatus.swift */; };
+		0409326F1C2662FF00736C7B /* NetworkStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0409326D1C2662FF00736C7B /* NetworkStatus.swift */; };
+		040932701C2662FF00736C7B /* NetworkStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0409326D1C2662FF00736C7B /* NetworkStatus.swift */; };
 		0416439C1BD41FA600873FAB /* ServerUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0416439B1BD41FA600873FAB /* ServerUserInfo.swift */; };
 		0416439F1BD4204300873FAB /* WakeOnLanInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0416439E1BD4204300873FAB /* WakeOnLanInfo.swift */; };
 		041643A11BD4216100873FAB /* UserLinkType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041643A01BD4216100873FAB /* UserLinkType.swift */; };
@@ -423,6 +429,8 @@
 		0409325C1C265F3D00736C7B /* PlayMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayMethod.swift; path = session/PlayMethod.swift; sourceTree = "<group>"; };
 		040932601C265F6700736C7B /* TranscodingInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TranscodingInfo.swift; path = session/TranscodingInfo.swift; sourceTree = "<group>"; };
 		040932641C26605B00736C7B /* SessionUpdatesEventArgs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionUpdatesEventArgs.swift; sourceTree = "<group>"; };
+		040932691C26627D00736C7B /* INetworkConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = INetworkConnection.swift; sourceTree = "<group>"; };
+		0409326D1C2662FF00736C7B /* NetworkStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkStatus.swift; sourceTree = "<group>"; };
 		0416439B1BD41FA600873FAB /* ServerUserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerUserInfo.swift; sourceTree = "<group>"; };
 		0416439E1BD4204300873FAB /* WakeOnLanInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WakeOnLanInfo.swift; sourceTree = "<group>"; };
 		041643A01BD4216100873FAB /* UserLinkType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLinkType.swift; sourceTree = "<group>"; };
@@ -628,6 +636,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		040932681C26627000736C7B /* network */ = {
+			isa = PBXGroup;
+			children = (
+				040932691C26627D00736C7B /* INetworkConnection.swift */,
+			);
+			name = network;
+			sourceTree = "<group>";
+		};
 		041643A41BD424E500873FAB /* system */ = {
 			isa = PBXGroup;
 			children = (
@@ -741,6 +757,7 @@
 				04B8AB361BEDA05900ED19CA /* ApiHelpers.swift */,
 				040932241C26547D00736C7B /* RemoteLogoutReason.swift */,
 				040932641C26605B00736C7B /* SessionUpdatesEventArgs.swift */,
+				0409326D1C2662FF00736C7B /* NetworkStatus.swift */,
 			);
 			name = apiclient;
 			path = Emby.ApiClient/model/apiclient;
@@ -1001,6 +1018,7 @@
 		8838C5621BC517E300587F8E /* apiinteraction */ = {
 			isa = PBXGroup;
 			children = (
+				040932681C26627000736C7B /* network */,
 				889288D01BE8DCC800DAD65F /* sync */,
 				889288C81BE7FED400DAD65F /* credentials */,
 				04B8AB2E1BDB291E00ED19CA /* connectionmanager */,
@@ -1413,6 +1431,7 @@
 				04C23BFC1C0C0BB1006722ED /* SubtitleProfileTests.swift in Sources */,
 				048E0CBF1C095E380001081F /* BaseItemPersonTests.swift in Sources */,
 				0409324F1C265BD100736C7B /* SessionUserInfo.swift in Sources */,
+				040932701C2662FF00736C7B /* NetworkStatus.swift in Sources */,
 				048E0CB41C06B98C0001081F /* ServerUserInfoTests.swift in Sources */,
 				048E0CC31C095F700001081F /* ChapterInfoDtoTests.swift in Sources */,
 				040932431C26590500736C7B /* GeneralCommand.swift in Sources */,
@@ -1431,6 +1450,7 @@
 				0409323B1C26583000736C7B /* PlaystateRequest.swift in Sources */,
 				04C23C2A1C16875E006722ED /* CodecProfileTests.swift in Sources */,
 				048E0CB61C06BA580001081F /* ServerInfoTests.swift in Sources */,
+				0409326C1C26627D00736C7B /* INetworkConnection.swift in Sources */,
 				040932571C265E6900736C7B /* PlayerStateInfo.swift in Sources */,
 				0409323F1C26589700736C7B /* MessageCommand.swift in Sources */,
 				048E0CB91C06BE690001081F /* UserDtoTests.swift in Sources */,
@@ -1502,6 +1522,7 @@
 				040932421C26590500736C7B /* GeneralCommand.swift in Sources */,
 				5D0FBA711C01B4EB005BB336 /* IsoType.swift in Sources */,
 				0409325E1C265F3D00736C7B /* PlayMethod.swift in Sources */,
+				0409326F1C2662FF00736C7B /* NetworkStatus.swift in Sources */,
 				0409324E1C265BD100736C7B /* SessionUserInfo.swift in Sources */,
 				5D0FBA721C01B4EB005BB336 /* SortOrder.swift in Sources */,
 				5D0FBA731C01B4EB005BB336 /* ChapterInfoDto.swift in Sources */,
@@ -1509,6 +1530,7 @@
 				5D0FBA741C01B4EB005BB336 /* MediaUrl.swift in Sources */,
 				040932461C26598200736C7B /* UserDataChangeInfo.swift in Sources */,
 				5D0FBA751C01B4EB005BB336 /* IAsyncHttpClient.swift in Sources */,
+				0409326B1C26627D00736C7B /* INetworkConnection.swift in Sources */,
 				5D0FBA761C01B4EB005BB336 /* ItemsByNameQuery.swift in Sources */,
 				5D0FBA771C01B4EB005BB336 /* EmptyResponse.swift in Sources */,
 				5D0FBA781C01B4EB005BB336 /* Logger.swift in Sources */,
@@ -1660,6 +1682,7 @@
 				040932411C26590500736C7B /* GeneralCommand.swift in Sources */,
 				04B8AB771BF2EC7300ED19CA /* IsoType.swift in Sources */,
 				0409325D1C265F3D00736C7B /* PlayMethod.swift in Sources */,
+				0409326E1C2662FF00736C7B /* NetworkStatus.swift in Sources */,
 				0409324D1C265BD100736C7B /* SessionUserInfo.swift in Sources */,
 				04B8AB3F1BEDAC8200ED19CA /* SortOrder.swift in Sources */,
 				04B8AB791BF2ECA900ED19CA /* ChapterInfoDto.swift in Sources */,
@@ -1667,6 +1690,7 @@
 				04B8AB661BF192AC00ED19CA /* MediaUrl.swift in Sources */,
 				040932451C26598200736C7B /* UserDataChangeInfo.swift in Sources */,
 				88CF7E3E1BC5BC8800A33B72 /* IAsyncHttpClient.swift in Sources */,
+				0409326A1C26627D00736C7B /* INetworkConnection.swift in Sources */,
 				04B8AB511BF03B8600ED19CA /* ItemsByNameQuery.swift in Sources */,
 				884EBEDD1BCD912B0032E7F3 /* EmptyResponse.swift in Sources */,
 				888EFC7E1BCC4DB700546DB3 /* Logger.swift in Sources */,
