@@ -71,35 +71,29 @@ import Foundation
 //import java.util.Observable;
 
 public class ApiClient: BaseApiClient {
+    private let apiEventListener: ApiEventListener
+    private let httpClient: IAsyncHttpClient
+    //private var networkConnection: INetworkConnection?
+    //private var apiWebSocket: ApiWebSocket?
+    private var serverInfo: ServerInfo?
+    private var connectionMode = ConnectionMode.Local
 
-//    protected IAsyncHttpClient httpClient;
-//    private ApiEventListener apiEventListener;
-//    
-//    private INetworkConnection networkConnection;
-//    private ApiWebSocket apiWebSocket;
-//    
-//    private ServerInfo serverInfo;
-//    public ServerInfo getServerInfo(){
-//        return serverInfo;
-//    }
-//    
-//    private ConnectionMode connectionMode = ConnectionMode.Local;
-//    
+    
 //    private Observable authenticatedObservable = new AutomaticObservable();
 //    public Observable getAuthenticatedObservable() {
 //        return authenticatedObservable;
 //    }
 //    
-//    public ApiClient(IAsyncHttpClient httpClient, IJsonSerializer jsonSerializer, ILogger logger, String serverAddress, String accessToken, ApiEventListener apiEventListener)
-//    {
-//        super(logger, jsonSerializer, serverAddress, accessToken);
-//        
-//        this.httpClient = httpClient;
-//        this.apiEventListener = apiEventListener;
-//        
-//        ResetHttpHeaders();
-//    }
-//    
+    
+    init(httpClient: IAsyncHttpClient, jsonSerializer: IJsonSerializer, logger: ILogger, serverAddress: String, accessToken: String, apiEventListener: ApiEventListener) {
+        self.httpClient = httpClient
+        self.apiEventListener = apiEventListener
+        
+        super.init(logger: logger, jsonSerializer: jsonSerializer, serverAddress: serverAddress, accessToken: accessToken)
+        
+        resetHttpHeaders()
+    }
+
 //    public ApiClient(IAsyncHttpClient httpClient, IJsonSerializer jsonSerializer, ILogger logger, String serverAddress, String appName, String applicationVersion, IDevice device, ApiEventListener apiEventListener)
 //    {
 //        super(logger, jsonSerializer, serverAddress, appName, device, applicationVersion);
