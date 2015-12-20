@@ -7,6 +7,66 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		040932211C2653CC00736C7B /* ApiEventListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932201C2653CC00736C7B /* ApiEventListener.swift */; };
+		040932221C2653CC00736C7B /* ApiEventListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932201C2653CC00736C7B /* ApiEventListener.swift */; };
+		040932231C2653CC00736C7B /* ApiEventListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932201C2653CC00736C7B /* ApiEventListener.swift */; };
+		040932251C26547D00736C7B /* RemoteLogoutReason.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932241C26547D00736C7B /* RemoteLogoutReason.swift */; };
+		040932261C26547D00736C7B /* RemoteLogoutReason.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932241C26547D00736C7B /* RemoteLogoutReason.swift */; };
+		040932271C26547D00736C7B /* RemoteLogoutReason.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932241C26547D00736C7B /* RemoteLogoutReason.swift */; };
+		040932291C2656DC00736C7B /* BrowseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932281C2656DC00736C7B /* BrowseRequest.swift */; };
+		0409322A1C2656DC00736C7B /* BrowseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932281C2656DC00736C7B /* BrowseRequest.swift */; };
+		0409322B1C2656DC00736C7B /* BrowseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932281C2656DC00736C7B /* BrowseRequest.swift */; };
+		0409322D1C26572200736C7B /* PlayRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0409322C1C26572200736C7B /* PlayRequest.swift */; };
+		0409322E1C26572200736C7B /* PlayRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0409322C1C26572200736C7B /* PlayRequest.swift */; };
+		0409322F1C26572200736C7B /* PlayRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0409322C1C26572200736C7B /* PlayRequest.swift */; };
+		040932311C26576F00736C7B /* PlayCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932301C26576F00736C7B /* PlayCommand.swift */; };
+		040932321C26576F00736C7B /* PlayCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932301C26576F00736C7B /* PlayCommand.swift */; };
+		040932331C26576F00736C7B /* PlayCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932301C26576F00736C7B /* PlayCommand.swift */; };
+		040932351C2657DD00736C7B /* PlaystateCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932341C2657DD00736C7B /* PlaystateCommand.swift */; };
+		040932361C2657DD00736C7B /* PlaystateCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932341C2657DD00736C7B /* PlaystateCommand.swift */; };
+		040932371C2657DD00736C7B /* PlaystateCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932341C2657DD00736C7B /* PlaystateCommand.swift */; };
+		040932391C26583000736C7B /* PlaystateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932381C26583000736C7B /* PlaystateRequest.swift */; };
+		0409323A1C26583000736C7B /* PlaystateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932381C26583000736C7B /* PlaystateRequest.swift */; };
+		0409323B1C26583000736C7B /* PlaystateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932381C26583000736C7B /* PlaystateRequest.swift */; };
+		0409323D1C26589700736C7B /* MessageCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0409323C1C26589700736C7B /* MessageCommand.swift */; };
+		0409323E1C26589700736C7B /* MessageCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0409323C1C26589700736C7B /* MessageCommand.swift */; };
+		0409323F1C26589700736C7B /* MessageCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0409323C1C26589700736C7B /* MessageCommand.swift */; };
+		040932411C26590500736C7B /* GeneralCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932401C26590500736C7B /* GeneralCommand.swift */; };
+		040932421C26590500736C7B /* GeneralCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932401C26590500736C7B /* GeneralCommand.swift */; };
+		040932431C26590500736C7B /* GeneralCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932401C26590500736C7B /* GeneralCommand.swift */; };
+		040932451C26598200736C7B /* UserDataChangeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932441C26598200736C7B /* UserDataChangeInfo.swift */; };
+		040932461C26598200736C7B /* UserDataChangeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932441C26598200736C7B /* UserDataChangeInfo.swift */; };
+		040932471C26598200736C7B /* UserDataChangeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932441C26598200736C7B /* UserDataChangeInfo.swift */; };
+		040932491C265A1400736C7B /* SessionInfoDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932481C265A1400736C7B /* SessionInfoDto.swift */; };
+		0409324A1C265A1400736C7B /* SessionInfoDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932481C265A1400736C7B /* SessionInfoDto.swift */; };
+		0409324B1C265A1400736C7B /* SessionInfoDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932481C265A1400736C7B /* SessionInfoDto.swift */; };
+		0409324D1C265BD100736C7B /* SessionUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0409324C1C265BD100736C7B /* SessionUserInfo.swift */; };
+		0409324E1C265BD100736C7B /* SessionUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0409324C1C265BD100736C7B /* SessionUserInfo.swift */; };
+		0409324F1C265BD100736C7B /* SessionUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0409324C1C265BD100736C7B /* SessionUserInfo.swift */; };
+		040932511C265C4000736C7B /* BaseItemInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932501C265C4000736C7B /* BaseItemInfo.swift */; };
+		040932521C265C4000736C7B /* BaseItemInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932501C265C4000736C7B /* BaseItemInfo.swift */; };
+		040932531C265C4000736C7B /* BaseItemInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932501C265C4000736C7B /* BaseItemInfo.swift */; };
+		040932551C265E6900736C7B /* PlayerStateInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932541C265E6900736C7B /* PlayerStateInfo.swift */; };
+		040932561C265E6900736C7B /* PlayerStateInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932541C265E6900736C7B /* PlayerStateInfo.swift */; };
+		040932571C265E6900736C7B /* PlayerStateInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932541C265E6900736C7B /* PlayerStateInfo.swift */; };
+		040932591C265F1200736C7B /* RepeatMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932581C265F1200736C7B /* RepeatMode.swift */; };
+		0409325A1C265F1200736C7B /* RepeatMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932581C265F1200736C7B /* RepeatMode.swift */; };
+		0409325B1C265F1200736C7B /* RepeatMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932581C265F1200736C7B /* RepeatMode.swift */; };
+		0409325D1C265F3D00736C7B /* PlayMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0409325C1C265F3D00736C7B /* PlayMethod.swift */; };
+		0409325E1C265F3D00736C7B /* PlayMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0409325C1C265F3D00736C7B /* PlayMethod.swift */; };
+		0409325F1C265F3D00736C7B /* PlayMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0409325C1C265F3D00736C7B /* PlayMethod.swift */; };
+		040932611C265F6700736C7B /* TranscodingInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932601C265F6700736C7B /* TranscodingInfo.swift */; };
+		040932621C265F6700736C7B /* TranscodingInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932601C265F6700736C7B /* TranscodingInfo.swift */; };
+		040932631C265F6700736C7B /* TranscodingInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932601C265F6700736C7B /* TranscodingInfo.swift */; };
+		040932651C26605B00736C7B /* SessionUpdatesEventArgs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932641C26605B00736C7B /* SessionUpdatesEventArgs.swift */; };
+		040932661C26605B00736C7B /* SessionUpdatesEventArgs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932641C26605B00736C7B /* SessionUpdatesEventArgs.swift */; };
+		040932671C26605B00736C7B /* SessionUpdatesEventArgs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932641C26605B00736C7B /* SessionUpdatesEventArgs.swift */; };
+		0409326A1C26627D00736C7B /* INetworkConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932691C26627D00736C7B /* INetworkConnection.swift */; };
+		0409326B1C26627D00736C7B /* INetworkConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932691C26627D00736C7B /* INetworkConnection.swift */; };
+		0409326C1C26627D00736C7B /* INetworkConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932691C26627D00736C7B /* INetworkConnection.swift */; };
+		0409326E1C2662FF00736C7B /* NetworkStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0409326D1C2662FF00736C7B /* NetworkStatus.swift */; };
+		0409326F1C2662FF00736C7B /* NetworkStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0409326D1C2662FF00736C7B /* NetworkStatus.swift */; };
+		040932701C2662FF00736C7B /* NetworkStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0409326D1C2662FF00736C7B /* NetworkStatus.swift */; };
 		0416439C1BD41FA600873FAB /* ServerUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0416439B1BD41FA600873FAB /* ServerUserInfo.swift */; };
 		0416439F1BD4204300873FAB /* WakeOnLanInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0416439E1BD4204300873FAB /* WakeOnLanInfo.swift */; };
 		041643A11BD4216100873FAB /* UserLinkType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041643A01BD4216100873FAB /* UserLinkType.swift */; };
@@ -351,6 +411,26 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		040932201C2653CC00736C7B /* ApiEventListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiEventListener.swift; sourceTree = "<group>"; };
+		040932241C26547D00736C7B /* RemoteLogoutReason.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteLogoutReason.swift; sourceTree = "<group>"; };
+		040932281C2656DC00736C7B /* BrowseRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BrowseRequest.swift; path = session/BrowseRequest.swift; sourceTree = "<group>"; };
+		0409322C1C26572200736C7B /* PlayRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayRequest.swift; path = session/PlayRequest.swift; sourceTree = "<group>"; };
+		040932301C26576F00736C7B /* PlayCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayCommand.swift; path = session/PlayCommand.swift; sourceTree = "<group>"; };
+		040932341C2657DD00736C7B /* PlaystateCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlaystateCommand.swift; path = session/PlaystateCommand.swift; sourceTree = "<group>"; };
+		040932381C26583000736C7B /* PlaystateRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlaystateRequest.swift; path = session/PlaystateRequest.swift; sourceTree = "<group>"; };
+		0409323C1C26589700736C7B /* MessageCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageCommand.swift; path = session/MessageCommand.swift; sourceTree = "<group>"; };
+		040932401C26590500736C7B /* GeneralCommand.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GeneralCommand.swift; path = session/GeneralCommand.swift; sourceTree = "<group>"; };
+		040932441C26598200736C7B /* UserDataChangeInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserDataChangeInfo.swift; path = session/UserDataChangeInfo.swift; sourceTree = "<group>"; };
+		040932481C265A1400736C7B /* SessionInfoDto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SessionInfoDto.swift; path = session/SessionInfoDto.swift; sourceTree = "<group>"; };
+		0409324C1C265BD100736C7B /* SessionUserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SessionUserInfo.swift; path = session/SessionUserInfo.swift; sourceTree = "<group>"; };
+		040932501C265C4000736C7B /* BaseItemInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseItemInfo.swift; path = entities/BaseItemInfo.swift; sourceTree = "<group>"; };
+		040932541C265E6900736C7B /* PlayerStateInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerStateInfo.swift; path = session/PlayerStateInfo.swift; sourceTree = "<group>"; };
+		040932581C265F1200736C7B /* RepeatMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RepeatMode.swift; path = session/RepeatMode.swift; sourceTree = "<group>"; };
+		0409325C1C265F3D00736C7B /* PlayMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayMethod.swift; path = session/PlayMethod.swift; sourceTree = "<group>"; };
+		040932601C265F6700736C7B /* TranscodingInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TranscodingInfo.swift; path = session/TranscodingInfo.swift; sourceTree = "<group>"; };
+		040932641C26605B00736C7B /* SessionUpdatesEventArgs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionUpdatesEventArgs.swift; sourceTree = "<group>"; };
+		040932691C26627D00736C7B /* INetworkConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = INetworkConnection.swift; sourceTree = "<group>"; };
+		0409326D1C2662FF00736C7B /* NetworkStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkStatus.swift; sourceTree = "<group>"; };
 		0416439B1BD41FA600873FAB /* ServerUserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerUserInfo.swift; sourceTree = "<group>"; };
 		0416439E1BD4204300873FAB /* WakeOnLanInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WakeOnLanInfo.swift; sourceTree = "<group>"; };
 		041643A01BD4216100873FAB /* UserLinkType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLinkType.swift; sourceTree = "<group>"; };
@@ -556,6 +636,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		040932681C26627000736C7B /* network */ = {
+			isa = PBXGroup;
+			children = (
+				040932691C26627D00736C7B /* INetworkConnection.swift */,
+			);
+			name = network;
+			sourceTree = "<group>";
+		};
 		041643A41BD424E500873FAB /* system */ = {
 			isa = PBXGroup;
 			children = (
@@ -667,6 +755,9 @@
 				041643A21BD4233800873FAB /* ConnectionMode.swift */,
 				04B8AB341BDB2E8D00ED19CA /* ServerCredentials.swift */,
 				04B8AB361BEDA05900ED19CA /* ApiHelpers.swift */,
+				040932241C26547D00736C7B /* RemoteLogoutReason.swift */,
+				040932641C26605B00736C7B /* SessionUpdatesEventArgs.swift */,
+				0409326D1C2662FF00736C7B /* NetworkStatus.swift */,
 			);
 			name = apiclient;
 			path = Emby.ApiClient/model/apiclient;
@@ -676,6 +767,20 @@
 			isa = PBXGroup;
 			children = (
 				04AFCAE51BD3453400C95C88 /* ClientCapabilities.swift */,
+				040932281C2656DC00736C7B /* BrowseRequest.swift */,
+				0409322C1C26572200736C7B /* PlayRequest.swift */,
+				040932301C26576F00736C7B /* PlayCommand.swift */,
+				040932341C2657DD00736C7B /* PlaystateCommand.swift */,
+				040932381C26583000736C7B /* PlaystateRequest.swift */,
+				0409323C1C26589700736C7B /* MessageCommand.swift */,
+				040932401C26590500736C7B /* GeneralCommand.swift */,
+				040932441C26598200736C7B /* UserDataChangeInfo.swift */,
+				040932481C265A1400736C7B /* SessionInfoDto.swift */,
+				0409324C1C265BD100736C7B /* SessionUserInfo.swift */,
+				040932541C265E6900736C7B /* PlayerStateInfo.swift */,
+				040932581C265F1200736C7B /* RepeatMode.swift */,
+				0409325C1C265F3D00736C7B /* PlayMethod.swift */,
+				040932601C265F6700736C7B /* TranscodingInfo.swift */,
 			);
 			name = session;
 			sourceTree = "<group>";
@@ -789,6 +894,7 @@
 				04B8AB761BF2EC7300ED19CA /* IsoType.swift */,
 				04B8AB871BF43B2200ED19CA /* MediaStream.swift */,
 				04B8AB891BF43D2600ED19CA /* MediaStreamType.swift */,
+				040932501C265C4000736C7B /* BaseItemInfo.swift */,
 			);
 			name = entities;
 			sourceTree = "<group>";
@@ -912,6 +1018,7 @@
 		8838C5621BC517E300587F8E /* apiinteraction */ = {
 			isa = PBXGroup;
 			children = (
+				040932681C26627000736C7B /* network */,
 				889288D01BE8DCC800DAD65F /* sync */,
 				889288C81BE7FED400DAD65F /* credentials */,
 				04B8AB2E1BDB291E00ED19CA /* connectionmanager */,
@@ -932,6 +1039,7 @@
 				889288CC1BE7FF8B00DAD65F /* ICredentialProvider.swift */,
 				889288D41BE908A500DAD65F /* BaseApiClient.swift */,
 				0479CFCB1C00191C00DFCEFB /* IllegalArgumentError.swift */,
+				040932201C2653CC00736C7B /* ApiEventListener.swift */,
 			);
 			path = apiinteraction;
 			sourceTree = "<group>";
@@ -1319,19 +1427,39 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				040932631C265F6700736C7B /* TranscodingInfo.swift in Sources */,
 				04C23BFC1C0C0BB1006722ED /* SubtitleProfileTests.swift in Sources */,
 				048E0CBF1C095E380001081F /* BaseItemPersonTests.swift in Sources */,
+				0409324F1C265BD100736C7B /* SessionUserInfo.swift in Sources */,
+				040932701C2662FF00736C7B /* NetworkStatus.swift in Sources */,
 				048E0CB41C06B98C0001081F /* ServerUserInfoTests.swift in Sources */,
 				048E0CC31C095F700001081F /* ChapterInfoDtoTests.swift in Sources */,
+				040932431C26590500736C7B /* GeneralCommand.swift in Sources */,
 				048E0CB21C06B7BE0001081F /* ApiHelpersTests.swift in Sources */,
+				040932271C26547D00736C7B /* RemoteLogoutReason.swift in Sources */,
 				048E0CBD1C0955ED0001081F /* MediaSourceInfoTests.swift in Sources */,
+				0409325B1C265F1200736C7B /* RepeatMode.swift in Sources */,
 				048E0CC11C095EE20001081F /* StudioDtoTests.swift in Sources */,
+				040932471C26598200736C7B /* UserDataChangeInfo.swift in Sources */,
+				0409322F1C26572200736C7B /* PlayRequest.swift in Sources */,
+				040932331C26576F00736C7B /* PlayCommand.swift in Sources */,
+				040932231C2653CC00736C7B /* ApiEventListener.swift in Sources */,
+				0409322B1C2656DC00736C7B /* BrowseRequest.swift in Sources */,
+				0409324B1C265A1400736C7B /* SessionInfoDto.swift in Sources */,
+				040932371C2657DD00736C7B /* PlaystateCommand.swift in Sources */,
+				0409323B1C26583000736C7B /* PlaystateRequest.swift in Sources */,
 				04C23C2A1C16875E006722ED /* CodecProfileTests.swift in Sources */,
 				048E0CB61C06BA580001081F /* ServerInfoTests.swift in Sources */,
+				0409326C1C26627D00736C7B /* INetworkConnection.swift in Sources */,
+				040932571C265E6900736C7B /* PlayerStateInfo.swift in Sources */,
+				0409323F1C26589700736C7B /* MessageCommand.swift in Sources */,
 				048E0CB91C06BE690001081F /* UserDtoTests.swift in Sources */,
 				0479CFE61C0165CD00DFCEFB /* BaseApiClientTests.swift in Sources */,
 				04C23C001C167A41006722ED /* StringHelpersTests.swift in Sources */,
+				0409325F1C265F3D00736C7B /* PlayMethod.swift in Sources */,
+				040932671C26605B00736C7B /* SessionUpdatesEventArgs.swift in Sources */,
 				048E0CBB1C094CFC0001081F /* ServerCredentialsTests.swift in Sources */,
+				040932531C265C4000736C7B /* BaseItemInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1339,6 +1467,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				040932621C265F6700736C7B /* TranscodingInfo.swift in Sources */,
 				5D0FBA491C01B4EB005BB336 /* Context.swift in Sources */,
 				5D0FBA4A1C01B4EB005BB336 /* SubtitlePlaybackMode.swift in Sources */,
 				5D0FBA4B1C01B4EB005BB336 /* FileUploadProgress.swift in Sources */,
@@ -1361,18 +1490,22 @@
 				5D0FBA581C01B4EB005BB336 /* ClientCapabilities.swift in Sources */,
 				5D0FBA591C01B4EB005BB336 /* MetadataFields.swift in Sources */,
 				5D0FBA5A1C01B4EB005BB336 /* UnratedItem.swift in Sources */,
+				0409323E1C26589700736C7B /* MessageCommand.swift in Sources */,
 				5D0FBA5B1C01B4EB005BB336 /* DeviceProfile.swift in Sources */,
 				5D0FBA5C1C01B4EB005BB336 /* ILogger.swift in Sources */,
 				5D0FBA5D1C01B4EB005BB336 /* MediaSourceType.swift in Sources */,
 				5D0FBA5E1C01B4EB005BB336 /* SeriesStatus.swift in Sources */,
 				5D0FBA5F1C01B4EB005BB336 /* IJsonSerializer.swift in Sources */,
+				040932321C26576F00736C7B /* PlayCommand.swift in Sources */,
 				04C23C1E1C1681F4006722ED /* ProfileCondition.swift in Sources */,
 				5D0FBA601C01B4EB005BB336 /* InstallationInfo.swift in Sources */,
 				5D0FBA611C01B4EB005BB336 /* ServerInfo.swift in Sources */,
 				04C23C211C1684B7006722ED /* ResponseProfile.swift in Sources */,
 				5D0FBA621C01B4EB005BB336 /* Video3DFormat.swift in Sources */,
+				0409323A1C26583000736C7B /* PlaystateRequest.swift in Sources */,
 				5D0FBA631C01B4EB005BB336 /* CredentialProviderProtocol.swift in Sources */,
 				5D0FBA641C01B4EB005BB336 /* ConnectionMode.swift in Sources */,
+				040932521C265C4000736C7B /* BaseItemInfo.swift in Sources */,
 				5D0FBA651C01B4EB005BB336 /* MediaType.swift in Sources */,
 				5D0FBA661C01B4EB005BB336 /* ConnectionOptions.swift in Sources */,
 				5D0FBA671C01B4EB005BB336 /* StringRequest.swift in Sources */,
@@ -1380,16 +1513,24 @@
 				5D0FBA691C01B4EB005BB336 /* SyncJobStatus.swift in Sources */,
 				5D0FBA6A1C01B4EB005BB336 /* ConnectService.swift in Sources */,
 				5D0FBA6B1C01B4EB005BB336 /* TransportStreamTimestamp.swift in Sources */,
+				0409322A1C2656DC00736C7B /* BrowseRequest.swift in Sources */,
 				5D0FBA6C1C01B4EB005BB336 /* RegistrationInfo.swift in Sources */,
 				5D0FBA6D1C01B4EB005BB336 /* ConnectionManager.swift in Sources */,
 				5D0FBA6E1C01B4EB005BB336 /* ConnectAuthorizationRequest.swift in Sources */,
 				5D0FBA6F1C01B4EB005BB336 /* MediaProtocol.swift in Sources */,
 				5D0FBA701C01B4EB005BB336 /* ApiHelpers.swift in Sources */,
+				040932421C26590500736C7B /* GeneralCommand.swift in Sources */,
 				5D0FBA711C01B4EB005BB336 /* IsoType.swift in Sources */,
+				0409325E1C265F3D00736C7B /* PlayMethod.swift in Sources */,
+				0409326F1C2662FF00736C7B /* NetworkStatus.swift in Sources */,
+				0409324E1C265BD100736C7B /* SessionUserInfo.swift in Sources */,
 				5D0FBA721C01B4EB005BB336 /* SortOrder.swift in Sources */,
 				5D0FBA731C01B4EB005BB336 /* ChapterInfoDto.swift in Sources */,
+				040932561C265E6900736C7B /* PlayerStateInfo.swift in Sources */,
 				5D0FBA741C01B4EB005BB336 /* MediaUrl.swift in Sources */,
+				040932461C26598200736C7B /* UserDataChangeInfo.swift in Sources */,
 				5D0FBA751C01B4EB005BB336 /* IAsyncHttpClient.swift in Sources */,
+				0409326B1C26627D00736C7B /* INetworkConnection.swift in Sources */,
 				5D0FBA761C01B4EB005BB336 /* ItemsByNameQuery.swift in Sources */,
 				5D0FBA771C01B4EB005BB336 /* EmptyResponse.swift in Sources */,
 				5D0FBA781C01B4EB005BB336 /* Logger.swift in Sources */,
@@ -1416,6 +1557,7 @@
 				04C23C1B1C16817D006722ED /* ProfileConditionValue.swift in Sources */,
 				5D0FBA8C1C01B4EB005BB336 /* BaseItemPerson.swift in Sources */,
 				5D0FBA8D1C01B4EB005BB336 /* DeviceProtocol.swift in Sources */,
+				040932221C2653CC00736C7B /* ApiEventListener.swift in Sources */,
 				04C23C071C167DF2006722ED /* DlnaProfileType.swift in Sources */,
 				04C23C241C168561006722ED /* CodecType.swift in Sources */,
 				5D0FBA8E1C01B4EB005BB336 /* IResponse.swift in Sources */,
@@ -1433,9 +1575,11 @@
 				5D0FBA981C01B4EB005BB336 /* ImageType.swift in Sources */,
 				5D0FBA991C01B4EB005BB336 /* ServerDiscoveryInfo.swift in Sources */,
 				5D0FBA9A1C01B4EB005BB336 /* Response.swift in Sources */,
+				040932261C26547D00736C7B /* RemoteLogoutReason.swift in Sources */,
 				5D0FBA9B1C01B4EB005BB336 /* ConnectUserQuery.swift in Sources */,
 				04C23C271C16858D006722ED /* CodecProfile.swift in Sources */,
 				5D0FBA9C1C01B4EB005BB336 /* HttpHeaders.swift in Sources */,
+				0409322E1C26572200736C7B /* PlayRequest.swift in Sources */,
 				5D0FBA9D1C01B4EB005BB336 /* SimilarItemsQuery.swift in Sources */,
 				5D0FBA9E1C01B4EB005BB336 /* SubtitleDeliveryMethod.swift in Sources */,
 				04C23C151C1680E1006722ED /* ContainerProfile.swift in Sources */,
@@ -1444,6 +1588,7 @@
 				5D0FBA9F1C01B4EB005BB336 /* IllegalArgumentError.swift in Sources */,
 				5D0FBAA01C01B4EB005BB336 /* HttpRequest.swift in Sources */,
 				5D0FBAA11C01B4EB005BB336 /* ItemFields.swift in Sources */,
+				0409325A1C265F1200736C7B /* RepeatMode.swift in Sources */,
 				5D0FBAA21C01B4EB005BB336 /* ImageFormat.swift in Sources */,
 				5D0FBAA31C01B4EB005BB336 /* ItemQuery.swift in Sources */,
 				5D0FBAA41C01B4EB005BB336 /* ProgramAudio.swift in Sources */,
@@ -1451,6 +1596,7 @@
 				5D0FBAA61C01B4EB005BB336 /* BaseItemDto.swift in Sources */,
 				5D0FBAA71C01B4EB005BB336 /* PinStatusResult.swift in Sources */,
 				5D0FBAA81C01B4EB005BB336 /* RecordingStatus.swift in Sources */,
+				040932661C26605B00736C7B /* SessionUpdatesEventArgs.swift in Sources */,
 				5D0FBAA91C01B4EB005BB336 /* ConnectPassword.swift in Sources */,
 				04C23BEC1C096AD4006722ED /* HeaderMatchType.swift in Sources */,
 				5D0FBAAA1C01B4EB005BB336 /* ItemFilter.swift in Sources */,
@@ -1462,7 +1608,9 @@
 				5D0FBAAF1C01B4EB005BB336 /* SubtitleDownloadOptions.swift in Sources */,
 				04C23C0C1C167F5B006722ED /* TranscodingProfile.swift in Sources */,
 				5D0FBAB01C01B4EB005BB336 /* iOSDevice.swift in Sources */,
+				040932361C2657DD00736C7B /* PlaystateCommand.swift in Sources */,
 				5D0FBAB11C01B4EB005BB336 /* VideoType.swift in Sources */,
+				0409324A1C265A1400736C7B /* SessionInfoDto.swift in Sources */,
 				5D0FBAB21C01B4EB005BB336 /* JsonSerializer.swift in Sources */,
 				5D0FBAB31C01B4EB005BB336 /* ExternalUrl.swift in Sources */,
 				5D0FBAB41C01B4EB005BB336 /* VideoSize.swift in Sources */,
@@ -1479,6 +1627,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				040932611C265F6700736C7B /* TranscodingInfo.swift in Sources */,
 				88CF7E641BC5C85A00A33B72 /* Context.swift in Sources */,
 				047B76ED1BFACDA50003A743 /* SubtitlePlaybackMode.swift in Sources */,
 				889288D31BE8DCE700DAD65F /* FileUploadProgress.swift in Sources */,
@@ -1501,18 +1650,22 @@
 				04AFCAE61BD3453400C95C88 /* ClientCapabilities.swift in Sources */,
 				04B8AB751BF2EC1F00ED19CA /* MetadataFields.swift in Sources */,
 				047B76F21BFAD08B0003A743 /* UnratedItem.swift in Sources */,
+				0409323D1C26589700736C7B /* MessageCommand.swift in Sources */,
 				04AFCAE91BD346F200C95C88 /* DeviceProfile.swift in Sources */,
 				88CF7E581BC5BF0300A33B72 /* ILogger.swift in Sources */,
 				04B8AB861BF43ABF00ED19CA /* MediaSourceType.swift in Sources */,
 				04B8AB491BEDAFE300ED19CA /* SeriesStatus.swift in Sources */,
 				88CF7E3C1BC5BB5600A33B72 /* IJsonSerializer.swift in Sources */,
+				040932311C26576F00736C7B /* PlayCommand.swift in Sources */,
 				04C23C1D1C1681F4006722ED /* ProfileCondition.swift in Sources */,
 				041643AD1BD495A700873FAB /* InstallationInfo.swift in Sources */,
 				04AFCAEE1BD3489C00C95C88 /* ServerInfo.swift in Sources */,
 				04C23C201C1684B7006722ED /* ResponseProfile.swift in Sources */,
 				04B8AB5F1BF1903400ED19CA /* Video3DFormat.swift in Sources */,
+				040932391C26583000736C7B /* PlaystateRequest.swift in Sources */,
 				04B8AB331BDB2D1700ED19CA /* CredentialProviderProtocol.swift in Sources */,
 				041643A31BD4233800873FAB /* ConnectionMode.swift in Sources */,
+				040932511C265C4000736C7B /* BaseItemInfo.swift in Sources */,
 				04B8AB6D1BF2E7C000ED19CA /* MediaType.swift in Sources */,
 				04AFCAFD1BD34C9F00C95C88 /* ConnectionOptions.swift in Sources */,
 				88CF7E671BC5CB4B00A33B72 /* StringRequest.swift in Sources */,
@@ -1520,16 +1673,24 @@
 				04B8AB5D1BF18FAC00ED19CA /* SyncJobStatus.swift in Sources */,
 				88CF7E5E1BC5C15D00A33B72 /* ConnectService.swift in Sources */,
 				04B8AB8E1BF443DB00ED19CA /* TransportStreamTimestamp.swift in Sources */,
+				040932291C2656DC00736C7B /* BrowseRequest.swift in Sources */,
 				888EFC651BC859E100546DB3 /* RegistrationInfo.swift in Sources */,
 				04B8AB311BDB293200ED19CA /* ConnectionManager.swift in Sources */,
 				88CF7E5B1BC5BFA300A33B72 /* ConnectAuthorizationRequest.swift in Sources */,
 				04B8AB841BF43A7800ED19CA /* MediaProtocol.swift in Sources */,
 				04B8AB371BEDA05900ED19CA /* ApiHelpers.swift in Sources */,
+				040932411C26590500736C7B /* GeneralCommand.swift in Sources */,
 				04B8AB771BF2EC7300ED19CA /* IsoType.swift in Sources */,
+				0409325D1C265F3D00736C7B /* PlayMethod.swift in Sources */,
+				0409326E1C2662FF00736C7B /* NetworkStatus.swift in Sources */,
+				0409324D1C265BD100736C7B /* SessionUserInfo.swift in Sources */,
 				04B8AB3F1BEDAC8200ED19CA /* SortOrder.swift in Sources */,
 				04B8AB791BF2ECA900ED19CA /* ChapterInfoDto.swift in Sources */,
+				040932551C265E6900736C7B /* PlayerStateInfo.swift in Sources */,
 				04B8AB661BF192AC00ED19CA /* MediaUrl.swift in Sources */,
+				040932451C26598200736C7B /* UserDataChangeInfo.swift in Sources */,
 				88CF7E3E1BC5BC8800A33B72 /* IAsyncHttpClient.swift in Sources */,
+				0409326A1C26627D00736C7B /* INetworkConnection.swift in Sources */,
 				04B8AB511BF03B8600ED19CA /* ItemsByNameQuery.swift in Sources */,
 				884EBEDD1BCD912B0032E7F3 /* EmptyResponse.swift in Sources */,
 				888EFC7E1BCC4DB700546DB3 /* Logger.swift in Sources */,
@@ -1556,6 +1717,7 @@
 				04C23C1A1C16817D006722ED /* ProfileConditionValue.swift in Sources */,
 				04B8AB7F1BF2F31E00ED19CA /* BaseItemPerson.swift in Sources */,
 				8810B9D91BECB2160062DB8F /* DeviceProtocol.swift in Sources */,
+				040932211C2653CC00736C7B /* ApiEventListener.swift in Sources */,
 				04C23C061C167DF2006722ED /* DlnaProfileType.swift in Sources */,
 				04C23C231C168561006722ED /* CodecType.swift in Sources */,
 				8857F86F1BCD4B5500ADFA8A /* IResponse.swift in Sources */,
@@ -1573,9 +1735,11 @@
 				04B8AB471BEDAF8100ED19CA /* ImageType.swift in Sources */,
 				04AFCADC1BD33FEA00C95C88 /* ServerDiscoveryInfo.swift in Sources */,
 				88CF7E371BC5B8DF00A33B72 /* Response.swift in Sources */,
+				040932251C26547D00736C7B /* RemoteLogoutReason.swift in Sources */,
 				88CF7E741BC6E5B500A33B72 /* ConnectUserQuery.swift in Sources */,
 				04C23C261C16858D006722ED /* CodecProfile.swift in Sources */,
 				88CF7E601BC5C37D00A33B72 /* HttpHeaders.swift in Sources */,
+				0409322D1C26572200736C7B /* PlayRequest.swift in Sources */,
 				04B8AB4F1BF039C700ED19CA /* SimilarItemsQuery.swift in Sources */,
 				04B8AB8C1BF4437700ED19CA /* SubtitleDeliveryMethod.swift in Sources */,
 				04C23C141C1680E1006722ED /* ContainerProfile.swift in Sources */,
@@ -1584,6 +1748,7 @@
 				0479CFCC1C00191C00DFCEFB /* IllegalArgumentError.swift in Sources */,
 				88CF7E381BC5B94500A33B72 /* HttpRequest.swift in Sources */,
 				04B8AB431BEDADBA00ED19CA /* ItemFields.swift in Sources */,
+				040932591C265F1200736C7B /* RepeatMode.swift in Sources */,
 				04B8AB561BF03F9200ED19CA /* ImageFormat.swift in Sources */,
 				04B8AB3C1BEDA79A00ED19CA /* ItemQuery.swift in Sources */,
 				04B8AB6F1BF2EB5800ED19CA /* ProgramAudio.swift in Sources */,
@@ -1591,6 +1756,7 @@
 				04B8AB581BF18B9C00ED19CA /* BaseItemDto.swift in Sources */,
 				88CF7E701BC6E0C100A33B72 /* PinStatusResult.swift in Sources */,
 				04B8AB6B1BF1971B00ED19CA /* RecordingStatus.swift in Sources */,
+				040932651C26605B00736C7B /* SessionUpdatesEventArgs.swift in Sources */,
 				88CF7E5A1BC5BF9E00A33B72 /* ConnectPassword.swift in Sources */,
 				04C23BEF1C096AD5006722ED /* HeaderMatchType.swift in Sources */,
 				04B8AB411BEDACCB00ED19CA /* ItemFilter.swift in Sources */,
@@ -1602,7 +1768,9 @@
 				04B8AB391BEDA45000ED19CA /* SubtitleDownloadOptions.swift in Sources */,
 				04C23C0B1C167F5B006722ED /* TranscodingProfile.swift in Sources */,
 				889288CF1BE8D9B400DAD65F /* iOSDevice.swift in Sources */,
+				040932351C2657DD00736C7B /* PlaystateCommand.swift in Sources */,
 				04B8AB451BEDAF2D00ED19CA /* VideoType.swift in Sources */,
+				040932491C265A1400736C7B /* SessionInfoDto.swift in Sources */,
 				888EFC811BCC4EDC00546DB3 /* JsonSerializer.swift in Sources */,
 				04B8AB621BF190A200ED19CA /* ExternalUrl.swift in Sources */,
 				04B8AB681BF192FB00ED19CA /* VideoSize.swift in Sources */,
