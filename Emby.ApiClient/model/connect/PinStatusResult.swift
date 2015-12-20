@@ -7,51 +7,24 @@
 //
 
 import Foundation
-//package mediabrowser.model.connect;
 
-public class PinStatusResult: GenericResult
+public struct PinStatusResult: JSONSerializable
 {
-    public required init(jSON: JSON_Object) {
-        super.init(jSON: jSON)
-        
-        if let Pin = jSON["Pin"] as? String {
-            self.Pin = Pin
-        }
-        
-        if let IsExpired = jSON["IsExpired"] as? Bool {
-            self.IsExpired = IsExpired
-        }
-        
-        if let IsConfirmed = jSON["IsConfirmed"] as? Bool {
-            self.IsConfirmed = IsConfirmed
-        }
-    }
+    public let pin: String
+    public let confirmed: Bool
+    public let expired: Bool
     
-    private var Pin: String?
-    public final func getPin() -> String?
-    {
-        return Pin;
-    }
-    public final func setPin(value: String)
-    {
-        Pin = value;
-    }
-    private var IsConfirmed: Bool?
-    public final func getIsConfirmed() -> Bool?
-    {
-        return IsConfirmed;
-    }
-    public final func setIsConfirmed(value: Bool)
-    {
-        IsConfirmed = value;
-    }
-    private var IsExpired: Bool?
-    public final func getIsExpired() -> Bool?
-    {
-        return IsExpired;
-    }
-    public final func setIsExpired(value: Bool)
-    {
-        IsExpired = value;
+    public init?(jSON: JSON_Object) {
+        if  let pin = jSON["Pin"] as? String,
+            let expired = jSON["IsExpired"] as? Bool,
+            let confirmed = jSON["IsConfirmed"] as? Bool
+        {
+            self.pin = pin
+            self.expired = expired
+            self.confirmed = confirmed
+        }
+        else {
+            return nil
+        }
     }
 }

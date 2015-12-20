@@ -5,7 +5,7 @@
 
 import Foundation
 
-public enum UserLinkType {
+public enum UserLinkType : String {
     case LinkedUser
     case Guest
 }

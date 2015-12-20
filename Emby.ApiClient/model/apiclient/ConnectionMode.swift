@@ -6,7 +6,7 @@
 
 import Foundation
 
-public enum ConnectionMode {
+public enum ConnectionMode: String {
     case Local
     case Remote
     case Manual

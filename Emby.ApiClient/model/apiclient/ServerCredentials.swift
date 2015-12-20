@@ -5,14 +5,15 @@
 
 import Foundation
 
-public class ServerCredentials {
+public class ServerCredentials: NSObject, NSCoding {
     var servers = [ServerInfo]()
-    let connectUserId: String
-    let connectAccessToken: String
+    var connectUserId: String
+    var connectAccessToken: String
 
-    init(connectAccessToken: String, connectUserId: String) {
+    init(connectAccessToken: String, connectUserId: String, servers: [ServerInfo] = []) {
         self.connectAccessToken = connectAccessToken
         self.connectUserId = connectUserId
+        self.servers = servers
     }
     
     func addOrUpdateServer(server: ServerInfo!) {
@@ -36,16 +37,16 @@ public class ServerCredentials {
 
             }
             
-            if ( !server.accessToken.isEmpty ) {
+            if ( server.accessToken != nil && !server.accessToken!.isEmpty ) {
                 existingServer.accessToken = server.accessToken
             }
             
-            if ( !server.userId.isEmpty ) {
+            if ( server.userId != nil && !server.userId!.isEmpty ) {
                 existingServer.userId = server.userId
 
             }
             
-            if ( !server.exchangeToken.isEmpty ) {
+            if ( server.exchangeToken != nil ) {
                 existingServer.exchangeToken = server.exchangeToken
 
             }
@@ -73,5 +74,22 @@ public class ServerCredentials {
         } else {
             servers.append(server)
         }
+    }
+    
+    // MARK: NSCoding
+    
+    public required convenience init?(coder aDecoder: NSCoder) {
+        guard let connectUserId = aDecoder.decodeObjectForKey("connectUserId") as? String,
+            let connectAccessToken = aDecoder.decodeObjectForKey("connectAccessToken") as? String,
+            let servers = aDecoder.decodeObjectForKey("servers") as? [ServerInfo]
+            else { return nil }
+        
+        self.init(connectAccessToken: connectAccessToken, connectUserId: connectUserId, servers: servers)
+    }
+    
+    public func encodeWithCoder(aCoder: NSCoder) {
+        aCoder.encodeObject(self.connectUserId, forKey: "connectUserId")
+        aCoder.encodeObject(self.connectAccessToken, forKey: "connectAccessToken")
+        aCoder.encodeObject(self.servers, forKey: "servers")
     }
 }

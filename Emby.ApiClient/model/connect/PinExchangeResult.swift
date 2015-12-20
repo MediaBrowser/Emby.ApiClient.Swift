@@ -9,35 +9,22 @@
 import Foundation
 //package mediabrowser.model.connect;
 
-public class PinExchangeResult: GenericResult
+public struct PinExchangeResult: JSONSerializable
 {
-    public required init(jSON: JSON_Object) {
-        super.init(jSON: jSON)
+    
+    public let userId: String
+    public let accessToken: String
+    
+    public init?(jSON: JSON_Object) {
         
-        if let Id = jSON["Id"] as? String {
-            self.UserId = Id
+        if  let userId = jSON["UserId"] as? String,
+            let accessToken = jSON["AccessToken"] as? String
+        {
+            self.userId = userId
+            self.accessToken = accessToken
         }
-        
-        if let AccessToken = jSON["AccessToken"] as? String {
-            self.AccessToken = AccessToken
+        else {
+            return nil
         }
-    }
-    private var UserId: String?
-    public final func getUserId() -> String?
-    {
-    return UserId;
-    }
-    public final func setUserId(value: String)
-    {
-    UserId = value;
-    }
-    private var AccessToken: String?
-    public final func getAccessToken() -> String?
-    {
-    return AccessToken;
-    }
-    public final func setAccessToken(value: String)
-    {
-    AccessToken = value;
     }
 }

@@ -6,73 +6,68 @@
 
 import Foundation
 
+import Alamofire
+
 public class ConnectionManager: ConnectionManagerProtocol {
+    
     let clientCapabilities: ClientCapabilities
-    let apiClients = [String: ApiClient]()
+    var apiClients = [String: ApiClient]()
     let credentialProvider: CredentialProviderProtocol
+    let applicationName: String
+    let applicationVersion: String
     let device: DeviceProtocol
     let serverDiscovery: ServerDiscoveryProtocol
     let connectService: ConnectService
+    let networkConnection: INetworkConnection
+    let httpClient: IAsyncHttpClient
+    var connectUser: ConnectUser?
+    
+    // TODO: Add ApiEventListener
+    // let apiEventListener: ApiEventListener
+    
+    
+    
+    // MARK: - Init
 
-    public init(clientCapabilities: ClientCapabilities,
-        credentialProvider: CredentialProviderProtocol,
-        device: DeviceProtocol,
+    public init(credentialProvider: CredentialProviderProtocol,
+        networkConnection: INetworkConnection,
         serverDiscovery: ServerDiscoveryProtocol,
-        connectService: ConnectService) {
-            
-        self.clientCapabilities = clientCapabilities
+        httpClient: IAsyncHttpClient,
+        applicationName: String,
+        applicationVersion: String,
+        device: DeviceProtocol,
+        clientCapabilities: ClientCapabilities)
+    {
+        
         self.credentialProvider = credentialProvider
-        self.device = device
+        self.networkConnection = networkConnection
         self.serverDiscovery = serverDiscovery
-        self.connectService = connectService
-    }
-
-    public func getApiClient(item: IHasServerId) -> ApiClient? {
-        return getApiClient(item.serverId)
-    }
-    
-    public func getApiClient(serverId: String) -> ApiClient? {
-        return apiClients[serverId]
-    }
-    
-    public func getServerInfo(serverId: String) -> ServerInfo? {
-        return credentialProvider
-            .getCredentials()
-            .servers
-            .filter({$0.id == serverId})
-            .first
+        self.httpClient = httpClient
+        self.applicationName = applicationName
+        self.applicationVersion = applicationVersion
+        self.device = device
+        self.clientCapabilities = clientCapabilities
+        
+        self.connectService = ConnectService(jsonSerializer: JsonSerializer(), logger: Logger(), httpClient: httpClient, appName: applicationName, appVersion: applicationVersion)
+        
+        // device.getResumeFromSleepObservable().addObserver(new DeviceResumeFromSleepObservable(this))
     }
     
-    public func connect(onSuccess: (ConnectionResult) -> Void, onError: (ErrorType) -> Void) {
-        //TODO    
-    }
     
-    public func connect(server: ServerInfo, onSuccess: (ConnectionResult) -> Void, onError: (ErrorType) -> Void) {
-        //TODO
-    }
+    // MARK: - Finding Servers
     
-    public func connect(server: ServerInfo, options: ConnectionOptions, onSuccess: (ConnectionResult) -> Void, onError: (ErrorType) -> Void) {
-        //TODO
-    }
-    
-    public func connect(address: String, onSuccess: (ConnectionResult) -> Void, onError: (ErrorType) -> Void) {
-        //TODO
-    }
-    
-    public func logout(onSuccess: () -> Void, onError: () -> Void) {
-        //TODO
-    }
-    
-    public func getAvailableServers(onSuccess: ([ServerInfo]) -> Void, onError: (ErrorType?) -> Void) {
+    public func getAvailableServers(onSuccess onSuccess: ([ServerInfo]) -> Void, onError: (ErrorType?) -> Void) {
         //TODO
         
         var serverDiscoveryFinished = false
         var connectedServersFinished = false
-
+        
         var serverDiscoveryFailed = false
         var connectedServersFailed = false
         
-        var results = [ServerInfo]()
+        let credentials = credentialProvider.getCredentials()
+        
+        print("\(credentials.servers.count) servers in saved credentials")
         
         func appendServerDiscoveryInfo(serverDiscoveryInfo: [ServerDiscoveryInfo]) {
             
@@ -84,42 +79,29 @@ public class ConnectionManager: ConnectionManagerProtocol {
                 serverInfo.id = serverDiscoveryInfoEach.id!
                 serverInfo.name = serverDiscoveryInfoEach.name!
                 
-                results.append(serverInfo)
+                credentials.addOrUpdateServer(serverInfo)
             }
         }
         
-        func appendConnectUserServer(connectUserServer: [ConnectUserServer]?) {
+        func appendConnectUserServer(connectUserServer: [ConnectUserServer]) {
             
-            if let connectUserServer = connectUserServer {
+            for connectUserServerEach in connectUserServer {
                 
-                for connectUserServerEach in connectUserServer {
-                    
-                    let serverInfo = ServerInfo()
-                    
-                    serverInfo.localAddress = connectUserServerEach.getLocalAddress()
-                    
-                    if let id = connectUserServerEach.getId() {
-                        serverInfo.id = id
-                    }
-                    
-                    if let name = connectUserServerEach.getName() {
-                        serverInfo.name = name
-                    }
-                    
-                    if let accessToken = connectUserServerEach.getAccessKey() {
-                        serverInfo.accessToken = accessToken
-                    }
-                    
-                    results.append(serverInfo)
-                }
+                let serverInfo = ServerInfo()
+                serverInfo.localAddress = connectUserServerEach.localAddress
+                serverInfo.id = connectUserServerEach.id
+                serverInfo.name = connectUserServerEach.name
+                serverInfo.accessToken = connectUserServerEach.accessKey
+                
+                credentials.addOrUpdateServer(serverInfo)
             }
         }
         
         serverDiscovery.findServers(1000,
             
             onSuccess: { (serverDiscoveryInfo: [ServerDiscoveryInfo]) -> Void in
-            
-                print("serverDiscovery.findServers finished with \(serverDiscoveryInfo))")
+                
+                print("serverDiscovery.findServers finished with \(serverDiscoveryInfo.count) servers)")
                 
                 appendServerDiscoveryInfo(serverDiscoveryInfo)
                 
@@ -135,10 +117,10 @@ public class ConnectionManager: ConnectionManagerProtocol {
                         
                     } else {
                         
-                        onSuccess(results)
+                        onSuccess(credentials.servers)
                     }
                 }
-            
+                
             }, onError: { (error) -> Void in
                 
                 print("serverDiscovery.findServers failed with \(error))")
@@ -155,883 +137,673 @@ public class ConnectionManager: ConnectionManagerProtocol {
                         onError(nil)
                         
                     } else {
-                    
-                        onSuccess(results)
+                        
+                        onSuccess(credentials.servers)
                     }
                 }
                 
         } )
         
-        self.Authenticate( connectService, onSuccess: { (userId, connectAccessToken) -> Void in
+        if !credentials.connectAccessToken.isEmpty {
             
-            let response = EmbyApiClient.Response<ConnectUserServers>()
-            
-            response.completion = { (result: ConnectUserServers?) -> Void in
-                
-                print("ConnectService.GetServers finished with \(result?.servers))")
-                
-                appendConnectUserServer(result?.servers)
+            ensureConnectUser(credentials, onSuccess: { () -> Void in
                 
                 connectedServersFinished = true
                 
-                if serverDiscoveryFinished {
-                    
-                    onSuccess(results)
-                }
-                
-            }
-            
-            do {
-                
-                try self.connectService.GetServers(userId, connectAccessToken: connectAccessToken, final: response)
-                
-            } catch {
-                
-                print("Failed to ConnectService.GetServers() \(error)")
-                
-                // cannot return error if we have some results from different scan method so return error only if both methods failed
-                
-                connectedServersFinished = true
-                connectedServersFailed = true
-                
-                if serverDiscoveryFailed {
-                    
-                    onError(error)
-                    
-                } else {
-                    
-                    onSuccess(results)
-                }
-                
-            }
-            
-            }) { () -> Void in
-                
-                connectedServersFinished = true
-                connectedServersFailed = true
-                
-                print("Failed to ConnectService.Authenticate()")
-                
-                if serverDiscoveryFinished {
+                do {
+                    try self.connectService.GetServers(credentials.connectUserId, connectAccessToken: credentials.connectAccessToken, success: { (results) -> Void in
+                        
+                        appendConnectUserServer(results)
+                        
+                        connectedServersFinished = true
+                        if serverDiscoveryFinished {
+                            onSuccess(credentials.servers)
+                        }
+                        
+                    }, failure: { (EmbyError) -> Void in
+                        
+                        connectedServersFinished = true
+                        if serverDiscoveryFinished {
+                            onSuccess(credentials.servers)
+                        }
+                    })
+                } catch {
+                    print("Failed to ConnectService.GetServers() \(error)")
                     
                     // cannot return error if we have some results from different scan method so return error only if both methods failed
                     
+                    connectedServersFinished = true
+                    connectedServersFailed = true
+                    
                     if serverDiscoveryFailed {
                         
-                        onError(nil)
+                        onError(error)
                         
                     } else {
-                    
-                        onSuccess(results)
+                        
+                        onSuccess(credentials.servers)
                     }
                 }
+                
+                }, onError: { (error) -> Void in
+                    connectedServersFinished = true
+                    connectedServersFailed = true
+            })
+            
+        } else {
+            connectedServersFinished = true
         }
     }
     
-    public func loginToConnect(username: String, password: String, onSuccess: () -> Void, onError: () -> Void) {
-        //TODO
+    
+    // MARK: - Connecting To Servers
+    
+    public func connect(onSuccess onSuccess: (ConnectionResult) -> Void, onError: (ErrorType) -> Void) {
+        getAvailableServers(onSuccess: { (servers) -> Void in
+            
+            self.connect(servers: servers, onSuccess: { (connectionResult) -> Void in
+                onSuccess(connectionResult)
+            }, onError: { (error) -> Void in
+                onError(error)
+            })
+            
+        }, onError: { (error) -> Void in
+            onError(error!)
+        })
     }
     
+    public func connect(server: ServerInfo, onSuccess: (ConnectionResult) -> Void, onError: (ErrorType) -> Void) {
+        self.connect(server, options: ConnectionOptions(), onSuccess: onSuccess, onError: onError)
+    }
+    
+    public func connect(server: ServerInfo, options: ConnectionOptions, onSuccess: (ConnectionResult) -> Void, onError: (ErrorType) -> Void) {
+        
+        var tests = [ConnectionMode.Manual, ConnectionMode.Local, ConnectionMode.Remote]
+        
+        if let lastConnectionMode = server.lastConnectionMode {
+            tests.removeAtIndex(tests.indexOf(lastConnectionMode)!)
+            tests.insert(lastConnectionMode, atIndex: 0)
+        }
+        
+        let localNetworkAvailable = networkConnection.getNetworkStatus().anyLocalNetworkAvailable
+        let sendWakeOnLan = server.wakeOnLanInfos.count > 0 && localNetworkAvailable
+        
+        if sendWakeOnLan {
+            beginWakeServer(server)
+        }
+        
+        let wakeOnLanSendTime = NSDate().timeIntervalSince1970
+        testNextConnectionMode(tests: tests,
+            index: 0,
+            localNetworkAvailable: localNetworkAvailable,
+            server: server,
+            wakeOnLanSendTime: wakeOnLanSendTime,
+            options: options,
+            onSuccess: onSuccess,
+            onError: onError)
+    }
+    
+    private func connect(var servers servers: [ServerInfo], onSuccess: (ConnectionResult) -> Void, onError: (ErrorType) -> Void) {
+        
+        servers.sortInPlace {
+            if let date1 = $0.dateLastAccessed, let date2 = $1.dateLastAccessed {
+                return date1.compare(date2) == NSComparisonResult.OrderedDescending
+            } else if let _ = $1.dateLastAccessed {
+                return false
+            } else {
+                return true
+            }
+        }
+        
+        if servers.count == 1 {
+            connect(servers[0], onSuccess: { (var result) -> Void in
+                
+                if result.state == .Unavailable {
+                    result.state = result.connectUser == nil ? .ConnectSignIn : .ServerSelection
+                }
+                
+                onSuccess(result)
+                }, onError: { (error) -> Void in
+                    onError(error)
+            })
+            return
+        }
+        
+        // See if we have any saved credentials and can auto sign in
+        if !servers.isEmpty && servers[0].accessToken != nil {
+            let firstServer = servers[0]
+            connect(firstServer, onSuccess: { (result) -> Void in
+                if result.state == .SignedIn {
+                    onSuccess(result)
+                }
+                else {
+                    var newResult = ConnectionResult()
+                    newResult.servers = servers
+                    newResult.state = .ConnectSignIn
+                    newResult.connectUser = self.connectUser
+                    onSuccess(newResult)
+                }
+                }, onError: { (error) -> Void in
+                    onError(error)
+            })
+            return
+        }
+        
+        if servers.isEmpty || servers[0].accessToken == nil {
+            var result = ConnectionResult()
+            result.servers = servers
+            result.connectUser = connectUser
+            result.state = servers.isEmpty ? .ConnectSignIn : .ServerSelection
+            onSuccess(result)
+        }
+    }
+    
+    public func connect(address: String, onSuccess: (ConnectionResult) -> Void, onError: (ErrorType) -> Void) {
+        let normalizedAddress = normalizeAddress(address)
+        
+        tryConnect(normalizedAddress, timeout: 1500, onSuccess: { (systemInfo) -> Void in
+            
+            let server = ServerInfo()
+            server.manualAddress = normalizedAddress
+            server.lastConnectionMode = .Manual
+            server.importInfo(systemInfo)
+            
+            self.connect(server, onSuccess: onSuccess, onError: onError)
+            
+        }, onError: { (error) -> Void in
+            var result = ConnectionResult()
+            result.state = .Unavailable
+            result.connectUser = self.connectUser
+            onSuccess(result)
+        })
+    }
+    
+    func testNextConnectionMode(tests tests: [ConnectionMode],
+        index: Int,
+        localNetworkAvailable: Bool,
+        server: ServerInfo,
+        wakeOnLanSendTime: NSTimeInterval,
+        options: ConnectionOptions,
+        onSuccess: (ConnectionResult) -> Void,
+        onError: (ErrorType) -> Void)
+    {
+        
+        if index >= tests.count {
+            let result = ConnectionResult()
+            onSuccess(result)
+            return
+        }
+        
+        let mode = tests[index]
+        let address = server.getAddress(mode)
+        
+        var enableRetry = false
+        var skipTest = false
+        var timeout = 15000
+        
+        if mode == .Local {
+            
+            if !localNetworkAvailable {
+                print("Skipping local connection test because local network is unavailable")
+                skipTest = true
+            }
+            enableRetry = true
+            timeout = 10000
+            
+        } else if mode == .Manual {
+            
+            if address == server.localAddress {
+                print("Skipping manual connection test because the address is the same as the local address")
+                skipTest = true
+            } else if address == server.remoteAddress {
+                print("Skipping manual connection test because the address is the same as the remote address")
+                skipTest = true
+            }
+        }
+        
+        let emptyAddress = address == nil || address!.isEmpty
+        if skipTest || emptyAddress {
+            testNextConnectionMode(tests: tests,
+                index: index + 1,
+                localNetworkAvailable: localNetworkAvailable,
+                server: server,
+                wakeOnLanSendTime: wakeOnLanSendTime,
+                options: options,
+                onSuccess: onSuccess,
+                onError: onError)
+            return
+        }
+        
+        tryConnect(address!, timeout: timeout, onSuccess: { (systemInfo) -> Void in
+            self.onSuccessfulConnection(server, systemInfo: systemInfo, connectionMode: mode, connectionOptions: options, onSuccess: onSuccess, onError: onError)
+        }, onError: {(error) -> Void in
+            // TODO: Handle retry
+            self.testNextConnectionMode(tests: tests,
+                index: index + 1,
+                localNetworkAvailable: localNetworkAvailable,
+                server: server,
+                wakeOnLanSendTime: wakeOnLanSendTime,
+                options: options,
+                onSuccess: onSuccess,
+                onError: onError)
+        })
+    }
+    
+    func tryConnect(url: String, timeout: Int, onSuccess: (PublicSystemInfo) -> Void, onError: (ErrorType) -> Void) {
+        
+        let finalURL = url + "/mediabrowser/system/info/public?format=json"
+        let request = HttpRequest(url: finalURL, method: .GET)
+        
+        httpClient.sendRequest(request, success: onSuccess, failure: onError)
+    }
+    
+    func onSuccessfulConnection(server: ServerInfo,
+        systemInfo: PublicSystemInfo,
+        connectionMode: ConnectionMode,
+        connectionOptions: ConnectionOptions,
+        onSuccess: (ConnectionResult) -> Void,
+        onError: (ErrorType) -> Void)
+    {
+        
+        let credentials = credentialProvider.getCredentials()
+        
+        if !credentials.connectAccessToken.isEmpty {
+            ensureConnectUser(credentials, onSuccess: { () -> Void in
+                
+                if server.exchangeToken != nil {
+                    self.addAuthenticationInfoFromConnect(server, systemInfo: systemInfo, connectionMode: connectionMode, connectionOptions: connectionOptions, credentials: credentials, onSuccess: onSuccess, onError: onError)
+                } else {
+                    self.afterConnectValidated(server, credentials: credentials, systemInfo: systemInfo, connectionMode: connectionMode, verifyLocalAuthentication: true, options: connectionOptions, onSuccess: onSuccess, onError: onError)
+                }
+                
+                }, onError: onError)
+        } else {
+            afterConnectValidated(server, credentials: credentials, systemInfo: systemInfo, connectionMode: connectionMode, verifyLocalAuthentication: true, options: connectionOptions, onSuccess: onSuccess, onError: onError)
+        }
+    }
+    
+    func afterConnectValidated(server: ServerInfo,
+        credentials: ServerCredentials,
+        systemInfo: PublicSystemInfo,
+        connectionMode: ConnectionMode,
+        verifyLocalAuthentication: Bool,
+        options: ConnectionOptions,
+        onSuccess: (ConnectionResult) -> Void,
+        onError: (ErrorType) -> Void)
+    {
+        if verifyLocalAuthentication && server.accessToken != nil {
+            validateAuthentication(server, connectionMode: connectionMode, onSuccess: { () -> Void in
+                
+                self.afterConnectValidated(server, credentials: credentials, systemInfo: systemInfo, connectionMode: connectionMode, verifyLocalAuthentication: true, options: options, onSuccess: onSuccess, onError: onError)
+                }, onError: { (error) -> Void in
+                    onError(error)
+            })
+        }
+        
+        server.importInfo(systemInfo)
+        
+        if options.updateDateLastAccessed {
+            server.dateLastAccessed = NSDate()
+        }
+        
+        server.lastConnectionMode = connectionMode
+        credentials.addOrUpdateServer(server)
+        credentialProvider.saveCredentials(credentials)
+        
+        var result = ConnectionResult()
+        result.apiClient = getOrAddApiClient(server, connectionMode: connectionMode)
+        result.state = server.accessToken == nil ? .ServerSignIn : .SignedIn
+        result.servers.append(server)
+        result.apiClient?.enableAutomaticNetworking(server, initialMode: connectionMode, networkConnection: networkConnection)
+        
+        if result.state == .SignedIn {
+            afterConnected(result.apiClient!, options: options)
+        }
+        
+        onSuccess(result)
+    }
+    
+    func afterConnected(apiClient: ApiClient, options: ConnectionOptions) {
+        if options.reportCapabilities {
+            // TODO: Uncomment after implementing
+            // apiClient.reportCapabilities(clientCapabilities)
+        }
+        
+        if options.enableWebSocket {
+            // TODO: Uncomment after implementing
+            // apiClient.openWebSocket()
+        }
+    }
+    
+    
+    // MARK: - Connect Service Methods
+    
+    func ensureConnectUser(credentials: ServerCredentials, onSuccess: () -> Void, onError: (ErrorType) -> Void) {
+        
+        if let connectUser = connectUser where connectUser.id == credentials.connectUserId {
+            onSuccess()
+            return
+        }
+        
+        if !credentials.connectUserId.isEmpty && !credentials.connectAccessToken.isEmpty {
+            connectUser = nil
+            
+            var query = ConnectUserQuery()
+            query.id = credentials.connectUserId
+            
+            
+            do {
+                
+                try connectService.GetConnectUser(query, connectAccessToken: credentials.connectAccessToken, success: { (user) -> Void in
+                    
+                    self.onConnectUserSignIn(user)
+                    onSuccess()
+                    
+                }, failure: onError)
+                
+            } catch {
+                onError(error)
+            }
+            
+        }
+    }
+    
+    func addAuthenticationInfoFromConnect(server: ServerInfo,
+        systemInfo: PublicSystemInfo,
+        connectionMode: ConnectionMode,
+        connectionOptions: ConnectionOptions,
+        credentials: ServerCredentials,
+        onSuccess: (ConnectionResult) -> Void,
+        onError: (ErrorType) -> Void)
+    {
+        guard var url = server.getAddress(connectionMode) else {
+            preconditionFailure("Illegal Argument: No address for connection mode")
+        }
+        guard let exchangeToken = server.exchangeToken else {
+            preconditionFailure("Illegal Argument: server")
+        }
+        
+        print("Adding authentication info from Connect")
+        
+        url += "/emby/Connect/Exchange?format=json&ConnectUserId=" + credentials.connectUserId
+        
+        let request = HttpRequest(url: url, method: .GET)
+        request.headers["X-MediaBrowser-Token"] = exchangeToken
+        
+        httpClient.sendRequest(request, success: { (result: ConnectAuthenticationExchangeResult) -> Void in
+            
+            server.userId = result.localUserId
+            server.accessToken = result.accessToken
+            self.afterConnectValidated(server, credentials: credentials, systemInfo: systemInfo, connectionMode: connectionMode, verifyLocalAuthentication: true, options: connectionOptions, onSuccess: onSuccess, onError: onError)
+            
+        }, failure: onError)
+    }
+    
+    func validateAuthentication(server: ServerInfo, connectionMode: ConnectionMode, onSuccess: () -> Void, onError: (ErrorType) -> Void) {
+        
+        let url = server.getAddress(connectionMode)!
+        
+        let headers = HttpHeaders()
+        headers.setAccessToken(server.accessToken)
+        
+        var request = HttpRequest(url: url + "/system/info?format=json", method: .GET)
+        request.headers = headers
+        
+        httpClient.sendRequest(request, success: { (info: SystemInfo) -> Void in
+            
+            server.importInfo(info)
+            
+            if server.userId != nil {
+                
+                let request = HttpRequest(url: url + "/mediabrowser/users/\(server.userId)?format=json", method: .GET)
+                self.httpClient.sendRequest(request, success: { (user: UserDto) -> Void in
+                    
+                    self.onLocalUserSignIn(user)
+                    onSuccess()
+                    
+                    }, failure: onError)
+
+            } else {
+                onSuccess()
+            }
+            
+            }, failure: onError)
+    }
+    
+    func onAuthenticated(apiClient: ApiClient, result: AuthenticationResult, options: ConnectionOptions, saveCredentials: Bool) {
+        
+        print("Updating credentials after local authentication")
+        
+        // TODO: Replace once implemented in ApiClient
+        // let server: ServerInfo = apiClient.getServerInfo()
+        let server = ServerInfo()
+        
+        let credentials = credentialProvider.getCredentials()
+        
+        if options.updateDateLastAccessed {
+            server.dateLastAccessed = NSDate()
+        }
+        
+        if saveCredentials {
+            server.userId = result.user.id!
+            server.accessToken = result.accessToken
+        } else {
+            //server.userId = nil
+            //server.accessToken = nil
+        }
+        
+        credentials.addOrUpdateServer(server)
+        saveUserInfoIntoCredentials(server, user: result.user)
+        credentialProvider.saveCredentials(credentials)
+        
+        afterConnected(apiClient, options: options)
+        
+        onLocalUserSignIn(result.user)
+    }
+    
+    public func loginToConnect(username: String, password: String, onSuccess: () -> Void, onError: (ErrorType) -> Void) {
+        
+        connectService.Authenticate(username, password: password, success: { (result) -> Void in
+            
+            let credentials = self.credentialProvider.getCredentials()
+            credentials.connectAccessToken = result.accessToken
+            credentials.connectUserId = result.user.id
+            self.credentialProvider.saveCredentials(credentials)
+            
+            self.onConnectUserSignIn(result.user)
+            
+            onSuccess()
+            
+            }, failure: onError)
+    }
+    
+    // MARK: - Server PIN Methods
+    
     public func createPin(deviceId: String, onSuccess: (PinCreationResult) -> Void, onError: (ErrorType) -> Void) {
-        //TODO
+        connectService.CreatePin(deviceId, success: onSuccess, failure: onError)
     }
     
     public func getPinStatus(pin: PinCreationResult, onSuccess: (PinStatusResult) -> Void, onError: (ErrorType) -> Void) {
-        //TODO
+        connectService.GetPinStatus(pin, success: onSuccess, failure: onError)
     }
     
     public func exchangePin(pin: PinCreationResult, onSuccess: (PinExchangeResult) -> Void, onError: (ErrorType) -> Void) {
-        //TODO
+        connectService.ExchangePin(pin, success: { (result) -> Void in
+            
+            let credentials = self.credentialProvider.getCredentials()
+            credentials.connectAccessToken = result.accessToken
+            credentials.connectUserId = result.userId
+            self.credentialProvider.saveCredentials(credentials)
+            
+            onSuccess(result)
+            
+            }, failure: onError)
     }
     
-    public func getResgistrationInfo(featureName: String, connectedServerId: String, onSuccess: (RegistrationInfo) -> Void, onError: (ErrorType) -> Void) {
-        //TODO
-    }
-//}
-
-    func Authenticate(service: ConnectService,
-        onSuccess:(userId: String, connectAccessToken: String) -> Void, onError:() -> Void) {
+    public func getRegistrationInfo(featureName: String, connectedServerId: String, onSuccess: (RegistrationInfo) -> Void, onError: (ErrorType) -> Void) {
+        
+        serverDiscovery.findServers(1000, onSuccess: { (servers) -> Void in
             
-            let response = EmbyApiClient.Response<ConnectAuthenticationResult>()
+            var serverInfoList: [ServerInfo] = []
             
-            response.completion = { (result: ConnectAuthenticationResult?) -> Void in
+            for server in servers {
+                let serverInfo = ServerInfo()
                 
-                print("Authenticate finished with \(result) \(result?.getAccessToken())")
+                serverInfo.localAddress = server.address!
+                serverInfo.id = server.id!
+                serverInfo.name = server.name!
                 
-                if let
-                    userId = result?.getUser()?.getId(),
-                    connectAccessToken = result?.getAccessToken() {
-                        
-                        onSuccess(userId: userId, connectAccessToken: connectAccessToken)
-                        
-                } else {
-                    
-                    onError()
+                serverInfoList.append(serverInfo)
+            }
+            
+            // TODO: Once getRegistrationInfo() is implemented in ApiClient
+            for serverInfo in serverInfoList {
+                if serverInfo.id == connectedServerId {
+                    if let apiClient = self.getApiClient(serverInfo.id) {
+                        //apiClient.getRegistrationInfo(featureName)
+                    }
                 }
             }
             
-            service.Authenticate("vedrano", password: "123456", response: response)
+            let credentials = self.credentialProvider.getCredentials()
+            
+            if !credentials.connectAccessToken.isEmpty && !credentials.connectUserId.isEmpty {
+                
+                do {
+                    try self.connectService.GetRegistrationInfo(credentials.connectUserId, feature: featureName, connectAccessToken: credentials.connectAccessToken, success: onSuccess, failure: onError)
+                } catch {
+                    onError(NSError(domain: "com.emby.apiclient", code: 1, userInfo: nil))
+                }
+                
+            } else {
+                
+            }
+            
+            
+        }) { (error) -> Void in
+            
+        }
     }
-
-
-
-
-//package mediabrowser.apiinteraction.connectionmanager;
-//
-//import mediabrowser.apiinteraction.*;
-//import mediabrowser.apiinteraction.connect.ConnectService;
-//import mediabrowser.apiinteraction.device.IDevice;
-//import mediabrowser.apiinteraction.discovery.IServerLocator;
-//import mediabrowser.apiinteraction.http.HttpHeaders;
-//import mediabrowser.apiinteraction.http.HttpRequest;
-//import mediabrowser.apiinteraction.http.IAsyncHttpClient;
-//import mediabrowser.apiinteraction.network.INetworkConnection;
-//import mediabrowser.model.apiclient.*;
-//import mediabrowser.model.connect.*;
-//import mediabrowser.model.dto.IHasServerId;
-//import mediabrowser.model.dto.UserDto;
-//import mediabrowser.model.extensions.StringHelper;
-//import mediabrowser.model.logging.ILogger;
-//import mediabrowser.model.registration.RegistrationInfo;
-//import mediabrowser.model.serialization.IJsonSerializer;
-//import mediabrowser.model.session.ClientCapabilities;
-//import mediabrowser.model.system.PublicSystemInfo;
-//import mediabrowser.model.users.AuthenticationResult;
-//
-//import java.io.UnsupportedEncodingException;
-//import java.security.NoSuchAlgorithmException;
-//import java.util.*;
-//
-//public class ConnectionManager implements IConnectionManager {
-//    
-//    private ICredentialProvider credentialProvider;
-//    private INetworkConnection networkConnection;
-//    protected ILogger logger;
-//    private IServerLocator serverDiscovery;
-//    protected IAsyncHttpClient httpClient;
-//    
-//    private HashMap<String, ApiClient> apiClients = new HashMap<String, ApiClient>();
-//    protected IJsonSerializer jsonSerializer;
-//    
-//    protected String applicationName;
-//    protected String applicationVersion;
-//    protected IDevice device;
-//    protected ClientCapabilities clientCapabilities;
-//    protected ApiEventListener apiEventListener;
-//    
-//    private ConnectService connectService;
-//    private ConnectUser connectUser;
-//    
-//    public ConnectionManager(ICredentialProvider credentialProvider,
-//    INetworkConnection networkConnectivity,
-//    IJsonSerializer jsonSerializer,
-//    ILogger logger,
-//    IServerLocator serverDiscovery,
-//    IAsyncHttpClient httpClient,
-//    String applicationName,
-//    String applicationVersion,
-//    IDevice device,
-//    ClientCapabilities clientCapabilities,
-//    ApiEventListener apiEventListener) {
+    
+    // MARK: - Logging Out
+    
+    public func logout(onSuccess: () -> Void, onError: () -> Void) {
+        print("Logging out of all servers")
+        
+        logoutAll(onSuccess, onError: onError)
+    }
+    
+    func logoutAll(onSuccess: () -> Void, onError: () -> Void) {
+        // TODO: Implement once ApiClient can logout
+        
+//        let clientList = apiClients.values
 //        
-//        this.credentialProvider = credentialProvider;
-//        networkConnection = networkConnectivity;
-//        this.logger = logger;
-//        this.serverDiscovery = serverDiscovery;
-//        this.httpClient = httpClient;
-//        this.applicationName = applicationName;
-//        this.applicationVersion = applicationVersion;
-//        this.device = device;
-//        this.clientCapabilities = clientCapabilities;
-//        this.apiEventListener = apiEventListener;
-//        this.jsonSerializer = jsonSerializer;
-//        
-//        connectService = new ConnectService(jsonSerializer, logger, httpClient, applicationName, applicationVersion);
-//        
-//        device.getResumeFromSleepObservable().addObserver(new DeviceResumeFromSleepObservable(this));
-//    }
-//    
-//    public ClientCapabilities getClientCapabilities() {
-//        return clientCapabilities;
-//    }
-//    
-//    @Override
-//    public ApiClient GetApiClient(IHasServerId item) {
-//        
-//        return GetApiClient(item.getServerId());
-//    }
-//    
-//    @Override
-//    public ApiClient GetApiClient(String serverId) {
-//        
-//        return apiClients.get(serverId);
-//    }
-//    
-//    @Override
-//    public ServerInfo getServerInfo(String serverId) {
-//        
-//        final ServerCredentials credentials = credentialProvider.GetCredentials();
-//        
-//        for (ServerInfo server : credentials.getServers()){
-//            if (StringHelper.EqualsIgnoreCase(server.getId(), serverId)){
-//                return  server;
-//            }
+//        for client in clientList {
+//            client.logout()
 //        }
-//        return null;
-//    }
-//    
-//    @Override
-//    public IDevice getDevice(){
-//        return this.device;
-//    }
-//    
-//    void OnConnectUserSignIn(ConnectUser user){
-//        
-//        connectUser = user;
-//        
-//        // TODO: Fire event
-//    }
-//    
-//    void OnFailedConnection(Response<ConnectionResult> response){
-//        
-//        logger.Debug("No server available");
-//        
-//        ConnectionResult result = new ConnectionResult();
-//        result.setState(ConnectionState.Unavailable);
-//        result.setConnectUser(connectUser);
-//        response.onResponse(result);
-//    }
-//    
-//    void OnFailedConnection(Response<ConnectionResult> response, ArrayList<ServerInfo> servers){
-//        
-//        logger.Debug("No saved authentication");
-//        
-//        ConnectionResult result = new ConnectionResult();
-//        
-//        if (servers.size() == 0 && connectUser == null){
-//            result.setState(ConnectionState.ConnectSignIn);
-//        }
-//        else{
-//            result.setState(ConnectionState.ServerSelection);
-//        }
-//        
-//        result.setServers(new ArrayList<ServerInfo>());
-//        result.setConnectUser(connectUser);
-//        
-//        response.onResponse(result);
-//    }
-//    
-//    @Override
-//    public void Connect(final Response<ConnectionResult> response) {
-//        
-//        if (clientCapabilities.getSupportsOfflineAccess())
-//        {
-//            NetworkStatus networkAccess = networkConnection.getNetworkStatus();
-//            if (!networkAccess.getIsNetworkAvailable())
-//            {
-//                // TODO: for offline access
-//                //return await GetOfflineResult().ConfigureAwait(false);
-//            }
-//        }
-//        
-//        logger.Debug("Entering initial connection workflow");
-//        
-//        GetAvailableServers(new GetAvailableServersResponse(logger, this, response));
-//    }
-//    
-//    void Connect(final ArrayList<ServerInfo> servers, final Response<ConnectionResult> response){
-//        
-//        // Sort by last date accessed, descending
-//        Collections.sort(servers, new ServerInfoDateComparator());
-//        Collections.reverse(servers);
-//        
-//        if (servers.size() == 1)
-//        {
-//            Connect(servers.get(0), new ConnectionOptions(), new ConnectToSingleServerListResponse(response));
-//            return;
-//        }
-//        
-//        // Check the first server for a saved access token
-//        if (servers.size() == 0 || tangible.DotNetToJavaStringHelper.isNullOrEmpty(servers.get(0).getAccessToken()))
-//        {
-//            OnFailedConnection(response, servers);
-//            return;
-//        }
-//        
-//        ServerInfo firstServer = servers.get(0);
-//        Connect(firstServer, new ConnectionOptions(), new FirstServerConnectResponse(this, servers, response));
-//    }
-//    
-//    @Override
-//    public void Connect(final ServerInfo server,
-//    final Response<ConnectionResult> response) {
-//        
-//        Connect(server, new ConnectionOptions(), response);
-//    }
-//    
-//    @Override
-//    public void Connect(final ServerInfo server,
-//    ConnectionOptions options,
-//    final Response<ConnectionResult> response) {
-//        
-//        ArrayList<ConnectionMode> tests = new ArrayList<ConnectionMode>();
-//        tests.add(ConnectionMode.Manual);
-//        tests.add(ConnectionMode.Local);
-//        tests.add(ConnectionMode.Remote);
-//        
-//        // If we've connected to the server before, try to optimize by starting with the last used connection mode
-//        if (server.getLastConnectionMode() != null)
-//        {
-//            tests.remove(server.getLastConnectionMode());
-//            tests.add(0, server.getLastConnectionMode());
-//        }
-//        
-//        boolean isLocalNetworkAvailable = networkConnection.getNetworkStatus().GetIsAnyLocalNetworkAvailable();
-//        
-//        // Kick off wake on lan on a separate thread (if applicable)
-//        boolean sendWakeOnLan = server.getWakeOnLanInfos().size() > 0 && isLocalNetworkAvailable;
-//        
-//        if (sendWakeOnLan){
-//            BeginWakeServer(server);
-//        }
-//        
-//        long wakeOnLanSendTime = System.currentTimeMillis();
-//        
-//        TestNextConnectionMode(tests, 0, isLocalNetworkAvailable, server, wakeOnLanSendTime, options, response);
-//    }
-//    
-//    void TestNextConnectionMode(final ArrayList<ConnectionMode> tests,
-//        final int index,
-//        final boolean isLocalNetworkAvailable,
-//        final ServerInfo server,
-//        final long wakeOnLanSendTime,
-//        final ConnectionOptions options,
-//        final Response<ConnectionResult> response){
-//            
-//            if (index >= tests.size()){
-//                
-//                OnFailedConnection(response);
-//                return;
-//            }
-//            
-//            final ConnectionMode mode = tests.get(index);
-//            final String address = server.GetAddress(mode);
-//            boolean enableRetry = false;
-//            boolean skipTest = false;
-//            int timeout = 15000;
-//            
-//            if (mode == ConnectionMode.Local){
-//                
-//                if (!isLocalNetworkAvailable){
-//                    logger.Debug("Skipping local connection test because local network is unavailable");
-//                    skipTest = true;
-//                }
-//                enableRetry = true;
-//                timeout = 10000;
-//            }
-//                
-//            else if (mode == ConnectionMode.Manual){
-//                
-//                if (StringHelper.EqualsIgnoreCase(address, server.getLocalAddress())){
-//                    logger.Debug("Skipping manual connection test because the address is the same as the local address");
-//                    skipTest = true;
-//                }
-//                else if (StringHelper.EqualsIgnoreCase(address, server.getRemoteAddress())){
-//                    logger.Debug("Skipping manual connection test because the address is the same as the remote address");
-//                    skipTest = true;
-//                }
-//            }
-//            
-//            if (skipTest || tangible.DotNetToJavaStringHelper.isNullOrEmpty(address))
-//            {
-//                TestNextConnectionMode(tests, index + 1, isLocalNetworkAvailable, server, wakeOnLanSendTime, options, response);
-//                return;
-//            }
-//            
-//            TryConnect(address, timeout, new TestNextConnectionModeTryConnectResponse(this, server, tests, mode, address, timeout, options, index, isLocalNetworkAvailable, wakeOnLanSendTime, enableRetry, logger, response));
-//    }
-//    
-//    void OnSuccessfulConnection(final ServerInfo server,
-//        final PublicSystemInfo systemInfo,
-//        final ConnectionMode connectionMode,
-//        final ConnectionOptions connectionOptions,
-//        final Response<ConnectionResult> response) {
-//            
-//            final ServerCredentials credentials = credentialProvider.GetCredentials();
-//            
-//            if (!tangible.DotNetToJavaStringHelper.isNullOrEmpty(credentials.getConnectAccessToken()))
-//            {
-//                EnsureConnectUser(credentials, new EnsureConnectUserResponse(this, server, credentials, systemInfo, connectionMode, connectionOptions, response));
-//            } else {
-//                
-//                AfterConnectValidated(server, credentials, systemInfo, connectionMode, true, connectionOptions, response);
-//            }
-//    }
-//    
-//    void AddAuthenticationInfoFromConnect(final ServerInfo server,
-//        ConnectionMode connectionMode,
-//        ServerCredentials credentials,
-//        final EmptyResponse response){
-//            
-//            if (tangible.DotNetToJavaStringHelper.isNullOrEmpty(server.getExchangeToken())) {
-//                throw new IllegalArgumentException("server");
-//            }
-//            
-//            logger.Debug("Adding authentication info from Connect");
-//            
-//            String url = server.GetAddress(connectionMode);
-//            
-//            url += "/emby/Connect/Exchange?format=json&ConnectUserId=" + credentials.getConnectUserId();
-//            
-//            HttpRequest request = new HttpRequest();
-//            request.setUrl(url);
-//            request.setMethod("GET");
-//            
-//            request.getRequestHeaders().put("X-MediaBrowser-Token", server.getExchangeToken());
-//            
-//            httpClient.Send(request, new ExchangeTokenResponse(jsonSerializer, server, response));
-//    }
-//    
-//    void AfterConnectValidated(final ServerInfo server,
-//        final ServerCredentials credentials,
-//        final PublicSystemInfo systemInfo,
-//        final ConnectionMode connectionMode,
-//        boolean verifyLocalAuthentication,
-//        final ConnectionOptions options,
-//        final Response<ConnectionResult> response){
-//            
-//            if (verifyLocalAuthentication && !tangible.DotNetToJavaStringHelper.isNullOrEmpty(server.getAccessToken()))
-//            {
-//                ValidateAuthentication(server, connectionMode, new AfterConnectValidatedResponse(this, server, credentials, systemInfo, connectionMode, options, response));
-//                
-//                return;
-//            }
-//            
-//            server.ImportInfo(systemInfo);
-//            
-//            if (options.getUpdateDateLastAccessed()){
-//                server.setDateLastAccessed(new Date());
-//            }
-//            
-//            server.setLastConnectionMode(connectionMode);
-//            credentials.AddOrUpdateServer(server);
-//            credentialProvider.SaveCredentials(credentials);
-//            
-//            ConnectionResult result = new ConnectionResult();
-//            
-//            result.setApiClient(GetOrAddApiClient(server, connectionMode));
-//            result.setState(tangible.DotNetToJavaStringHelper.isNullOrEmpty(server.getAccessToken()) ?
-//                ConnectionState.ServerSignIn :
-//                ConnectionState.SignedIn);
-//            
-//            result.getServers().add(server);
-//            result.getApiClient().EnableAutomaticNetworking(server, connectionMode, networkConnection);
-//            
-//            if (result.getState() == ConnectionState.SignedIn)
-//            {
-//                AfterConnected(result.getApiClient(), options);
-//            }
-//            
-//            response.onResponse(result);
-//    }
-//    
-//    @Override
-//    public void Connect(final String address, final Response<ConnectionResult> response) {
-//        
-//        final String normalizedAddress = NormalizeAddress(address);
-//        
-//        logger.Debug("Attempting to connect to server at %s", address);
-//        
-//        TryConnect(normalizedAddress, 15000, new ConnectToAddressResponse(this, normalizedAddress, response));
-//    }
-//    
-//    @Override
-//    public void Logout(final EmptyResponse response) {
-//        
-//        logger.Debug("Logging out of all servers");
-//        
-//        LogoutAll(new LogoutAllResponse(credentialProvider, logger, response, this));
-//    }
-//    
-//    void clearConnectUserAfterLogout() {
-//        
-//        if (connectUser != null){
-//            connectUser = null;
-//        }
-//    }
-//    
-//    private void ValidateAuthentication(final ServerInfo server, ConnectionMode connectionMode, final EmptyResponse response)
-//    {
-//        final String url = server.GetAddress(connectionMode);
-//        
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.SetAccessToken(server.getAccessToken());
-//        
-//        final HttpRequest request = new HttpRequest();
-//        request.setUrl(url + "/emby/system/info?format=json");
-//        request.setMethod("GET");
-//        request.setRequestHeaders(headers);
-//        
-//        Response<String> stringResponse = new ValidateAuthenticationResponse(this, jsonSerializer, server, response, request, httpClient, url);
-//        
-//        httpClient.Send(request, stringResponse);
-//    }
-//    
-//    void TryConnect(String url, int timeout, final Response<PublicSystemInfo> response)
-//    {
-//        url += "/emby/system/info/public?format=json";
-//        
-//        HttpRequest request = new HttpRequest();
-//        request.setUrl(url);
-//        request.setMethod("GET");
-//        request.setTimeout(timeout);
-//        
-//        httpClient.Send(request, new SerializedResponse<PublicSystemInfo>(response, jsonSerializer, PublicSystemInfo.class));
-//    }
-//    
-//    protected ApiClient InstantiateApiClient(String serverAddress) {
-//        
-//        return new ApiClient(httpClient,
-//            jsonSerializer,
-//            logger,
-//            serverAddress,
-//            applicationName,
-//            applicationVersion,
-//            device,
-//            apiEventListener);
-//    }
-//    
-//    private ApiClient GetOrAddApiClient(ServerInfo server, ConnectionMode connectionMode)
-//    {
-//        ApiClient apiClient = apiClients.get(server.getId());
-//        
-//        if (apiClient == null){
-//            
-//            String address = server.GetAddress(connectionMode);
-//            
-//            apiClient = InstantiateApiClient(address);
-//            
-//            apiClients.put(server.getId(), apiClient);
-//            
-//            apiClient.getAuthenticatedObservable().addObserver(new AuthenticatedObserver(this, apiClient));
-//        }
-//        
-//        if (tangible.DotNetToJavaStringHelper.isNullOrEmpty(server.getAccessToken()))
-//        {
-//            apiClient.ClearAuthenticationInfo();
-//        }
-//        else
-//        {
-//            apiClient.SetAuthenticationInfo(server.getAccessToken(), server.getUserId());
-//        }
-//        
-//        return apiClient;
-//    }
-//    
-//    void AfterConnected(ApiClient apiClient, ConnectionOptions options)
-//    {
-//        if (options.getReportCapabilities()){
-//            apiClient.ReportCapabilities(clientCapabilities, new EmptyResponse());
-//        }
-//        
-//        if (options.getEnableWebSocket()){
-//            apiClient.OpenWebSocket();
-//        }
-//    }
-//    
-//    void OnAuthenticated(final ApiClient apiClient,
-//        final AuthenticationResult result,
-//        ConnectionOptions options,
-//        final boolean saveCredentials)
-//    {
-//        logger.Debug("Updating credentials after local authentication");
-//        
-//        ServerInfo server = apiClient.getServerInfo();
-//        
-//        ServerCredentials credentials = credentialProvider.GetCredentials();
-//        
-//        if (options.getUpdateDateLastAccessed()){
-//            server.setDateLastAccessed(new Date());
-//        }
-//        
-//        if (saveCredentials)
-//        {
-//            server.setUserId(result.getUser().getId());
-//            server.setAccessToken(result.getAccessToken());
-//        }
-//        else
-//        {
-//            server.setUserId(null);
-//            server.setAccessToken(null);
-//        }
-//        
-//        credentials.AddOrUpdateServer(server);
-//        SaveUserInfoIntoCredentials(server, result.getUser());
-//        credentialProvider.SaveCredentials(credentials);
-//        
-//        AfterConnected(apiClient, options);
-//        
-//        OnLocalUserSignIn(result.getUser());
-//    }
-//    
-//    private void SaveUserInfoIntoCredentials(ServerInfo server, UserDto user)
-//    {
-//        ServerUserInfo info = new ServerUserInfo();
-//        info.setIsSignedInOffline(true);
-//        info.setId(user.getId());
-//        
-//        // Record user info here
-//        server.AddOrUpdate(info);
-//    }
-//    
-//    void OnLocalUserSignIn(UserDto user)
-//    {
-//        // TODO: Fire event
-//    }
-//    
-//    void OnLocalUserSignout(ApiClient apiClient)
-//    {
-//        // TODO: Fire event
-//    }
-//    
-//    public void GetAvailableServers(final Response<ArrayList<ServerInfo>> response)
-//    {
-//        logger.Debug("Getting saved servers via credential provider");
-//        final ServerCredentials credentials = credentialProvider.GetCredentials();
-//        
-//        final int numTasks = 2;
-//        final int[] numTasksCompleted = {0};
-//        final ArrayList<ServerInfo> foundServers = new ArrayList<ServerInfo>();
-//        final ArrayList<ServerInfo> connectServers = new ArrayList<ServerInfo>();
-//        
-//        Response<ArrayList<ServerInfo>> findServersResponse = new FindServersResponse(this, credentials, foundServers, connectServers, numTasksCompleted, numTasks, response);
-//        
-//        logger.Debug("Scanning network for local servers");
-//        
-//        FindServers(findServersResponse);
-//        
-//        EmptyResponse connectServersResponse = new GetConnectServersResponse(logger, connectService, credentials, foundServers, connectServers, numTasks, numTasksCompleted, response, this);
-//        
-//        if (!tangible.DotNetToJavaStringHelper.isNullOrEmpty(credentials.getConnectAccessToken()))
-//        {
-//            logger.Debug("Getting server list from Connect");
-//            
-//            EnsureConnectUser(credentials, connectServersResponse);
-//        }
-//        else{
-//            connectServersResponse.onError(null);
-//        }
-//    }
-//    
-//    void EnsureConnectUser(ServerCredentials credentials, final EmptyResponse response){
-//        
-//        if (connectUser != null && StringHelper.EqualsIgnoreCase(connectUser.getId(), credentials.getConnectUserId()))
-//        {
-//            response.onResponse();
-//            return;
-//        }
-//        
-//        if (!tangible.DotNetToJavaStringHelper.isNullOrEmpty(credentials.getConnectUserId()) && !tangible.DotNetToJavaStringHelper.isNullOrEmpty(credentials.getConnectAccessToken()))
-//        {
-//            this.connectUser = null;
-//            
-//            ConnectUserQuery query = new ConnectUserQuery();
-//            
-//            query.setId(credentials.getConnectUserId());
-//            
-//            connectService.GetConnectUser(query, credentials.getConnectAccessToken(), new GetConnectUserResponse(this, response));
-//        }
-//    }
-//    
-//    void OnGetServerResponse(ServerCredentials credentials,
-//        ArrayList<ServerInfo> foundServers,
-//        ArrayList<ServerInfo> connectServers,
-//        Response<ArrayList<ServerInfo>> response){
-//            
-//            for(ServerInfo newServer : foundServers){
-//                
-//                if (tangible.DotNetToJavaStringHelper.isNullOrEmpty(newServer.getManualAddress())) {
-//                    newServer.setLastConnectionMode(ConnectionMode.Local);
-//                }
-//                else {
-//                    newServer.setLastConnectionMode(ConnectionMode.Manual);
-//                }
-//                
-//                credentials.AddOrUpdateServer(newServer);
-//            }
-//            
-//            for(ServerInfo newServer : connectServers){
-//                
-//                credentials.AddOrUpdateServer(newServer);
-//            }
-//            
-//            ArrayList<ServerInfo> cleanList = new ArrayList<ServerInfo>();
-//            ArrayList<ServerInfo> existing = credentials.getServers();
-//            
-//            for(ServerInfo server : existing){
-//                
-//                // It's not a connect server, so assume it's still valid
-//                if (tangible.DotNetToJavaStringHelper.isNullOrEmpty(server.getExchangeToken()))
-//                {
-//                    cleanList.add(server);
-//                    continue;
-//                }
-//                
-//                boolean found = false;
-//                
-//                for(ServerInfo connectServer : connectServers){
-//                    
-//                    if (StringHelper.EqualsIgnoreCase(server.getId(), connectServer.getId())){
-//                        found = true;
-//                        break;
-//                    }
-//                }
-//                
-//                if (found)
-//                {
-//                    cleanList.add(server);
-//                }
-//                else{
-//                    logger.Debug("Dropping server "+server.getName()+" - "+server.getId()+" because it's no longer in the user's Connect profile.");
-//                }
-//            }
-//            
-//            // Sort by last date accessed, descending
-//            Collections.sort(cleanList, new ServerInfoDateComparator());
-//            Collections.reverse(cleanList);
-//            
-//            credentials.setServers(cleanList);
-//            
-//            credentialProvider.SaveCredentials(credentials);
-//            
-//            ArrayList<ServerInfo> clone = new ArrayList<ServerInfo>();
-//            clone.addAll(credentials.getServers());
-//            
-//            response.onResponse(clone);
-//    }
-//    
-//    protected void FindServers(final Response<ArrayList<ServerInfo>> response)
-//    {
-//        FindServersInternal(response);
-//    }
-//    
-//    protected void FindServersInternal(final Response<ArrayList<ServerInfo>> response)
-//    {
-//        serverDiscovery.serverDiscoveryInfo.size()(1000, new FindServersInnerResponse(this, response));
-//    }
-//    
-//    void WakeAllServers()
-//        {
-//            logger.Debug("Waking all servers");
-//            
-//            for(ServerInfo server : credentialProvider.GetCredentials().getServers()){
-//                
-//                WakeServer(server, new EmptyResponse());
-//            }
-//    }
-//    
-//    private void BeginWakeServer(final ServerInfo info)
-//    {
-//        Thread thread = new Thread(new BeginWakeServerRunnable(this, info));
-//        
-//        thread.start();
-//    }
-//    
-//    void WakeServer(ServerInfo info, final EmptyResponse response)
-//    {
-//        logger.Debug("Waking server: %s, Id: %s", info.getName(), info.getId());
-//        
-//        ArrayList<WakeOnLanInfo> wakeList = info.getWakeOnLanInfos();
-//        
-//        final int count = wakeList.size();
-//        
-//        if (count == 0){
-//            logger.Debug("Server %s has no saved wake on lan profiles", info.getName());
-//            response.onResponse();
-//            return;
-//        }
-//        
-//        final ArrayList<EmptyResponse> doneList = new ArrayList<EmptyResponse>();
-//        
-//        for(WakeOnLanInfo wakeOnLanInfo : wakeList){
-//            
-//            WakeServer(wakeOnLanInfo, new WakeServerResponse(doneList, response));
-//        }
-//    }
-//    
-//    private void WakeServer(WakeOnLanInfo info, EmptyResponse response) {
-//        
-//        networkConnection.SendWakeOnLan(info.getMacAddress(), info.getPort(), response);
-//    }
-//    
-//    String NormalizeAddress(String address) throws IllegalArgumentException {
-//        
-//        if (tangible.DotNetToJavaStringHelper.isNullOrEmpty(address))
-//        {
-//            throw new IllegalArgumentException("address");
-//        }
-//        
-//        if (StringHelper.IndexOfIgnoreCase(address, "http") == -1)
-//        {
-//            address = "http://" + address;
-//        }
-//        
-//        return address;
-//    }
-//    
-//    private void LogoutAll(final EmptyResponse response){
-//        
-//        Object[] clientList = apiClients.values().toArray();
-//        
-//        final int count = clientList.length;
-//        
-//        if (count == 0){
-//            response.onResponse();
-//            return;
-//        }
-//        
-//        final ArrayList<Integer> doneList = new ArrayList<Integer>();
-//        
-//        for(Object clientObj : clientList){
-//            
-//            ApiClient client = (ApiClient)clientObj;
-//            
-//            ApiClientLogoutResponse logoutResponse = new ApiClientLogoutResponse(doneList, count, response, this, client);
-//            
-//            if (!tangible.DotNetToJavaStringHelper.isNullOrEmpty(client.getAccessToken()))
-//            {
-//                client.Logout(logoutResponse);
-//            }
-//            else {
-//                logoutResponse.onResponse(false);
-//            }
-//        }
-//        
-//        connectUser = null;
-//    }
-//    
-//    public void LoginToConnect(String username, String password, final EmptyResponse response) throws UnsupportedEncodingException, NoSuchAlgorithmException {
-//        
-//        connectService.Authenticate(username, password, new LoginToConnectResponse(this, credentialProvider, response));
-//    }
-//    
-//    public void CreatePin(String deviceId, Response<PinCreationResult> response)
-//    {
-//        connectService.CreatePin(deviceId, response);
-//    }
-//    
-//    public void GetPinStatus(PinCreationResult pin, Response<PinStatusResult> response)
-//    {
-//        connectService.GetPinStatus(pin, response);
-//    }
-//    
-//    public void ExchangePin(PinCreationResult pin, final Response<PinExchangeResult> response)
-//    {
-//        connectService.ExchangePin(pin, new ExchangePinResponse(credentialProvider, response));
-//    }
-//    
-//    public void GetRegistrationInfo(String featureName, String connectedServerId, Response<RegistrationInfo> response) {
-//        
-//        FindServers(new GetRegistrationInfoFindServersResponse(this, featureName, connectedServerId, logger, response, credentialProvider, connectService));
-//    }
+        
+        connectUser = nil
+    }
+    
+    
+    // MARK: - Waking Servers
+    
+    func wakeAllServers() {
+        print("Waking all servers")
+        
+        for server in credentialProvider.getCredentials().servers {
+            wakeServer(server)
+        }
+    }
+    
+    func beginWakeServer(server: ServerInfo) {
+        
+        let wakeList = server.wakeOnLanInfos
+        for info in wakeList {
+            wakeServer(info)
+        }
+        
+        print("Waking server: \(server.name), ID: \(server.id), number: \(wakeList.count)")
+    }
+    
+    func wakeServer(server: ServerInfo) {
+        for info in server.wakeOnLanInfos {
+            wakeServer(info)
+        }
+    }
+    
+    func wakeServer(info: WakeOnLanInfo) {
+        networkConnection.sendWakeOnLan(info.macAddress, port: info.port)
+    }
+    
+    
+    // MARK: - Utility Methods
+    
+    public func getApiClient(item: IHasServerId) -> ApiClient? {
+        return getApiClient(item.serverId)
+    }
+    
+    public func getApiClient(serverId: String) -> ApiClient? {
+        return apiClients[serverId]
+    }
+    
+    public func getServerInfo(serverId: String) -> ServerInfo? {
+        return credentialProvider
+            .getCredentials()
+            .servers
+            .filter({$0.id == serverId})
+            .first
+    }
+    
+    func getOrAddApiClient(server: ServerInfo, connectionMode: ConnectionMode) -> ApiClient {
+        
+        var apiClient = apiClients[server.id]
+        
+        if apiClient == nil {
+            
+            let address = server.getAddress(connectionMode)!
+            
+            apiClient = ApiClient(httpClient: httpClient, jsonSerializer: JsonSerializer(), logger: Logger(), serverAddress: address, appName: "Emby_ApiClient", applicationVersion: "1.0", device: device)
+            
+            apiClients[server.id] = apiClient
+            
+            // TODO: Add observer
+            // apiClient.getAuthenticatedObservable().addObserver(new AuthenticatedObserver(this, apiClient))
+        }
+        
+        if server.accessToken == nil {
+            apiClient!.clearAuthenticationInfo()
+        } else {
+            apiClient!.setAuthenticationInfo(server.accessToken, userId: server.userId)
+        }
+        
+        return apiClient!
+    }
+    
+    func onConnectUserSignIn(user: ConnectUser) {
+        connectUser = user
+    }
+    
+    func onLocalUserSignIn(user: UserDto) {
+        // TODO: Fire event
+    }
+    
+    func onLocalUserSignOut(user: UserDto) {
+        // TODO: Fire event
+    }
+    
+    func saveUserInfoIntoCredentials(server: ServerInfo, user: UserDto) {
+        let info = ServerUserInfo(id: user.id!, isSignedInOffline: true)
+        server.addOrUpdate(info)
+    }
+    
+    func normalizeAddress(address: String) -> String {
+        precondition(!address.isEmpty, "Illegal Argument: address")
+        
+        if !address.hasPrefix("http") {
+            return "http://" + address
+        }
+        
+        return address
+    }
 }

@@ -52,7 +52,7 @@ public class BaseApiClient// implements IDisposable
     private var privateAccessToken: String?
     private var privateImageQuality: Int?
     private var privateCurrentUserId: String?
-    private let httpHeaders = HttpHeaders()
+    let httpHeaders = HttpHeaders()
     
     internal init(logger: ILogger, jsonSerializer: IJsonSerializer, serverAddress: String, clientName: String,
         device: DeviceProtocol, applicationVersion: String) {
@@ -183,12 +183,12 @@ public class BaseApiClient// implements IDisposable
     }
     
     internal func setAuthorizationHttpRequestHeader(scheme: String?, parameter: String?) {
-        httpHeaders.setAuthorizationScheme(scheme)
-        httpHeaders.setAuthorizationParameter(parameter)
+        httpHeaders.authorizationScheme = scheme
+        httpHeaders.authorizationParameter = parameter
     }
     
     private func clearHttpRequestHeader(name: String) {
-        httpHeaders.remove(name)
+        httpHeaders[name] = nil
     }
     
     internal func getAuthorizationParameter() -> String? {
@@ -227,11 +227,12 @@ public class BaseApiClient// implements IDisposable
 //    
    
     public final func getApiUrl(handler: String?) -> String {
-        return getApiUrl(handler, queryString: QueryStringDictionary())
+        return getApiUrl(handler, queryString: nil)
     }
     
     internal final func getApiUrl(handler: String?, queryString: QueryStringDictionary?) -> String {
-        return queryString!.getUrl(getApiUrl() + "/" + handler!)
+        let base = getApiUrl() + "/" + handler!
+        return queryString != nil ? queryString!.getUrl(base) : base
     }
 
     public final func getSubtitleUrl(options: SubtitleDownloadOptions) -> String {

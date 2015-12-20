@@ -8,11 +8,15 @@
 
 import Foundation
 
-//package mediabrowser.apiinteraction.http;
-//
-//import mediabrowser.apiinteraction.Response;
+import Alamofire
 
 public protocol IAsyncHttpClient {
-    
-    /*public*/ func Send<T>(request: HttpRequest, response: EmbyApiClient.Response<T>)
+    func sendRequest<Value: JSONSerializable>(request: HttpRequest, success: (Value) -> Void, failure: (EmbyError) -> Void)
+    func sendCollectionRequest<Value: JSONSerializable>(request: HttpRequest, success: ([Value]) -> Void, failure: (EmbyError) -> Void)
 }
+
+//extension Array:JSONSerializable where Element: JSONSerializable {
+//    public init?(jSON: JSON_Object) {
+//        return nil
+//    }
+//}

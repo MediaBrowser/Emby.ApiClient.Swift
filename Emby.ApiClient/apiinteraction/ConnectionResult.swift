@@ -8,6 +8,9 @@
 
 import Foundation
 
-public enum ConnectionResult {
-    
+public struct ConnectionResult {
+    public var state: ConnectionState = .Unavailable
+    public var servers: [ServerInfo] = []
+    public var apiClient: ApiClient?
+    public var connectUser: ConnectUser?
 }
