@@ -39,7 +39,6 @@
 		040932471C26598200736C7B /* UserDataChangeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932441C26598200736C7B /* UserDataChangeInfo.swift */; };
 		040932491C265A1400736C7B /* SessionInfoDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932481C265A1400736C7B /* SessionInfoDto.swift */; };
 		0409324A1C265A1400736C7B /* SessionInfoDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932481C265A1400736C7B /* SessionInfoDto.swift */; };
-		0409324B1C265A1400736C7B /* SessionInfoDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932481C265A1400736C7B /* SessionInfoDto.swift */; };
 		0409324D1C265BD100736C7B /* SessionUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0409324C1C265BD100736C7B /* SessionUserInfo.swift */; };
 		0409324E1C265BD100736C7B /* SessionUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0409324C1C265BD100736C7B /* SessionUserInfo.swift */; };
 		0409324F1C265BD100736C7B /* SessionUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0409324C1C265BD100736C7B /* SessionUserInfo.swift */; };
@@ -67,6 +66,12 @@
 		0409326E1C2662FF00736C7B /* NetworkStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0409326D1C2662FF00736C7B /* NetworkStatus.swift */; };
 		0409326F1C2662FF00736C7B /* NetworkStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0409326D1C2662FF00736C7B /* NetworkStatus.swift */; };
 		040932701C2662FF00736C7B /* NetworkStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0409326D1C2662FF00736C7B /* NetworkStatus.swift */; };
+		040932761C28FE7700736C7B /* UserQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932751C28FE7700736C7B /* UserQuery.swift */; };
+		040932771C28FEB400736C7B /* UserQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932751C28FE7700736C7B /* UserQuery.swift */; };
+		040932781C28FEB500736C7B /* UserQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932751C28FE7700736C7B /* UserQuery.swift */; };
+		040932791C28FEB600736C7B /* UserQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040932751C28FE7700736C7B /* UserQuery.swift */; };
+		0409327D1C29070900736C7B /* SessionQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0409327B1C29070600736C7B /* SessionQuery.swift */; };
+		0409327E1C29070A00736C7B /* SessionQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0409327B1C29070600736C7B /* SessionQuery.swift */; };
 		0416439C1BD41FA600873FAB /* ServerUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0416439B1BD41FA600873FAB /* ServerUserInfo.swift */; };
 		0416439F1BD4204300873FAB /* WakeOnLanInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0416439E1BD4204300873FAB /* WakeOnLanInfo.swift */; };
 		041643A11BD4216100873FAB /* UserLinkType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041643A01BD4216100873FAB /* UserLinkType.swift */; };
@@ -427,6 +432,8 @@
 		040932641C26605B00736C7B /* SessionUpdatesEventArgs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionUpdatesEventArgs.swift; sourceTree = "<group>"; };
 		040932691C26627D00736C7B /* INetworkConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = INetworkConnection.swift; sourceTree = "<group>"; };
 		0409326D1C2662FF00736C7B /* NetworkStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkStatus.swift; sourceTree = "<group>"; };
+		040932751C28FE7700736C7B /* UserQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserQuery.swift; path = querying/UserQuery.swift; sourceTree = "<group>"; };
+		0409327B1C29070600736C7B /* SessionQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SessionQuery.swift; path = querying/SessionQuery.swift; sourceTree = "<group>"; };
 		0416439B1BD41FA600873FAB /* ServerUserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerUserInfo.swift; sourceTree = "<group>"; };
 		0416439E1BD4204300873FAB /* WakeOnLanInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WakeOnLanInfo.swift; sourceTree = "<group>"; };
 		041643A01BD4216100873FAB /* UserLinkType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLinkType.swift; sourceTree = "<group>"; };
@@ -871,6 +878,8 @@
 				04B8AB4C1BF037ED00ED19CA /* NextUpQuery.swift */,
 				04B8AB4E1BF039C700ED19CA /* SimilarItemsQuery.swift */,
 				04B8AB501BF03B8600ED19CA /* ItemsByNameQuery.swift */,
+				040932751C28FE7700736C7B /* UserQuery.swift */,
+				0409327B1C29070600736C7B /* SessionQuery.swift */,
 			);
 			name = querying;
 			sourceTree = "<group>";
@@ -1410,6 +1419,7 @@
 				040932631C265F6700736C7B /* TranscodingInfo.swift in Sources */,
 				04C23BFC1C0C0BB1006722ED /* SubtitleProfileTests.swift in Sources */,
 				048E0CBF1C095E380001081F /* BaseItemPersonTests.swift in Sources */,
+				040932791C28FEB600736C7B /* UserQuery.swift in Sources */,
 				0409324F1C265BD100736C7B /* SessionUserInfo.swift in Sources */,
 				040932701C2662FF00736C7B /* NetworkStatus.swift in Sources */,
 				048E0CB41C06B98C0001081F /* ServerUserInfoTests.swift in Sources */,
@@ -1425,7 +1435,6 @@
 				040932331C26576F00736C7B /* PlayCommand.swift in Sources */,
 				040932231C2653CC00736C7B /* ApiEventListener.swift in Sources */,
 				0409322B1C2656DC00736C7B /* BrowseRequest.swift in Sources */,
-				0409324B1C265A1400736C7B /* SessionInfoDto.swift in Sources */,
 				040932371C2657DD00736C7B /* PlaystateCommand.swift in Sources */,
 				0409323B1C26583000736C7B /* PlaystateRequest.swift in Sources */,
 				04C23C2A1C16875E006722ED /* CodecProfileTests.swift in Sources */,
@@ -1452,6 +1461,7 @@
 				5D0FBA4A1C01B4EB005BB336 /* SubtitlePlaybackMode.swift in Sources */,
 				5D0FBA4B1C01B4EB005BB336 /* FileUploadProgress.swift in Sources */,
 				5D0FBA4C1C01B4EB005BB336 /* SystemInfo.swift in Sources */,
+				040932781C28FEB500736C7B /* UserQuery.swift in Sources */,
 				04C23C121C168056006722ED /* EncodingContext.swift in Sources */,
 				5D0FBA4D1C01B4EB005BB336 /* WakeOnLanInfo.swift in Sources */,
 				5D0FBA4E1C01B4EB005BB336 /* PinExchangeResult.swift in Sources */,
@@ -1585,6 +1595,7 @@
 				5D0FBAAE1C01B4EB005BB336 /* ServerLocator.swift in Sources */,
 				5D0FBAAF1C01B4EB005BB336 /* SubtitleDownloadOptions.swift in Sources */,
 				04C23C0C1C167F5B006722ED /* TranscodingProfile.swift in Sources */,
+				0409327E1C29070A00736C7B /* SessionQuery.swift in Sources */,
 				5D0FBAB01C01B4EB005BB336 /* iOSDevice.swift in Sources */,
 				040932361C2657DD00736C7B /* PlaystateCommand.swift in Sources */,
 				5D0FBAB11C01B4EB005BB336 /* VideoType.swift in Sources */,
@@ -1608,6 +1619,7 @@
 				047B76ED1BFACDA50003A743 /* SubtitlePlaybackMode.swift in Sources */,
 				889288D31BE8DCE700DAD65F /* FileUploadProgress.swift in Sources */,
 				041643A81BD4280600873FAB /* SystemInfo.swift in Sources */,
+				040932771C28FEB400736C7B /* UserQuery.swift in Sources */,
 				04C23C111C168056006722ED /* EncodingContext.swift in Sources */,
 				0416439F1BD4204300873FAB /* WakeOnLanInfo.swift in Sources */,
 				88CF7E721BC6E49F00A33B72 /* PinExchangeResult.swift in Sources */,
@@ -1741,6 +1753,7 @@
 				889288D71BE90D8000DAD65F /* ServerLocator.swift in Sources */,
 				04B8AB391BEDA45000ED19CA /* SubtitleDownloadOptions.swift in Sources */,
 				04C23C0B1C167F5B006722ED /* TranscodingProfile.swift in Sources */,
+				0409327D1C29070900736C7B /* SessionQuery.swift in Sources */,
 				889288CF1BE8D9B400DAD65F /* iOSDevice.swift in Sources */,
 				040932351C2657DD00736C7B /* PlaystateCommand.swift in Sources */,
 				04B8AB451BEDAF2D00ED19CA /* VideoType.swift in Sources */,
@@ -1765,6 +1778,7 @@
 				0A40C8321C26879E0020A7A2 /* UserSelection.swift in Sources */,
 				0A40C8301C26879E0020A7A2 /* SignIn.swift in Sources */,
 				0A40C8311C26879E0020A7A2 /* Startup.swift in Sources */,
+				040932761C28FE7700736C7B /* UserQuery.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

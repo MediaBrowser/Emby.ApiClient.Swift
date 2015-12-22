@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct SessionInfoDto {
+public struct SessionInfoDto : JSONSerializable {
 //    var supportedCommands = [String]()
 //    var queueableMediaTypes = [String]()
 //    var playableMediaTypes = [String]()
@@ -27,4 +27,7 @@ public struct SessionInfoDto {
 //    let playstateInfo: PlayerStateInfo
 //    let transcodingInfo: TranscodingInfo
     
+    public init?(jSON: JSON_Object) {
+        fatalError("init(jSON:) has not been implemented: \(jSON)")
+    }
 }
