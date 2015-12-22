@@ -5,95 +5,95 @@
 
 import Foundation
 
-public class BaseItemDto {
-    var name: String?
-    var serverId: String?
-    var id: String?
-    var etag: String?
-    var playlistItemid: String?
-    var dateCreated: NSDate?
-    var dateLastMediaAdded: NSDate?
-    var extraType: ExtraType?
-    var airsBeforeSeasonNumber: Int?
-    var airsAfterSeasonNumber: Int?
-    var airsBeforeEpisodeNumber: Int?
-    var absoluteEpisodeNumber: Int?
-    var displaySpecialWithSeasons: Bool?
-    var canDelete: Bool?
-    var canDownload: Bool?
-    var hasSubtitles: Bool?
-    var preferredMetadataLanguage: String?
-    var preferredMetadataCountryCode: String?
-    var awardSummary: String?
-    var shareUrl: String?
-    var metascore: Float?
-    var hasDynamicCategories: Bool?
-    var animeSeriesIndex: Int?
-    var supportsSync: Bool?
-    var hasSyncJob: Bool?
-    var isSynced: Bool?
-    var syncStatus: SyncJobStatus?
-    var syncPercent: Double?
-    var dvdSeasonNumber: Int?
-    var dvdEpisodeNumber: Int?
-    var sortName: String?
-    var forcedSortName: String?
-    var video3dFormat: Video3DFormat?
-    var premierDate: NSDate?
-    var externalUrls: [ExternalUrl]?
-    var mediaSources: [MediaSourceInfo]?
-    var criticRating: Float?
-    var gameSystem: String?
-    var criticRatingSummary: String?
-    var multiPartGameFiles: [String]?
-    var path: String?
-    var officialRating: String?
-    var customRating: String?
-    var channelId: String?
-    var channelName: String?
-    var overview: String?
-    var shortOverview: String?
-    var tmdbCollectionName: String?
-    var tagLines: [String]?
-    var genres: [String]?
-    var seriesGenres: [String]?
-    var communityRating: Float?
-    var voteCount: Int?
-    var cumulativeRunTimeTicks: Int?
-    var originalRunTimeTicks: Int?
-    var runTimeTicks: Int?
-    var playAccess: PlayAccess?
-    var aspectRation: String?
-    var productionYear: Int?
-    var players: Int?
-    var isPlaceHolder: Bool?
-    var indexNumber: Int?
-    var indexNumberEnd: Int?
-    var parentIndexNumber: Int?
-    var remoteTrailers: [MediaUrl]?
-    var soundtrackIds: [String]?
-    var providerIds: [String:String]?
-    var isHd: Bool?
-    var isFolder: Bool?
-    var parentId: String?
-    var type: String?
-    var people: [BaseItemPerson]?
-    var studios: [StudioDto]?
-    var parentLogoItemId: String?
-    var parentBackdropItemId: String?
-    var parentBackdropImageTags: [String]?
-    var localTrailerCount: Int?
-    var userData: UserItemDataDto?
-    var seasonUserData: UserItemDataDto?
-    var recursiveItemCount: Int?
-    var childCount: Int?
-    var seriesName: String?
-    var seriesId: String?
-    var seasonId: String?
-    var specialFeatureCount: Int?
-    var displayPreferencesId: String?
-    var status: String?
-    var seriesStatus: SeriesStatus? {
+public class BaseItemDto : JSONSerializable {
+    public var name: String?
+    public var serverId: String?
+    public var id: String?
+    public var etag: String?
+    public var playlistItemid: String?
+    public var dateCreated: NSDate?
+    public var dateLastMediaAdded: NSDate?
+    public var extraType: ExtraType?
+    public var airsBeforeSeasonNumber: Int?
+    public var airsAfterSeasonNumber: Int?
+    public var airsBeforeEpisodeNumber: Int?
+    public var absoluteEpisodeNumber: Int?
+    public var displaySpecialWithSeasons: Bool?
+    public var canDelete: Bool?
+    public var canDownload: Bool?
+    public var hasSubtitles: Bool?
+    public var preferredMetadataLanguage: String?
+    public var preferredMetadataCountryCode: String?
+    public var awardSummary: String?
+    public var shareUrl: String?
+    public var metascore: Float?
+    public var hasDynamicCategories: Bool?
+    public var animeSeriesIndex: Int?
+    public var supportsSync: Bool?
+    public var hasSyncJob: Bool?
+    public var isSynced: Bool?
+    public var syncStatus: SyncJobStatus?
+    public var syncPercent: Double?
+    public var dvdSeasonNumber: Int?
+    public var dvdEpisodeNumber: Int?
+    public var sortName: String?
+    public var forcedSortName: String?
+    public var video3dFormat: Video3DFormat?
+    public var premierDate: NSDate?
+    public var externalUrls: [ExternalUrl]?
+    public var mediaSources: [MediaSourceInfo]?
+    public var criticRating: Float?
+    public var gameSystem: String?
+    public var criticRatingSummary: String?
+    public var multiPartGameFiles: [String]?
+    public var path: String?
+    public var officialRating: String?
+    public var customRating: String?
+    public var channelId: String?
+    public var channelName: String?
+    public var overview: String?
+    public var shortOverview: String?
+    public var tmdbCollectionName: String?
+    public var tagLines: [String]?
+    public var genres: [String]?
+    public var seriesGenres: [String]?
+    public var communityRating: Float?
+    public var voteCount: Int?
+    public var cumulativeRunTimeTicks: Int?
+    public var originalRunTimeTicks: Int?
+    public var runTimeTicks: Int?
+    public var playAccess: PlayAccess?
+    public var aspectRation: String?
+    public var productionYear: Int?
+    public var players: Int?
+    public var isPlaceHolder: Bool?
+    public var indexNumber: Int?
+    public var indexNumberEnd: Int?
+    public var parentIndexNumber: Int?
+    public var remoteTrailers: [MediaUrl]?
+    public var soundtrackIds: [String]?
+    public var providerIds: [String:String]?
+    public var isHd: Bool?
+    public var isFolder: Bool?
+    public var parentId: String?
+    public var type: String?
+    public var people: [BaseItemPerson]?
+    public var studios: [StudioDto]?
+    public var parentLogoItemId: String?
+    public var parentBackdropItemId: String?
+    public var parentBackdropImageTags: [String]?
+    public var localTrailerCount: Int?
+    public var userData: UserItemDataDto?
+    public var seasonUserData: UserItemDataDto?
+    public var recursiveItemCount: Int?
+    public var childCount: Int?
+    public var seriesName: String?
+    public var seriesId: String?
+    public var seasonId: String?
+    public var specialFeatureCount: Int?
+    public var displayPreferencesId: String?
+    public var status: String?
+    public var seriesStatus: SeriesStatus? {
         get {
             if let status = self.status {
                 return SeriesStatus(rawValue: status)
@@ -107,7 +107,7 @@ public class BaseItemDto {
         }
     }
     
-    var recordingStatus: RecordingStatus? {
+    public var recordingStatus: RecordingStatus? {
         get {
             if let status = self.status {
                 return RecordingStatus(rawValue: status)
@@ -121,31 +121,31 @@ public class BaseItemDto {
         }
     }
     
-    var airTime: String?
-    var airDays: [String]?
-    var indexOptions: [String]?
-    var tags: [String]?
-    var keywords: [String]?
-    var primaryImageAspectRatio: Double?
-    var originalPrimaryImageAspectRatio: Double?
-    var artists: [String]?
-    var artistItems: [NameIdPair]?
-    var album: String?
-    var collectionType: String?
-    var displayOrder: String?
-    var albumId: String?
-    var albumPrimaryImageTag: String?
-    var seriesPrimaryImageTag: String?
-    var albumArtist: String?
-    var albumArtists: [NameIdPair]?
-    var seasonName: String?
-    var mediaStreams: [MediaStream]?
-    var videoType: VideoType?
-    var displayMediaType: String?
-    var partCount: Int?
-    var mediaSourceCount: Int?
+    public var airTime: String?
+    public var airDays: [String]?
+    public var indexOptions: [String]?
+    public var tags: [String]?
+    public var keywords: [String]?
+    public var primaryImageAspectRatio: Double?
+    public var originalPrimaryImageAspectRatio: Double?
+    public var artists: [String]?
+    public var artistItems: [NameIdPair]?
+    public var album: String?
+    public var collectionType: String?
+    public var displayOrder: String?
+    public var albumId: String?
+    public var albumPrimaryImageTag: String?
+    public var seriesPrimaryImageTag: String?
+    public var albumArtist: String?
+    public var albumArtists: [NameIdPair]?
+    public var seasonName: String?
+    public var mediaStreams: [MediaStream]?
+    public var videoType: VideoType?
+    public var displayMediaType: String?
+    public var partCount: Int?
+    public var mediaSourceCount: Int?
     
-    var supportsPlayLists: Bool {
+    public var supportsPlayLists: Bool {
         get {
             return (runTimeTicks != nil) || ((isFolder != nil) && isFolder!) || isGenre || isMusicGenre || isArtist
         }
@@ -155,53 +155,53 @@ public class BaseItemDto {
         return self.type == type
     }
     
-    var imageTags: [ImageType: String]?
-    var backdropImageTags: [String]?
-    var screenshotImageTags: [String]?
-    var parentLogoImageTag: String?
-    var parentArtItemId: String?
-    var parentArtImageTag: String?
-    var seriesThumbImageTag: String?
-    var seriesStudio: String?
-    var parentThumbItemId: String?
-    var parentThumbImageTag: String?
-    var parentPrimaryImageItemId: String?
-    var parentPrimaryImageTag: String?
-    var chapters: [ChapterInfoDto]?
-    var locationType: LocationType?
-    var isoType: IsoType?
-    var mediaType: String?
-    var endDate: NSDate?
-    var homePageUrl: String?
-    var productionLocations: [String]?
-    var budget: Double?
-    var revenue: Double?
-    var lockedFields: [MetadataFields]?
-    var movieCount: Int?
-    var seriesCount: Int?
-    var episodeCount: Int?
-    var gameCount: Int?
-    var songCount: Int?
-    var albumCount: Int?
-    var musicVideoCount: Int?
-    var lockData: Bool?
-    var width: Int?
-    var height: Int?
-    var cameraMake: String?
-    var cameraModel: String?
-    var software: String?
-    var exposureTime: Double?
-    var focalLength: Double?
-    var imageOrientation: ImageOrientation?
-    var aperture: Double?
-    var shutterSpeed: Double?
-    var latitude: Double?
-    var longitude: Double?
-    var altitude: Double?
-    var isoSpeedRating: Int?
-    var recordingCount: Int?
-    var seriesTimerId: String?
-    var canResume: Bool {
+    public var imageTags: [ImageType: String]?
+    public var backdropImageTags: [String]?
+    public var screenshotImageTags: [String]?
+    public var parentLogoImageTag: String?
+    public var parentArtItemId: String?
+    public var parentArtImageTag: String?
+    public var seriesThumbImageTag: String?
+    public var seriesStudio: String?
+    public var parentThumbItemId: String?
+    public var parentThumbImageTag: String?
+    public var parentPrimaryImageItemId: String?
+    public var parentPrimaryImageTag: String?
+    public var chapters: [ChapterInfoDto]?
+    public var locationType: LocationType?
+    public var isoType: IsoType?
+    public var mediaType: String?
+    public var endDate: NSDate?
+    public var homePageUrl: String?
+    public var productionLocations: [String]?
+    public var budget: Double?
+    public var revenue: Double?
+    public var lockedFields: [MetadataFields]?
+    public var movieCount: Int?
+    public var seriesCount: Int?
+    public var episodeCount: Int?
+    public var gameCount: Int?
+    public var songCount: Int?
+    public var albumCount: Int?
+    public var musicVideoCount: Int?
+    public var lockData: Bool?
+    public var width: Int?
+    public var height: Int?
+    public var cameraMake: String?
+    public var cameraModel: String?
+    public var software: String?
+    public var exposureTime: Double?
+    public var focalLength: Double?
+    public var imageOrientation: ImageOrientation?
+    public var aperture: Double?
+    public var shutterSpeed: Double?
+    public var latitude: Double?
+    public var longitude: Double?
+    public var altitude: Double?
+    public var isoSpeedRating: Int?
+    public var recordingCount: Int?
+    public var seriesTimerId: String?
+    public var canResume: Bool {
         get {
             if let playbackPositionTicks = userData?.playbackPositionTicks {
                 return playbackPositionTicks > 0
@@ -211,7 +211,7 @@ public class BaseItemDto {
         }
     }
     
-    var resumePositionTicks: Int {
+    public var resumePositionTicks: Int {
         get {
             if let playbackPositionTicks = userData?.playbackPositionTicks {
                 return playbackPositionTicks
@@ -221,153 +221,157 @@ public class BaseItemDto {
         }
     }
     
-    var backdropCount: Int {
+    public var backdropCount: Int {
         get {
             return (backdropImageTags != nil) ? backdropImageTags!.count : 0
         }
     }
     
-    var screenshotCount: Int {
+    public var screenshotCount: Int {
         get {
             return (screenshotImageTags != nil) ? screenshotImageTags!.count : 0
         }
     }
     
-    var hasBanner: Bool {
+    public var hasBanner: Bool {
         get {
             return (imageTags != nil) ? imageTags![ImageType.Banner] != nil : false
         }
     }
     
-    var hasArtImage: Bool {
+    public var hasArtImage: Bool {
         get {
             return (imageTags != nil) ? imageTags![ImageType.Art] != nil : false
         }
     }
     
-    var hasLogo: Bool {
+    public var hasLogo: Bool {
         get {
             return (imageTags != nil) ? imageTags![ImageType.Logo] != nil : false
         }
     }
     
-    var hasThumb: Bool {
+    public var hasThumb: Bool {
         get {
             return (imageTags != nil) ? imageTags![ImageType.Thumb] != nil : false
         }
     }
     
-    var hasPrimaryImage: Bool {
+    public var hasPrimaryImage: Bool {
         get {
             return (imageTags != nil) ? imageTags![ImageType.Primary] != nil : false
         }
     }
     
-    var hasDiscImage: Bool {
+    public var hasDiscImage: Bool {
         get {
             return (imageTags != nil) ? imageTags![ImageType.Disc] != nil : false
         }
     }
     
-    var hasBoxImage: Bool {
+    public var hasBoxImage: Bool {
         get {
             return (imageTags != nil) ? imageTags![ImageType.Box] != nil : false
         }
     }
     
-    var hasBoxRearImage: Bool {
+    public var hasBoxRearImage: Bool {
         get {
             return (imageTags != nil) ? imageTags![ImageType.BoxRear] != nil : false
         }
     }
     
-    var hasMenuImage: Bool {
+    public var hasMenuImage: Bool {
         get {
             return (imageTags != nil) ? imageTags![ImageType.Menu] != nil : false
         }
     }
     
-    var isVideo: Bool {
+    public var isVideo: Bool {
         get {
             return mediaType == MediaType.Video.rawValue
         }
     }
     
-    var isGame: Bool {
+    public var isGame: Bool {
         get {
             return mediaType == MediaType.Game.rawValue
         }
     }
     
-    var isPerson: Bool {
+    public var isPerson: Bool {
         get {
             return mediaType == "Person"
         }
     }
     
-    var isRoot: Bool {
+    public var isRoot: Bool {
         get {
             return mediaType == "AggregateFolder"
         }
     }
     
-    var isMusicGenre: Bool {
+    public var isMusicGenre: Bool {
         get {
             return mediaType == "MusicGenre"
         }
     }
     
-    var isGameGenre: Bool {
+    public var isGameGenre: Bool {
         get {
             return mediaType == "GameGenre"
         }
     }
     
-    var isGenre: Bool {
+    public var isGenre: Bool {
         get {
             return mediaType == "Genre"
         }
     }
     
-    var isArtist: Bool {
+    public var isArtist: Bool {
         get {
             return mediaType == "MusicArtist"
         }
     }
     
-    var isAlbum: Bool {
+    public var isAlbum: Bool {
         get {
             return mediaType == "MusicAlbum"
         }
     }
     
-    var IsStudio: Bool {
+    public var IsStudio: Bool {
         get {
             return mediaType == "Studio"
         }
     }
     
-    var supportsSimilarItems: Bool {
+    public var supportsSimilarItems: Bool {
         get {
             return isType("Movie") || isType("Series") || isType("MusicAlbum") || isType("MusicArtist") || isType("Program") || isType("Recording") || isType("ChannelVideoItem") || isType("Game")
         }
     }
     
-    var programId: String?
-    var channelPrimaryImageTag: String?
-    var startDate: NSDate?
-    var completionPercentage: Double?
-    var isRepeat: Bool?
-    var episodeTitle: String?
-    var channelType: ChannelType?
-    var audio: ProgramAudio?
-    var isMovie: Bool?
-    var isSports: Bool?
-    var isSeries: Bool?
-    var isLive: Bool?
-    var isNews: Bool?
-    var isKids: Bool?
-    var isPremiere: Bool?
-    var timerId: String?
-    var currentProgram: BaseItemDto?
+    public var programId: String?
+    public var channelPrimaryImageTag: String?
+    public var startDate: NSDate?
+    public var completionPercentage: Double?
+    public var isRepeat: Bool?
+    public var episodeTitle: String?
+    public var channelType: ChannelType?
+    public var audio: ProgramAudio?
+    public var isMovie: Bool?
+    public var isSports: Bool?
+    public var isSeries: Bool?
+    public var isLive: Bool?
+    public var isNews: Bool?
+    public var isKids: Bool?
+    public var isPremiere: Bool?
+    public var timerId: String?
+    public var currentProgram: BaseItemDto?
+    
+    public required init?(jSON: JSON_Object) {
+        fatalError("init(jSON:) has not been implemented: \(jSON)")
+    }
 }

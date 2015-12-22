@@ -106,6 +106,115 @@ public class ApiClient: BaseApiClient {
         sendCollectionRequest(request, success: success, failure: failure)
     }
 
+    /**
+     
+     Retrieves an item for a user
+     
+     - Parameter id: The Item Id
+     - Parameter userId: The User Id
+     - Parameter success: Success callback with an BaseItemDto
+     - Parameter failure: Failure callback with an EmbyError
+
+     */
+    public func getItemAsync(id: String, userId: String, success: (BaseItemDto) -> Void, failure: (EmbyError) -> Void) {
+        precondition(!id.isEmpty, "Illegal Argument: id")
+        precondition(!userId.isEmpty, "Illegal Argument: userId")
+        
+        let url = getApiUrl("/Users/\(userId)/Items/\(id)")
+        
+        getItemFromUrl(url, success: success, failure: failure)
+    }
+    
+    /**
+     
+     Retrieves an array of items for a user
+     
+     - Parameter query: The ItemQuery
+     - Parameter success: Success callback with an array of BaseItemDto
+     - Parameter failure: Failure callback with an EmbyError
+     
+     */
+    public func getItemsAsync(query: ItemQuery, success: ([BaseItemDto]) -> Void, failure: (EmbyError) -> Void) {
+        let url = getItemListUrl(query)
+        
+        getItemsFromUrl(url, success: success, failure: failure)
+    }
+    
+    /**
+
+     Retrieves a list of users
+     
+     - Parameter query: The user query
+     - Parameter success: Success callback with an array of UserDto
+     - Parameter failure: Failure callback with an EmbyError
+
+     */
+    public func getUsersAsync(query: UserQuery, success: ([UserDto]) -> Void, failure: (EmbyError) -> Void) {
+        let dict = QueryStringDictionary()
+        
+        dict.addIfNotNil("IsDisabled", value: query.disabled)
+        dict.addIfNotNil("IsHidden", value: query.hidden)
+    
+        let urlString = getApiUrl("Users", queryString: dict)
+        let request = HttpRequest(url: urlString, method: .GET, postData: dict)
+        
+        sendCollectionRequest(request, success: success, failure: failure)
+    }
+    
+    /**
+
+     Retrieves root items for user
+
+     - Parameter userId: The User Id
+     - Parameter success: Success callback with an BaseItemDto
+     - Parameter failure: Failure callback with an EmbyError
+     
+     */
+    public func getRootFolderAsync(userId: String, success: (BaseItemDto) -> Void, failure: (EmbyError) -> Void) {
+        precondition(!userId.isEmpty, "Illegal Argument: userId")
+        
+        let url = getApiUrl("/Users/\(userId)/Items/Root")
+        
+        getItemFromUrl(url, success: success, failure: failure)
+    }
+    
+    /**
+     
+     Retrieves the intros
+     
+     - Parameter userId: The User Id
+     - Parameter success: Success callback with an BaseItemDto
+     - Parameter failure: Failure callback with an EmbyError
+     
+     */
+    public func getIntrosAsync(itemId: String, userId: String, success: ([BaseItemDto]) -> Void, failure: (EmbyError) -> Void) {
+        precondition(!itemId.isEmpty, "Illegal Argument: itemId")
+        precondition(!userId.isEmpty, "Illegal Argument: userId")
+        
+        let url = getApiUrl("/Users/\(userId)/Items/\(itemId)/Intros")
+        
+        getItemsFromUrl(url, success: success, failure: failure)
+    }
+    
+    /**
+
+     Retrieves client sessions
+     
+     - Parameter query: The Session Query
+     - Parameter success: Success callback with an SessionInfoDto
+     - Parameter failure: Failure callback with an EmbyError
+     
+     */
+    public func getClientSessionsAsync(query: SessionQuery, success: ([SessionInfoDto]) -> Void, failure: (EmbyError) -> Void) {
+        let dict = QueryStringDictionary()
+        
+        dict.Add("ControllableByUserId", value: query.controllableByUserId)
+        
+        let urlString = getApiUrl("Sessions", queryString: dict)
+        let request = HttpRequest(url: urlString, method: .GET)
+        
+        sendCollectionRequest(request, success: success, failure: failure)
+    }
     
     public func enableAutomaticNetworking(info: ServerInfo, initialMode: ConnectionMode, networkConnection: INetworkConnection) {
         self.networkConnection = networkConnection
@@ -116,8 +225,6 @@ public class ApiClient: BaseApiClient {
         
     }
     
-    
-
 //    
 //    public void OpenWebSocket(){
 //        
@@ -221,40 +328,6 @@ public class ApiClient: BaseApiClient {
 //        }
 //    }
 //    
-//    public void GetItemAsync(String id, String userId, final Response<BaseItemDto> response)
-//    {
-//        if (tangible.DotNetToJavaStringHelper.isNullOrEmpty(id))
-//        {
-//            throw new IllegalArgumentException("id");
-//        }
-//        
-//        if (tangible.DotNetToJavaStringHelper.isNullOrEmpty(userId))
-//        {
-//            throw new IllegalArgumentException("userId");
-//        }
-//        
-//        String url = GetApiUrl("Users/" + userId + "/Items/" + id);
-//        
-//        GetItemFromUrl(url, response);
-//    }
-//    
-//    public void GetIntrosAsync(String itemId, String userId, final Response<ItemsResult> response)
-//    {
-//        if (tangible.DotNetToJavaStringHelper.isNullOrEmpty(itemId))
-//        {
-//            throw new IllegalArgumentException("itemId");
-//        }
-//        
-//        if (tangible.DotNetToJavaStringHelper.isNullOrEmpty(userId))
-//        {
-//            throw new IllegalArgumentException("userId");
-//        }
-//        
-//        String url = GetApiUrl("Users/" + userId + "/Items/" + itemId + "/Intros");
-//        
-//        GetItemsFromUrl(url, response);
-//    }
-//    
 //    public void GetItemCountsAsync(ItemCountsQuery query, final Response<ItemCounts> response)
 //    {
 //        if (query == null)
@@ -288,79 +361,27 @@ public class ApiClient: BaseApiClient {
 //        Send(url, "GET", new SerializedResponse<>(response, jsonSerializer, RegistrationInfo.class));
 //    }
 //    
-//    public void GetRootFolderAsync(String userId, final Response<BaseItemDto> response)
-//    {
-//        if (tangible.DotNetToJavaStringHelper.isNullOrEmpty(userId))
-//        {
-//            throw new IllegalArgumentException("userId");
-//        }
-//        
-//        String url = GetApiUrl("Users/" + userId + "/Items/Root");
-//        
-//        GetItemFromUrl(url, response);
-//    }
+
+//
 //    
-//    public void GetUsersAsync(UserQuery query, final Response<UserDto[]> response)
-//    {
-//        QueryStringDictionary queryString = new QueryStringDictionary();
-//        
-//        queryString.AddIfNotNull("IsDisabled", query.getIsDisabled());
-//        queryString.AddIfNotNull("IsHidden", query.getIsHidden());
-//        
-//        String url = GetApiUrl("Users", queryString);
-//        
-//        url = AddDataFormat(url);
-//        
-//        Send(url, "GET", new SerializedResponse<UserDto[]>(response, jsonSerializer, new UserDto[]{}.getClass()));
-//    }
-//    
-//    public void GetPublicUsersAsync(final Response<UserDto[]> response)
-//    {
-//        String url = GetApiUrl("Users/Public");
-//        
-//        url = AddDataFormat(url);
-//        
-//        Send(url, "GET", new SerializedResponse<UserDto[]>(response, jsonSerializer, new UserDto[]{}.getClass()));
-//    }
-//    
-//    public void GetClientSessionsAsync(SessionQuery query, final Response<SessionInfoDto[]> response)
-//    {
-//        QueryStringDictionary queryString = new QueryStringDictionary();
-//        
-//        queryString.AddIfNotNullOrEmpty("ControllableByUserId", query.getControllableByUserId());
-//        
-//        String url = GetApiUrl("Sessions", queryString);
-//        
-//        url = AddDataFormat(url);
-//        
-//        Send(url, "GET", new SerializedResponse<SessionInfoDto[]>(response, jsonSerializer, new SessionInfoDto[]{}.getClass()));
-//    }
-//    
-//    private void GetItemsFromUrl(String url, final Response<ItemsResult> response) {
-//        
-//        url = AddDataFormat(url);
-//        
-//        Send(url, "GET", new SerializedResponse<ItemsResult>(response, jsonSerializer, ItemsResult.class));
-//    }
-//    
-//    private void GetItemFromUrl(String url, final Response<BaseItemDto> response) {
-//        
-//        url = AddDataFormat(url);
-//        
-//        Send(url, "GET", new SerializedResponse<BaseItemDto>(response, jsonSerializer, BaseItemDto.class));
-//    }
-//    
-//    public void GetItemsAsync(ItemQuery query, final Response<ItemsResult> response)
-//    {
-//        if (query == null)
-//        {
-//            throw new IllegalArgumentException("query");
-//        }
-//        
-//        String url = GetItemListUrl(query);
-//        
-//        GetItemsFromUrl(url, response);
-//    }
+
+    
+    private func getItemFromUrl<T: JSONSerializable>(url: String, success: (T) -> Void, failure: (EmbyError) -> Void) {
+        let urlWithFormat = addDataFormat(url)
+        
+        let request = HttpRequest(url: urlWithFormat, method: .GET)
+        
+        sendRequest(request, success: success, failure: failure)
+    }
+    
+    private func getItemsFromUrl<Value: JSONSerializable>(url: String, success: ([Value]) -> Void, failure: (EmbyError) -> Void) {
+        let urlWithFormat = addDataFormat(url)
+        
+        let request = HttpRequest(url: urlWithFormat, method: .GET)
+        
+        sendCollectionRequest(request, success: success, failure: failure)
+    }
+    
 //    
 //    /// <summary>
 //    /// Gets the next up async.
