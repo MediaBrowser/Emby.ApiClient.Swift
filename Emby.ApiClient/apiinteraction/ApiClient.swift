@@ -141,6 +141,28 @@ public class ApiClient: BaseApiClient {
     }
     
     /**
+     
+     Retrieves an array of item counts for a user
+     
+     - Parameter query: The ItemCountsQuery
+     - Parameter success: Success callback with an ItemCounts
+     - Parameter failure: Failure callback with an EmbyError
+     
+     */
+    public func getItemCountsAsync(query: ItemCountsQuery, success: (ItemCounts) -> Void, failure: (EmbyError) -> Void) {
+        let dict = QueryStringDictionary()
+        
+        dict.addIfNotNilOrEmpty("UserId", value: query.userId)
+        dict.addIfNotNil("IsFavorite", value: query.favorite)
+        
+        let urlString = getApiUrl("Items/Counts", queryString: dict)
+        let urlWithFormat = addDataFormat(urlString)
+        let request = HttpRequest(url: urlWithFormat, method: .GET, postData: dict)
+        
+        sendRequest(request, success: success, failure: failure)
+    }
+    
+    /**
 
      Retrieves a list of users
      
@@ -214,6 +236,24 @@ public class ApiClient: BaseApiClient {
         let request = HttpRequest(url: urlString, method: .GET)
         
         sendCollectionRequest(request, success: success, failure: failure)
+    }
+    
+    /**
+     
+     Retrieves registartion information
+     
+     - Parameter query: The feature
+     - Parameter success: Success callback with an RegistrationInfo
+     - Parameter failure: Failure callback with an EmbyError
+     
+     */
+    public func getRegistrationInfo(feature: String, success: (RegistrationInfo) -> Void, failure: (EmbyError) -> Void) {
+        precondition(!feature.isEmpty, "Illegal Argument: feature")
+        
+        let url = getApiUrl("/Registrations/\(feature)")
+        let urlWithFormat = addDataFormat(url)
+        
+        getItemFromUrl(urlWithFormat, success: success, failure: failure)
     }
     
     public func enableAutomaticNetworking(info: ServerInfo, initialMode: ConnectionMode, networkConnection: INetworkConnection) {
@@ -327,39 +367,8 @@ public class ApiClient: BaseApiClient {
 //            response.onError(ex);
 //        }
 //    }
-//    
-//    public void GetItemCountsAsync(ItemCountsQuery query, final Response<ItemCounts> response)
-//    {
-//        if (query == null)
-//        {
-//            throw new IllegalArgumentException("query");
-//        }
-//        
-//        QueryStringDictionary dict = new QueryStringDictionary ();
-//        
-//        dict.AddIfNotNullOrEmpty("UserId", query.getUserId());
-//        dict.AddIfNotNull("IsFavorite", query.getIsFavorite());
-//        
-//        String url = GetApiUrl("Items/Counts", dict);
-//        
-//        url = AddDataFormat(url);
-//        
-//        Send(url, "GET", new SerializedResponse<ItemCounts>(response, jsonSerializer, ItemCounts.class));
-//    }
-//    
-//    public void GetRegistrationInfo(String feature, final Response<RegistrationInfo> response)
-//    {
-//        if (feature == null)
-//        {
-//            throw new IllegalArgumentException("feature");
-//        }
-//        
-//        String url = GetApiUrl("Registrations/" + feature);
-//        
-//        url = AddDataFormat(url);
-//        
-//        Send(url, "GET", new SerializedResponse<>(response, jsonSerializer, RegistrationInfo.class));
-//    }
+//
+//
 //    
 
 //

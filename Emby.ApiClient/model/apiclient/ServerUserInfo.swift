@@ -20,6 +20,15 @@ public class ServerUserInfo: NSObject, NSCoding {
         self.isSignedInOffline = isSignedInOffline
     }
     
+    // MARK: NSObject
+    
+    override public func isEqual(object: AnyObject?) -> Bool {
+        if let rhs = object as? ServerUserInfo {
+            return id == rhs.id
+        }
+        return false
+    }
+    
     // MARK: NSCoding
     
     public required convenience init?(coder aDecoder: NSCoder) {

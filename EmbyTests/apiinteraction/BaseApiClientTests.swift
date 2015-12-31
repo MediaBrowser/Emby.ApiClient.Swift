@@ -38,7 +38,7 @@ class BaseApiClientTests: XCTestCase {
 
         let subtitleUrl = baseApiClient!.getSubtitleUrl(subtitleDownloadOptions)
         
-        XCTAssertEqual("\(serverAddress)/mediabrowser/Videos/1/2/Subtitles/3/Stream.x?", subtitleUrl)
+        XCTAssertEqual("\(serverAddress)/mediabrowser/Videos/1/2/Subtitles/3/Stream.x", subtitleUrl)
     }
     
     //public final func setJsonSerializer(value: IJsonSerializer) {
@@ -71,11 +71,11 @@ class BaseApiClientTests: XCTestCase {
         
         let apiUrl = baseApiClient!.getApiUrl(handler)
         
-        XCTAssertEqual("\(serverAddress)/mediabrowser/handler?", apiUrl)
+        XCTAssertEqual("\(serverAddress)/mediabrowser/handler", apiUrl)
     }
     
     func testGetImageUrlWithBaseItemDtoForBackdropImage() {
-        let baseItemDto = BaseItemDto()
+        let baseItemDto = BaseItemDto(jSON: JSON_Object())!
         baseItemDto.id = "imageId";
         baseItemDto.backdropImageTags = ["png"]
         
@@ -89,7 +89,7 @@ class BaseApiClientTests: XCTestCase {
     }
     
     func testGetImageUrlWithBaseItemDtoForScreenshotImage() {
-        let baseItemDto = BaseItemDto()
+        let baseItemDto = BaseItemDto(jSON: JSON_Object())!
         baseItemDto.id = "imageId";
         baseItemDto.screenshotImageTags = ["png"]
         
@@ -107,7 +107,7 @@ class BaseApiClientTests: XCTestCase {
         chapterInfoDto.imageTag = "png"
         
         
-        let baseItemDto = BaseItemDto()
+        let baseItemDto = BaseItemDto(jSON: JSON_Object())!
         baseItemDto.id = "imageId";
         baseItemDto.chapters = [chapterInfoDto]
         
@@ -121,7 +121,7 @@ class BaseApiClientTests: XCTestCase {
     }
     
     func testGetImageUrlWithBaseItemDtoDefaultCase() {
-        let baseItemDto = BaseItemDto()
+        let baseItemDto = BaseItemDto(jSON: JSON_Object())!
         baseItemDto.id = "imageId";
         baseItemDto.imageTags = [ImageType.Primary: "png"]
         
@@ -264,7 +264,7 @@ class BaseApiClientTests: XCTestCase {
     }
     
     func testGetBackdropImageUrlsForNoId() {
-        let backdropImageUrls = baseApiClient!.getBackdropImageUrls(BaseItemDto(), options: ImageOptions())
+        let backdropImageUrls = baseApiClient!.getBackdropImageUrls(BaseItemDto(jSON: JSON_Object())!, options: ImageOptions())
         
         XCTAssertNotNil(backdropImageUrls)
         XCTAssertTrue(backdropImageUrls!.isEmpty)

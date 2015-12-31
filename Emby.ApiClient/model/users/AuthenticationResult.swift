@@ -18,14 +18,14 @@ public struct AuthenticationResult : JSONSerializable {
         if  let accessToken = jSON["AccessToken"] as? String,
             let serverId = jSON["ServerId"] as? String,
             let userJSON = jSON["User"] as? JSON_Object,
-            //let sessionInfoJSON = jSON["SessionInfo"] as? JSON_Object,
+            let sessionInfoJSON = jSON["SessionInfo"] as? JSON_Object,
             let user = UserDto(jSON: userJSON)
         {
             self.accessToken = accessToken
             self.serverId = serverId
             
             self.user = user
-            self.sessionInfo = SessionInfoDto()
+            self.sessionInfo = SessionInfoDto(jSON: sessionInfoJSON)!
         }
         else {
             return nil
