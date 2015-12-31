@@ -236,6 +236,15 @@
 		048EAE1E1C3434D000BE521F /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888EFC6C1BCC3DA600546DB3 /* Configuration.swift */; };
 		048EAE1F1C3434E200BE521F /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888EFC7D1BCC4DB700546DB3 /* Logger.swift */; };
 		048EAE201C34351200BE521F /* iOSDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 889288CE1BE8D9B400DAD65F /* iOSDevice.swift */; };
+		048EAE221C34E08F00BE521F /* ItemCountsQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048EAE211C34E08F00BE521F /* ItemCountsQuery.swift */; };
+		048EAE231C34E08F00BE521F /* ItemCountsQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048EAE211C34E08F00BE521F /* ItemCountsQuery.swift */; };
+		048EAE241C34E08F00BE521F /* ItemCountsQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048EAE211C34E08F00BE521F /* ItemCountsQuery.swift */; };
+		048EAE251C34E08F00BE521F /* ItemCountsQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048EAE211C34E08F00BE521F /* ItemCountsQuery.swift */; };
+		048EAE271C34E0E400BE521F /* ItemCounts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048EAE261C34E0E400BE521F /* ItemCounts.swift */; };
+		048EAE281C34E0E400BE521F /* ItemCounts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048EAE261C34E0E400BE521F /* ItemCounts.swift */; };
+		048EAE291C34E0E400BE521F /* ItemCounts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048EAE261C34E0E400BE521F /* ItemCounts.swift */; };
+		048EAE2A1C34E0E400BE521F /* ItemCounts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048EAE261C34E0E400BE521F /* ItemCounts.swift */; };
+		048EAE2B1C34E59500BE521F /* IJsonSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7E3B1BC5BB5600A33B72 /* IJsonSerializer.swift */; };
 		04AFCAD81BD33E0500C95C88 /* ServerLocatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFCAD71BD33E0500C95C88 /* ServerLocatorProtocol.swift */; };
 		04AFCADC1BD33FEA00C95C88 /* ServerDiscoveryInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFCADB1BD33FEA00C95C88 /* ServerDiscoveryInfo.swift */; };
 		04AFCAE21BD3436600C95C88 /* ConnectionManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFCAE11BD3436600C95C88 /* ConnectionManagerProtocol.swift */; };
@@ -601,6 +610,8 @@
 		048E0CC21C095F700001081F /* ChapterInfoDtoTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChapterInfoDtoTests.swift; path = model/dto/ChapterInfoDtoTests.swift; sourceTree = "<group>"; };
 		048EAD971C342F0A00BE521F /* BoolHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoolHelpers.swift; sourceTree = "<group>"; };
 		048EAD9C1C342FD900BE521F /* BoolHelpersTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoolHelpersTests.swift; sourceTree = "<group>"; };
+		048EAE211C34E08F00BE521F /* ItemCountsQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ItemCountsQuery.swift; path = querying/ItemCountsQuery.swift; sourceTree = "<group>"; };
+		048EAE261C34E0E400BE521F /* ItemCounts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ItemCounts.swift; path = dto/ItemCounts.swift; sourceTree = "<group>"; };
 		04AFCAD71BD33E0500C95C88 /* ServerLocatorProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerLocatorProtocol.swift; sourceTree = "<group>"; };
 		04AFCADB1BD33FEA00C95C88 /* ServerDiscoveryInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerDiscoveryInfo.swift; sourceTree = "<group>"; };
 		04AFCAE11BD3436600C95C88 /* ConnectionManagerProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectionManagerProtocol.swift; sourceTree = "<group>"; };
@@ -971,6 +982,7 @@
 				04B8AB851BF43ABF00ED19CA /* MediaSourceType.swift */,
 				04B8AB8F1BF44ADB00ED19CA /* UserItemDataDto.swift */,
 				047B76E71BFACA5D0003A743 /* UserDto.swift */,
+				048EAE261C34E0E400BE521F /* ItemCounts.swift */,
 			);
 			name = dto;
 			sourceTree = "<group>";
@@ -1019,6 +1031,7 @@
 				04B8AB501BF03B8600ED19CA /* ItemsByNameQuery.swift */,
 				040932751C28FE7700736C7B /* UserQuery.swift */,
 				0409327B1C29070600736C7B /* SessionQuery.swift */,
+				048EAE211C34E08F00BE521F /* ItemCountsQuery.swift */,
 			);
 			name = querying;
 			sourceTree = "<group>";
@@ -1578,6 +1591,7 @@
 				048EADC41C34338400BE521F /* RecordingStatus.swift in Sources */,
 				048EADFE1C3433BB00BE521F /* ProfileConditionValue.swift in Sources */,
 				048EADA91C34328500BE521F /* IResponse.swift in Sources */,
+				048EAE251C34E08F00BE521F /* ItemCountsQuery.swift in Sources */,
 				048EADA31C34326900BE521F /* IllegalArgumentError.swift in Sources */,
 				048EADC31C34337E00BE521F /* TransportStreamTimestamp.swift in Sources */,
 				048EADB01C34334500BE521F /* DeviceProtocol.swift in Sources */,
@@ -1657,6 +1671,7 @@
 				040932231C2653CC00736C7B /* ApiEventListener.swift in Sources */,
 				048EADB11C34334B00BE521F /* ServerLocatorProtocol.swift in Sources */,
 				048EADD01C34339900BE521F /* ExtraType.swift in Sources */,
+				048EAE2A1C34E0E400BE521F /* ItemCounts.swift in Sources */,
 				048EAE1F1C3434E200BE521F /* Logger.swift in Sources */,
 				048EADD31C34339900BE521F /* VideoSize.swift in Sources */,
 				048EADA61C34327900BE521F /* ConnectionResult.swift in Sources */,
@@ -1859,10 +1874,12 @@
 				5D0FBAA71C01B4EB005BB336 /* PinStatusResult.swift in Sources */,
 				5D0FBAA81C01B4EB005BB336 /* RecordingStatus.swift in Sources */,
 				040932661C26605B00736C7B /* SessionUpdatesEventArgs.swift in Sources */,
+				048EAE291C34E0E400BE521F /* ItemCounts.swift in Sources */,
 				5D0FBAA91C01B4EB005BB336 /* ConnectPassword.swift in Sources */,
 				04C23BEC1C096AD4006722ED /* HeaderMatchType.swift in Sources */,
 				5D0FBAAA1C01B4EB005BB336 /* ItemFilter.swift in Sources */,
 				5D0FBAAB1C01B4EB005BB336 /* ConnectionResult.swift in Sources */,
+				048EAE241C34E08F00BE521F /* ItemCountsQuery.swift in Sources */,
 				5D0FBAAC1C01B4EB005BB336 /* NameIdPair.swift in Sources */,
 				04C23C091C167E91006722ED /* DirectPlayProfile.swift in Sources */,
 				5D0FBAAD1C01B4EB005BB336 /* ConnectUser.swift in Sources */,
@@ -2018,10 +2035,12 @@
 				88CF7E701BC6E0C100A33B72 /* PinStatusResult.swift in Sources */,
 				04B8AB6B1BF1971B00ED19CA /* RecordingStatus.swift in Sources */,
 				040932651C26605B00736C7B /* SessionUpdatesEventArgs.swift in Sources */,
+				048EAE281C34E0E400BE521F /* ItemCounts.swift in Sources */,
 				88CF7E5A1BC5BF9E00A33B72 /* ConnectPassword.swift in Sources */,
 				04C23BEF1C096AD5006722ED /* HeaderMatchType.swift in Sources */,
 				04B8AB411BEDACCB00ED19CA /* ItemFilter.swift in Sources */,
 				041643AA1BD48E6100873FAB /* ConnectionResult.swift in Sources */,
+				048EAE231C34E08F00BE521F /* ItemCountsQuery.swift in Sources */,
 				04B8AB7B1BF2F11E00ED19CA /* NameIdPair.swift in Sources */,
 				04C23C081C167E91006722ED /* DirectPlayProfile.swift in Sources */,
 				88CF7E761BC6E71200A33B72 /* ConnectUser.swift in Sources */,
@@ -2050,11 +2069,14 @@
 				0A40C82E1C26879E0020A7A2 /* ConnectSignIn.swift in Sources */,
 				0A40C82F1C26879E0020A7A2 /* ServerSelection.swift in Sources */,
 				888EFC9A1BCC52CD00546DB3 /* AppDelegate.swift in Sources */,
+				048EAE2B1C34E59500BE521F /* IJsonSerializer.swift in Sources */,
 				048EAD981C342F0A00BE521F /* BoolHelpers.swift in Sources */,
 				0A40C8321C26879E0020A7A2 /* UserSelection.swift in Sources */,
 				0A40C8301C26879E0020A7A2 /* SignIn.swift in Sources */,
+				048EAE271C34E0E400BE521F /* ItemCounts.swift in Sources */,
 				0A40C8311C26879E0020A7A2 /* Startup.swift in Sources */,
 				040932761C28FE7700736C7B /* UserQuery.swift in Sources */,
+				048EAE221C34E08F00BE521F /* ItemCountsQuery.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
