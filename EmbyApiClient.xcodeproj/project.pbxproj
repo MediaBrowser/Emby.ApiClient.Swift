@@ -469,6 +469,18 @@
 		5D0FBACA1C0258D2005BB336 /* CocoaAsyncSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88D3663A1BF12BEF002F2767 /* CocoaAsyncSocket.framework */; };
 		5D0FBACC1C0258DC005BB336 /* CocoaAsyncSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D0FBACB1C0258DC005BB336 /* CocoaAsyncSocket.framework */; };
 		5DD39A821BE9E6AD00B2D09A /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DD39A811BE9E6AD00B2D09A /* Alamofire.framework */; };
+		730C99481C372BD100FE32DF /* UpcomingEpisodesQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730C99471C372BD100FE32DF /* UpcomingEpisodesQuery.swift */; };
+		730C994B1C372D7600FE32DF /* UpcomingEpisodesQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730C99471C372BD100FE32DF /* UpcomingEpisodesQuery.swift */; };
+		730C994C1C372D7700FE32DF /* UpcomingEpisodesQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730C99471C372BD100FE32DF /* UpcomingEpisodesQuery.swift */; };
+		730C994D1C372D7B00FE32DF /* UpcomingEpisodesQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730C99471C372BD100FE32DF /* UpcomingEpisodesQuery.swift */; };
+		730C99521C374C0C00FE32DF /* EpisodeQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730C99511C374C0C00FE32DF /* EpisodeQuery.swift */; };
+		730C99531C374C0C00FE32DF /* EpisodeQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730C99511C374C0C00FE32DF /* EpisodeQuery.swift */; };
+		730C99541C374C0C00FE32DF /* EpisodeQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730C99511C374C0C00FE32DF /* EpisodeQuery.swift */; };
+		730C99551C374C0C00FE32DF /* EpisodeQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730C99511C374C0C00FE32DF /* EpisodeQuery.swift */; };
+		730C99571C374F1A00FE32DF /* SeasonQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730C99561C374F1A00FE32DF /* SeasonQuery.swift */; };
+		730C99581C374F1A00FE32DF /* SeasonQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730C99561C374F1A00FE32DF /* SeasonQuery.swift */; };
+		730C99591C374F1A00FE32DF /* SeasonQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730C99561C374F1A00FE32DF /* SeasonQuery.swift */; };
+		730C995A1C374F1A00FE32DF /* SeasonQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730C99561C374F1A00FE32DF /* SeasonQuery.swift */; };
 		8810B9D91BECB2160062DB8F /* DeviceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8810B9D81BECB2160062DB8F /* DeviceProtocol.swift */; };
 		8838C55B1BC514B500587F8E /* Emby.ApiClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 8838C55A1BC514B500587F8E /* Emby.ApiClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		884EBEDD1BCD912B0032E7F3 /* EmptyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884EBEDC1BCD912B0032E7F3 /* EmptyResponse.swift */; };
@@ -705,6 +717,9 @@
 		5D0FBAC61C01B83C005BB336 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/tvOS/Alamofire.framework; sourceTree = "<group>"; };
 		5D0FBACB1C0258DC005BB336 /* CocoaAsyncSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaAsyncSocket.framework; path = Carthage/Build/tvOS/CocoaAsyncSocket.framework; sourceTree = "<group>"; };
 		5DD39A811BE9E6AD00B2D09A /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
+		730C99471C372BD100FE32DF /* UpcomingEpisodesQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpcomingEpisodesQuery.swift; sourceTree = "<group>"; };
+		730C99511C374C0C00FE32DF /* EpisodeQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EpisodeQuery.swift; sourceTree = "<group>"; };
+		730C99561C374F1A00FE32DF /* SeasonQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeasonQuery.swift; sourceTree = "<group>"; };
 		8810B9D81BECB2160062DB8F /* DeviceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DeviceProtocol.swift; path = device/DeviceProtocol.swift; sourceTree = "<group>"; };
 		8838C5571BC514B500587F8E /* EmbyApiClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EmbyApiClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8838C55A1BC514B500587F8E /* Emby.ApiClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Emby.ApiClient.h; sourceTree = "<group>"; };
@@ -1032,6 +1047,9 @@
 				040932751C28FE7700736C7B /* UserQuery.swift */,
 				0409327B1C29070600736C7B /* SessionQuery.swift */,
 				048EAE211C34E08F00BE521F /* ItemCountsQuery.swift */,
+				730C99471C372BD100FE32DF /* UpcomingEpisodesQuery.swift */,
+				730C99511C374C0C00FE32DF /* EpisodeQuery.swift */,
+				730C99561C374F1A00FE32DF /* SeasonQuery.swift */,
 			);
 			name = querying;
 			sourceTree = "<group>";
@@ -1588,6 +1606,7 @@
 				048EAE1C1C3433FC00BE521F /* Context.swift in Sources */,
 				048EAE1B1C3433E000BE521F /* PlayAccess.swift in Sources */,
 				048EADFF1C3433BB00BE521F /* ProfileCondition.swift in Sources */,
+				730C994D1C372D7B00FE32DF /* UpcomingEpisodesQuery.swift in Sources */,
 				048EADC41C34338400BE521F /* RecordingStatus.swift in Sources */,
 				048EADFE1C3433BB00BE521F /* ProfileConditionValue.swift in Sources */,
 				048EADA91C34328500BE521F /* IResponse.swift in Sources */,
@@ -1603,6 +1622,7 @@
 				048EAD9F1C3431F500BE521F /* ApiClient.swift in Sources */,
 				048EADED1C3433B400BE521F /* MediaSourceInfo.swift in Sources */,
 				040932701C2662FF00736C7B /* NetworkStatus.swift in Sources */,
+				730C995A1C374F1A00FE32DF /* SeasonQuery.swift in Sources */,
 				048EADF21C3433BB00BE521F /* HeaderMatchType.swift in Sources */,
 				048EADC11C34337800BE521F /* DynamicDayOfWeek.swift in Sources */,
 				048EADC91C34339300BE521F /* ImageFormat.swift in Sources */,
@@ -1636,6 +1656,7 @@
 				048EADF61C3433BB00BE521F /* XmlAttribute.swift in Sources */,
 				048EADC01C34337800BE521F /* AccessSchedule.swift in Sources */,
 				048EAE101C3433D200BE521F /* ConnectAuthenticationResult.swift in Sources */,
+				730C99551C374C0C00FE32DF /* EpisodeQuery.swift in Sources */,
 				048EADAB1C34333400BE521F /* FileUploadProgress.swift in Sources */,
 				048EADA21C34326500BE521F /* BaseApiClient.swift in Sources */,
 				048EAE151C3433D200BE521F /* ConnectUserQuery.swift in Sources */,
@@ -1811,6 +1832,7 @@
 				0409326B1C26627D00736C7B /* INetworkConnection.swift in Sources */,
 				5D0FBA761C01B4EB005BB336 /* ItemsByNameQuery.swift in Sources */,
 				5D0FBA771C01B4EB005BB336 /* EmptyResponse.swift in Sources */,
+				730C99591C374F1A00FE32DF /* SeasonQuery.swift in Sources */,
 				5D0FBA781C01B4EB005BB336 /* Logger.swift in Sources */,
 				5D0FBA791C01B4EB005BB336 /* PublicSystemInfo.swift in Sources */,
 				5D0FBA7A1C01B4EB005BB336 /* UserItemDataDto.swift in Sources */,
@@ -1850,6 +1872,7 @@
 				5D0FBA951C01B4EB005BB336 /* BaseApiClient.swift in Sources */,
 				5D0FBA961C01B4EB005BB336 /* UserDto.swift in Sources */,
 				5D0FBA971C01B4EB005BB336 /* LocationType.swift in Sources */,
+				730C994C1C372D7700FE32DF /* UpcomingEpisodesQuery.swift in Sources */,
 				5D0FBA981C01B4EB005BB336 /* ImageType.swift in Sources */,
 				5D0FBA991C01B4EB005BB336 /* ServerDiscoveryInfo.swift in Sources */,
 				040932261C26547D00736C7B /* RemoteLogoutReason.swift in Sources */,
@@ -1887,6 +1910,7 @@
 				5D0FBAAF1C01B4EB005BB336 /* SubtitleDownloadOptions.swift in Sources */,
 				04C23C0C1C167F5B006722ED /* TranscodingProfile.swift in Sources */,
 				0409327E1C29070A00736C7B /* SessionQuery.swift in Sources */,
+				730C99541C374C0C00FE32DF /* EpisodeQuery.swift in Sources */,
 				5D0FBAB01C01B4EB005BB336 /* iOSDevice.swift in Sources */,
 				040932361C2657DD00736C7B /* PlaystateCommand.swift in Sources */,
 				5D0FBAB11C01B4EB005BB336 /* VideoType.swift in Sources */,
@@ -1972,6 +1996,7 @@
 				0409326A1C26627D00736C7B /* INetworkConnection.swift in Sources */,
 				04B8AB511BF03B8600ED19CA /* ItemsByNameQuery.swift in Sources */,
 				884EBEDD1BCD912B0032E7F3 /* EmptyResponse.swift in Sources */,
+				730C99581C374F1A00FE32DF /* SeasonQuery.swift in Sources */,
 				888EFC7E1BCC4DB700546DB3 /* Logger.swift in Sources */,
 				041643A61BD424F400873FAB /* PublicSystemInfo.swift in Sources */,
 				04B8AB901BF44ADB00ED19CA /* UserItemDataDto.swift in Sources */,
@@ -2011,6 +2036,7 @@
 				889288D51BE908A500DAD65F /* BaseApiClient.swift in Sources */,
 				047B76E81BFACA5D0003A743 /* UserDto.swift in Sources */,
 				04B8AB4B1BEDB00D00ED19CA /* LocationType.swift in Sources */,
+				730C994B1C372D7600FE32DF /* UpcomingEpisodesQuery.swift in Sources */,
 				04B8AB471BEDAF8100ED19CA /* ImageType.swift in Sources */,
 				04AFCADC1BD33FEA00C95C88 /* ServerDiscoveryInfo.swift in Sources */,
 				040932251C26547D00736C7B /* RemoteLogoutReason.swift in Sources */,
@@ -2048,6 +2074,7 @@
 				04B8AB391BEDA45000ED19CA /* SubtitleDownloadOptions.swift in Sources */,
 				04C23C0B1C167F5B006722ED /* TranscodingProfile.swift in Sources */,
 				0409327D1C29070900736C7B /* SessionQuery.swift in Sources */,
+				730C99531C374C0C00FE32DF /* EpisodeQuery.swift in Sources */,
 				889288CF1BE8D9B400DAD65F /* iOSDevice.swift in Sources */,
 				040932351C2657DD00736C7B /* PlaystateCommand.swift in Sources */,
 				04B8AB451BEDAF2D00ED19CA /* VideoType.swift in Sources */,
@@ -2067,12 +2094,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A40C82E1C26879E0020A7A2 /* ConnectSignIn.swift in Sources */,
+				730C99521C374C0C00FE32DF /* EpisodeQuery.swift in Sources */,
+				730C99481C372BD100FE32DF /* UpcomingEpisodesQuery.swift in Sources */,
 				0A40C82F1C26879E0020A7A2 /* ServerSelection.swift in Sources */,
 				888EFC9A1BCC52CD00546DB3 /* AppDelegate.swift in Sources */,
 				048EAE2B1C34E59500BE521F /* IJsonSerializer.swift in Sources */,
 				048EAD981C342F0A00BE521F /* BoolHelpers.swift in Sources */,
 				0A40C8321C26879E0020A7A2 /* UserSelection.swift in Sources */,
 				0A40C8301C26879E0020A7A2 /* SignIn.swift in Sources */,
+				730C99571C374F1A00FE32DF /* SeasonQuery.swift in Sources */,
 				048EAE271C34E0E400BE521F /* ItemCounts.swift in Sources */,
 				0A40C8311C26879E0020A7A2 /* Startup.swift in Sources */,
 				040932761C28FE7700736C7B /* UserQuery.swift in Sources */,
