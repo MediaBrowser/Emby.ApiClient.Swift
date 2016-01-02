@@ -391,115 +391,84 @@ public class ApiClient: BaseApiClient {
         sendCollectionRequest(request, success: success, failure: failure)
     }
     
-//    
-//    /// <summary>
-//    /// Gets the next up async.
-//    /// </summary>
-//    /// <param name="query">The query.</param>
-//    /// <returns>Task{ItemsResult}.</returns>
-//    /// <exception cref="System.IllegalArgumentException">query</exception>
-//    public void GetNextUpEpisodesAsync(NextUpQuery query, final Response<ItemsResult> response)
-//    {
-//        if (query == null)
-//        {
-//            throw new IllegalArgumentException("query");
-//        }
-//        
-//        String url = GetNextUpUrl(query);
-//        
-//        GetItemsFromUrl(url, response);
-//    }
-//    
-//    public void GetUpcomingEpisodesAsync(UpcomingEpisodesQuery query, final Response<ItemsResult> response)
-//    {
-//        if (query == null)
-//        {
-//            throw new IllegalArgumentException("query");
-//        }
-//        
-//        QueryStringDictionary dict = new QueryStringDictionary ();
-//        
-//        dict.AddIfNotNull("Fields", query.getFields());
-//        
-//        dict.AddIfNotNull("Limit", query.getLimit());
-//        
-//        dict.AddIfNotNull("StartIndex", query.getStartIndex());
-//        
-//        dict.Add("UserId", query.getUserId());
-//        
-//        dict.AddIfNotNull("EnableImages", query.getEnableImages());
-//        dict.AddIfNotNull("ImageTypeLimit", query.getImageTypeLimit());
-//        dict.AddIfNotNull("EnableImageTypes", query.getEnableImageTypes());
-//        
-//        String url = GetApiUrl("Shows/Upcoming", dict);
-//        
-//        GetItemsFromUrl(url, response);
-//    }
-//    
-//    /// <summary>
-//    /// Gets the similar movies async.
-//    /// </summary>
-//    /// <param name="query">The query.</param>
-//    /// <returns>Task{ItemsResult}.</returns>
-//    /// <exception cref="System.IllegalArgumentException">query</exception>
-//    public void GetSimilarItems(SimilarItemsQuery query, final Response<ItemsResult> response)
-//    {
-//        if (query == null)
-//        {
-//            throw new IllegalArgumentException("query");
-//        }
-//        
-//        String url = GetSimilarItemListUrl(query, "Items");
-//        
-//        GetItemsFromUrl(url, response);
-//    }
-//    
-//    public void GetEpisodesAsync(EpisodeQuery query, final Response<ItemsResult> response)
-//    {
-//        if (query == null)
-//        {
-//            throw new IllegalArgumentException("query");
-//        }
-//        
-//        QueryStringDictionary dict = new QueryStringDictionary();
-//        
-//        dict.AddIfNotNull("Season", query.getSeasonNumber());
-//        dict.AddIfNotNullOrEmpty("UserId", query.getUserId());
-//        
-//        dict.AddIfNotNullOrEmpty("SeasonId", query.getSeasonId());
-//        
-//        dict.AddIfNotNull("Fields", query.getFields());
-//        
-//        dict.AddIfNotNullOrEmpty("AdjacentTo", query.getAdjacentTo());
-//        
-//        dict.AddIfNotNull("IsMissing", query.getIsMissing());
-//        dict.AddIfNotNull("IsVirtualUnaired", query.getIsVirtualUnaired());
-//        
-//        String url = GetApiUrl("Shows/" + query.getSeriesId() + "/Episodes", dict);
-//        
-//        GetItemsFromUrl(url, response);
-//    }
-//    
-//    public void GetSeasonsAsync(SeasonQuery query, final Response<ItemsResult> response)
-//    {
-//        if (query == null)
-//        {
-//            throw new IllegalArgumentException("query");
-//        }
-//        
-//        QueryStringDictionary dict = new QueryStringDictionary ();
-//        
-//        dict.AddIfNotNullOrEmpty("UserId", query.getUserId());
-//        dict.AddIfNotNull("Fields", query.getFields());
-//        
-//        dict.AddIfNotNull("IsMissing", query.getIsMissing());
-//        dict.AddIfNotNull("IsVirtualUnaired", query.getIsVirtualUnaired());
-//        dict.AddIfNotNull("IsSpecialSeason", query.getIsSpecialSeason());
-//        
-//        String url = GetApiUrl("Shows/" + query.getSeriesId() + "/Seasons", dict);
-//        
-//        GetItemsFromUrl(url, response);
-//    }
+    /**
+
+    Gets the next up async
+
+    - Parameter query: The query
+    - Parameter success: Success callback with an array of BaseItemDto
+    - Parameter failure: Failure callback with an EmbyError
+
+    */
+    
+    public func getNextUpEpisodesAsync(query: NextUpQuery, success: ([BaseItemDto]) -> Void, failure: (EmbyError) -> Void) {
+        let url = getNextUpUrl(query)
+        
+        getItemsFromUrl(url, success: success, failure: failure)
+    }
+    
+    public func getUpcomingEpisodesAsync(query: UpcomingEpisodesQuery, success: ([BaseItemDto]) -> Void, failure: (EmbyError) -> Void) {
+        let dict = QueryStringDictionary()
+        
+        dict.add("Fields", value: query.fields?.map({$0.rawValue}))
+        dict.addIfNotNil("Limit", value: query.limit)
+        dict.addIfNotNil("StartIndex", value: query.startIndex)
+        dict.addIfNotNil("UserId", value: query.userId)
+        dict.addIfNotNil("EnableImages", value: query.enableImages)
+        dict.addIfNotNil("ImageTypeLimit", value: query.imageTypeLimit)
+        dict.add("EnableImageTypes", value: query.enableImageTypes?.map({$0.rawValue}))
+        
+        let url = getApiUrl("Shows/Upcoming", queryString: dict)
+        
+        getItemsFromUrl(url, success: success, failure: failure)
+    }
+    
+    /**
+     
+     Gets the similar movies async
+     
+     - Parameter query: The query
+     - Parameter success: Success callback with an array of BaseItemDto
+     - Parameter failure: Failure callback with an EmbyError
+     
+     */
+    
+    public func getSimilarItems(query: SimilarItemsQuery, success: ([BaseItemDto]) -> Void, failure: (EmbyError) -> Void) {
+        let url = getSimilarItemListUrl(query, type: "Items")
+        
+        getItemsFromUrl(url, success: success, failure: failure)
+    }
+    
+    public func getEpisodesAsync(query: EpisodeQuery, success: ([BaseItemDto]) -> Void, failure: (EmbyError) -> Void) {
+        let dict = QueryStringDictionary()
+        
+        dict.addIfNotNil("Season", value: query.seasonNumber)
+        dict.addIfNotNilOrEmpty("UserId", value: query.userId)
+        dict.addIfNotNilOrEmpty("SeasonId", value: query.seasonId)
+        dict.add("Fields", value: query.fields?.map({$0.rawValue}))
+        dict.addIfNotNilOrEmpty("AdjacentTo", value: query.adjacentTo)
+        dict.addIfNotNil("IsMissing", value: query.isMissing)
+        dict.addIfNotNil("IsVirtualUnaired", value: query.isVirtualUnaired)
+        
+        let url = getApiUrl("Shows/\(query.seriesId)/Episodes", queryString: dict)
+        
+        getItemsFromUrl(url, success: success, failure: failure)
+    }
+    
+    public func getSeasonsAsync(query: SeasonQuery, success: ([BaseItemDto]) -> Void, failure: (EmbyError) -> Void) {
+        let dict = QueryStringDictionary()
+        
+        dict.addIfNotNilOrEmpty("UserId", value: query.userId)
+        dict.add("Fields", value: query.fields?.map({$0.rawValue}))
+        dict.addIfNotNil("IsMissing", value: query.isMissing)
+        dict.addIfNotNil("IsVirtualUnaired", value: query.isVirtualUnaired)
+        dict.addIfNotNil("IsSpecialSeason", value: query.isSpecialSeason)
+        
+        let url = getApiUrl("Shows/\(query.seriesId)/Seasons", queryString: dict)
+        
+        getItemsFromUrl(url, success: success, failure: failure)
+    }
+
 //    
 //    /// <summary>
 //    /// Gets the people async.
