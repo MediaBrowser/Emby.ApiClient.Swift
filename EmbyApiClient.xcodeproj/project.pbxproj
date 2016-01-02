@@ -245,6 +245,8 @@
 		048EAE291C34E0E400BE521F /* ItemCounts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048EAE261C34E0E400BE521F /* ItemCounts.swift */; };
 		048EAE2A1C34E0E400BE521F /* ItemCounts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048EAE261C34E0E400BE521F /* ItemCounts.swift */; };
 		048EAE2B1C34E59500BE521F /* IJsonSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88CF7E3B1BC5BB5600A33B72 /* IJsonSerializer.swift */; };
+		048EAE2C1C3772E200BE521F /* ItemFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B8AB421BEDADBA00ED19CA /* ItemFields.swift */; };
+		048EAE2D1C3772FF00BE521F /* ImageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B8AB461BEDAF8100ED19CA /* ImageType.swift */; };
 		04AFCAD81BD33E0500C95C88 /* ServerLocatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFCAD71BD33E0500C95C88 /* ServerLocatorProtocol.swift */; };
 		04AFCADC1BD33FEA00C95C88 /* ServerDiscoveryInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFCADB1BD33FEA00C95C88 /* ServerDiscoveryInfo.swift */; };
 		04AFCAE21BD3436600C95C88 /* ConnectionManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AFCAE11BD3436600C95C88 /* ConnectionManagerProtocol.swift */; };
@@ -2104,9 +2106,11 @@
 				0A40C8301C26879E0020A7A2 /* SignIn.swift in Sources */,
 				730C99571C374F1A00FE32DF /* SeasonQuery.swift in Sources */,
 				048EAE271C34E0E400BE521F /* ItemCounts.swift in Sources */,
+				048EAE2C1C3772E200BE521F /* ItemFields.swift in Sources */,
 				0A40C8311C26879E0020A7A2 /* Startup.swift in Sources */,
 				040932761C28FE7700736C7B /* UserQuery.swift in Sources */,
 				048EAE221C34E08F00BE521F /* ItemCountsQuery.swift in Sources */,
+				048EAE2D1C3772FF00BE521F /* ImageType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
