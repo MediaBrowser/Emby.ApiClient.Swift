@@ -469,6 +469,81 @@ public class ApiClient: BaseApiClient {
         getItemsFromUrl(url, success: success, failure: failure)
     }
 
+    /**
+     
+     Gets the instant mix from album async
+     
+     - Parameter query: The query
+     - Parameter success: Success callback with an array of BaseItemDto
+     - Parameter failure: Failure callback with an EmbyError
+     
+     */
+    public func getInstantMixFromItem(query: SimilarItemsQuery, success: ([BaseItemDto]) -> Void, failure: (EmbyError) -> Void) {
+        let url = getInstantMixUrl(query, type: "Items");
+        
+        getItemsFromUrl(url, success: success, failure: failure)
+    }
+    
+    /**
+     
+     Gets the genres async
+     
+     - Parameter query: The query
+     - Parameter success: Success callback with an array of BaseItemDto
+     - Parameter failure: Failure callback with an EmbyError
+     
+     */
+    public func getGenresAsync(query: ItemsByNameQuery, success: ([BaseItemDto]) -> Void, failure: (EmbyError) -> Void) {
+        let url = getItemByNameListUrl(query, type: "Genres")
+        
+        getItemsFromUrl(url, success: success, failure: failure)
+    }
+    
+    /**
+     
+     Gets the studios async
+     
+     - Parameter query: The query
+     - Parameter success: Success callback with an array of BaseItemDto
+     - Parameter failure: Failure callback with an EmbyError
+     
+     */
+    public func getStudiosAsync(query: ItemsByNameQuery, success: ([BaseItemDto]) -> Void, failure: (EmbyError) -> Void) {
+        let url = getItemByNameListUrl(query, type: "Studios")
+        
+        getItemsFromUrl(url, success: success, failure: failure)
+    }
+    
+    /**
+     
+     Gets the artists async
+     
+     - Parameter query: The query
+     - Parameter success: Success callback with an array of BaseItemDto
+     - Parameter failure: Failure callback with an EmbyError
+     
+     */
+    public func getArtistsAsync(query: ItemsByNameQuery, success: ([BaseItemDto]) -> Void, failure: (EmbyError) -> Void) {
+        let url = getItemByNameListUrl(query, type: "Artists")
+        
+        getItemsFromUrl(url, success: success, failure: failure)
+    }
+    
+    /**
+     
+     Gets the album artists async
+     
+     - Parameter query: The query
+     - Parameter success: Success callback with an array of BaseItemDto
+     - Parameter failure: Failure callback with an EmbyError
+     
+     */
+    public func getAlbumArtistsAsync(query: ItemsByNameQuery, success: ([BaseItemDto]) -> Void, failure: (EmbyError) -> Void) {
+        let url = getItemByNameListUrl(query, type: "Artists/AlbumArtists")
+        
+        getItemsFromUrl(url, success: success, failure: failure)
+    }
+    
 //    
 //    /// <summary>
 //    /// Gets the people async.
@@ -488,212 +563,140 @@ public class ApiClient: BaseApiClient {
 //        GetItemsFromUrl(url, response);
 //    }
 //    
-//    /// <summary>
-//    /// Gets the instant mix from album async.
-//    /// </summary>
-//    /// <param name="query">The query.</param>
-//    /// <returns>Task{ItemsResult}.</returns>
-//    /// <exception cref="System.IllegalArgumentException">query</exception>
-//    public void GetInstantMixFromItem(SimilarItemsQuery query, final Response<ItemsResult> response)
-//    {
-//        if (query == null)
-//        {
-//            throw new IllegalArgumentException("query");
-//        }
-//        
-//        String url = GetInstantMixUrl(query, "Items");
-//        
-//        GetItemsFromUrl(url, response);
-//    }
-//    
-//    /// <summary>
-//    /// Gets the genres async.
-//    /// </summary>
-//    /// <param name="query">The query.</param>
-//    /// <returns>Task{ItemsResult}.</returns>
-//    public void GetGenresAsync(ItemsByNameQuery query, final Response<ItemsResult> response)
-//    {
-//        String url = GetItemByNameListUrl("Genres", query);
-//        
-//        GetItemsFromUrl(url, response);
-//    }
-//    
-//    /// <summary>
-//    /// Gets the studios async.
-//    /// </summary>
-//    /// <param name="query">The query.</param>
-//    /// <returns>Task{ItemsResult}.</returns>
-//    public void GetStudiosAsync(ItemsByNameQuery query, final Response<ItemsResult> response)
-//    {
-//        String url = GetItemByNameListUrl("Studios", query);
-//        
-//        GetItemsFromUrl(url, response);
-//    }
-//    
-//    /// <summary>
-//    /// Gets the artists.
-//    /// </summary>
-//    /// <param name="query">The query.</param>
-//    /// <returns>Task{ItemsResult}.</returns>
-//    /// <exception cref="System.IllegalArgumentException">userId</exception>
-//    public void GetArtistsAsync(ArtistsQuery query, final Response<ItemsResult> response)
-//    {
-//        String url = GetItemByNameListUrl("Artists", query);
-//        
-//        GetItemsFromUrl(url, response);
-//    }
-//    
-//    /// <summary>
-//    /// Gets the artists.
-//    /// </summary>
-//    /// <param name="query">The query.</param>
-//    /// <returns>Task{ItemsResult}.</returns>
-//    /// <exception cref="System.IllegalArgumentException">userId</exception>
-//    public void GetAlbumArtistsAsync(ArtistsQuery query, final Response<ItemsResult> response)
-//    {
-//        String url = GetItemByNameListUrl("Artists/AlbumArtists", query);
-//        
-//        GetItemsFromUrl(url, response);
-//    }
-//    
-//    /// <summary>
-//    /// Gets a studio
-//    /// </summary>
-//    /// <param name="name">The name.</param>
-//    /// <param name="userId">The user id.</param>
-//    /// <returns>Task{BaseItemDto}.</returns>
-//    /// <exception cref="System.IllegalArgumentException">userId</exception>
-//    public void GetStudioAsync(String name, String userId, final Response<BaseItemDto> response)
-//    {
-//        if (tangible.DotNetToJavaStringHelper.isNullOrEmpty(name))
-//        {
-//            throw new IllegalArgumentException("name");
-//        }
-//        if (tangible.DotNetToJavaStringHelper.isNullOrEmpty(userId))
-//        {
-//            throw new IllegalArgumentException("userId");
-//        }
-//        
-//        QueryStringDictionary dict = new QueryStringDictionary();
-//        
-//        dict.Add("userId", userId);
-//        
-//        String url = GetApiUrl("Studios/" + GetSlugName(name), dict);
-//        
-//        GetItemFromUrl(url, response);
-//    }
-//    
-//    /// <summary>
-//    /// Gets a genre
-//    /// </summary>
-//    /// <param name="name">The name.</param>
-//    /// <param name="userId">The user id.</param>
-//    /// <returns>Task{BaseItemDto}.</returns>
-//    /// <exception cref="System.IllegalArgumentException">userId</exception>
-//    public void GetGenreAsync(String name, String userId, final Response<BaseItemDto> response)
-//    {
-//        if (tangible.DotNetToJavaStringHelper.isNullOrEmpty(name))
-//        {
-//            throw new IllegalArgumentException("name");
-//        }
-//        if (tangible.DotNetToJavaStringHelper.isNullOrEmpty(userId))
-//        {
-//            throw new IllegalArgumentException("userId");
-//        }
-//        
-//        QueryStringDictionary dict = new QueryStringDictionary();
-//        
-//        dict.Add("userId", userId);
-//        
-//        String url = GetApiUrl("Genres/" + GetSlugName(name), dict);
-//        
-//        GetItemFromUrl(url, response);
-//    }
-//    
-//    public void GetMusicGenreAsync(String name, String userId, final Response<BaseItemDto> response)
-//    {
-//        if (tangible.DotNetToJavaStringHelper.isNullOrEmpty(name))
-//        {
-//            throw new IllegalArgumentException("name");
-//        }
-//        if (tangible.DotNetToJavaStringHelper.isNullOrEmpty(userId))
-//        {
-//            throw new IllegalArgumentException("userId");
-//        }
-//        
-//        QueryStringDictionary dict = new QueryStringDictionary();
-//        
-//        dict.Add("userId", userId);
-//        
-//        String url = GetApiUrl("MusicGenres/" + GetSlugName(name), dict);
-//        
-//        GetItemFromUrl(url, response);
-//    }
-//    
-//    public void GetGameGenreAsync(String name, String userId, final Response<BaseItemDto> response)
-//    {
-//        if (tangible.DotNetToJavaStringHelper.isNullOrEmpty(name))
-//        {
-//            throw new IllegalArgumentException("name");
-//        }
-//        if (tangible.DotNetToJavaStringHelper.isNullOrEmpty(userId))
-//        {
-//            throw new IllegalArgumentException("userId");
-//        }
-//        
-//        QueryStringDictionary dict = new QueryStringDictionary();
-//        
-//        dict.Add("userId", userId);
-//        
-//        String url = GetApiUrl("GameGenres/" + GetSlugName(name), dict);
-//        
-//        GetItemFromUrl(url, response);
-//    }
-//    
-//    /// <summary>
-//    /// Gets the music genre async.
-//    /// </summary>
-//    /// <param name="name">The name.</param>
-//    /// <returns>Task{BaseItemDto}.</returns>
-//    /// <exception cref="System.IllegalArgumentException">name</exception>
-//    public void GetMusicGenreAsync(String name, final Response<BaseItemDto> response)
-//    {
-//        if (tangible.DotNetToJavaStringHelper.isNullOrEmpty(name))
-//        {
-//            throw new IllegalArgumentException("name");
-//        }
-//        
-//        String url = GetApiUrl("MusicGenres/" + GetSlugName(name));
-//        
-//        GetItemFromUrl(url, response);
-//    }
-//    
-//    /// <summary>
-//    /// Gets the artist async.
-//    /// </summary>
-//    /// <param name="name">The name.</param>
-//    /// <param name="userId">The user id.</param>
-//    /// <returns>Task{BaseItemDto}.</returns>
-//    /// <exception cref="System.IllegalArgumentException">name</exception>
-//    public void GetArtistAsync(String name, String userId, final Response<BaseItemDto> response)
-//    {
-//        if (tangible.DotNetToJavaStringHelper.isNullOrEmpty(name))
-//        {
-//            throw new IllegalArgumentException("name");
-//        }
-//        if (tangible.DotNetToJavaStringHelper.isNullOrEmpty(userId))
-//        {
-//            throw new IllegalArgumentException("userId");
-//        }
-//        
-//        QueryStringDictionary dict = new QueryStringDictionary();
-//        
-//        dict.Add("userId", userId);
-//        
-//        String url = GetApiUrl("Artists/" + GetSlugName(name), dict);
-//        
-//        GetItemFromUrl(url, response);
-//    }
+    
+    /**
+    
+    Gets a studio async
+    
+    - Parameter name: The studio name
+    - Parameter userId: The User ID
+    - Parameter success: Success callback with an array of BaseItemDto
+    - Parameter failure: Failure callback with an EmbyError
+    
+    */
+    public func getStudioAsync(name: String, userId: String, success: (BaseItemDto) -> Void, failure: (EmbyError) -> Void) {
+        precondition(!name.isEmpty, "Illegal Argument: name")
+        precondition(!userId.isEmpty, "Illegal Argument: userId")
+        
+        let dict = QueryStringDictionary()
+        
+        dict.Add("userId", value: userId)
+        
+        let url = getApiUrl("Studios/\(getSlugName(name))", queryString: dict)
+        
+        getItemFromUrl(url, success: success, failure: failure)
+    }
+
+    /**
+     
+     Gets a genre async
+     
+     - Parameter name: The genre name
+     - Parameter userId: The User ID
+     - Parameter success: Success callback with an array of BaseItemDto
+     - Parameter failure: Failure callback with an EmbyError
+     
+     */
+    public func getGenreAsync(name: String, userId: String, success: (BaseItemDto) -> Void, failure: (EmbyError) -> Void) {
+        precondition(!name.isEmpty, "Illegal Argument: name")
+        precondition(!userId.isEmpty, "Illegal Argument: userId")
+        
+        let dict = QueryStringDictionary()
+        
+        dict.Add("userId", value: userId)
+        
+        let url = getApiUrl("Genres/\(getSlugName(name))", queryString: dict)
+        
+        getItemFromUrl(url, success: success, failure: failure)
+    }
+    
+    /**
+     
+     Gets a music genre async
+     
+     - Parameter name: The music genre name
+     - Parameter userId: The User ID
+     - Parameter success: Success callback with an array of BaseItemDto
+     - Parameter failure: Failure callback with an EmbyError
+     
+     */
+    public func getMusicGenreAsync(name: String, userId: String, success: (BaseItemDto) -> Void, failure: (EmbyError) -> Void) {
+        precondition(!name.isEmpty, "Illegal Argument: name")
+        precondition(!userId.isEmpty, "Illegal Argument: userId")
+        
+        let dict = QueryStringDictionary()
+        
+        dict.Add("userId", value: userId)
+        
+        let url = getApiUrl("MusicGenres/\(getSlugName(name))", queryString: dict)
+        
+        getItemFromUrl(url, success: success, failure: failure)
+    }
+
+    /**
+     
+     Gets a music genre async
+     
+     - Parameter name: The music genre name
+     - Parameter userId: The User ID
+     - Parameter success: Success callback with an array of BaseItemDto
+     - Parameter failure: Failure callback with an EmbyError
+     
+     */
+    public func getMusicGenreAsync(name: String, success: (BaseItemDto) -> Void, failure: (EmbyError) -> Void) {
+        precondition(!name.isEmpty, "Illegal Argument: name")
+        
+        let url = getApiUrl("MusicGenres/\(getSlugName(name))")
+        
+        getItemFromUrl(url, success: success, failure: failure)
+    }
+    
+    /**
+     
+     Gets a game genre async
+     
+     - Parameter name: The game genre name
+     - Parameter userId: The User ID
+     - Parameter success: Success callback with an array of BaseItemDto
+     - Parameter failure: Failure callback with an EmbyError
+     
+     */
+    public func getGameGenreAsync(name: String, userId: String, success: (BaseItemDto) -> Void, failure: (EmbyError) -> Void) {
+        precondition(!name.isEmpty, "Illegal Argument: name")
+        precondition(!userId.isEmpty, "Illegal Argument: userId")
+        
+        let dict = QueryStringDictionary()
+        
+        dict.Add("userId", value: userId)
+        
+        let url = getApiUrl("GameGenres/\(getSlugName(name))", queryString: dict)
+        
+        getItemFromUrl(url, success: success, failure: failure)
+    }
+
+    /**
+     
+     Gets an artist async
+     
+     - Parameter name: The artist name
+     - Parameter userId: The User ID
+     - Parameter success: Success callback with an array of BaseItemDto
+     - Parameter failure: Failure callback with an EmbyError
+     
+     */
+    public func getArtistAsync(name: String, userId: String, success: (BaseItemDto) -> Void, failure: (EmbyError) -> Void) {
+        precondition(!name.isEmpty, "Illegal Argument: name")
+        precondition(!userId.isEmpty, "Illegal Argument: userId")
+        
+        let dict = QueryStringDictionary()
+        
+        dict.Add("userId", value: userId)
+        
+        let url = getApiUrl("Artists/\(getSlugName(name))", queryString: dict)
+        
+        getItemFromUrl(url, success: success, failure: failure)
+    }
+
 //    
 //    /// <summary>
 //    /// Restarts the server async.
