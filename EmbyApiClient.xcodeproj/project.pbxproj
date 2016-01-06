@@ -483,6 +483,18 @@
 		730C99581C374F1A00FE32DF /* SeasonQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730C99561C374F1A00FE32DF /* SeasonQuery.swift */; };
 		730C99591C374F1A00FE32DF /* SeasonQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730C99561C374F1A00FE32DF /* SeasonQuery.swift */; };
 		730C995A1C374F1A00FE32DF /* SeasonQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 730C99561C374F1A00FE32DF /* SeasonQuery.swift */; };
+		7352DE461C3CA8A50004BB0B /* PersonsQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7352DE451C3CA8A50004BB0B /* PersonsQuery.swift */; };
+		7352DE471C3CA8A50004BB0B /* PersonsQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7352DE451C3CA8A50004BB0B /* PersonsQuery.swift */; };
+		7352DE481C3CA8A50004BB0B /* PersonsQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7352DE451C3CA8A50004BB0B /* PersonsQuery.swift */; };
+		7352DE491C3CA8A50004BB0B /* PersonsQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7352DE451C3CA8A50004BB0B /* PersonsQuery.swift */; };
+		7352DE4C1C3CB48D0004BB0B /* PluginInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7352DE4B1C3CB48D0004BB0B /* PluginInfo.swift */; };
+		7352DE4D1C3CB48D0004BB0B /* PluginInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7352DE4B1C3CB48D0004BB0B /* PluginInfo.swift */; };
+		7352DE4E1C3CB48D0004BB0B /* PluginInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7352DE4B1C3CB48D0004BB0B /* PluginInfo.swift */; };
+		7352DE4F1C3CB48D0004BB0B /* PluginInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7352DE4B1C3CB48D0004BB0B /* PluginInfo.swift */; };
+		7352DE511C3CBA550004BB0B /* ServerConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7352DE501C3CBA550004BB0B /* ServerConfiguration.swift */; };
+		7352DE521C3CBA550004BB0B /* ServerConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7352DE501C3CBA550004BB0B /* ServerConfiguration.swift */; };
+		7352DE531C3CBA550004BB0B /* ServerConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7352DE501C3CBA550004BB0B /* ServerConfiguration.swift */; };
+		7352DE541C3CBA550004BB0B /* ServerConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7352DE501C3CBA550004BB0B /* ServerConfiguration.swift */; };
 		8810B9D91BECB2160062DB8F /* DeviceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8810B9D81BECB2160062DB8F /* DeviceProtocol.swift */; };
 		8838C55B1BC514B500587F8E /* Emby.ApiClient.h in Headers */ = {isa = PBXBuildFile; fileRef = 8838C55A1BC514B500587F8E /* Emby.ApiClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		884EBEDD1BCD912B0032E7F3 /* EmptyResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 884EBEDC1BCD912B0032E7F3 /* EmptyResponse.swift */; };
@@ -722,6 +734,9 @@
 		730C99471C372BD100FE32DF /* UpcomingEpisodesQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpcomingEpisodesQuery.swift; sourceTree = "<group>"; };
 		730C99511C374C0C00FE32DF /* EpisodeQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EpisodeQuery.swift; sourceTree = "<group>"; };
 		730C99561C374F1A00FE32DF /* SeasonQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeasonQuery.swift; sourceTree = "<group>"; };
+		7352DE451C3CA8A50004BB0B /* PersonsQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonsQuery.swift; sourceTree = "<group>"; };
+		7352DE4B1C3CB48D0004BB0B /* PluginInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PluginInfo.swift; sourceTree = "<group>"; };
+		7352DE501C3CBA550004BB0B /* ServerConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerConfiguration.swift; sourceTree = "<group>"; };
 		8810B9D81BECB2160062DB8F /* DeviceProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DeviceProtocol.swift; path = device/DeviceProtocol.swift; sourceTree = "<group>"; };
 		8838C5571BC514B500587F8E /* EmbyApiClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EmbyApiClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8838C55A1BC514B500587F8E /* Emby.ApiClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Emby.ApiClient.h; sourceTree = "<group>"; };
@@ -860,6 +875,7 @@
 				047B76F11BFAD08B0003A743 /* UnratedItem.swift */,
 				047B76F31BFAD1320003A743 /* AccessSchedule.swift */,
 				047B76F51BFAD2B60003A743 /* DynamicDayOfWeek.swift */,
+				7352DE501C3CBA550004BB0B /* ServerConfiguration.swift */,
 			);
 			name = configuration;
 			sourceTree = "<group>";
@@ -1052,6 +1068,7 @@
 				730C99471C372BD100FE32DF /* UpcomingEpisodesQuery.swift */,
 				730C99511C374C0C00FE32DF /* EpisodeQuery.swift */,
 				730C99561C374F1A00FE32DF /* SeasonQuery.swift */,
+				7352DE451C3CA8A50004BB0B /* PersonsQuery.swift */,
 			);
 			name = querying;
 			sourceTree = "<group>";
@@ -1157,6 +1174,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		7352DE4A1C3CB4350004BB0B /* plugins */ = {
+			isa = PBXGroup;
+			children = (
+				7352DE4B1C3CB48D0004BB0B /* PluginInfo.swift */,
+			);
+			name = plugins;
+			sourceTree = "<group>";
+		};
 		8838C54D1BC514B500587F8E = {
 			isa = PBXGroup;
 			children = (
@@ -1240,6 +1265,7 @@
 				047B76E91BFACBEF0003A743 /* configuration */,
 				04B8AB821BF43A6900ED19CA /* mediainfo */,
 				04B8AB691BF1970E00ED19CA /* livetv */,
+				7352DE4A1C3CB4350004BB0B /* plugins */,
 				04B8AB601BF1909000ED19CA /* providers */,
 				04B8AB5B1BF18F9B00ED19CA /* sync */,
 				04B8AB541BF03F8100ED19CA /* drawing */,
@@ -1706,6 +1732,7 @@
 				048EADB51C34335700BE521F /* HttpHeaders.swift in Sources */,
 				048EADC51C34338400BE521F /* ProgramAudio.swift in Sources */,
 				048EADDA1C34339F00BE521F /* ItemFilter.swift in Sources */,
+				7352DE491C3CA8A50004BB0B /* PersonsQuery.swift in Sources */,
 				048EADEC1C3433B400BE521F /* BaseItemPerson.swift in Sources */,
 				048EADA11C34325800BE521F /* IAsyncHttpClient.swift in Sources */,
 				048EADCC1C34339900BE521F /* VideoType.swift in Sources */,
@@ -1731,6 +1758,7 @@
 				048EADD21C34339900BE521F /* MediaUrl.swift in Sources */,
 				048E0CB61C06BA580001081F /* ServerInfoTests.swift in Sources */,
 				048EADD91C34339F00BE521F /* ItemQuery.swift in Sources */,
+				7352DE541C3CBA550004BB0B /* ServerConfiguration.swift in Sources */,
 				048EAE191C3433D900BE521F /* RegistrationInfo.swift in Sources */,
 				048EADDD1C34339F00BE521F /* SimilarItemsQuery.swift in Sources */,
 				048EADB21C34334B00BE521F /* ServerLocator.swift in Sources */,
@@ -1759,6 +1787,7 @@
 				048EADDE1C34339F00BE521F /* ItemsByNameQuery.swift in Sources */,
 				048EADBC1C34337300BE521F /* UserPolicy.swift in Sources */,
 				048EADE71C3433B400BE521F /* ImageOptions.swift in Sources */,
+				7352DE4F1C3CB48D0004BB0B /* PluginInfo.swift in Sources */,
 				040932531C265C4000736C7B /* BaseItemInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1774,6 +1803,7 @@
 				5D0FBA4C1C01B4EB005BB336 /* SystemInfo.swift in Sources */,
 				040932781C28FEB500736C7B /* UserQuery.swift in Sources */,
 				04C23C121C168056006722ED /* EncodingContext.swift in Sources */,
+				7352DE481C3CA8A50004BB0B /* PersonsQuery.swift in Sources */,
 				5D0FBA4D1C01B4EB005BB336 /* WakeOnLanInfo.swift in Sources */,
 				5D0FBA4E1C01B4EB005BB336 /* PinExchangeResult.swift in Sources */,
 				5D0FBA4F1C01B4EB005BB336 /* PackageVersionClass.swift in Sources */,
@@ -1863,6 +1893,7 @@
 				5D0FBA8D1C01B4EB005BB336 /* DeviceProtocol.swift in Sources */,
 				040932221C2653CC00736C7B /* ApiEventListener.swift in Sources */,
 				04C23C071C167DF2006722ED /* DlnaProfileType.swift in Sources */,
+				7352DE4E1C3CB48D0004BB0B /* PluginInfo.swift in Sources */,
 				04C23C241C168561006722ED /* CodecType.swift in Sources */,
 				5D0FBA8E1C01B4EB005BB336 /* IResponse.swift in Sources */,
 				04C23BF31C096B18006722ED /* XmlAttribute.swift in Sources */,
@@ -1896,6 +1927,7 @@
 				5D0FBAA41C01B4EB005BB336 /* ProgramAudio.swift in Sources */,
 				5D0FBAA51C01B4EB005BB336 /* Configuration.swift in Sources */,
 				5D0FBAA61C01B4EB005BB336 /* BaseItemDto.swift in Sources */,
+				7352DE531C3CBA550004BB0B /* ServerConfiguration.swift in Sources */,
 				5D0FBAA71C01B4EB005BB336 /* PinStatusResult.swift in Sources */,
 				5D0FBAA81C01B4EB005BB336 /* RecordingStatus.swift in Sources */,
 				040932661C26605B00736C7B /* SessionUpdatesEventArgs.swift in Sources */,
@@ -1938,6 +1970,7 @@
 				041643A81BD4280600873FAB /* SystemInfo.swift in Sources */,
 				040932771C28FEB400736C7B /* UserQuery.swift in Sources */,
 				04C23C111C168056006722ED /* EncodingContext.swift in Sources */,
+				7352DE471C3CA8A50004BB0B /* PersonsQuery.swift in Sources */,
 				0416439F1BD4204300873FAB /* WakeOnLanInfo.swift in Sources */,
 				88CF7E721BC6E49F00A33B72 /* PinExchangeResult.swift in Sources */,
 				041643AF1BD4962100873FAB /* PackageVersionClass.swift in Sources */,
@@ -2027,6 +2060,7 @@
 				8810B9D91BECB2160062DB8F /* DeviceProtocol.swift in Sources */,
 				040932211C2653CC00736C7B /* ApiEventListener.swift in Sources */,
 				04C23C061C167DF2006722ED /* DlnaProfileType.swift in Sources */,
+				7352DE4D1C3CB48D0004BB0B /* PluginInfo.swift in Sources */,
 				04C23C231C168561006722ED /* CodecType.swift in Sources */,
 				8857F86F1BCD4B5500ADFA8A /* IResponse.swift in Sources */,
 				04C23BF21C096B18006722ED /* XmlAttribute.swift in Sources */,
@@ -2060,6 +2094,7 @@
 				04B8AB6F1BF2EB5800ED19CA /* ProgramAudio.swift in Sources */,
 				888EFC6D1BCC3DA600546DB3 /* Configuration.swift in Sources */,
 				04B8AB581BF18B9C00ED19CA /* BaseItemDto.swift in Sources */,
+				7352DE521C3CBA550004BB0B /* ServerConfiguration.swift in Sources */,
 				88CF7E701BC6E0C100A33B72 /* PinStatusResult.swift in Sources */,
 				04B8AB6B1BF1971B00ED19CA /* RecordingStatus.swift in Sources */,
 				040932651C26605B00736C7B /* SessionUpdatesEventArgs.swift in Sources */,
@@ -2103,7 +2138,10 @@
 				048EAE2B1C34E59500BE521F /* IJsonSerializer.swift in Sources */,
 				048EAD981C342F0A00BE521F /* BoolHelpers.swift in Sources */,
 				0A40C8321C26879E0020A7A2 /* UserSelection.swift in Sources */,
+				7352DE511C3CBA550004BB0B /* ServerConfiguration.swift in Sources */,
+				7352DE461C3CA8A50004BB0B /* PersonsQuery.swift in Sources */,
 				0A40C8301C26879E0020A7A2 /* SignIn.swift in Sources */,
+				7352DE4C1C3CB48D0004BB0B /* PluginInfo.swift in Sources */,
 				730C99571C374F1A00FE32DF /* SeasonQuery.swift in Sources */,
 				048EAE271C34E0E400BE521F /* ItemCounts.swift in Sources */,
 				048EAE2C1C3772E200BE521F /* ItemFields.swift in Sources */,
