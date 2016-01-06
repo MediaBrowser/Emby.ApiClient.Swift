@@ -399,8 +399,7 @@ public class ApiClient: BaseApiClient {
     - Parameter success: Success callback with an array of BaseItemDto
     - Parameter failure: Failure callback with an EmbyError
 
-    */
-    
+     */
     public func getNextUpEpisodesAsync(query: NextUpQuery, success: ([BaseItemDto]) -> Void, failure: (EmbyError) -> Void) {
         let url = getNextUpUrl(query)
         
@@ -432,7 +431,6 @@ public class ApiClient: BaseApiClient {
      - Parameter failure: Failure callback with an EmbyError
      
      */
-    
     public func getSimilarItems(query: SimilarItemsQuery, success: ([BaseItemDto]) -> Void, failure: (EmbyError) -> Void) {
         let url = getSimilarItemListUrl(query, type: "Items")
         
@@ -544,25 +542,24 @@ public class ApiClient: BaseApiClient {
         getItemsFromUrl(url, success: success, failure: failure)
     }
     
-//    
-//    /// <summary>
-//    /// Gets the people async.
-//    /// </summary>
-//    /// <param name="query">The query.</param>
-//    /// <returns>Task{ItemsResult}.</returns>
-//    /// <exception cref="System.IllegalArgumentException">userId</exception>
-//    public void GetPeopleAsync(PersonsQuery query, final Response<ItemsResult> response)
-//    {
-//        String url = GetItemByNameListUrl("Persons", query);
-//        
-//        if (query.getPersonTypes() != null && query.getPersonTypes().length > 0)
-//        {
-//            url += "&PersonTypes=" + tangible.DotNetToJavaStringHelper.join(",", query.getPersonTypes());
-//        }
-//        
-//        GetItemsFromUrl(url, response);
-//    }
-//    
+    /**
+    
+    Gets the people async
+    
+    - Parameter query: The query
+    - Parameter success: Success callback with an array of BaseItemDto
+    - Parameter failure: Failure callback with an EmbyError
+    
+     */
+    public func getPeopleAsync(query: PersonsQuery, success: ([BaseItemDto]) -> Void, failure: (EmbyError) -> Void) {
+        var url = getItemByNameListUrl(query, type: "Persons")
+        
+        if let personTypes = query.personTypes {
+            url += "&PersonTypes=\(personTypes.joinWithSeparator(","))"
+        }
+        
+        getItemsFromUrl(url, success: success, failure: failure)
+    }
     
     /**
     
@@ -573,7 +570,7 @@ public class ApiClient: BaseApiClient {
     - Parameter success: Success callback with an array of BaseItemDto
     - Parameter failure: Failure callback with an EmbyError
     
-    */
+     */
     public func getStudioAsync(name: String, userId: String, success: (BaseItemDto) -> Void, failure: (EmbyError) -> Void) {
         precondition(!name.isEmpty, "Illegal Argument: name")
         precondition(!userId.isEmpty, "Illegal Argument: userId")
@@ -708,59 +705,74 @@ public class ApiClient: BaseApiClient {
 //        
 //        PostAsync(url, response);
 //    }
-//    
-//    /// <summary>
-//    /// Gets the system status async.
-//    /// </summary>
-//    /// <returns>Task{SystemInfo}.</returns>
-//    public void GetSystemInfoAsync(final Response<SystemInfo> response)
-//    {
-//        String url = GetApiUrl("System/Info");
-//        
-//        url = AddDataFormat(url);
-//        
-//        Send(url, "GET", new SerializedResponse<SystemInfo>(response, jsonSerializer, SystemInfo.class));
-//    }
-//    
-//    /// <summary>
-//    /// get public system information as an asynchronous operation.
-//    /// </summary>
-//    /// <param name="cancellationToken">The cancellation token.</param>
-//    /// <returns>Task&lt;PublicSystemInfo&gt;.</returns>
-//    public void GetPublicSystemInfoAsync(final Response<PublicSystemInfo> response)
-//    {
-//        String url = GetApiUrl("System/Info/Public");
-//        
-//        url = AddDataFormat(url);
-//        
-//        Send(url, "GET", new SerializedResponse<PublicSystemInfo>(response, jsonSerializer, PublicSystemInfo.class));
-//    }
-//    
-//    /// <summary>
-//    /// Gets a list of plugins installed on the server
-//    /// </summary>
-//    /// <returns>Task{PluginInfo[]}.</returns>
-//    public void GetInstalledPluginsAsync(final Response<PluginInfo[]> response)
-//    {
-//        String url = GetApiUrl("Plugins");
-//        
-//        url = AddDataFormat(url);
-//        
-//        Send(url, "GET", new SerializedResponse<PluginInfo[]>(response, jsonSerializer, new PluginInfo[]{}.getClass()));
-//    }
-//    
-//    /// <summary>
-//    /// Gets the current server configuration
-//    /// </summary>
-//    /// <returns>Task{ServerConfiguration}.</returns>
-//    public void GetServerConfigurationAsync(final Response<ServerConfiguration> response)
-//    {
-//        String url = GetApiUrl("System/Configuration");
-//        
-//        url = AddDataFormat(url);
-//        
-//        Send(url, "GET", new SerializedResponse<ServerConfiguration>(response, jsonSerializer, ServerConfiguration.class));
-//    }
+//
+    /**
+    
+    Gets the system status async
+    
+    - Parameter success: Success callback with an SystemInfo
+    - Parameter failure: Failure callback with an EmbyError
+    
+     */
+    public func getSystemInfoAsync(success: (SystemInfo) -> Void, failure: (EmbyError) -> Void) {
+        var url = getApiUrl("System/Info")
+        
+        url = addDataFormat(url)
+        
+        let request = HttpRequest(url: url, method: .GET)
+        sendRequest(request, success: success, failure: failure)
+    }
+    
+    /**
+     
+     Gets public system information async
+     
+     - Parameter success: Success callback with an PublicSystemInfo
+     - Parameter failure: Failure callback with an EmbyError
+     
+     */
+    public func getPublicSystemInfoAsync(success: (PublicSystemInfo) -> Void, failure: (EmbyError) -> Void) {
+        var url = getApiUrl("System/Info/Public")
+        
+        url = addDataFormat(url)
+        
+        let request = HttpRequest(url: url, method: .GET)
+        sendRequest(request, success: success, failure: failure)
+    }
+    
+    /**
+     
+     Gets a list of plugins installed on the server async
+     
+     - Parameter success: Success callback with an SystemInfo
+     - Parameter failure: Failure callback with an EmbyError
+     
+     */
+    public func getInstalledPluginsAsync(success: ([PluginInfo]) -> Void, failure: (EmbyError) -> Void) {
+        var url = getApiUrl("System/Info/Public")
+        
+        url = addDataFormat(url)
+        
+        let request = HttpRequest(url: url, method: .GET)
+        sendCollectionRequest(request, success: success, failure: failure)
+    }
+    
+    /**
+     
+     Gets the current server configuration async
+     
+     - Parameter success: Success callback with an ServerConfigureation
+     - Parameter failure: Failure callback with an EmbyError
+     
+     */
+    public func getServerConfigurationAsync(success: (ServerConfiguration) -> Void, failure: (EmbyError) -> Void) {
+        var url = getApiUrl("System/Configuration")
+        
+        url = addDataFormat(url)
+        
+        let request = HttpRequest(url: url, method: .GET)
+        sendRequest(request, success: success, failure: failure)
+    }
 //    
 //    /// <summary>
 //    /// Gets the scheduled tasks.

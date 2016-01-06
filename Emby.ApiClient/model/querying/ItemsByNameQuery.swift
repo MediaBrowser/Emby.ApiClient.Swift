@@ -5,7 +5,7 @@
 
 import Foundation
 
-public struct ItemsByNameQuery {
+public class ItemsByNameQuery {
     var userId: String?
     var startIndex: Int?
     var limit: Int?
