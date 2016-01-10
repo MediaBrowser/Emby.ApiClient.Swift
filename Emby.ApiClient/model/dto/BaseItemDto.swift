@@ -39,7 +39,7 @@ public class BaseItemDto : JSONSerializable {
     public var sortName: String?
     public var forcedSortName: String?
     public var video3dFormat: Video3DFormat?
-    public var premierDate: NSDate?
+    public var premiereDate: NSDate?
     public var externalUrls: [ExternalUrl]?
     public var mediaSources: [MediaSourceInfo]?
     public var criticRating: Float?
@@ -372,6 +372,115 @@ public class BaseItemDto : JSONSerializable {
     public var currentProgram: BaseItemDto?
     
     public required init?(jSON: JSON_Object) {
-        fatalError("init(jSON:) has not been implemented: \(jSON)")
+        if  let id = jSON["Id"] as? String {
+            self.id = id
+            
+            // MOVIE START
+            self.name = jSON["Name"] as? String
+            self.serverId = jSON["ServerId"] as? String
+            self.etag = jSON["Etag"] as? String
+            
+            let formatter = NSDateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+            formatter.timeZone = NSTimeZone(forSecondsFromGMT: 0)
+            
+            if let dateCreatedString = jSON["DateCreated"] as? String {
+                self.dateCreated = formatter.dateFromString(dateCreatedString)
+            }
+            
+            self.canDelete = jSON["CanDelete"] as? Bool
+            self.canDownload = jSON["CanDownload"] as? Bool
+            self.awardSummary = jSON["AwardSummary"] as? String
+            self.metascore = jSON["Metascore"] as? Float
+            self.supportsSync = jSON["SupportsSync"] as? Bool
+            self.hasSyncJob = jSON["HasSyncJob"] as? Bool
+            self.isSynced = jSON["IsSynced"] as? Bool
+            self.sortName = jSON["SortName"] as? String
+            
+            if let premiereDateString = jSON["PremiereDate"] as? String {
+                self.premiereDate = formatter.dateFromString(premiereDateString)
+            }
+
+            if let externalUrls = jSON["ExternalUrls"] as? [JSON_Object] {
+                self.externalUrls = externalUrls.map({eUrl in
+                    let name = eUrl["Name"] as? String
+                    let url = eUrl["Url"] as? String
+                    return ExternalUrl(name: name!, url: url!)
+                })
+            }
+            
+            // TODO: Media Sources
+            
+            self.criticRating = jSON["CriticRating"] as? Float
+            self.criticRatingSummary = jSON["CriticRatingSummary"] as? String
+            self.path = jSON["Path"] as? String
+            self.officialRating = jSON["OfficialRating"] as? String
+            self.overview = jSON["Overview"] as? String
+            self.shortOverview = jSON["ShortOverview"] as? String
+            self.tagLines = jSON["Taglines"] as? [String]
+            self.genres = jSON["Genres"] as? [String]
+            self.communityRating = jSON["CommunityRating"] as? Float
+            self.voteCount = jSON["VoteCount"] as? Int
+            self.runTimeTicks = jSON["RunTimeTicks"] as? Int
+            
+            if let playAccess = jSON["PlayAccess"] as? String {
+                self.playAccess = PlayAccess(rawValue: playAccess)
+            }
+            
+            self.productionYear = jSON["ProductionYear"] as? Int
+            self.isPlaceHolder = jSON["IsPlaceHolder"] as? Bool
+            
+            // TODO: Remote Trailers
+            // TODO: Provider Ids
+            
+            self.isHd = jSON["IsHD"] as? Bool
+            self.isFolder = jSON["IsFolder"] as? Bool
+            self.parentId = jSON["ParentId"] as? String
+            self.type = jSON["Type"] as? String
+            
+            // TODO: People
+            // TODO: Studios
+            
+            self.localTrailerCount = jSON["LocalTrailerCount"] as? Int
+            
+            // TODO: User Data
+            
+            self.displayPreferencesId = jSON["DisplayPreferencesId"] as? String
+            self.tags = jSON["Tags"] as? [String]
+            self.keywords = jSON["Keywords"] as? [String]
+            self.primaryImageAspectRatio = jSON["PrimaryImageAspectRatio"] as? Double
+            self.originalPrimaryImageAspectRatio = jSON["OriginalPrimaryImageAspectRatio"] as? Double
+            
+            // TODO: Media Streams
+            
+            if let videoType = jSON["VideoType"] as? String {
+                self.videoType = VideoType(rawValue: videoType)
+            }
+            
+            // TODO: Image Tags
+            
+            self.backdropImageTags = jSON["BackdropImageTags"] as? [String]
+            self.screenshotImageTags = jSON["ScreenshotImageTags"] as? [String]
+            
+            // TODO: Chapters
+            
+            if let locationType = jSON["LocationType"] as? String {
+                self.locationType = LocationType(rawValue: locationType)
+            }
+            
+            self.mediaType = jSON["MediaType"] as? String
+            self.homePageUrl = jSON["HomePageUrl"] as? String
+            self.productionLocations = jSON["ProductionLocations"] as? [String]
+            
+            self.budget = jSON["Budget"] as? Double
+            self.revenue = jSON["Revenue"] as? Double
+            
+            // TODO: Locked Fields
+            
+            self.lockData = jSON["LockData"] as? Bool
+            // MOVIE END
+        } else {
+            return nil
+        }
     }
 }

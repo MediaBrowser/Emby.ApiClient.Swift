@@ -5,8 +5,8 @@
 
 import Foundation
 
-public enum LocationType: Int {
-    case FileSystem = 0
+public enum LocationType: String {
+    case FileSystem
     case Remote
     case Virtual
     case Offline

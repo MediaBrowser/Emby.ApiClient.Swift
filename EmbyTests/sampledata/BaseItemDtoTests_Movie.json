@@ -1,0 +1,524 @@
+{
+    "Name": "Elysium",
+    "ServerId": "39621c8d93d2f9b6cd0b86d579356f69",
+    "Id": "4998a9df017164441770ad3fefea42f1",
+    "Etag": "9c9467df42e700936eabc8e9c4370399",
+    "DateCreated": "2014-11-04T17:00:14.0000000Z",
+    "CanDelete": false,
+    "CanDownload": true,
+    "AwardSummary": "1 win & 7 nominations.",
+    "Metascore": 61,
+    "SupportsSync": true,
+    "HasSyncJob": false,
+    "IsSynced": false,
+    "SortName": "elysium",
+    "PremiereDate": "2013-08-09T04:00:00.0000000Z",
+    "ExternalUrls": [{
+                     "Name": "IMDb",
+                     "Url": "http://www.imdb.com/title/tt1535108"
+                     }, {
+                     "Name": "TheMovieDb",
+                     "Url": "http://www.themoviedb.org/movie/68724"
+                     }
+                     ],
+    "MediaSources": [{
+                     "Protocol": "File",
+                     "Id": "4998a9df017164441770ad3fefea42f1",
+                     "Path": "F:\\media\\film\\Elysium (2013)\\Elysium (2013).m4v",
+                     "Type": "Default",
+                     "Container": "m4v",
+                     "Size": 8888246050,
+                     "Name": "1080P/H264/AAC",
+                     "RunTimeTicks": 65755870000,
+                     "ReadAtNativeFramerate": false,
+                     "SupportsTranscoding": true,
+                     "SupportsDirectStream": true,
+                     "SupportsDirectPlay": true,
+                     "RequiresOpening": false,
+                     "RequiresClosing": false,
+                     "VideoType": "VideoFile",
+                     "MediaStreams": [{
+                                      "Codec": "h264",
+                                      "Language": "und",
+                                      "IsInterlaced": false,
+                                      "BitRate": 7056942,
+                                      "BitDepth": 8,
+                                      "RefFrames": 4,
+                                      "IsDefault": true,
+                                      "IsForced": false,
+                                      "Height": 804,
+                                      "Width": 1920,
+                                      "AverageFrameRate": 23.97596,
+                                      "RealFrameRate": 47.95205,
+                                      "Profile": "High",
+                                      "Type": "Video",
+                                      "AspectRatio": "2.40:1",
+                                      "Index": 0,
+                                      "IsExternal": false,
+                                      "IsTextSubtitleStream": false,
+                                      "SupportsExternalStream": false,
+                                      "PixelFormat": "yuv420p",
+                                      "Level": 41,
+                                      "IsAnamorphic": false,
+                                      "IsCabac": true
+                                      }, {
+                                      "Codec": "aac",
+                                      "Language": "eng",
+                                      "IsInterlaced": false,
+                                      "ChannelLayout": "stereo",
+                                      "BitRate": 321916,
+                                      "Channels": 2,
+                                      "SampleRate": 48000,
+                                      "IsDefault": true,
+                                      "IsForced": false,
+                                      "Profile": "LC",
+                                      "Type": "Audio",
+                                      "Index": 1,
+                                      "IsExternal": false,
+                                      "IsTextSubtitleStream": false,
+                                      "SupportsExternalStream": false,
+                                      "Level": 0
+                                      }, {
+                                      "Codec": "ac3",
+                                      "Language": "eng",
+                                      "IsInterlaced": false,
+                                      "ChannelLayout": "5.1",
+                                      "BitRate": 640000,
+                                      "Channels": 6,
+                                      "SampleRate": 48000,
+                                      "IsDefault": false,
+                                      "IsForced": false,
+                                      "Type": "Audio",
+                                      "Index": 2,
+                                      "IsExternal": false,
+                                      "IsTextSubtitleStream": false,
+                                      "SupportsExternalStream": false,
+                                      "Level": 0
+                                      }, {
+                                      "Codec": "dca",
+                                      "Language": "eng",
+                                      "IsInterlaced": false,
+                                      "ChannelLayout": "5.1",
+                                      "BitRate": 1536000,
+                                      "Channels": 6,
+                                      "SampleRate": 48000,
+                                      "IsDefault": false,
+                                      "IsForced": false,
+                                      "Profile": "DTS-HD MA",
+                                      "Type": "Audio",
+                                      "Index": 3,
+                                      "IsExternal": false,
+                                      "IsTextSubtitleStream": false,
+                                      "SupportsExternalStream": false,
+                                      "Level": 0
+                                      }, {
+                                      "Codec": "mov_text",
+                                      "Language": "eng",
+                                      "IsInterlaced": false,
+                                      "IsDefault": false,
+                                      "IsForced": false,
+                                      "Type": "Subtitle",
+                                      "Index": 4,
+                                      "IsExternal": false,
+                                      "IsTextSubtitleStream": true,
+                                      "SupportsExternalStream": true,
+                                      "Level": 0
+                                      }
+                                      ],
+                     "PlayableStreamFileNames": [],
+                     "Formats": ["mov", "mp4", "m4a", "3gp", "3g2", "mj2"],
+                     "Bitrate": 10813630,
+                     "RequiredHttpHeaders": {},
+                     "DefaultAudioStreamIndex": 1
+                     }
+                     ],
+    "CriticRating": 68,
+    "CriticRatingSummary": "After the heady sci-fi thrills of District 9, Elysium is a bit of a comedown for director Neill Blomkamp, but on its own terms, it delivers just often enough to satisfy.",
+    "Path": "F:\\media\\film\\Elysium (2013)\\Elysium (2013).m4v",
+    "OfficialRating": "R",
+    "Overview": "In the year 2159, two classes of people exist: the very wealthy who live on a pristine man-made space station called Elysium, and the rest, who live on an overpopulated, ruined Earth. Secretary Rhodes (Jodie Foster), a hard line government ofﬁcial, will stop at nothing to enforce anti-immigration laws and preserve the luxurious lifestyle of the citizens of Elysium. That doesn’t stop the people of Earth from trying to get in, by any means they can. When unlucky Max (Matt Damon) is backed into a corner, he agrees to take on a daunting mission that, if successful, will not only save his life, but could bring equality to these polarized worlds.",
+    "ShortOverview": "In the year 2154, the very wealthy live on a man-made space station while the rest of the population resides on a ruined Earth. A man takes on a mission that could bring equality to the polarized worlds.",
+    "Taglines": ["He can save us all."],
+    "Genres": ["Action", "Drama", "Sci-Fi"],
+    "CommunityRating": 6.7,
+    "VoteCount": 248061,
+    "RunTimeTicks": 65755870000,
+    "PlayAccess": "Full",
+    "ProductionYear": 2013,
+    "IsPlaceHolder": false,
+    "RemoteTrailers": [{
+                       "Url": "http://www.youtube.com/watch?v=oIBtePb-dGY",
+                       "Name": "Elysium Trailer",
+                       "VideoSize": "HighDefinition"
+                       }
+                       ],
+    "ProviderIds": {
+        "Tmdb": "68724",
+        "Imdb": "tt1535108"
+    },
+    "IsHD": true,
+    "IsFolder": false,
+    "ParentId": "3ba29c88311a3ef5b6aaeaf5a952487c",
+    "Type": "Movie",
+    "People": [{
+               "Name": "Matt Damon",
+               "Id": "573ac9b0a3df39a5cfe89a631fcf3597",
+               "Role": "Max",
+               "Type": "Actor",
+               "PrimaryImageTag": "352766a7a86ddf38eba3f4a929c5d34b"
+               }, {
+               "Name": "Jodie Foster",
+               "Id": "e6775507a5c5ceb1c40aa0c3ff31acf9",
+               "Role": "Delacourt",
+               "Type": "Actor"
+               }, {
+               "Name": "Sharlto Copley",
+               "Id": "a831840872d822f372de3a3cd383c83a",
+               "Role": "Kruger",
+               "Type": "Actor"
+               }, {
+               "Name": "Alice Braga",
+               "Id": "877439f6ac67723c2eecff0e1f0c2d57",
+               "Role": "Frey",
+               "Type": "Actor"
+               }, {
+               "Name": "Diego Luna",
+               "Id": "412f22f4f6a968c56d63599deeec56e8",
+               "Role": "Julio",
+               "Type": "Actor"
+               }, {
+               "Name": "Wagner Moura",
+               "Id": "18f7e8e0865a8ab22bd459860085e3eb",
+               "Role": "Spider",
+               "Type": "Actor"
+               }, {
+               "Name": "William Fichtner",
+               "Id": "bd3cf603ffc5b6a4490c778cc3e57c1c",
+               "Role": "John Carlyle",
+               "Type": "Actor"
+               }, {
+               "Name": "Faran Tahir",
+               "Id": "da017198b33228c3d4ceb49a68f583cc",
+               "Role": "President Patel",
+               "Type": "Actor"
+               }, {
+               "Name": "Jose Pablo Cantillo",
+               "Id": "b4fb81075c88cdbb8f7789e8a24f0d4c",
+               "Role": "Sandro",
+               "Type": "Actor"
+               }, {
+               "Name": "Maxwell Perry Cotton",
+               "Id": "db5d21515b41463cf53fcd30237ce6c8",
+               "Role": "Young Max",
+               "Type": "Actor"
+               }, {
+               "Name": "Brandon Auret",
+               "Id": "fd03a7e3b983e354a908cea9dd1eef59",
+               "Role": "Drake",
+               "Type": "Actor"
+               }, {
+               "Name": "Josh Blacker",
+               "Id": "4e6cac8d92a8bb97412b76b49bd63081",
+               "Role": "Crowe",
+               "Type": "Actor"
+               }, {
+               "Name": "Emma Tremblay",
+               "Id": "d1a3708d9e32311cd0f4f2439eab2862",
+               "Role": "Matilda",
+               "Type": "Actor"
+               }, {
+               "Name": "Adrian Holmes",
+               "Id": "50623dc55e613dd289e96c4d24f27e88",
+               "Role": "Manuel",
+               "Type": "Actor"
+               }, {
+               "Name": "Jared Keeso",
+               "Id": "c89e9d00b32e4f3fb773bf342eebac8d",
+               "Role": "Rico",
+               "Type": "Actor"
+               }, {
+               "Name": "Talisa Soto",
+               "Id": "bd7b1e789e6046bc6c17aa32caf8f814",
+               "Role": "(uncredited)",
+               "Type": "Actor"
+               }, {
+               "Name": "Michael Shanks",
+               "Id": "09bfcd2b685bc4dc96710777bf143caa",
+               "Role": "CCB Agent",
+               "Type": "Actor"
+               }, {
+               "Name": "Carly Pope",
+               "Id": "fdd27cea76de290c6d81ae375a77ecc5",
+               "Role": "CCB Agent",
+               "Type": "Actor"
+               }, {
+               "Name": "Ona Grauer",
+               "Id": "0a6a0fbfc4b0f52c21e7bffc48ce74b0",
+               "Role": "CCB Agent",
+               "Type": "Actor"
+               }, {
+               "Name": "Terry Chen",
+               "Id": "6b1255e1caf7e43cd1591276d9438229",
+               "Role": "Technician",
+               "Type": "Actor"
+               }, {
+               "Name": "Chris Shields",
+               "Id": "2fc2dd55f9a17c4d86f89cbe9cff0bfd",
+               "Role": "Dr. Faizel",
+               "Type": "Actor"
+               }, {
+               "Name": "Neill Blomkamp",
+               "Id": "60c1bd188ec7ed5675be51c2e3a807dd",
+               "Role": "Director",
+               "Type": "Director"
+               }, {
+               "Name": "Neill Blomkamp",
+               "Id": "60c1bd188ec7ed5675be51c2e3a807dd",
+               "Role": "Writer",
+               "Type": "Writer"
+               }, {
+               "Name": "Simon Kinberg",
+               "Id": "c3909242358e420b4acc0ecf87004ef3",
+               "Role": "Producer",
+               "Type": "Producer"
+               }, {
+               "Name": "Giorgio Armani",
+               "Id": "789c6b52e8a6ea6e3d28b28487f362ab",
+               "Role": "Costume Design",
+               "Type": "Costume & Make-Up"
+               }, {
+               "Name": "Ryan Amon",
+               "Id": "e80951974f781c225ebfda0fb52e36ae",
+               "Role": "Original Music Composer",
+               "Type": "Sound"
+               }, {
+               "Name": "Trent Opaloch",
+               "Id": "cd75562ac8058eb5aba04df9194d960b",
+               "Role": "Director of Photography",
+               "Type": "Camera"
+               }, {
+               "Name": "Sue Baden-Powell",
+               "Id": "904ff4d747f4c27fd5e414c0d8212f96",
+               "Role": "Executive Producer",
+               "Type": "Production"
+               }, {
+               "Name": "Bill Block",
+               "Id": "7f7ed38219c4ae9e168368337e6b4009",
+               "Role": "Executive Producer",
+               "Type": "Production"
+               }, {
+               "Name": "Julian Clarke",
+               "Id": "d1ee20bdaa425f81d3c9a80d5144e9db",
+               "Role": "Editor",
+               "Type": "Editing"
+               }, {
+               "Name": "Lee Smith",
+               "Id": "40384ac8fc8df66d0050bc05746f21f5",
+               "Role": "Editor",
+               "Type": "Editing"
+               }, {
+               "Name": "Francine Maisler",
+               "Id": "c6c3e8a670a9da0b81f4050d3f713360",
+               "Role": "Casting",
+               "Type": "Production"
+               }, {
+               "Name": "Philip Ivey",
+               "Id": "4585ba2e96cff36b65a194d4ae754dde",
+               "Role": "Production Design",
+               "Type": "Art"
+               }, {
+               "Name": "April Ferry",
+               "Id": "bf8b24968113b8d166deae47c98846ea",
+               "Role": "Costume Design",
+               "Type": "Costume & Make-Up"
+               }
+               ],
+    "Studios": [{
+                "Name": "Sony Pictures Entertainment (SPE)",
+                "Id": "f58ae7f82bf9b3803f7f6319276b0f9d"
+                }, {
+                "Name": "TriStar Pictures",
+                "Id": "03832b0164b9c5162ccdbc247afa3da6"
+                }, {
+                "Name": "Media Rights Capital",
+                "Id": "4661f8ca8ecedcb663a8a39128088afc"
+                }, {
+                "Name": "QED International",
+                "Id": "23c0339377f643747bb5a5a19031912b"
+                }, {
+                "Name": "Alpha Core",
+                "Id": "051d4ca023a558014e814deb9ef1147c"
+                }, {
+                "Name": "Simon Kinberg Productions",
+                "Id": "7f7f70a53be0ef87d7313ff2212736f2"
+                }
+                ],
+    "LocalTrailerCount": 0,
+    "UserData": {
+        "PlaybackPositionTicks": 0,
+        "PlayCount": 0,
+        "IsFavorite": false,
+        "Played": false,
+        "Key": "68724"
+    },
+    "DisplayPreferencesId": "dbf7709c41faaa746463d67978eb863d",
+    "Tags": [],
+    "Keywords": ["space station", "class conflict"],
+    "PrimaryImageAspectRatio": 0.666666666666667,
+    "OriginalPrimaryImageAspectRatio": 0.666666666666667,
+    "MediaStreams": [{
+                     "Codec": "h264",
+                     "Language": "und",
+                     "IsInterlaced": false,
+                     "BitRate": 7056942,
+                     "BitDepth": 8,
+                     "RefFrames": 4,
+                     "IsDefault": true,
+                     "IsForced": false,
+                     "Height": 804,
+                     "Width": 1920,
+                     "AverageFrameRate": 23.97596,
+                     "RealFrameRate": 47.95205,
+                     "Profile": "High",
+                     "Type": "Video",
+                     "AspectRatio": "2.40:1",
+                     "Index": 0,
+                     "IsExternal": false,
+                     "IsTextSubtitleStream": false,
+                     "SupportsExternalStream": false,
+                     "PixelFormat": "yuv420p",
+                     "Level": 41,
+                     "IsAnamorphic": false,
+                     "IsCabac": true
+                     }, {
+                     "Codec": "aac",
+                     "Language": "eng",
+                     "IsInterlaced": false,
+                     "ChannelLayout": "stereo",
+                     "BitRate": 321916,
+                     "Channels": 2,
+                     "SampleRate": 48000,
+                     "IsDefault": true,
+                     "IsForced": false,
+                     "Profile": "LC",
+                     "Type": "Audio",
+                     "Index": 1,
+                     "IsExternal": false,
+                     "IsTextSubtitleStream": false,
+                     "SupportsExternalStream": false,
+                     "Level": 0
+                     }, {
+                     "Codec": "ac3",
+                     "Language": "eng",
+                     "IsInterlaced": false,
+                     "ChannelLayout": "5.1",
+                     "BitRate": 640000,
+                     "Channels": 6,
+                     "SampleRate": 48000,
+                     "IsDefault": false,
+                     "IsForced": false,
+                     "Type": "Audio",
+                     "Index": 2,
+                     "IsExternal": false,
+                     "IsTextSubtitleStream": false,
+                     "SupportsExternalStream": false,
+                     "Level": 0
+                     }, {
+                     "Codec": "dca",
+                     "Language": "eng",
+                     "IsInterlaced": false,
+                     "ChannelLayout": "5.1",
+                     "BitRate": 1536000,
+                     "Channels": 6,
+                     "SampleRate": 48000,
+                     "IsDefault": false,
+                     "IsForced": false,
+                     "Profile": "DTS-HD MA",
+                     "Type": "Audio",
+                     "Index": 3,
+                     "IsExternal": false,
+                     "IsTextSubtitleStream": false,
+                     "SupportsExternalStream": false,
+                     "Level": 0
+                     }, {
+                     "Codec": "mov_text",
+                     "Language": "eng",
+                     "IsInterlaced": false,
+                     "IsDefault": false,
+                     "IsForced": false,
+                     "Type": "Subtitle",
+                     "Index": 4,
+                     "IsExternal": false,
+                     "IsTextSubtitleStream": true,
+                     "SupportsExternalStream": true,
+                     "Level": 0
+                     }
+                     ],
+    "VideoType": "VideoFile",
+    "ImageTags": {
+        "Primary": "0860dc91b2e74adecca440431c79f96f",
+        "Banner": "1e7081fb9331b786e97ae04a755639f4",
+        "Logo": "8c0be4c036a27da884aaf65893f46eae",
+        "Thumb": "c5f677199fb6f12e05a3f884c3143be4"
+    },
+    "BackdropImageTags": ["b1fcdd641c6d237d38beca04a10426b8", "b466dfc7e0c5531d250d9a35af96613d", "711cb7a465c1a8f76574c1f240b5d1ec", "bd21cef4efb81477e8cd12bd896b9757"],
+    "ScreenshotImageTags": [],
+    "Chapters": [{
+                 "StartPositionTicks": 0,
+                 "Name": "Chapter 1"
+                 }, {
+                 "StartPositionTicks": 4226900000,
+                 "Name": "Chapter 2"
+                 }, {
+                 "StartPositionTicks": 7194450000,
+                 "Name": "Chapter 3"
+                 }, {
+                 "StartPositionTicks": 11677260000,
+                 "Name": "Chapter 4"
+                 }, {
+                 "StartPositionTicks": 15349260000,
+                 "Name": "Chapter 5"
+                 }, {
+                 "StartPositionTicks": 18024430000,
+                 "Name": "Chapter 6"
+                 }, {
+                 "StartPositionTicks": 23621270000,
+                 "Name": "Chapter 7"
+                 }, {
+                 "StartPositionTicks": 34640610000,
+                 "Name": "Chapter 8"
+                 }, {
+                 "StartPositionTicks": 36592980000,
+                 "Name": "Chapter 9"
+                 }, {
+                 "StartPositionTicks": 38497380000,
+                 "Name": "Chapter 10"
+                 }, {
+                 "StartPositionTicks": 40427650000,
+                 "Name": "Chapter 11"
+                 }, {
+                 "StartPositionTicks": 42340390000,
+                 "Name": "Chapter 12"
+                 }, {
+                 "StartPositionTicks": 46199660000,
+                 "Name": "Chapter 13"
+                 }, {
+                 "StartPositionTicks": 49702330000,
+                 "Name": "Chapter 14"
+                 }, {
+                 "StartPositionTicks": 54200150000,
+                 "Name": "Chapter 15"
+                 }, {
+                 "StartPositionTicks": 57446310000,
+                 "Name": "Chapter 16"
+                 }
+                 ],
+    "LocationType": "FileSystem",
+    "MediaType": "Video",
+    "HomePageUrl": "http://www.itsbetterupthere.com/site/",
+    "ProductionLocations": ["United States of America"],
+    "Budget": 115000000,
+    "Revenue": 286140700,
+    "LockedFields": [],
+    "LockData": false
+}
