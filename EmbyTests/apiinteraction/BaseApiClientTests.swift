@@ -14,6 +14,7 @@ class BaseApiClientTests: XCTestCase {
     let device = iOSDevice()
     let applicationVersion = "1"
     var baseApiClient: BaseApiClient?
+    let baseItemDto = BaseItemDto(jSON: ["Id": "TestId"])!
     
     override func setUp() {
         super.setUp()
@@ -75,7 +76,6 @@ class BaseApiClientTests: XCTestCase {
     }
     
     func testGetImageUrlWithBaseItemDtoForBackdropImage() {
-        let baseItemDto = BaseItemDto(jSON: JSON_Object())!
         baseItemDto.id = "imageId";
         baseItemDto.backdropImageTags = ["png"]
         
@@ -89,7 +89,6 @@ class BaseApiClientTests: XCTestCase {
     }
     
     func testGetImageUrlWithBaseItemDtoForScreenshotImage() {
-        let baseItemDto = BaseItemDto(jSON: JSON_Object())!
         baseItemDto.id = "imageId";
         baseItemDto.screenshotImageTags = ["png"]
         
@@ -106,8 +105,6 @@ class BaseApiClientTests: XCTestCase {
         var chapterInfoDto = ChapterInfoDto(name: "chapter1", startPositionTicks: 0)
         chapterInfoDto.imageTag = "png"
         
-        
-        let baseItemDto = BaseItemDto(jSON: JSON_Object())!
         baseItemDto.id = "imageId";
         baseItemDto.chapters = [chapterInfoDto]
         
@@ -121,7 +118,6 @@ class BaseApiClientTests: XCTestCase {
     }
     
     func testGetImageUrlWithBaseItemDtoDefaultCase() {
-        let baseItemDto = BaseItemDto(jSON: JSON_Object())!
         baseItemDto.id = "imageId";
         baseItemDto.imageTags = [ImageType.Primary: "png"]
         
@@ -262,13 +258,7 @@ class BaseApiClientTests: XCTestCase {
         } catch {
         }
     }
-    
-    func testGetBackdropImageUrlsForNoId() {
-        let backdropImageUrls = baseApiClient!.getBackdropImageUrls(BaseItemDto(jSON: JSON_Object())!, options: ImageOptions())
-        
-        XCTAssertNotNil(backdropImageUrls)
-        XCTAssertTrue(backdropImageUrls!.isEmpty)
-    }
+
 
     //TODO: Remaining unit tests
     //public final func getBackdropImageUrls(item: BaseItemDto, var options: ImageOptions) -> [String]? {
