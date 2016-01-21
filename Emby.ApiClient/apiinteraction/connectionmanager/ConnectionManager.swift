@@ -75,9 +75,9 @@ public class ConnectionManager: ConnectionManagerProtocol {
                 
                 let serverInfo = ServerInfo()
                 
-                serverInfo.localAddress = serverDiscoveryInfoEach.address!
-                serverInfo.id = serverDiscoveryInfoEach.id!
-                serverInfo.name = serverDiscoveryInfoEach.name!
+                serverInfo.localAddress = serverDiscoveryInfoEach.address
+                serverInfo.id = serverDiscoveryInfoEach.id
+                serverInfo.name = serverDiscoveryInfoEach.name
                 
                 credentials.addOrUpdateServer(serverInfo)
             }
@@ -649,9 +649,9 @@ public class ConnectionManager: ConnectionManagerProtocol {
             for server in servers {
                 let serverInfo = ServerInfo()
                 
-                serverInfo.localAddress = server.address!
-                serverInfo.id = server.id!
-                serverInfo.name = server.name!
+                serverInfo.localAddress = server.address
+                serverInfo.id = server.id
+                serverInfo.name = server.name
                 
                 serverInfoList.append(serverInfo)
             }

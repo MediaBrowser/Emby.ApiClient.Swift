@@ -9,26 +9,13 @@
 import Foundation
 import CocoaAsyncSocket
 
-//package mediabrowser.apiinteraction.discovery;
-//
-//import mediabrowser.apiinteraction.Response;
-//import mediabrowser.model.apiclient.ServerDiscoveryInfo;
-//import mediabrowser.model.logging.ILogger;
-//import mediabrowser.model.serialization.IJsonSerializer;
-//
-//import java.io.IOException;
-//import java.net.*;
-//import java.util.ArrayList;
-//import java.util.Date;
-//import java.util.Enumeration;
-
 public class ServerLocator: ServerDiscoveryProtocol, GCDAsyncUdpSocketDelegate {
     
     private let logger: ILogger
     private let jsonSerializer: IJsonSerializer
     
     private var onSuccess: (([ServerDiscoveryInfo]) -> Void)?
-    var serverDiscoveryInfo = [ServerDiscoveryInfo]()
+    var serverDiscoveryInfo: Set<ServerDiscoveryInfo> = []
     
     public init( logger: ILogger, jsonSerializer: IJsonSerializer) {
         self.logger = logger;
@@ -39,25 +26,22 @@ public class ServerLocator: ServerDiscoveryProtocol, GCDAsyncUdpSocketDelegate {
     // MARK: - utility methods
     
     public func findServers(timeoutMs: Int, onSuccess: ([ServerDiscoveryInfo]) -> Void, onError: (ErrorType) -> Void)
-        {
+    {
         let udpSocket = GCDAsyncUdpSocket(delegate: self, delegateQueue: dispatch_get_main_queue())
         
         // Find the server using UDP broadcast
-            
+        
         do {
             self.onSuccess = onSuccess
             
             try udpSocket.enableBroadcast(true)
-
-            let sendData = "who is EmbyServer?".dataUsingEncoding(NSUTF8StringEncoding);
-
-            //Try the 255.255.255.255 first
             
+            let sendData = "who is EmbyServer?".dataUsingEncoding(NSUTF8StringEncoding);
             let host = "255.255.255.255"
             let port: UInt16 = 7359;
             
             udpSocket.sendData(sendData, toHost: host, port: port, withTimeout: NSTimeInterval(Double(timeoutMs)/1000.0), tag: 1)
-
+            
             print("ServerLocator >>> Request packet sent to: 255.255.255.255 (DEFAULT)");
             
         } catch {
@@ -65,61 +49,16 @@ public class ServerLocator: ServerDiscoveryProtocol, GCDAsyncUdpSocketDelegate {
             
             onError(error)
         }
-        
-//        try {
-//            // Broadcast the message over all the network interfaces
-//            Enumeration interfaces = NetworkInterface.getNetworkInterfaces();
-//            while (interfaces.hasMoreElements()) {
-//                NetworkInterface networkInterface = (NetworkInterface)interfaces.nextElement();
-//                
-//                if (networkInterface.isLoopback() || !networkInterface.isUp()) {
-//                    continue; // Don't want to broadcast to the loopback interface
-//                }
-//                
-//                for (InterfaceAddress interfaceAddress : networkInterface.getInterfaceAddresses()) {
-//                    InetAddress broadcast = interfaceAddress.getBroadcast();
-//                    if (broadcast == null) {
-//                        continue;
-//                    }
-//                    
-//                    // Send the broadcast package!
-//                    try {
-//                        DatagramPacket sendPacket = new DatagramPacket(sendData, sendData.length, broadcast, port);
-//                        c.send(sendPacket);
-//                    } catch (Exception e) {
-//                        logger.ErrorException("Error sending DatagramPacket", e);
-//                    }
-//                    
-//                    logger.Debug(getClass().getName() + ">>> Request packet sent to: " + broadcast.getHostAddress() + "; Interface: " + networkInterface.getDisplayName());
-//                }
-//            }
-//            
-//            logger.Debug(getClass().getName() + ">>> Done looping over all network interfaces. Now waiting for a reply!");
-//            
-//            Receive(c, timeoutMs, response);
-//            
-//            //Close the port!
-//            c.close();
-//            
-//        } catch (Exception ex) {
-//            
-//            logger.ErrorException("Error finding servers", ex);
-//            
-//            response.onError(ex);
-//        }
     }
     
     @objc func finished() {
         
         print("Found \(serverDiscoveryInfo.count) servers");
         
-        self.onSuccess?(serverDiscoveryInfo)
+        self.onSuccess?(Array(serverDiscoveryInfo))
     }
     
-    private func Receive(c: GCDAsyncUdpSocket, timeoutMs: UInt, onResponse: ([ServerDiscoveryInfo]) -> Void) throws { // IOException {
-        
-//        ArrayList<ServerDiscoveryInfo> servers = new ArrayList<ServerDiscoveryInfo>();
-//        ArrayList<String> foundServerIds = new ArrayList<String>();
+    private func Receive(c: GCDAsyncUdpSocket, timeoutMs: UInt, onResponse: ([ServerDiscoveryInfo]) -> Void) throws {
         
         serverDiscoveryInfo = []
         let timeout = NSTimeInterval(Double(timeoutMs) / 1000.0)
@@ -131,57 +70,7 @@ public class ServerLocator: ServerDiscoveryProtocol, GCDAsyncUdpSocketDelegate {
         }
         catch {
             print (error)
-            //                logger.Debug("Server discovery timed out waiting for response.");
-            //                break;
         }
-        
-//        while (timeout > 0){
-//        
-//        while (timeoutMs > 0){
-//            
-//            long startTime = System.currentTimeMillis();
-//            
-//            // Wait for a response
-//            byte[] recvBuf = new byte[15000];
-//            DatagramPacket receivePacket = new DatagramPacket(recvBuf, recvBuf.length);
-//            c.setSoTimeout((int)timeoutMs);
-//            
-//            try {
-//                c.receive(receivePacket);
-//            }
-//            catch (SocketTimeoutException e) {
-//                logger.Debug("Server discovery timed out waiting for response.");
-//                break;
-//            }
-//            
-//            SocketAddress remoteEndpoint = c.getRemoteSocketAddress();
-//            
-//            // We have a response
-//            logger.Debug(getClass().getName() + ">>> Broadcast response from server: " + receivePacket.getAddress().getHostAddress());
-//            
-//            // Check if the message is correct
-//            String message = new String(receivePacket.getData()).trim();
-//            
-//            logger.Debug(getClass().getName() + ">>> Broadcast response from server: " + message);
-//            
-//            ServerDiscoveryInfo serverInfo = jsonSerializer.DeserializeFromString(message, ServerDiscoveryInfo.class);
-//            
-//            if (remoteEndpoint != null){
-//                serverInfo.setEndpointAddress(remoteEndpoint.toString());
-//            }
-//            
-//            if (foundServerIds.indexOf(serverInfo.getId()) == -1){
-//                foundServerIds.add(serverInfo.getId());
-//                servers.add(serverInfo);
-//            }
-//            
-//            long endTime = System.currentTimeMillis();
-//            timeoutMs = timeoutMs - (endTime - startTime);
-//        }
-//        
-//        logger.Debug("Found %d servers", servers.size());
-//        
-//        response.onResponse(servers);
     }
     
     
@@ -254,7 +143,7 @@ public class ServerLocator: ServerDiscoveryProtocol, GCDAsyncUdpSocketDelegate {
         do {
             if let serverInfo: ServerDiscoveryInfo = try JsonSerializer().DeserializeFromString( json!, type:nil) {
                 
-                self.serverDiscoveryInfo.append(serverInfo)
+                self.serverDiscoveryInfo.insert(serverInfo)
             }
         } catch {
             print("\(error)")
