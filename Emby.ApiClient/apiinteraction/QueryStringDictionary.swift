@@ -79,7 +79,7 @@ public class QueryStringDictionary //extends java.util.HashMap<String, String>
     
     public final func addIfNotNilOrEmpty(_ name: String, value: String?) {
         if let val = value, !val.isEmpty {
-            addIfNotNil(name, value: Int(value))
+            addIfNotNil(name, value: Int(value!))
         }
     }
 

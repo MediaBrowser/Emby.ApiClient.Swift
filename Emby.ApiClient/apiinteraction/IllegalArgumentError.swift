@@ -5,6 +5,6 @@
 
 import Foundation
 
-public enum IllegalArgumentError: ErrorType {
+public enum IllegalArgumentError: Error {
     case EmptyString(argumentName: String)
 }

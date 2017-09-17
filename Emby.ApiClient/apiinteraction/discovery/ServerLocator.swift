@@ -9,7 +9,7 @@
 import Foundation
 import CocoaAsyncSocket
 
-public class ServerLocator: ServerDiscoveryProtocol, GCDAsyncUdpSocketDelegate {
+public class ServerLocator: NSObject, ServerDiscoveryProtocol, GCDAsyncUdpSocketDelegate {
     
     private let logger: ILogger
     private let jsonSerializer: IJsonSerializer
@@ -25,9 +25,9 @@ public class ServerLocator: ServerDiscoveryProtocol, GCDAsyncUdpSocketDelegate {
     
     // MARK: - utility methods
     
-    public func findServers(timeoutMs: Int, onSuccess: ([ServerDiscoveryInfo]) -> Void, onError: (ErrorType) -> Void)
+    public func findServers(timeoutMs: Int, onSuccess: @escaping ([ServerDiscoveryInfo]) -> Void, onError: (Error) -> Void)
     {
-        let udpSocket = GCDAsyncUdpSocket(delegate: self, delegateQueue: dispatch_get_main_queue())
+        let udpSocket = GCDAsyncUdpSocket(delegate: self, delegateQueue: DispatchQueue.main)
         
         // Find the server using UDP broadcast
         
@@ -36,11 +36,11 @@ public class ServerLocator: ServerDiscoveryProtocol, GCDAsyncUdpSocketDelegate {
             
             try udpSocket.enableBroadcast(true)
             
-            let sendData = "who is EmbyServer?".dataUsingEncoding(NSUTF8StringEncoding);
+            let sendData = "who is EmbyServer?".data(using: String.Encoding.utf8);
             let host = "255.255.255.255"
             let port: UInt16 = 7359;
             
-            udpSocket.sendData(sendData, toHost: host, port: port, withTimeout: NSTimeInterval(Double(timeoutMs)/1000.0), tag: 1)
+            udpSocket.send(sendData!, toHost: host, port: port, withTimeout: TimeInterval(Double(timeoutMs)/1000.0), tag: 1)
             
             print("ServerLocator >>> Request packet sent to: 255.255.255.255 (DEFAULT)");
             
@@ -61,9 +61,9 @@ public class ServerLocator: ServerDiscoveryProtocol, GCDAsyncUdpSocketDelegate {
     private func Receive(c: GCDAsyncUdpSocket, timeoutMs: UInt, onResponse: ([ServerDiscoveryInfo]) -> Void) throws {
         
         serverDiscoveryInfo = []
-        let timeout = NSTimeInterval(Double(timeoutMs) / 1000.0)
+        let timeout = TimeInterval(Double(timeoutMs) / 1000.0)
         
-        NSTimer.scheduledTimerWithTimeInterval(timeout, target: self, selector: Selector("finished"), userInfo: nil, repeats: false)
+        Timer.scheduledTimer(timeInterval: timeout, target: self, selector: Selector("finished"), userInfo: nil, repeats: false)
         
         do {
             try c.beginReceiving()
@@ -110,7 +110,7 @@ public class ServerLocator: ServerDiscoveryProtocol, GCDAsyncUdpSocketDelegate {
         
         print("didSendDataWithTag")
         do {
-            try self.Receive(sock, timeoutMs: UInt(1000), onResponse: { (serverDiscoveryInfo: [ServerDiscoveryInfo]) -> Void in
+            try self.Receive(c: sock, timeoutMs: UInt(1000), onResponse: { (serverDiscoveryInfo: [ServerDiscoveryInfo]) -> Void in
                 
                 print("serverDiscoveryInfo \(serverDiscoveryInfo)")
             })
@@ -135,13 +135,13 @@ public class ServerLocator: ServerDiscoveryProtocol, GCDAsyncUdpSocketDelegate {
      **/
     @objc public func udpSocket(sock: GCDAsyncUdpSocket!, didReceiveData data: NSData!, fromAddress address: NSData!, withFilterContext filterContext: AnyObject!) {
         
-        let json = NSString(data: data, encoding: NSUTF8StringEncoding) as? String
+        let json = NSString(data: data as Data, encoding: String.Encoding.utf8.rawValue) as String?
         
         // We have a response
-        print("ServerLocator >>> Broadcast response from server: \(sock.localAddress()): \(json)")
+        print("ServerLocator >>> Broadcast response from server: \(String(describing: sock.localAddress())): \(json)")
         
         do {
-            if let serverInfo: ServerDiscoveryInfo = try JsonSerializer().DeserializeFromString( json!, type:nil) {
+            if let serverInfo: ServerDiscoveryInfo = try JsonSerializer().DeserializeFromString( text: json!, type:nil) {
                 
                 self.serverDiscoveryInfo.insert(serverInfo)
             }

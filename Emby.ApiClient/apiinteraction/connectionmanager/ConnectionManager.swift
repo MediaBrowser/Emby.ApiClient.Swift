@@ -216,7 +216,7 @@ public class ConnectionManager: ConnectionManagerProtocol {
         self.connect(server: server, options: ConnectionOptions(), onSuccess: onSuccess, onError: onError)
     }
     
-    public func connect(server: ServerInfo, options: ConnectionOptions, onSuccess: (ConnectionResult) -> Void, onError: (Error) -> Void) {
+    public func connect(server: ServerInfo, options: ConnectionOptions, onSuccess: (ConnectionResult), onError: (Error) -> Void) {
         
         var tests = [ConnectionMode.Manual, ConnectionMode.Local, ConnectionMode.Remote]
         
@@ -326,7 +326,7 @@ public class ConnectionManager: ConnectionManagerProtocol {
         wakeOnLanSendTime: TimeInterval,
         options: ConnectionOptions,
         onSuccess: @escaping (ConnectionResult) -> Void,
-        onError: (Error) -> Void)
+        onError: @escaping (Error) -> Void)
     {
         
         if index >= tests.count {
@@ -479,7 +479,7 @@ public class ConnectionManager: ConnectionManagerProtocol {
     
     // MARK: - Connect Service Methods
     
-    func ensureConnectUser(credentials: ServerCredentials, onSuccess: () -> Void, onError: (Error) -> Void) {
+    func ensureConnectUser(credentials: ServerCredentials, onSuccess: @escaping () -> Void, onError: @escaping (Error) -> Void) {
         
         if let connectUser = connectUser, connectUser.id == credentials.connectUserId {
             onSuccess()
@@ -497,7 +497,7 @@ public class ConnectionManager: ConnectionManagerProtocol {
                 
                 try connectService.GetConnectUser(query: query, connectAccessToken: credentials.connectAccessToken, success: { (user) -> Void in
                     
-                    self.onConnectUserSignIn(user)
+                    self.onConnectUserSignIn(user: user)
                     onSuccess()
                     
                 }, failure: onError)
@@ -515,7 +515,7 @@ public class ConnectionManager: ConnectionManagerProtocol {
         connectionOptions: ConnectionOptions,
         credentials: ServerCredentials,
         onSuccess: (ConnectionResult) -> Void,
-        onError: (ErrorType) -> Void)
+        onError: (Error) -> Void)
     {
         guard var url = server.getAddress(connectionMode) else {
             preconditionFailure("Illegal Argument: No address for connection mode")
@@ -540,7 +540,7 @@ public class ConnectionManager: ConnectionManagerProtocol {
         }, failure: onError)
     }
     
-    func validateAuthentication(server: ServerInfo, connectionMode: ConnectionMode, onSuccess: () -> Void, onError: (ErrorType) -> Void) {
+    func validateAuthentication(server: ServerInfo, connectionMode: ConnectionMode, onSuccess: () -> Void, onError: (Error) -> Void) {
         
         let url = server.getAddress(connectionMode)!
         
@@ -593,16 +593,16 @@ public class ConnectionManager: ConnectionManagerProtocol {
             //server.accessToken = nil
         }
         
-        credentials.addOrUpdateServer(server)
-        saveUserInfoIntoCredentials(server, user: result.user)
-        credentialProvider.saveCredentials(credentials)
+        credentials.addOrUpdateServer(server: server)
+        saveUserInfoIntoCredentials(server: server, user: result.user)
+        credentialProvider.saveCredentials(credentials: credentials)
         
-        afterConnected(apiClient, options: options)
+        afterConnected(apiClient: apiClient, options: options)
         
-        onLocalUserSignIn(result.user)
+        onLocalUserSignIn(user: result.user)
     }
     
-    public func loginToConnect(username: String, password: String, onSuccess: () -> Void, onError: (ErrorType) -> Void) {
+    public func loginToConnect(username: String, password: String, onSuccess: () -> Void, onError: (Error) -> Void) {
         
         connectService.Authenticate(username, password: password, success: { (result) -> Void in
             
@@ -620,15 +620,15 @@ public class ConnectionManager: ConnectionManagerProtocol {
     
     // MARK: - Server PIN Methods
     
-    public func createPin(deviceId: String, onSuccess: (PinCreationResult) -> Void, onError: (ErrorType) -> Void) {
+    public func createPin(deviceId: String, onSuccess: (PinCreationResult) -> Void, onError: (Error) -> Void) {
         connectService.CreatePin(deviceId, success: onSuccess, failure: onError)
     }
     
-    public func getPinStatus(pin: PinCreationResult, onSuccess: (PinStatusResult) -> Void, onError: (ErrorType) -> Void) {
+    public func getPinStatus(pin: PinCreationResult, onSuccess: (PinStatusResult) -> Void, onError: (Error) -> Void) {
         connectService.GetPinStatus(pin, success: onSuccess, failure: onError)
     }
     
-    public func exchangePin(pin: PinCreationResult, onSuccess: (PinExchangeResult) -> Void, onError: (ErrorType) -> Void) {
+    public func exchangePin(pin: PinCreationResult, onSuccess: (PinExchangeResult) -> Void, onError: (Error) -> Void) {
         connectService.ExchangePin(pin, success: { (result) -> Void in
             
             let credentials = self.credentialProvider.getCredentials()
@@ -641,7 +641,7 @@ public class ConnectionManager: ConnectionManagerProtocol {
             }, failure: onError)
     }
     
-    public func getRegistrationInfo(featureName: String, connectedServerId: String, onSuccess: (RegistrationInfo) -> Void, onError: (ErrorType) -> Void) {
+    public func getRegistrationInfo(featureName: String, connectedServerId: String, onSuccess: (RegistrationInfo) -> Void, onError: (Error) -> Void) {
         
         serverDiscovery.findServers(1000, onSuccess: { (servers) -> Void in
             
@@ -795,7 +795,7 @@ public class ConnectionManager: ConnectionManagerProtocol {
     
     func saveUserInfoIntoCredentials(server: ServerInfo, user: UserDto) {
         let info = ServerUserInfo(id: user.id!, isSignedInOffline: true)
-        server.addOrUpdate(info)
+        server.addOrUpdate(user: info)
     }
     
     func normalizeAddress(address: String) -> String {
