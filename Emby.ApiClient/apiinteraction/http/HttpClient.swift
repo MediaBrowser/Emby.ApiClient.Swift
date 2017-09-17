@@ -19,7 +19,7 @@ public class HttpClient : IAsyncHttpClient {
         self.context = context;
     }
     
-    public func sendRequest<T : JSONSerializable>(request: HttpRequest, success: (T) -> Void, failure: (EmbyError) -> Void) {
+    public func sendRequest<T : JSONSerializable>(request: HttpRequest, success: @escaping (T) -> Void, failure: @escaping (EmbyError) -> Void) {
         
         Alamofire.request(request)
             .responseJSON { (res) -> Void in
@@ -44,7 +44,7 @@ public class HttpClient : IAsyncHttpClient {
         }
     }
     
-    public func sendCollectionRequest<T : JSONSerializable>(request: HttpRequest, success: ([T]) -> Void, failure: (EmbyError) -> Void) {
+    public func sendCollectionRequest<T : JSONSerializable>(request: HttpRequest, success: @escaping ([T]) -> Void, failure: @escaping (EmbyError) -> Void) {
         
         Alamofire.request(request)
             .responseJSON { (res) -> Void in
@@ -73,7 +73,8 @@ public class HttpClient : IAsyncHttpClient {
     }
 }
 
-public enum EmbyError: ErrorType {
+public enum EmbyError: Error {
+    
     case JsonDeserializationError
     case NetworkRequestError(String)
 }

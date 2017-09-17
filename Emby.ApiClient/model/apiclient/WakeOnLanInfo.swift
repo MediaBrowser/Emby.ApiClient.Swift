@@ -6,6 +6,9 @@
 import Foundation
 
 public class WakeOnLanInfo: NSObject, NSCoding {
+    public func encode(with aCoder: NSCoder) {
+    }
+    
     let macAddress: String
     let port: Int
     
@@ -18,10 +21,10 @@ public class WakeOnLanInfo: NSObject, NSCoding {
     // MARK: NSCoding
     
     public required convenience init?(coder aDecoder: NSCoder) {
-        guard let macAddress = aDecoder.decodeObjectForKey("") as? String
+        guard let macAddress = aDecoder.decodeObject(forKey: "") as? String
             else { return nil }
         
-        self.init(macAddress: macAddress, port: aDecoder.decodeIntegerForKey("port"))
+        self.init(macAddress: macAddress, port: aDecoder.decodeInteger(forKey: "port"))
     }
     
     public func encodeWithCoder(aCoder: NSCoder) {

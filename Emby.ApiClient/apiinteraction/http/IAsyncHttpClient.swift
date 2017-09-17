@@ -11,8 +11,8 @@ import Foundation
 import Alamofire
 
 public protocol IAsyncHttpClient {
-    func sendRequest<Value: JSONSerializable>(request: HttpRequest, success: (Value) -> Void, failure: (EmbyError) -> Void)
-    func sendCollectionRequest<Value: JSONSerializable>(request: HttpRequest, success: ([Value]) -> Void, failure: (EmbyError) -> Void)
+    func sendRequest<T : JSONSerializable>(request: HttpRequest, success: @escaping (T) -> Void, failure: @escaping (EmbyError) -> Void)
+    func sendCollectionRequest<T : JSONSerializable>(request: HttpRequest, success: @escaping ([T]) -> Void, failure: @escaping (EmbyError) -> Void)
 }
 
 //extension Array:JSONSerializable where Element: JSONSerializable {

@@ -15,9 +15,9 @@ public class JsonSerializer: IJsonSerializer {
     
     public func DeserializeFromString<T: JSONSerializable>(text: String, type: Any?) throws -> T? {
         
-        if let data = text.dataUsingEncoding(NSUTF8StringEncoding) where !text.isEmpty {
+        if let data = text.data(using: String.Encoding.utf8), !text.isEmpty {
             
-            let json = try NSJSONSerialization.JSONObjectWithData( data, options: [])
+            let json = try JSONSerialization.jsonObject( with: data, options: [])
             
             if let jsonObject = json as? JSON_Object {
                 return T(jSON: jsonObject)
@@ -33,8 +33,8 @@ public class JsonSerializer: IJsonSerializer {
     }
     
     public func serializeToString(obj: AnyObject) -> String {
-        if let jsonData = try? NSJSONSerialization.dataWithJSONObject(obj, options: []) {
-            return String(NSString(data: jsonData, encoding: NSUTF8StringEncoding))
+        if let jsonData = try? JSONSerialization.data(withJSONObject: obj, options: []) {
+            return String(describing: NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue))
         }
         
         return ""

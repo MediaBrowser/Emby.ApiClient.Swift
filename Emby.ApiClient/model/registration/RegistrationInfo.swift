@@ -28,9 +28,9 @@ public struct RegistrationInfo: JSONSerializable
             self.trial = trial
             self.registered = registered
             
-            let formatter = NSDateFormatter()
+            let formatter = DateFormatter()
             formatter.dateFormat = "yyyy-MM-dd"
-            self.expirationDate = formatter.dateFromString(expirationString)!
+            self.expirationDate = formatter.dateFromString(expirationString)! as NSDate
         }
         else {
             return nil

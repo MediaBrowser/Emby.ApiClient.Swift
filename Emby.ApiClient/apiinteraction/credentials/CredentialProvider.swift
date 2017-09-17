@@ -23,8 +23,8 @@ public class CredentialProvider: CredentialProviderProtocol { // ICredentialProv
     
     public func getCredentials() -> ServerCredentials {
     
-        if  let data = NSUserDefaults.standardUserDefaults().objectForKey("Emby Server Credentials") as? NSData,
-            let credentials = NSKeyedUnarchiver.unarchiveObjectWithData(data) as? ServerCredentials
+        if  let data = UserDefaults.standard.object(forKey: "Emby Server Credentials") as? NSData,
+            let credentials = NSKeyedUnarchiver.unarchiveObject(with: data as Data) as? ServerCredentials
         {
             return credentials
         }
@@ -34,8 +34,8 @@ public class CredentialProvider: CredentialProviderProtocol { // ICredentialProv
 
     public func saveCredentials(credentials: ServerCredentials) {
         
-        let data = NSKeyedArchiver.archivedDataWithRootObject(credentials)
-        NSUserDefaults.standardUserDefaults().setObject(data, forKey: "Emby Server Credentials")
+        let data = NSKeyedArchiver.archivedData(withRootObject: credentials)
+        UserDefaults.standard.set(data, forKey: "Emby Server Credentials")
 
     }
     

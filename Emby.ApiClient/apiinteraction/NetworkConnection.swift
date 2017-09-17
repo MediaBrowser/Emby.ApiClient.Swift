@@ -9,23 +9,20 @@
 import Foundation
 import CocoaAsyncSocket
 
-public class NetworkConnection: INetworkConnection, GCDAsyncUdpSocketDelegate {
+public class NetworkConnection: NSObject, INetworkConnection, GCDAsyncUdpSocketDelegate {
     
-    public init() {
-        
-    }
     
     public func sendWakeOnLan(macAddress: String, port: Int) {
-        let bytes = macBytesFromString(macAddress)!
+        let bytes = macBytesFromString(macAddress: macAddress)!
         let data = NSData(bytes: bytes, length: bytes.count)
         
-        let udpSocket = GCDAsyncUdpSocket(delegate: self, delegateQueue: dispatch_get_main_queue())
+        let udpSocket = GCDAsyncUdpSocket(delegate: self, delegateQueue: DispatchQueue.main)
         
         do {
             try udpSocket.enableBroadcast(true)
             
             let host = "255.255.255.255"
-            udpSocket.sendData(data, toHost: host, port: UInt16(port), withTimeout: 2, tag: 1)
+            udpSocket.send(data as Data, toHost: host, port: UInt16(port), withTimeout: 2, tag: 1)
             
             print("sendWakeOnLan send to 255.255.255.255")
             
@@ -35,12 +32,12 @@ public class NetworkConnection: INetworkConnection, GCDAsyncUdpSocketDelegate {
     }
     
     public func sendWakeOnLan(macAddress: String, ipAddress: String, port: Int) {
-        let bytes = macBytesFromString(macAddress)!
+        let bytes = macBytesFromString(macAddress: macAddress)!
         let data = NSData(bytes: bytes, length: bytes.count)
         
-        let udpSocket = GCDAsyncUdpSocket(delegate: self, delegateQueue: dispatch_get_main_queue())
+        let udpSocket = GCDAsyncUdpSocket(delegate: self, delegateQueue: DispatchQueue.main)
         
-        udpSocket.sendData(data, toHost: ipAddress, port: UInt16(port), withTimeout: 2, tag: 2)
+        udpSocket.send(data as Data, toHost: ipAddress, port: UInt16(port), withTimeout: 2, tag: 2)
         
         print("sendWakeOnLan send to \(ipAddress)")
     }
@@ -51,7 +48,7 @@ public class NetworkConnection: INetworkConnection, GCDAsyncUdpSocketDelegate {
     
     private func macBytesFromString(macAddress: String) -> [UInt8]? {
         let address = "01:23:45:67:89:AB"
-        let substrings = address.characters.split(":")
+        let substrings = address.characters.split(separator: ":")
         
         if substrings.count != 6 {
             return nil

@@ -11,8 +11,8 @@ import Foundation
 import Alamofire
 
 public struct HttpRequest : URLRequestConvertible
-{    
-    let method: Alamofire.Method
+{
+    let method: HTTPMethod
     let url: String
     
     let postData: QueryStringDictionary?
@@ -22,16 +22,16 @@ public struct HttpRequest : URLRequestConvertible
     
     var headers: HttpHeaders = HttpHeaders()
     
-    init(url: String, method: Alamofire.Method, postData: QueryStringDictionary? = nil) {
+    init(url: String, method: HTTPMethod, postData: QueryStringDictionary? = nil) {
         self.url = url
         self.method = method
         self.postData = postData
     }
     
-    public var URLRequest: NSMutableURLRequest {
+    public func asURLRequest() throws -> URLRequest {
         let url = NSURL(string: self.url)!
-        let request = NSMutableURLRequest(URL: url)
-        request.HTTPMethod = method.rawValue
+        let request = NSMutableURLRequest(url: url as URL)
+        request.httpMethod = method.rawValue
         
         
         let encoding = postData != nil ? Alamofire.ParameterEncoding.JSON : Alamofire.ParameterEncoding.URL
@@ -58,7 +58,7 @@ public struct HttpRequest : URLRequestConvertible
             newHeaders["Content-Type"] = "application/json"
         }
         
-        if let authParameter = newHeaders.authorizationParameter, authScheme = newHeaders.authorizationScheme {
+        if let authParameter = newHeaders.authorizationParameter, let authScheme = newHeaders.authorizationScheme {
             let value = authScheme + " " + authParameter
             newHeaders["X-Emby-Authorization"] = value
         }
