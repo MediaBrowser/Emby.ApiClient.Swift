@@ -148,37 +148,37 @@ public class BaseApiClient// implements IDisposable
     }
     
     public final func changeServerLocation(address: String) {
-        setServerAddress(address)
+        setServerAddress(value: address)
         
-        setAuthenticationInfo(nil, userId: nil)
+        setAuthenticationInfo(accessToken: nil, userId: nil)
     }
     
     public func setAuthenticationInfo(accessToken: String?, userId: String?) {
-        setCurrentUserId(userId)
-        setAccessToken(accessToken)
+        setCurrentUserId(value: userId)
+        setAccessToken(value: accessToken)
         resetHttpHeaders()
     }
     
     public func setAuthenticationInfo(accessToken: String?) {
-        setCurrentUserId(nil)
-        setAccessToken(accessToken)
+        setCurrentUserId(value: nil)
+        setAccessToken(value: accessToken)
         resetHttpHeaders()
     }
     
     public func clearAuthenticationInfo() {
-        setCurrentUserId(nil)
-        setAccessToken(nil)
+        setCurrentUserId(value: nil)
+        setAccessToken(value: nil)
         resetHttpHeaders()
     }
     
     internal func resetHttpHeaders() {
-        httpHeaders.setAccessToken(getAccessToken())
+        httpHeaders.setAccessToken(token: getAccessToken())
         
         if let authValue = getAuthorizationParameter() {
-            setAuthorizationHttpRequestHeader(getAuthorizationScheme(), parameter: authValue)
+            setAuthorizationHttpRequestHeader(scheme: getAuthorizationScheme(), parameter: authValue)
         } else {
-            clearHttpRequestHeader("Authorization")
-            setAuthorizationHttpRequestHeader(nil, parameter: nil)
+            clearHttpRequestHeader(name: "Authorization")
+            setAuthorizationHttpRequestHeader(scheme: nil, parameter: nil)
         }
     }
     
@@ -208,7 +208,7 @@ public class BaseApiClient// implements IDisposable
     }
     
     internal final func getSlugName(name: String?) -> String {
-        return ApiHelpers.getSlugName(name)
+        return ApiHelpers.getSlugName(name: name)
     }
 //
 //    /**
@@ -227,18 +227,18 @@ public class BaseApiClient// implements IDisposable
 //    
    
     public final func getApiUrl(handler: String?) -> String {
-        return getApiUrl(handler, queryString: nil)
+        return getApiUrl(handler: handler, queryString: nil)
     }
     
     internal final func getApiUrl(handler: String?, queryString: QueryStringDictionary?) -> String {
         let base = getApiUrl() + "/" + handler!
-        return queryString != nil ? queryString!.getUrl(base) : base
+        return queryString != nil ? queryString!.getUrl(prefix: base) : base
     }
 
     public final func getSubtitleUrl(options: SubtitleDownloadOptions) -> String {
         let partialUrl: String = "Videos/\(options.itemId)/\(options.mediaSourceId)/Subtitles/\(options.streamIndex)/Stream.\(options.format)"
      
-        return getApiUrl(partialUrl)
+        return getApiUrl(handler: partialUrl)
     }
 
     internal final func getItemListUrl(query: ItemQuery) -> String {
@@ -261,9 +261,9 @@ public class BaseApiClient// implements IDisposable
         dict.addIfNotNil("recursive", value: query.recursive)
         dict.addIfNotNil("MinIndexNumber", value: query.minIndexNumber)
         dict.add("MediaTypes", value: query.mediaTypes)
-        dict.addIfNotNil("Genres", value: query.genres?.joinWithSeparator("|"))
+        dict.addIfNotNil("Genres", value: query.genres?.joined(separator: "|"))
         dict.add("Ids", value: query.ids)
-        dict.addIfNotNil("StudioIds", value: query.studioIds?.joinWithSeparator("|"))
+        dict.addIfNotNil("StudioIds", value: query.studioIds?.joined(separator: "|"))
         dict.add("ExcludeItemTypes", value: query.excludeItemTypes)
         dict.add("IncludeItemTypes", value: query.includeItemTypes)
         dict.add("ArtistIds", value: query.artistIds)
@@ -284,8 +284,8 @@ public class BaseApiClient// implements IDisposable
         dict.addIfNotNilOrEmpty("NameStartsWith", value: query.nameStartsWith)
         dict.addIfNotNilOrEmpty("NameLessThan", value: query.nameLessThan)
         dict.addIfNotNilOrEmpty("AlbumArtistStartsWithOrGreater", value: query.albumArtistStartsWithOrGreater)
-        dict.addIfNotNil("LocationTypes", value: query.locationTypes.map({String($0)}))
-        dict.addIfNotNil("ExcludeLocationTypes", value: query.excludeLocationTypes.map({String($0)}))
+        dict.addIfNotNil("LocationTypes", value: query.locationTypes.map({String(describing: $0)}))
+        dict.addIfNotNil("ExcludeLocationTypes", value: query.excludeLocationTypes.map({String(describing: $0)}))
         dict.addIfNotNil("IsMissing", value: query.isMissing)
         dict.addIfNotNil("IsUnaired", value: query.isUnaired)
         dict.addIfNotNil("IsVirtualUnaired", value: query.isVirtualUnaired)
@@ -294,7 +294,7 @@ public class BaseApiClient// implements IDisposable
         dict.add("EnableImageTypes", value: query.enableImageTypes?.map({$0.rawValue}))
         dict.addIfNotNil("AiredDuringSeason", value: query.airedDuringSeasion)
         
-        return getApiUrl("Users/\(query.userId)/Items", queryString: dict)
+        return getApiUrl(handler: "Users/\(query.userId)/Items", queryString: dict)
     }
     
     internal final func getNextUpUrl(query: NextUpQuery) -> String {
@@ -309,7 +309,7 @@ public class BaseApiClient// implements IDisposable
         dict.addIfNotNil("ImageTypeLimit", value: query.imageTypeLimit)
         dict.add("EnableImageTypes", value: query.enableImageTypes?.map({$0.rawValue}))
         
-        return getApiUrl("Shows/NextUp", queryString: dict)
+        return getApiUrl(handler: "Shows/NextUp", queryString: dict)
     }
 
     internal final func getSimilarItemListUrl(query: SimilarItemsQuery, type: String?) -> String {
@@ -319,7 +319,7 @@ public class BaseApiClient// implements IDisposable
         dict.addIfNotNilOrEmpty("UserId", value: query.userId)
         dict.add("Fields", value: query.fields?.map({$0.rawValue}))
         
-        return getApiUrl("\(type!)/\(query.id!)/Similar", queryString: dict)
+        return getApiUrl(handler: "\(type!)/\(query.id!)/Similar", queryString: dict)
     }
 
     internal final func getInstantMixUrl(query: SimilarItemsQuery, type: String?) -> String {
@@ -329,7 +329,7 @@ public class BaseApiClient// implements IDisposable
         dict.addIfNotNilOrEmpty("UserId", value: query.userId)
         dict.add("Fields", value: query.fields?.map({$0.rawValue}))
         
-        return getApiUrl("\(type!)/\(query.id!)/InstantMix", queryString: dict)
+        return getApiUrl(handler: "\(type!)/\(query.id!)/InstantMix", queryString: dict)
     }
 
     internal final func getItemByNameListUrl(query: ItemsByNameQuery, type: String?) -> String {
@@ -356,7 +356,7 @@ public class BaseApiClient// implements IDisposable
         dict.addIfNotNil("ImageTypeLimit", value: query.imageTypeLimit)
         dict.add("EnableImageTypes", value: query.enableImageTypes?.map({$0.rawValue}))
 
-        return getApiUrl(type, queryString: dict)
+        return getApiUrl(handler: type, queryString: dict)
     }
 
     private func getImageUrl(baseUrl: String, options: ImageOptions, queryParams: QueryStringDictionary) -> String {
@@ -380,45 +380,48 @@ public class BaseApiClient// implements IDisposable
         queryParams.addIfNotNil("PercentPlayed", value: options.percentPlayed);
         queryParams.addIfNotNilOrEmpty("BackgroundColor", value: options.backgroundColor);
 
-        return getApiUrl(baseUrl, queryString: queryParams);
+        return getApiUrl(handler: baseUrl, queryString: queryParams);
     }
 
-    public final func getImageUrl(item: BaseItemDto, var options: ImageOptions) -> String? {
-        options.tag = getImageTag(item, options: options)
+    public final func getImageUrl(item: BaseItemDto, options: ImageOptions) -> String? {
+        var newOptions = options
+        newOptions.tag = getImageTag(item: item, options: newOptions)
         
-        return getImageUrl(item.id, options: options)
+        return getImageUrl(itemId: item.id, options: newOptions)
     }
 
     public final func getImageUrl(itemId: String?, options: ImageOptions) -> String? {
         if let id = itemId {
             let url = "Items/\(id)/Images/\(options.imageType)";
             
-            return getImageUrl(url, options: options, queryParams: QueryStringDictionary())
+            return getImageUrl(baseUrl: url, options: options, queryParams: QueryStringDictionary())
         }
         
         return nil
     }
     
-    public final func getUserImageUrl(user: UserDto, var options: ImageOptions) -> String? {
-        options.tag = user.primaryImageTag
+    public final func getUserImageUrl(user: UserDto, options: ImageOptions) -> String? {
+        var newOptions = options
+        newOptions.tag = user.primaryImageTag
         
-        return getUserImageUrl(user.id, options: options)
+        return getUserImageUrl(userId: user.id, options: newOptions)
     }
     
     public final func getUserImageUrl(userId: String?, options: ImageOptions) -> String? {
         if let id = userId {
             let url = "Users/\(id)/Images/\(options.imageType)";
             
-            return getImageUrl(url, options: options, queryParams: QueryStringDictionary())
+            return getImageUrl(baseUrl: url, options: options, queryParams: QueryStringDictionary())
         }
         
         return nil
     }
 
-    public final func getPersonImageUrl(item: BaseItemPerson, var options: ImageOptions) -> String? {
-        options.tag = item.primaryImageTag
+    public final func getPersonImageUrl(item: BaseItemPerson, options: ImageOptions) -> String? {
+        var newOptions = options
+        newOptions.tag = item.primaryImageTag
         
-        return getImageUrl(item.id, options: options)
+        return getImageUrl(itemId: item.id, options: options)
     }
 
     private func getImageTag(item: BaseItemDto, options: ImageOptions) -> String? {
@@ -439,9 +442,9 @@ public class BaseApiClient// implements IDisposable
             throw IllegalArgumentError.EmptyString(argumentName: "name")
         }
         
-        let url = "Genres/\(getSlugName(name))/Images/\(options.imageType)"
+        let url = "Genres/\(getSlugName(name: name))/Images/\(options.imageType)"
         
-        return getImageUrl(url, options: options, queryParams: QueryStringDictionary())
+        return getImageUrl(baseUrl: url, options: options, queryParams: QueryStringDictionary())
     }
 
     public final func getMusicGenreImageUrl(name: String, options: ImageOptions) throws -> String {
@@ -449,9 +452,9 @@ public class BaseApiClient// implements IDisposable
             throw IllegalArgumentError.EmptyString(argumentName: "name")
         }
         
-        let url = "MusicGenres/\(getSlugName(name))/Images/\(options.imageType)"
+        let url = "MusicGenres/\(getSlugName(name: name))/Images/\(options.imageType)"
         
-        return getImageUrl(url, options: options, queryParams: QueryStringDictionary())
+        return getImageUrl(baseUrl: url, options: options, queryParams: QueryStringDictionary())
     }
 
     public final func getGameGenreImageUrl(name: String, options: ImageOptions) throws -> String {
@@ -459,9 +462,9 @@ public class BaseApiClient// implements IDisposable
             throw IllegalArgumentError.EmptyString(argumentName: "name")
         }
         
-        let url = "GameGenres/\(getSlugName(name))/Images/\(options.imageType)"
+        let url = "GameGenres/\(getSlugName(name: name))/Images/\(options.imageType)"
         
-        return getImageUrl(url, options: options, queryParams: QueryStringDictionary())
+        return getImageUrl(baseUrl: url, options: options, queryParams: QueryStringDictionary())
     }
     
     public final func getStudioImageUrl(name: String, options: ImageOptions) throws -> String {
@@ -469,9 +472,9 @@ public class BaseApiClient// implements IDisposable
             throw IllegalArgumentError.EmptyString(argumentName: "name")
         }
         
-        let url = "Studios/\(getSlugName(name))/Images/\(options.imageType)"
+        let url = "Studios/\(getSlugName(name: name))/Images/\(options.imageType)"
         
-        return getImageUrl(url, options: options, queryParams: QueryStringDictionary())
+        return getImageUrl(baseUrl: url, options: options, queryParams: QueryStringDictionary())
     }
 
     public final func getArtistImageUrl(name: String, options: ImageOptions) throws -> String {
@@ -479,13 +482,14 @@ public class BaseApiClient// implements IDisposable
             throw IllegalArgumentError.EmptyString(argumentName: "name")
         }
         
-        let url = "Artists/\(getSlugName(name))/Images/\(options.imageType)"
+        let url = "Artists/\(getSlugName(name: name))/Images/\(options.imageType)"
         
-        return getImageUrl(url, options: options, queryParams: QueryStringDictionary())
+        return getImageUrl(baseUrl: url, options: options, queryParams: QueryStringDictionary())
     }
     
-    public final func getBackdropImageUrls(item: BaseItemDto, var options: ImageOptions) -> [String]? {
-        options.imageType = ImageType.Backdrop
+    public final func getBackdropImageUrls(item: BaseItemDto, options: ImageOptions) -> [String]? {
+        var newOptions = options
+        newOptions.imageType = ImageType.Backdrop
         
         var backdropItemId: String?
         
@@ -506,11 +510,18 @@ public class BaseApiClient// implements IDisposable
         if let bImageTags = backdropImageTags {
             var files = [String]()
             
-            for var i = 0; i < bImageTags.count; ++i {
-                options.imageIndex = i
-                options.tag = bImageTags[i]
+            /*for var i = 0; i < bImageTags.count; ++i {
+                newOptions.imageIndex = i
+                newOptions.tag = bImageTags[i]
                 
-                files[i] = getImageUrl(backdropItemId, options: options)!
+                files[i] = getImageUrl(backdropItemId, options: newOptions)!
+            }*/
+            
+            for i in 0..<bImageTags.count {
+                newOptions.imageIndex = i
+                newOptions.tag = bImageTags[i]
+                
+                files[i] = getImageUrl(itemId: backdropItemId, options: newOptions)!
             }
             
             return files
@@ -519,60 +530,63 @@ public class BaseApiClient// implements IDisposable
         return nil
     }
     
-    public final func getLogoImageUrl(item: BaseItemDto, var options: ImageOptions) throws -> String? {
-        options.imageType = ImageType.Logo
+    public final func getLogoImageUrl(item: BaseItemDto, options: ImageOptions) throws -> String? {
+        var newOptions = options
+        newOptions.imageType = ImageType.Logo
         
         let logoItemId = item.hasLogo ? item.id : item.parentLogoItemId
         let imageTag = item.hasLogo ? item.imageTags?[ImageType.Logo] : item.parentLogoImageTag
         
         if let lItemId = logoItemId {
-            options.tag = imageTag
+            newOptions.tag = imageTag
             
-            return getImageUrl(lItemId, options: options)
+            return getImageUrl(itemId: lItemId, options: newOptions)
         }
         
         return nil
     }
     
-    public final func getThumbImageUrl(item: BaseItemDto, var options: ImageOptions) throws -> String? {
-        options.imageType = ImageType.Logo
+    public final func getThumbImageUrl(item: BaseItemDto, options: ImageOptions) throws -> String? {
+        var newOptions = options
+        newOptions.imageType = ImageType.Logo
         
         let thumbItemId = item.hasThumb ? item.id : item.seriesThumbImageTag != nil ? item.seriesId : item.parentThumbItemId
         let imageTag = item.hasThumb ? item.imageTags?[ImageType.Thumb] : item.seriesThumbImageTag != nil ? item.seriesThumbImageTag : item.parentThumbImageTag
         
         if let tItemId = thumbItemId {
-            options.tag = imageTag
+            newOptions.tag = imageTag
             
-            return getImageUrl(tItemId, options: options)
+            return getImageUrl(itemId: tItemId, options: newOptions)
         }
         
         return nil
     }
     
-    public final func getArtImageUrl(item: BaseItemDto, var options: ImageOptions) throws -> String? {
-        options.imageType = ImageType.Logo
+    public final func getArtImageUrl(item: BaseItemDto, options: ImageOptions) throws -> String? {
+        var newOptions = options
+        newOptions.imageType = ImageType.Logo
         
         let artItemId = item.hasArtImage ? item.id : item.parentArtItemId
         let imageTag = item.hasArtImage ? item.imageTags?[ImageType.Art] : item.parentArtImageTag
         
         if let aItemId = artItemId {
-            options.tag = imageTag
+            newOptions.tag = imageTag
             
-            return getImageUrl(aItemId, options: options)
+            return getImageUrl(itemId: aItemId, options: newOptions)
         }
         
         return nil
     }
 
     internal final func serializeToJson(obj: AnyObject) -> String {
-        return getJsonSerializer()!.serializeToString(obj)
+        return getJsonSerializer()!.serializeToString(obj: obj)
     }
     
     internal final func addDataFormat(url: String) -> String {
         let format = "json"
         
         var newUrl = url
-        if url.containsString("?") {
+        if url.contains("?") {
             newUrl += "&format=" + format
         } else {
             newUrl += "?format=" + format
@@ -582,10 +596,10 @@ public class BaseApiClient// implements IDisposable
     }
     
     public func getIsoString(date: NSDate) -> String {
-        let formatter = NSDateFormatter()
+        let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm'Z'"
-        formatter.timeZone = NSTimeZone(forSecondsFromGMT: 0)
+        formatter.timeZone = NSTimeZone(forSecondsFromGMT: 0) as TimeZone!
         
-        return formatter.stringFromDate(date)
+        return formatter.string(from: date as Date)
     }
 }

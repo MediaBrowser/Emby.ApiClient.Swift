@@ -39,7 +39,7 @@ public struct MediaSourceInfo {
     var defaultSubtitleStreamIndex: Int?
     var defaultAudioStream: MediaStream? {
         get {
-            return getDefaultAudioStream(defaultAudioStreamIndex)
+            return getDefaultAudioStream(defaultIndex: defaultAudioStreamIndex)
         }
     }
     
@@ -92,6 +92,6 @@ public struct MediaSourceInfo {
     public func isSecondaryAudio(stream: MediaStream) -> Bool {
         return mediaStreams
             .filter({$0.type != nil && $0.type! == MediaStreamType.Audio})
-            .contains({$0.index != stream.index})
+            .contains(where: {$0.index != stream.index})
     }
 }

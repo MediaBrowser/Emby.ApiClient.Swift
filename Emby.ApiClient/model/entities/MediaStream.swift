@@ -42,7 +42,7 @@ public struct MediaStream {
                 return false
             }
             
-            return MediaStream.isTextFormat(codec)
+            return MediaStream.isTextFormat(format: codec)
         }
     }
     

@@ -30,7 +30,7 @@ public struct RegistrationInfo: JSONSerializable
             
             let formatter = DateFormatter()
             formatter.dateFormat = "yyyy-MM-dd"
-            self.expirationDate = formatter.dateFromString(expirationString)! as NSDate
+            self.expirationDate = formatter.date(from: expirationString)! as NSDate
         }
         else {
             return nil

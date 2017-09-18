@@ -97,13 +97,13 @@ public class ConnectionManager: ConnectionManagerProtocol {
             }
         }
         
-        serverDiscovery.findServers(1000,
+        serverDiscovery.findServers(timeoutMs: 1000,
             
             onSuccess: { (serverDiscoveryInfo: [ServerDiscoveryInfo]) -> Void in
                 
                 print("serverDiscovery.findServers finished with \(serverDiscoveryInfo.count) servers)")
                 
-                appendServerDiscoveryInfo(serverDiscoveryInfo)
+                appendServerDiscoveryInfo(serverDiscoveryInfo: serverDiscoveryInfo)
                 
                 serverDiscoveryFinished = true
                 
@@ -643,7 +643,7 @@ public class ConnectionManager: ConnectionManagerProtocol {
     
     public func getRegistrationInfo(featureName: String, connectedServerId: String, onSuccess: @escaping (RegistrationInfo) -> Void, onError: @escaping (Error) -> Void) {
         
-        serverDiscovery.findServers(1000, onSuccess: { (servers) -> Void in
+        serverDiscovery.findServers(timeoutMs: 1000, onSuccess: { (servers) -> Void in
             
             var serverInfoList: [ServerInfo] = []
             
@@ -660,7 +660,7 @@ public class ConnectionManager: ConnectionManagerProtocol {
             // TODO: Once getRegistrationInfo() is implemented in ApiClient
             for serverInfo in serverInfoList {
                 if serverInfo.id == connectedServerId {
-                    if let apiClient = self.getApiClient(serverInfo.id) {
+                    if let apiClient = self.getApiClient(serverId: serverInfo.id) {
                         //apiClient.getRegistrationInfo(featureName)
                     }
                 }
@@ -671,7 +671,7 @@ public class ConnectionManager: ConnectionManagerProtocol {
             if !credentials.connectAccessToken.isEmpty && !credentials.connectUserId.isEmpty {
                 
                 do {
-                    try self.connectService.GetRegistrationInfo(credentials.connectUserId, feature: featureName, connectAccessToken: credentials.connectAccessToken, success: onSuccess, failure: onError)
+                    try self.connectService.GetRegistrationInfo(userId: credentials.connectUserId, feature: featureName, connectAccessToken: credentials.connectAccessToken, success: onSuccess, failure: onError)
                 } catch {
                     onError(NSError(domain: "com.emby.apiclient", code: 1, userInfo: nil))
                 }

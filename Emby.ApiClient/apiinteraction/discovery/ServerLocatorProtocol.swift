@@ -5,5 +5,5 @@
 import Foundation
 
 public protocol ServerDiscoveryProtocol {
-    func findServers(timeoutMs: Int, onSuccess: ([ServerDiscoveryInfo]) -> Void, onError: (ErrorType) -> Void)
+    func findServers(timeoutMs: Int, onSuccess: ([ServerDiscoveryInfo]) -> Void, onError: (Error) -> Void)
 }

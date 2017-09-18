@@ -50,17 +50,19 @@ public class ApiClient: BaseApiClient {
     
     // MARK: - Request Creation and Sending
     
-    private func sendRequest<T: JSONSerializable>(var request: HttpRequest, success: (T) -> Void, failure: (EmbyError) -> Void) {
+    private func sendRequest<T: JSONSerializable>(request: HttpRequest, success: @escaping (T) -> Void, failure: @escaping (EmbyError) -> Void) {
         
-        request.addHeaders(httpHeaders)
+        var request = request
+        request.addHeaders(newHeaders: httpHeaders)
         
-        httpClient.sendRequest(request, success: success, failure: failure)
+        httpClient.sendRequest(request: request, success: success, failure: failure)
     }
     
-    private func sendCollectionRequest<Value: JSONSerializable>(var request: HttpRequest, success: ([Value]) -> Void, failure: (EmbyError) -> Void) {
+    private func sendCollectionRequest<Value: JSONSerializable>( request: HttpRequest, success: @escaping ([Value]) -> Void, failure: @escaping (EmbyError) -> Void) {
         
-        request.addHeaders(httpHeaders)
-        httpClient.sendCollectionRequest(request, success: success, failure: failure)
+        var request = request
+        request.addHeaders(newHeaders: httpHeaders)
+        httpClient.sendCollectionRequest(request: request, success: success, failure: failure)
     }
     
     
@@ -76,7 +78,7 @@ public class ApiClient: BaseApiClient {
      - Parameter failure: Failure callback with an EmbyError
      
      */
-    public func authenticateUserAsync(username: String, password: String, success: (AuthenticationResult) -> Void, failure: (EmbyError) -> Void) {
+    public func authenticateUserAsync(username: String, password: String, success: @escaping (AuthenticationResult) -> Void, failure: @escaping (EmbyError) -> Void) {
         
         precondition(!username.isEmpty, "Illegal Argument: username")
         
@@ -85,9 +87,9 @@ public class ApiClient: BaseApiClient {
         dict.Add("Password", value: password.sha1())
         dict.Add("PasswordMd5", value: password.md5())
         
-        let urlString = getApiUrl("Users/AuthenticateByName")
-        let request = HttpRequest(url: urlString, method: .POST, postData: dict)
-        sendRequest(request, success: success, failure: failure)
+        let urlString = getApiUrl(handler: "Users/AuthenticateByName")
+        let request = HttpRequest(url: urlString, method: .post, postData: dict)
+        sendRequest(request: request, success: success, failure: failure)
     }
     
     
@@ -99,11 +101,11 @@ public class ApiClient: BaseApiClient {
      - Parameter failure: Failure callback with an EmbyError
      
      */
-    public func getPublicUsersAsync(success: ([UserDto]) -> Void, failure: (EmbyError) -> Void) {
-        let urlString = getApiUrl("Users/Public")
+    public func getPublicUsersAsync(success: @escaping ([UserDto]) -> Void, failure:  @escaping (EmbyError) -> Void) {
+        let urlString = getApiUrl(handler: "Users/Public")
         
-        let request = HttpRequest(url: urlString, method: .GET)
-        sendCollectionRequest(request, success: success, failure: failure)
+        let request = HttpRequest(url: urlString, method: .get)
+        sendCollectionRequest(request: request, success: success, failure: failure)
     }
 
     /**
@@ -116,13 +118,13 @@ public class ApiClient: BaseApiClient {
      - Parameter failure: Failure callback with an EmbyError
 
      */
-    public func getItemAsync(id: String, userId: String, success: (BaseItemDto) -> Void, failure: (EmbyError) -> Void) {
+    public func getItemAsync(id: String, userId: String, success: @escaping (BaseItemDto) -> Void, failure: @escaping (EmbyError) -> Void) {
         precondition(!id.isEmpty, "Illegal Argument: id")
         precondition(!userId.isEmpty, "Illegal Argument: userId")
         
-        let url = getApiUrl("/Users/\(userId)/Items/\(id)")
+        let url = getApiUrl(handler: "/Users/\(userId)/Items/\(id)")
         
-        getItemFromUrl(url, success: success, failure: failure)
+        getItemFromUrl(url: url, success: success, failure: failure)
     }
     
     /**
@@ -134,10 +136,10 @@ public class ApiClient: BaseApiClient {
      - Parameter failure: Failure callback with an EmbyError
      
      */
-    public func getItemsAsync(query: ItemQuery, success: ([BaseItemDto]) -> Void, failure: (EmbyError) -> Void) {
-        let url = getItemListUrl(query)
+    public func getItemsAsync(query: ItemQuery, success: @escaping ([BaseItemDto]) -> Void, failure: @escaping (EmbyError) -> Void) {
+        let url = getItemListUrl(query: query)
         
-        getItemsFromUrl(url, success: success, failure: failure)
+        getItemsFromUrl(url: url, success: success, failure: failure)
     }
     
     /**
@@ -149,17 +151,17 @@ public class ApiClient: BaseApiClient {
      - Parameter failure: Failure callback with an EmbyError
      
      */
-    public func getItemCountsAsync(query: ItemCountsQuery, success: (ItemCounts) -> Void, failure: (EmbyError) -> Void) {
+    public func getItemCountsAsync(query: ItemCountsQuery, success: @escaping (ItemCounts) -> Void, failure: @escaping (EmbyError) -> Void) {
         let dict = QueryStringDictionary()
         
         dict.addIfNotNilOrEmpty("UserId", value: query.userId)
         dict.addIfNotNil("IsFavorite", value: query.favorite)
         
-        let urlString = getApiUrl("Items/Counts", queryString: dict)
-        let urlWithFormat = addDataFormat(urlString)
-        let request = HttpRequest(url: urlWithFormat, method: .GET, postData: dict)
+        let urlString = getApiUrl(handler: "Items/Counts", queryString: dict)
+        let urlWithFormat = addDataFormat(url: urlString)
+        let request = HttpRequest(url: urlWithFormat, method: .get, postData: dict)
         
-        sendRequest(request, success: success, failure: failure)
+        sendRequest(request: request, success: success, failure: failure)
     }
     
     /**
@@ -171,16 +173,16 @@ public class ApiClient: BaseApiClient {
      - Parameter failure: Failure callback with an EmbyError
 
      */
-    public func getUsersAsync(query: UserQuery, success: ([UserDto]) -> Void, failure: (EmbyError) -> Void) {
+    public func getUsersAsync(query: UserQuery, success: @escaping ([UserDto]) -> Void, failure: @escaping (EmbyError) -> Void) {
         let dict = QueryStringDictionary()
         
         dict.addIfNotNil("IsDisabled", value: query.disabled)
         dict.addIfNotNil("IsHidden", value: query.hidden)
     
-        let urlString = getApiUrl("Users", queryString: dict)
-        let request = HttpRequest(url: urlString, method: .GET, postData: dict)
+        let urlString = getApiUrl(handler: "Users", queryString: dict)
+        let request = HttpRequest(url: urlString, method: .get, postData: dict)
         
-        sendCollectionRequest(request, success: success, failure: failure)
+        sendCollectionRequest(request: request, success: success, failure: failure)
     }
     
     /**
@@ -192,12 +194,12 @@ public class ApiClient: BaseApiClient {
      - Parameter failure: Failure callback with an EmbyError
      
      */
-    public func getRootFolderAsync(userId: String, success: (BaseItemDto) -> Void, failure: (EmbyError) -> Void) {
+    public func getRootFolderAsync(userId: String, success: @escaping (BaseItemDto) -> Void, failure: @escaping (EmbyError) -> Void) {
         precondition(!userId.isEmpty, "Illegal Argument: userId")
         
-        let url = getApiUrl("/Users/\(userId)/Items/Root")
+        let url = getApiUrl(handler: "/Users/\(userId)/Items/Root")
         
-        getItemFromUrl(url, success: success, failure: failure)
+        getItemFromUrl(url: url, success: success, failure: failure)
     }
     
     /**
@@ -209,13 +211,13 @@ public class ApiClient: BaseApiClient {
      - Parameter failure: Failure callback with an EmbyError
      
      */
-    public func getIntrosAsync(itemId: String, userId: String, success: ([BaseItemDto]) -> Void, failure: (EmbyError) -> Void) {
+    public func getIntrosAsync(itemId: String, userId: String, success: @escaping ([BaseItemDto]) -> Void, failure: @escaping (EmbyError) -> Void) {
         precondition(!itemId.isEmpty, "Illegal Argument: itemId")
         precondition(!userId.isEmpty, "Illegal Argument: userId")
         
-        let url = getApiUrl("/Users/\(userId)/Items/\(itemId)/Intros")
+        let url = getApiUrl(handler: "/Users/\(userId)/Items/\(itemId)/Intros")
         
-        getItemsFromUrl(url, success: success, failure: failure)
+        getItemsFromUrl(url: url, success: success, failure: failure)
     }
     
     /**
@@ -227,15 +229,15 @@ public class ApiClient: BaseApiClient {
      - Parameter failure: Failure callback with an EmbyError
      
      */
-    public func getClientSessionsAsync(query: SessionQuery, success: ([SessionInfoDto]) -> Void, failure: (EmbyError) -> Void) {
+    public func getClientSessionsAsync(query: SessionQuery, success: @escaping ([SessionInfoDto]) -> Void, failure: @escaping (EmbyError) -> Void) {
         let dict = QueryStringDictionary()
         
         dict.Add("ControllableByUserId", value: query.controllableByUserId)
         
-        let urlString = getApiUrl("Sessions", queryString: dict)
-        let request = HttpRequest(url: urlString, method: .GET)
+        let urlString = getApiUrl(handler: "Sessions", queryString: dict)
+        let request = HttpRequest(url: urlString, method: .get)
         
-        sendCollectionRequest(request, success: success, failure: failure)
+        sendCollectionRequest(request: request, success: success, failure: failure)
     }
     
     /**
@@ -247,13 +249,13 @@ public class ApiClient: BaseApiClient {
      - Parameter failure: Failure callback with an EmbyError
      
      */
-    public func getRegistrationInfo(feature: String, success: (RegistrationInfo) -> Void, failure: (EmbyError) -> Void) {
+    public func getRegistrationInfo(feature: String, success: @escaping (RegistrationInfo) -> Void, failure: @escaping (EmbyError) -> Void) {
         precondition(!feature.isEmpty, "Illegal Argument: feature")
         
-        let url = getApiUrl("/Registrations/\(feature)")
-        let urlWithFormat = addDataFormat(url)
+        let url = getApiUrl(handler: "/Registrations/\(feature)")
+        let urlWithFormat = addDataFormat(url: url)
         
-        getItemFromUrl(urlWithFormat, success: success, failure: failure)
+        getItemFromUrl(url: urlWithFormat, success: success, failure: failure)
     }
     
     public func enableAutomaticNetworking(info: ServerInfo, initialMode: ConnectionMode, networkConnection: INetworkConnection) {
@@ -261,7 +263,7 @@ public class ApiClient: BaseApiClient {
         self.connectionMode = initialMode
         self.serverInfo = info
         
-        self.setServerAddress(info.getAddress(initialMode)!)
+        self.setServerAddress(value: info.getAddress(mode: initialMode)!)
         
     }
     
@@ -375,20 +377,20 @@ public class ApiClient: BaseApiClient {
 //    
 
     
-    private func getItemFromUrl<T: JSONSerializable>(url: String, success: (T) -> Void, failure: (EmbyError) -> Void) {
-        let urlWithFormat = addDataFormat(url)
+    private func getItemFromUrl<T: JSONSerializable>(url: String, success: @escaping (T) -> Void, failure: @escaping (EmbyError) -> Void) {
+        let urlWithFormat = addDataFormat(url: url)
         
-        let request = HttpRequest(url: urlWithFormat, method: .GET)
+        let request = HttpRequest(url: urlWithFormat, method: .get)
         
-        sendRequest(request, success: success, failure: failure)
+        sendRequest(request: request, success: success, failure: failure)
     }
     
-    private func getItemsFromUrl<Value: JSONSerializable>(url: String, success: ([Value]) -> Void, failure: (EmbyError) -> Void) {
-        let urlWithFormat = addDataFormat(url)
+    private func getItemsFromUrl<Value: JSONSerializable>(url: String, success: @escaping ([Value]) -> Void, failure: @escaping (EmbyError) -> Void) {
+        let urlWithFormat = addDataFormat(url: url)
         
-        let request = HttpRequest(url: urlWithFormat, method: .GET)
+        let request = HttpRequest(url: urlWithFormat, method: .get)
         
-        sendCollectionRequest(request, success: success, failure: failure)
+        sendCollectionRequest(request: request, success: success, failure: failure)
     }
     
     /**
@@ -400,13 +402,13 @@ public class ApiClient: BaseApiClient {
     - Parameter failure: Failure callback with an EmbyError
 
      */
-    public func getNextUpEpisodesAsync(query: NextUpQuery, success: ([BaseItemDto]) -> Void, failure: (EmbyError) -> Void) {
-        let url = getNextUpUrl(query)
+    public func getNextUpEpisodesAsync(query: NextUpQuery, success: @escaping ([BaseItemDto]) -> Void, failure: @escaping (EmbyError) -> Void) {
+        let url = getNextUpUrl(query: query)
         
-        getItemsFromUrl(url, success: success, failure: failure)
+        getItemsFromUrl(url: url, success: success, failure: failure)
     }
     
-    public func getUpcomingEpisodesAsync(query: UpcomingEpisodesQuery, success: ([BaseItemDto]) -> Void, failure: (EmbyError) -> Void) {
+    public func getUpcomingEpisodesAsync(query: UpcomingEpisodesQuery, success: @escaping ([BaseItemDto]) -> Void, failure: @escaping (EmbyError) -> Void) {
         let dict = QueryStringDictionary()
         
         dict.add("Fields", value: query.fields?.map({$0.rawValue}))
@@ -417,9 +419,9 @@ public class ApiClient: BaseApiClient {
         dict.addIfNotNil("ImageTypeLimit", value: query.imageTypeLimit)
         dict.add("EnableImageTypes", value: query.enableImageTypes?.map({$0.rawValue}))
         
-        let url = getApiUrl("Shows/Upcoming", queryString: dict)
+        let url = getApiUrl(handler: "Shows/Upcoming", queryString: dict)
         
-        getItemsFromUrl(url, success: success, failure: failure)
+        getItemsFromUrl(url: url, success: success, failure: failure)
     }
     
     /**
@@ -431,13 +433,13 @@ public class ApiClient: BaseApiClient {
      - Parameter failure: Failure callback with an EmbyError
      
      */
-    public func getSimilarItems(query: SimilarItemsQuery, success: ([BaseItemDto]) -> Void, failure: (EmbyError) -> Void) {
-        let url = getSimilarItemListUrl(query, type: "Items")
+    public func getSimilarItems(query: SimilarItemsQuery, success: @escaping ([BaseItemDto]) -> Void, failure: @escaping (EmbyError) -> Void) {
+        let url = getSimilarItemListUrl(query: query, type: "Items")
         
-        getItemsFromUrl(url, success: success, failure: failure)
+        getItemsFromUrl(url: url, success: success, failure: failure)
     }
     
-    public func getEpisodesAsync(query: EpisodeQuery, success: ([BaseItemDto]) -> Void, failure: (EmbyError) -> Void) {
+    public func getEpisodesAsync(query: EpisodeQuery, success: @escaping ([BaseItemDto]) -> Void, failure: @escaping (EmbyError) -> Void) {
         let dict = QueryStringDictionary()
         
         dict.addIfNotNil("Season", value: query.seasonNumber)
@@ -448,12 +450,12 @@ public class ApiClient: BaseApiClient {
         dict.addIfNotNil("IsMissing", value: query.isMissing)
         dict.addIfNotNil("IsVirtualUnaired", value: query.isVirtualUnaired)
         
-        let url = getApiUrl("Shows/\(query.seriesId)/Episodes", queryString: dict)
+        let url = getApiUrl(handler: "Shows/\(query.seriesId)/Episodes", queryString: dict)
         
-        getItemsFromUrl(url, success: success, failure: failure)
+        getItemsFromUrl(url: url, success: success, failure: failure)
     }
     
-    public func getSeasonsAsync(query: SeasonQuery, success: ([BaseItemDto]) -> Void, failure: (EmbyError) -> Void) {
+    public func getSeasonsAsync(query: SeasonQuery, success: @escaping ([BaseItemDto]) -> Void, failure: @escaping (EmbyError) -> Void) {
         let dict = QueryStringDictionary()
         
         dict.addIfNotNilOrEmpty("UserId", value: query.userId)
@@ -462,9 +464,9 @@ public class ApiClient: BaseApiClient {
         dict.addIfNotNil("IsVirtualUnaired", value: query.isVirtualUnaired)
         dict.addIfNotNil("IsSpecialSeason", value: query.isSpecialSeason)
         
-        let url = getApiUrl("Shows/\(query.seriesId)/Seasons", queryString: dict)
+        let url = getApiUrl(handler: "Shows/\(query.seriesId)/Seasons", queryString: dict)
         
-        getItemsFromUrl(url, success: success, failure: failure)
+        getItemsFromUrl(url: url, success: success, failure: failure)
     }
 
     /**
@@ -476,10 +478,10 @@ public class ApiClient: BaseApiClient {
      - Parameter failure: Failure callback with an EmbyError
      
      */
-    public func getInstantMixFromItem(query: SimilarItemsQuery, success: ([BaseItemDto]) -> Void, failure: (EmbyError) -> Void) {
-        let url = getInstantMixUrl(query, type: "Items");
+    public func getInstantMixFromItem(query: SimilarItemsQuery, success: @escaping ([BaseItemDto]) -> Void, failure: @escaping (EmbyError) -> Void) {
+        let url = getInstantMixUrl(query: query, type: "Items");
         
-        getItemsFromUrl(url, success: success, failure: failure)
+        getItemsFromUrl(url: url, success: success, failure: failure)
     }
     
     /**
@@ -491,10 +493,10 @@ public class ApiClient: BaseApiClient {
      - Parameter failure: Failure callback with an EmbyError
      
      */
-    public func getGenresAsync(query: ItemsByNameQuery, success: ([BaseItemDto]) -> Void, failure: (EmbyError) -> Void) {
-        let url = getItemByNameListUrl(query, type: "Genres")
+    public func getGenresAsync(query: ItemsByNameQuery, success: @escaping ([BaseItemDto]) -> Void, failure: @escaping (EmbyError) -> Void) {
+        let url = getItemByNameListUrl(query: query, type: "Genres")
         
-        getItemsFromUrl(url, success: success, failure: failure)
+        getItemsFromUrl(url: url, success: success, failure: failure)
     }
     
     /**
@@ -506,10 +508,10 @@ public class ApiClient: BaseApiClient {
      - Parameter failure: Failure callback with an EmbyError
      
      */
-    public func getStudiosAsync(query: ItemsByNameQuery, success: ([BaseItemDto]) -> Void, failure: (EmbyError) -> Void) {
-        let url = getItemByNameListUrl(query, type: "Studios")
+    public func getStudiosAsync(query: ItemsByNameQuery, success: @escaping ([BaseItemDto]) -> Void, failure: @escaping (EmbyError) -> Void) {
+        let url = getItemByNameListUrl(query: query, type: "Studios")
         
-        getItemsFromUrl(url, success: success, failure: failure)
+        getItemsFromUrl(url: url, success: success, failure: failure)
     }
     
     /**
@@ -521,10 +523,10 @@ public class ApiClient: BaseApiClient {
      - Parameter failure: Failure callback with an EmbyError
      
      */
-    public func getArtistsAsync(query: ItemsByNameQuery, success: ([BaseItemDto]) -> Void, failure: (EmbyError) -> Void) {
-        let url = getItemByNameListUrl(query, type: "Artists")
+    public func getArtistsAsync(query: ItemsByNameQuery, success: @escaping ([BaseItemDto]) -> Void, failure: @escaping (EmbyError) -> Void) {
+        let url = getItemByNameListUrl(query: query, type: "Artists")
         
-        getItemsFromUrl(url, success: success, failure: failure)
+        getItemsFromUrl(url: url, success: success, failure: failure)
     }
     
     /**
@@ -536,10 +538,10 @@ public class ApiClient: BaseApiClient {
      - Parameter failure: Failure callback with an EmbyError
      
      */
-    public func getAlbumArtistsAsync(query: ItemsByNameQuery, success: ([BaseItemDto]) -> Void, failure: (EmbyError) -> Void) {
-        let url = getItemByNameListUrl(query, type: "Artists/AlbumArtists")
+    public func getAlbumArtistsAsync(query: ItemsByNameQuery, success: @escaping ([BaseItemDto]) -> Void, failure: @escaping (EmbyError) -> Void) {
+        let url = getItemByNameListUrl(query: query, type: "Artists/AlbumArtists")
         
-        getItemsFromUrl(url, success: success, failure: failure)
+        getItemsFromUrl(url: url, success: success, failure: failure)
     }
     
     /**
@@ -551,14 +553,14 @@ public class ApiClient: BaseApiClient {
     - Parameter failure: Failure callback with an EmbyError
     
      */
-    public func getPeopleAsync(query: PersonsQuery, success: ([BaseItemDto]) -> Void, failure: (EmbyError) -> Void) {
-        var url = getItemByNameListUrl(query, type: "Persons")
+    public func getPeopleAsync(query: PersonsQuery, success: @escaping ([BaseItemDto]) -> Void, failure: @escaping (EmbyError) -> Void) {
+        var url = getItemByNameListUrl(query: query, type: "Persons")
         
         if let personTypes = query.personTypes {
-            url += "&PersonTypes=\(personTypes.joinWithSeparator(","))"
+            url += "&PersonTypes=\(personTypes.joined(separator: ","))"
         }
         
-        getItemsFromUrl(url, success: success, failure: failure)
+        getItemsFromUrl(url: url, success: success, failure: failure)
     }
     
     /**
@@ -571,7 +573,7 @@ public class ApiClient: BaseApiClient {
     - Parameter failure: Failure callback with an EmbyError
     
      */
-    public func getStudioAsync(name: String, userId: String, success: (BaseItemDto) -> Void, failure: (EmbyError) -> Void) {
+    public func getStudioAsync(name: String, userId: String, success: @escaping (BaseItemDto) -> Void, failure: @escaping (EmbyError) -> Void) {
         precondition(!name.isEmpty, "Illegal Argument: name")
         precondition(!userId.isEmpty, "Illegal Argument: userId")
         
@@ -579,9 +581,9 @@ public class ApiClient: BaseApiClient {
         
         dict.Add("userId", value: userId)
         
-        let url = getApiUrl("Studios/\(getSlugName(name))", queryString: dict)
+        let url = getApiUrl(handler: "Studios/\(getSlugName(name: name))", queryString: dict)
         
-        getItemFromUrl(url, success: success, failure: failure)
+        getItemFromUrl(url: url, success: success, failure: failure)
     }
 
     /**
@@ -594,7 +596,7 @@ public class ApiClient: BaseApiClient {
      - Parameter failure: Failure callback with an EmbyError
      
      */
-    public func getGenreAsync(name: String, userId: String, success: (BaseItemDto) -> Void, failure: (EmbyError) -> Void) {
+    public func getGenreAsync(name: String, userId: String, success: @escaping (BaseItemDto) -> Void, failure: @escaping (EmbyError) -> Void) {
         precondition(!name.isEmpty, "Illegal Argument: name")
         precondition(!userId.isEmpty, "Illegal Argument: userId")
         
@@ -602,9 +604,9 @@ public class ApiClient: BaseApiClient {
         
         dict.Add("userId", value: userId)
         
-        let url = getApiUrl("Genres/\(getSlugName(name))", queryString: dict)
+        let url = getApiUrl(handler: "Genres/\(getSlugName(name: name))", queryString: dict)
         
-        getItemFromUrl(url, success: success, failure: failure)
+        getItemFromUrl(url: url, success: success, failure: failure)
     }
     
     /**
@@ -617,7 +619,7 @@ public class ApiClient: BaseApiClient {
      - Parameter failure: Failure callback with an EmbyError
      
      */
-    public func getMusicGenreAsync(name: String, userId: String, success: (BaseItemDto) -> Void, failure: (EmbyError) -> Void) {
+    public func getMusicGenreAsync(name: String, userId: String, success: @escaping (BaseItemDto) -> Void, failure: @escaping (EmbyError) -> Void) {
         precondition(!name.isEmpty, "Illegal Argument: name")
         precondition(!userId.isEmpty, "Illegal Argument: userId")
         
@@ -625,9 +627,9 @@ public class ApiClient: BaseApiClient {
         
         dict.Add("userId", value: userId)
         
-        let url = getApiUrl("MusicGenres/\(getSlugName(name))", queryString: dict)
+        let url = getApiUrl(handler: "MusicGenres/\(getSlugName(name: name))", queryString: dict)
         
-        getItemFromUrl(url, success: success, failure: failure)
+        getItemFromUrl(url: url, success: success, failure: failure)
     }
 
     /**
@@ -640,12 +642,12 @@ public class ApiClient: BaseApiClient {
      - Parameter failure: Failure callback with an EmbyError
      
      */
-    public func getMusicGenreAsync(name: String, success: (BaseItemDto) -> Void, failure: (EmbyError) -> Void) {
+    public func getMusicGenreAsync(name: String, success: @escaping (BaseItemDto) -> Void, failure: @escaping (EmbyError) -> Void) {
         precondition(!name.isEmpty, "Illegal Argument: name")
         
-        let url = getApiUrl("MusicGenres/\(getSlugName(name))")
+        let url = getApiUrl(handler: "MusicGenres/\(getSlugName(name: name))")
         
-        getItemFromUrl(url, success: success, failure: failure)
+        getItemFromUrl(url: url, success: success, failure: failure)
     }
     
     /**
@@ -658,7 +660,7 @@ public class ApiClient: BaseApiClient {
      - Parameter failure: Failure callback with an EmbyError
      
      */
-    public func getGameGenreAsync(name: String, userId: String, success: (BaseItemDto) -> Void, failure: (EmbyError) -> Void) {
+    public func getGameGenreAsync(name: String, userId: String, success: @escaping (BaseItemDto) -> Void, failure: @escaping (EmbyError) -> Void) {
         precondition(!name.isEmpty, "Illegal Argument: name")
         precondition(!userId.isEmpty, "Illegal Argument: userId")
         
@@ -666,9 +668,9 @@ public class ApiClient: BaseApiClient {
         
         dict.Add("userId", value: userId)
         
-        let url = getApiUrl("GameGenres/\(getSlugName(name))", queryString: dict)
+        let url = getApiUrl(handler: "GameGenres/\(getSlugName(name: name))", queryString: dict)
         
-        getItemFromUrl(url, success: success, failure: failure)
+        getItemFromUrl(url: url, success: success, failure: failure)
     }
 
     /**
@@ -681,7 +683,7 @@ public class ApiClient: BaseApiClient {
      - Parameter failure: Failure callback with an EmbyError
      
      */
-    public func getArtistAsync(name: String, userId: String, success: (BaseItemDto) -> Void, failure: (EmbyError) -> Void) {
+    public func getArtistAsync(name: String, userId: String, success: @escaping (BaseItemDto) -> Void, failure: @escaping (EmbyError) -> Void) {
         precondition(!name.isEmpty, "Illegal Argument: name")
         precondition(!userId.isEmpty, "Illegal Argument: userId")
         
@@ -689,9 +691,9 @@ public class ApiClient: BaseApiClient {
         
         dict.Add("userId", value: userId)
         
-        let url = getApiUrl("Artists/\(getSlugName(name))", queryString: dict)
+        let url = getApiUrl(handler: "Artists/\(getSlugName(name: name))", queryString: dict)
         
-        getItemFromUrl(url, success: success, failure: failure)
+        getItemFromUrl(url: url, success: success, failure: failure)
     }
 
 //    
@@ -714,13 +716,13 @@ public class ApiClient: BaseApiClient {
     - Parameter failure: Failure callback with an EmbyError
     
      */
-    public func getSystemInfoAsync(success: (SystemInfo) -> Void, failure: (EmbyError) -> Void) {
-        var url = getApiUrl("System/Info")
+    public func getSystemInfoAsync(success: @escaping (SystemInfo) -> Void, failure: @escaping (EmbyError) -> Void) {
+        var url = getApiUrl(handler: "System/Info")
         
-        url = addDataFormat(url)
+        url = addDataFormat(url: url)
         
-        let request = HttpRequest(url: url, method: .GET)
-        sendRequest(request, success: success, failure: failure)
+        let request = HttpRequest(url: url, method: .get)
+        sendRequest(request: request, success: success, failure: failure)
     }
     
     /**
@@ -731,13 +733,13 @@ public class ApiClient: BaseApiClient {
      - Parameter failure: Failure callback with an EmbyError
      
      */
-    public func getPublicSystemInfoAsync(success: (PublicSystemInfo) -> Void, failure: (EmbyError) -> Void) {
-        var url = getApiUrl("System/Info/Public")
+    public func getPublicSystemInfoAsync(success: @escaping (PublicSystemInfo) -> Void, failure: @escaping (EmbyError) -> Void) {
+        var url = getApiUrl(handler: "System/Info/Public")
         
-        url = addDataFormat(url)
+        url = addDataFormat(url: url)
         
-        let request = HttpRequest(url: url, method: .GET)
-        sendRequest(request, success: success, failure: failure)
+        let request = HttpRequest(url: url, method: .get)
+        sendRequest(request: request, success: success, failure: failure)
     }
     
     /**
@@ -748,13 +750,13 @@ public class ApiClient: BaseApiClient {
      - Parameter failure: Failure callback with an EmbyError
      
      */
-    public func getInstalledPluginsAsync(success: ([PluginInfo]) -> Void, failure: (EmbyError) -> Void) {
-        var url = getApiUrl("System/Info/Public")
+    public func getInstalledPluginsAsync(success: @escaping ([PluginInfo]) -> Void, failure: @escaping (EmbyError) -> Void) {
+        var url = getApiUrl(handler: "System/Info/Public")
         
-        url = addDataFormat(url)
+        url = addDataFormat(url: url)
         
-        let request = HttpRequest(url: url, method: .GET)
-        sendCollectionRequest(request, success: success, failure: failure)
+        let request = HttpRequest(url: url, method: .get)
+        sendCollectionRequest(request: request, success: success, failure: failure)
     }
     
     /**
@@ -765,13 +767,13 @@ public class ApiClient: BaseApiClient {
      - Parameter failure: Failure callback with an EmbyError
      
      */
-    public func getServerConfigurationAsync(success: (ServerConfiguration) -> Void, failure: (EmbyError) -> Void) {
-        var url = getApiUrl("System/Configuration")
+    public func getServerConfigurationAsync(success: @escaping (ServerConfiguration) -> Void, failure: @escaping (EmbyError) -> Void) {
+        var url = getApiUrl(handler: "System/Configuration")
         
-        url = addDataFormat(url)
+        url = addDataFormat(url: url)
         
-        let request = HttpRequest(url: url, method: .GET)
-        sendRequest(request, success: success, failure: failure)
+        let request = HttpRequest(url: url, method: .get)
+        sendRequest(request: request, success: success, failure: failure)
     }
 //    
 //    /// <summary>

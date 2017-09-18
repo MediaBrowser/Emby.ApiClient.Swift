@@ -27,7 +27,7 @@ public class ServerCredentials: NSObject, NSCoding {
 
             if let serverDateLastAccessed = server.dateLastAccessed {
                 if let existingLastDateAccessed = existingServer.dateLastAccessed {
-                    if ( existingLastDateAccessed.compare(serverDateLastAccessed as Date) == ComparisonResult.OrderedDescending) {
+                    if ( existingLastDateAccessed.compare(serverDateLastAccessed as Date) == ComparisonResult.orderedDescending) {
                         existingServer.dateLastAccessed = serverDateLastAccessed
                     }
                 } else {
