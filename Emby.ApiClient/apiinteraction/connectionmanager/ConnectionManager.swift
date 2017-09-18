@@ -198,7 +198,7 @@ public class ConnectionManager: ConnectionManagerProtocol {
     
     // MARK: - Connecting To Servers
     
-    public func connect(onSuccess: (ConnectionResult), onError: @escaping (Error) -> Void) {
+    public func connect(onSuccess: @escaping (ConnectionResult) -> Void, onError: @escaping (Error) -> Void) {
         getAvailableServers(onSuccess: { (servers) -> Void in
             
             self.connect(servers: servers, onSuccess: { (connectionResult) -> Void in
@@ -212,11 +212,11 @@ public class ConnectionManager: ConnectionManagerProtocol {
         })
     }
     
-    public func connect(server: ServerInfo, onSuccess: (ConnectionResult) -> Void, onError: (Error) -> Void) {
+    public func connect(server: ServerInfo, onSuccess: @escaping (ConnectionResult) -> Void, onError: @escaping (Error) -> Void) {
         self.connect(server: server, options: ConnectionOptions(), onSuccess: onSuccess, onError: onError)
     }
     
-    public func connect(server: ServerInfo, options: ConnectionOptions, onSuccess: (ConnectionResult), onError: (Error) -> Void) {
+    public func connect(server: ServerInfo, options: ConnectionOptions, onSuccess: @escaping (ConnectionResult) -> Void, onError: @escaping (Error) -> Void) {
         
         var tests = [ConnectionMode.Manual, ConnectionMode.Local, ConnectionMode.Remote]
         
@@ -229,7 +229,7 @@ public class ConnectionManager: ConnectionManagerProtocol {
         let sendWakeOnLan = server.wakeOnLanInfos.count > 0 && localNetworkAvailable
         
         if sendWakeOnLan {
-            beginWakeServer(server: server)
+            beginWakeServer(server)
         }
         
         let wakeOnLanSendTime = NSDate().timeIntervalSince1970
@@ -243,7 +243,7 @@ public class ConnectionManager: ConnectionManagerProtocol {
             onError: onError)
     }
     
-    private func connect( servers: [ServerInfo], onSuccess: (ConnectionResult), onError: @escaping (Error) -> Void) {
+    private func connect( servers: [ServerInfo], onSuccess: @escaping (ConnectionResult) -> Void, onError: @escaping (Error) -> Void) {
         
         var servers = servers
         servers.sort {
@@ -257,13 +257,13 @@ public class ConnectionManager: ConnectionManagerProtocol {
         }
         
         if servers.count == 1 {
-            connect(servers[0], onSuccess: { (result) -> Void in
-                
-                if result.state == .Unavailable {
-                    result.state = result.connectUser == nil ? .ConnectSignIn : .ServerSelection
+            connect(server: servers[0], onSuccess: { (result) -> Void in
+                var newResult = result
+                if newResult.state == .Unavailable {
+                    newResult.state = result.connectUser == nil ? .ConnectSignIn : .ServerSelection
                 }
                 
-                onSuccess(result)
+                onSuccess(newResult)
                 }, onError: { (error) -> Void in
                     onError(error)
             })
@@ -273,7 +273,7 @@ public class ConnectionManager: ConnectionManagerProtocol {
         // See if we have any saved credentials and can auto sign in
         if !servers.isEmpty && servers[0].accessToken != nil {
             let firstServer = servers[0]
-            connect(firstServer, onSuccess: { (result) -> Void in
+            connect(server: firstServer, onSuccess: { (result) -> Void in
                 if result.state == .SignedIn {
                     onSuccess(result)
                 }
@@ -299,7 +299,7 @@ public class ConnectionManager: ConnectionManagerProtocol {
         }
     }
     
-    public func connect(address: String, onSuccess: (ConnectionResult), onError: (Error) -> Void) {
+    public func connect(address: String, onSuccess: @escaping (ConnectionResult) -> Void, onError: @escaping (Error) -> Void) {
         let normalizedAddress = normalizeAddress(address: address)
         
         tryConnect(url: normalizedAddress, timeout: 1500, onSuccess: { (systemInfo) -> Void in
@@ -309,7 +309,7 @@ public class ConnectionManager: ConnectionManagerProtocol {
             server.lastConnectionMode = .Manual
             server.importInfo(systemInfo: systemInfo)
             
-            self.connect(server, onSuccess: onSuccess, onError: onError)
+            self.connect(server: server, onSuccess: onSuccess, onError: onError)
             
         }, onError: { (error) -> Void in
             var result = ConnectionResult()
@@ -412,7 +412,7 @@ public class ConnectionManager: ConnectionManagerProtocol {
             ensureConnectUser(credentials: credentials, onSuccess: { () -> Void in
                 
                 if server.exchangeToken != nil {
-                    self.addAuthenticationInfoFromConnect(server, systemInfo: systemInfo, connectionMode: connectionMode, connectionOptions: connectionOptions, credentials: credentials, onSuccess: onSuccess, onError: onError)
+                    self.addAuthenticationInfoFromConnect(server: server, systemInfo: systemInfo, connectionMode: connectionMode, connectionOptions: connectionOptions, credentials: credentials, onSuccess: onSuccess, onError: onError)
                 } else {
                     self.afterConnectValidated(server: server, credentials: credentials, systemInfo: systemInfo, connectionMode: connectionMode, verifyLocalAuthentication: true, options: connectionOptions, onSuccess: onSuccess, onError: onError)
                 }
@@ -433,9 +433,9 @@ public class ConnectionManager: ConnectionManagerProtocol {
         onError: @escaping (Error) -> Void)
     {
         if verifyLocalAuthentication && server.accessToken != nil {
-            validateAuthentication(server, connectionMode: connectionMode, onSuccess: { () -> Void in
+            validateAuthentication(server: server, connectionMode: connectionMode, onSuccess: { () -> Void in
                 
-                self.afterConnectValidated(server, credentials: credentials, systemInfo: systemInfo, connectionMode: connectionMode, verifyLocalAuthentication: true, options: options, onSuccess: onSuccess, onError: onError)
+                self.afterConnectValidated(server: server, credentials: credentials, systemInfo: systemInfo, connectionMode: connectionMode, verifyLocalAuthentication: true, options: options, onSuccess: onSuccess, onError: onError)
                 }, onError: { (error) -> Void in
                     onError(error)
             })
@@ -514,10 +514,10 @@ public class ConnectionManager: ConnectionManagerProtocol {
         connectionMode: ConnectionMode,
         connectionOptions: ConnectionOptions,
         credentials: ServerCredentials,
-        onSuccess: (ConnectionResult) -> Void,
-        onError: (Error) -> Void)
+        onSuccess: @escaping (ConnectionResult) -> Void,
+        onError: @escaping (Error) -> Void)
     {
-        guard var url = server.getAddress(connectionMode) else {
+        guard var url = server.getAddress(mode: connectionMode) else {
             preconditionFailure("Illegal Argument: No address for connection mode")
         }
         guard let exchangeToken = server.exchangeToken else {
@@ -528,38 +528,38 @@ public class ConnectionManager: ConnectionManagerProtocol {
         
         url += "/emby/Connect/Exchange?format=json&ConnectUserId=" + credentials.connectUserId
         
-        let request = HttpRequest(url: url, method: .GET)
+        let request = HttpRequest(url: url, method: .get)
         request.headers["X-MediaBrowser-Token"] = exchangeToken
         
-        httpClient.sendRequest(request, success: { (result: ConnectAuthenticationExchangeResult) -> Void in
+        httpClient.sendRequest(request: request, success: { (result: ConnectAuthenticationExchangeResult) -> Void in
             
             server.userId = result.localUserId
             server.accessToken = result.accessToken
-            self.afterConnectValidated(server, credentials: credentials, systemInfo: systemInfo, connectionMode: connectionMode, verifyLocalAuthentication: true, options: connectionOptions, onSuccess: onSuccess, onError: onError)
+            self.afterConnectValidated(server: server, credentials: credentials, systemInfo: systemInfo, connectionMode: connectionMode, verifyLocalAuthentication: true, options: connectionOptions, onSuccess: onSuccess, onError: onError)
             
         }, failure: onError)
     }
     
-    func validateAuthentication(server: ServerInfo, connectionMode: ConnectionMode, onSuccess: () -> Void, onError: (Error) -> Void) {
+    func validateAuthentication(server: ServerInfo, connectionMode: ConnectionMode, onSuccess: @escaping () -> Void, onError: @escaping (Error) -> Void) {
         
-        let url = server.getAddress(connectionMode)!
+        let url = server.getAddress(mode: connectionMode)!
         
         let headers = HttpHeaders()
-        headers.setAccessToken(server.accessToken)
+        headers.setAccessToken(token: server.accessToken)
         
-        var request = HttpRequest(url: url + "/system/info?format=json", method: .GET)
+        var request = HttpRequest(url: url + "/system/info?format=json", method: .get)
         request.headers = headers
         
-        httpClient.sendRequest(request, success: { (info: SystemInfo) -> Void in
+        httpClient.sendRequest(request: request, success: { (info: SystemInfo) -> Void in
             
-            server.importInfo(info)
+            server.importInfo(systemInfo: info)
             
             if server.userId != nil {
                 
-                let request = HttpRequest(url: url + "/mediabrowser/users/\(server.userId)?format=json", method: .GET)
-                self.httpClient.sendRequest(request, success: { (user: UserDto) -> Void in
+                let request = HttpRequest(url: url + "/mediabrowser/users/\(server.userId)?format=json", method: .get)
+                self.httpClient.sendRequest(request: request, success: { (user: UserDto) -> Void in
                     
-                    self.onLocalUserSignIn(user)
+                    self.onLocalUserSignIn(user: user)
                     onSuccess()
                     
                     }, failure: onError)
@@ -602,16 +602,16 @@ public class ConnectionManager: ConnectionManagerProtocol {
         onLocalUserSignIn(user: result.user)
     }
     
-    public func loginToConnect(username: String, password: String, onSuccess: () -> Void, onError: (Error) -> Void) {
+    public func loginToConnect(username: String, password: String, onSuccess: @escaping () -> Void, onError: @escaping (Error) -> Void) {
         
-        connectService.Authenticate(username, password: password, success: { (result) -> Void in
+        connectService.Authenticate(username: username, password: password, success: { (result) -> Void in
             
             let credentials = self.credentialProvider.getCredentials()
             credentials.connectAccessToken = result.accessToken
             credentials.connectUserId = result.user.id
-            self.credentialProvider.saveCredentials(credentials)
+            self.credentialProvider.saveCredentials(credentials: credentials)
             
-            self.onConnectUserSignIn(result.user)
+            self.onConnectUserSignIn(user: result.user)
             
             onSuccess()
             
@@ -620,28 +620,28 @@ public class ConnectionManager: ConnectionManagerProtocol {
     
     // MARK: - Server PIN Methods
     
-    public func createPin(deviceId: String, onSuccess: (PinCreationResult) -> Void, onError: (Error) -> Void) {
-        connectService.CreatePin(deviceId, success: onSuccess, failure: onError)
+    public func createPin(deviceId: String, onSuccess: @escaping (PinCreationResult) -> Void, onError: @escaping (Error) -> Void) {
+        connectService.CreatePin(deviceId: deviceId, success: onSuccess, failure: onError)
     }
     
-    public func getPinStatus(pin: PinCreationResult, onSuccess: (PinStatusResult) -> Void, onError: (Error) -> Void) {
-        connectService.GetPinStatus(pin, success: onSuccess, failure: onError)
+    public func getPinStatus(pin: PinCreationResult, onSuccess: @escaping (PinStatusResult) -> Void, onError: @escaping (Error) -> Void) {
+        connectService.GetPinStatus(pin: pin, success: onSuccess, failure: onError)
     }
     
-    public func exchangePin(pin: PinCreationResult, onSuccess: (PinExchangeResult) -> Void, onError: (Error) -> Void) {
-        connectService.ExchangePin(pin, success: { (result) -> Void in
+    public func exchangePin(pin: PinCreationResult, onSuccess: @escaping (PinExchangeResult) -> Void, onError: @escaping (Error) -> Void) {
+        connectService.ExchangePin(pin: pin, success: { (result) -> Void in
             
             let credentials = self.credentialProvider.getCredentials()
             credentials.connectAccessToken = result.accessToken
             credentials.connectUserId = result.userId
-            self.credentialProvider.saveCredentials(credentials)
+            self.credentialProvider.saveCredentials(credentials: credentials)
             
             onSuccess(result)
             
             }, failure: onError)
     }
     
-    public func getRegistrationInfo(featureName: String, connectedServerId: String, onSuccess: (RegistrationInfo) -> Void, onError: (Error) -> Void) {
+    public func getRegistrationInfo(featureName: String, connectedServerId: String, onSuccess: @escaping (RegistrationInfo) -> Void, onError: @escaping (Error) -> Void) {
         
         serverDiscovery.findServers(1000, onSuccess: { (servers) -> Void in
             
@@ -688,10 +688,10 @@ public class ConnectionManager: ConnectionManagerProtocol {
     
     // MARK: - Logging Out
     
-    public func logout(onSuccess: () -> Void, onError: () -> Void) {
+    public func logout(onSuccess: @escaping () -> Void, onError: @escaping () -> Void) {
         print("Logging out of all servers")
         
-        logoutAll(onSuccess, onError: onError)
+        logoutAll(onSuccess: onSuccess, onError: onError)
     }
     
     func logoutAll(onSuccess: () -> Void, onError: () -> Void) {
@@ -717,31 +717,31 @@ public class ConnectionManager: ConnectionManagerProtocol {
         }
     }
     
-    func beginWakeServer(server: ServerInfo) {
+    func beginWakeServer(_ server: ServerInfo) {
         
         let wakeList = server.wakeOnLanInfos
         for info in wakeList {
-            wakeServer(info)
+            wakeServer(info: info)
         }
         
         print("Waking server: \(server.name), ID: \(server.id), number: \(wakeList.count)")
     }
     
-    func wakeServer(server: ServerInfo) {
+    func wakeServer(_ server: ServerInfo) {
         for info in server.wakeOnLanInfos {
-            wakeServer(info)
+            wakeServer(info: info)
         }
     }
     
     func wakeServer(info: WakeOnLanInfo) {
-        networkConnection.sendWakeOnLan(info.macAddress, port: info.port)
+        networkConnection.sendWakeOnLan(macAddress: info.macAddress, port: info.port)
     }
     
     
     // MARK: - Utility Methods
     
     public func getApiClient(item: IHasServerId) -> ApiClient? {
-        return getApiClient(item.serverId)
+        return getApiClient(serverId: item.serverId)
     }
     
     public func getApiClient(serverId: String) -> ApiClient? {
@@ -762,7 +762,7 @@ public class ConnectionManager: ConnectionManagerProtocol {
         
         if apiClient == nil {
             
-            let address = server.getAddress(connectionMode)!
+            let address = server.getAddress(mode: connectionMode)!
             
             apiClient = ApiClient(httpClient: httpClient, jsonSerializer: JsonSerializer(), logger: Logger(), serverAddress: address, appName: "Emby_ApiClient", applicationVersion: "1.0", device: device)
             
@@ -775,7 +775,7 @@ public class ConnectionManager: ConnectionManagerProtocol {
         if server.accessToken == nil {
             apiClient!.clearAuthenticationInfo()
         } else {
-            apiClient!.setAuthenticationInfo(server.accessToken, userId: server.userId)
+            apiClient!.setAuthenticationInfo(accessToken: server.accessToken, userId: server.userId)
         }
         
         return apiClient!
