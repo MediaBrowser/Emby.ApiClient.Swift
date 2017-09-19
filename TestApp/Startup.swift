@@ -28,8 +28,8 @@ class Startup: UIViewController {
     
 
     // MARK: - Navigation
-
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let serverSelection = segue.destination as? ServerSelection {
             serverSelection.servers = sender as! [ServerInfo]
             serverSelection.connectionManager = connectionManager

@@ -57,7 +57,7 @@ class ConnectSignIn: UITableViewController {
             alert.addAction(UIAlertAction(title: "Continue", style: .default, handler: { (alert) -> Void in
                 self.navigationController?.popToRootViewController(animated: true)
             }))
-            self.presentpresent(alert, animated: true, completion: nil)
+            self.present(alert, animated: true, completion: nil)
             
         }, onError: { error in
             

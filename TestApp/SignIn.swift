@@ -28,17 +28,17 @@ class SignIn: UITableViewController {
     }
     
     @IBAction func signInButtonTapped(sender: UIBarButtonItem) {
-        apiClient.authenticateUserAsync(usernameField.text!, password: passwordField.text ?? "", success: { (result) -> Void in
+        apiClient.authenticateUserAsync(username: usernameField.text!, password: passwordField.text ?? "", success: { (result) -> Void in
             
-            let alert = UIAlertController(title: "Authentication Successful", message: "Access Token: \(result.accessToken)", preferredStyle: .Alert)
-            alert.addAction(UIAlertAction(title: "Continue", style: .Default, handler: nil))
-            self.presentViewController(alert, animated: true, completion: nil)
+            let alert = UIAlertController(title: "Authentication Successful", message: "Access Token: \(result.accessToken)", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Continue", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
             
             }, failure: { (error) -> Void in
                 
-                let alert = UIAlertController(title: "Sign In Failed", message: "\(error)", preferredStyle: .Alert)
-                alert.addAction(UIAlertAction(title: "Continue", style: .Default, handler: nil))
-                self.presentViewController(alert, animated: true, completion: nil)
+                let alert = UIAlertController(title: "Sign In Failed", message: "\(error)", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Continue", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
                 
         })
     }
