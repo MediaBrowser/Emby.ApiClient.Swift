@@ -22,9 +22,13 @@ public class HttpClient : IAsyncHttpClient {
     public func sendRequest<T : JSONSerializable>(request: HttpRequest, success: @escaping (T) -> Void, failure: @escaping (EmbyError) -> Void) {
         
         Alamofire.request(request)
-            .responseJSON { (res) -> Void in
+            .validate { request, response, data in
+                // custom evalution clousre now includes data (allows you to parse data to dig out error messeages
+                return .success
+            }
+            .responseJSON { response in
                 
-                if case .Success(let json) = res.result {
+                if case .success(let json) = response.result {
                     if  let jsonObject = json as? JSON_Object {
                         
                         if let object = T(jSON: jsonObject) {
@@ -38,8 +42,8 @@ public class HttpClient : IAsyncHttpClient {
                         failure(EmbyError.JsonDeserializationError)
                     }
                 }
-                else if case .Failure(let error) = res.result {
-                    failure(EmbyError.NetworkRequestError(error.description))
+                else if case .failure(let error) = response.result {
+                    failure(EmbyError.NetworkRequestError(error.localizedDescription))
                 }
         }
     }
@@ -47,9 +51,13 @@ public class HttpClient : IAsyncHttpClient {
     public func sendCollectionRequest<T : JSONSerializable>(request: HttpRequest, success: @escaping ([T]) -> Void, failure: @escaping (EmbyError) -> Void) {
         
         Alamofire.request(request)
-            .responseJSON { (res) -> Void in
+            .validate { request, response, data in
+                // custom evalution clousre now includes data (allows you to parse data to dig out error messeages
+                return .success
+            }
+            .responseJSON { response in
                 
-                if case .Success(let json) = res.result {
+                if case .success(let json) = response.result {
                     if let jsonArray = json as? JSON_Array {
                         
                         var results: [T] = []
@@ -66,8 +74,8 @@ public class HttpClient : IAsyncHttpClient {
                         failure(EmbyError.JsonDeserializationError)
                     }
                 }
-                else if case .Failure(let error) = res.result {
-                    failure(EmbyError.NetworkRequestError(error.description))
+                else if case .failure(let error) = response.result {
+                    failure(EmbyError.NetworkRequestError(error.localizedDescription))
                 }
         }
     }

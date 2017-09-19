@@ -16,11 +16,11 @@ class Startup: UIViewController {
     
     var connectionResult: ConnectionResult?
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         connectionManager?.connect(onSuccess: { (result) -> Void in
-            self.connectionFinished(result)
+            self.connectionFinished(result: result)
             }, onError: { (error) -> Void in
                 print("Error connecting: \(error)")
         })
@@ -30,14 +30,14 @@ class Startup: UIViewController {
     // MARK: - Navigation
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let serverSelection = segue.destinationViewController as? ServerSelection {
+        if let serverSelection = segue.destination as? ServerSelection {
             serverSelection.servers = sender as! [ServerInfo]
             serverSelection.connectionManager = connectionManager
         }
-        else if let userSelection = segue.destinationViewController as? UserSelection {
+        else if let userSelection = segue.destination as? UserSelection {
             userSelection.connectionResult = connectionResult!
         }
-        else if let connectSignIn  = segue.destinationViewController as? ConnectSignIn {
+        else if let connectSignIn  = segue.destination as? ConnectSignIn {
             connectSignIn.connectionManager = connectionManager
         }
     }
@@ -48,12 +48,12 @@ class Startup: UIViewController {
     func connectionFinished(result: ConnectionResult) {
         switch result.state {
         case .ServerSelection:
-            performSegueWithIdentifier("Server Selection", sender: result.servers)
+            performSegue(withIdentifier: "Server Selection", sender: result.servers)
         case .ServerSignIn:
             connectionResult = result
-            performSegueWithIdentifier("User Selection", sender: nil)
+            performSegue(withIdentifier: "User Selection", sender: nil)
         case .ConnectSignIn:
-            performSegueWithIdentifier("Connect Sign In", sender: nil)
+            performSegue(withIdentifier: "Connect Sign In", sender: nil)
         case .SignedIn:
             print("Signed In: \(result)")
         default:
@@ -62,7 +62,7 @@ class Startup: UIViewController {
     }
     
     @IBAction func signOutButtonTapped(sender: UIBarButtonItem) {
-        connectionManager.logout({ () -> Void in
+        connectionManager.logout(onSuccess: { () -> Void in
             
             }) { () -> Void in
                 

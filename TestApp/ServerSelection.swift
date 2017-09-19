@@ -24,7 +24,7 @@ class ServerSelection: UITableViewController {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return servers.count
     }
 

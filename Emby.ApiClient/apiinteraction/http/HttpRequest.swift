@@ -29,25 +29,28 @@ public struct HttpRequest : URLRequestConvertible
     }
     
     public func asURLRequest() throws -> URLRequest {
+        var encodedURL: URLRequest? = nil
         let url = NSURL(string: self.url)!
         let request = NSMutableURLRequest(url: url as URL)
         request.httpMethod = method.rawValue
         
         
-        let encoding = postData != nil ? Alamofire.ParameterEncoding.JSON : Alamofire.ParameterEncoding.URL
+        let encoding: ParameterEncoding = (postData != nil) ? Alamofire.JSONEncoding.default : Alamofire.URLEncoding.default
         
-        let (encodedURL, error) = encoding.encode(request, parameters: postData?.data)
-        if let error = error {
+        do {
+            encodedURL = try encoding.encode(request as! URLRequestConvertible, with: postData?.data)
+            
+            if headers.data.count > 0 {
+                for (key, value) in headers.data {
+                    encodedURL!.setValue(value, forHTTPHeaderField: key)
+                }
+            }
+            
+        } catch let error {
             print(error)
         }
         
-        if headers.data.count > 0 {
-            for (key, value) in headers.data {
-                encodedURL.setValue(value, forHTTPHeaderField: key)
-            }
-        }
-        
-        return encodedURL
+        return encodedURL!
     }
     
     mutating func addHeaders(newHeaders: HttpHeaders) {

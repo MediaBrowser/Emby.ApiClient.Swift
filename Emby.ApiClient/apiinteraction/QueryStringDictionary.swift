@@ -369,7 +369,7 @@ public class QueryStringDictionary //extends java.util.HashMap<String, String>
     */
     private func GetEncodedValue(value: String) -> String
     {
-        return value.stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet()) ?? ""
+        return value.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
     }
     
     public final func getUrl(prefix: String) -> String {

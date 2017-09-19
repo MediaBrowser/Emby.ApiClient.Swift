@@ -25,7 +25,7 @@ public class ServerLocator: NSObject, ServerDiscoveryProtocol, GCDAsyncUdpSocket
     
     // MARK: - utility methods
     
-    public func findServers(timeoutMs: Int, onSuccess: @escaping ([ServerDiscoveryInfo]) -> Void, onError: (Error) -> Void)
+    public func findServers(timeoutMs: Int, onSuccess: @escaping ([ServerDiscoveryInfo]) -> Void, onError: @escaping (Error) -> Void)
     {
         let udpSocket = GCDAsyncUdpSocket(delegate: self, delegateQueue: DispatchQueue.main)
         
@@ -58,7 +58,7 @@ public class ServerLocator: NSObject, ServerDiscoveryProtocol, GCDAsyncUdpSocket
         self.onSuccess?(Array(serverDiscoveryInfo))
     }
     
-    private func Receive(c: GCDAsyncUdpSocket, timeoutMs: UInt, onResponse: ([ServerDiscoveryInfo]) -> Void) throws {
+    private func Receive(c: GCDAsyncUdpSocket, timeoutMs: UInt, onResponse: @escaping ([ServerDiscoveryInfo]) -> Void) throws {
         
         serverDiscoveryInfo = []
         let timeout = TimeInterval(Double(timeoutMs) / 1000.0)

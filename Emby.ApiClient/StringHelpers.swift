@@ -7,7 +7,7 @@ import Foundation
 
 internal func splitToArray(stringToSplit: String?, delimiter: Character) -> [String] {
     if let toBeSplit = stringToSplit {
-        return toBeSplit.characters.split(separator: { $0 == delimiter }).map(String.init).filter({!$0.isEmpty})
+        return toBeSplit.characters.split{ $0 == delimiter }.map(String.init).filter({!$0.isEmpty})
     } else {
         return [String]()
     }
@@ -17,9 +17,11 @@ extension String {
     func sha1() -> String {
         let data = self.data(using: String.Encoding.utf8)!
         var digest = [UInt8](repeating: 0, count:Int(CC_SHA1_DIGEST_LENGTH))
-        CC_SHA1(data.base64EncodedData(), CC_LONG(data.count), &digest)
-        let hexBytes = digest.map { String(format: "%02hhx", $0) }
-        return hexBytes.joined(separator: "")
+        data.withUnsafeBytes{
+            _ = CC_SHA1($0, CC_LONG(data.count), &digest)
+        }
+        let hexBytes = digest.map{String(format: "%02hhx", $0)}
+        return hexBytes.joined()
     }
     
     func md5() -> String {

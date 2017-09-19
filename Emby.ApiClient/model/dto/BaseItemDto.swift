@@ -349,7 +349,7 @@ public class BaseItemDto : JSONSerializable {
     
     public var supportsSimilarItems: Bool {
         get {
-            return isType("Movie") || isType("Series") || isType("MusicAlbum") || isType("MusicArtist") || isType("Program") || isType("Recording") || isType("ChannelVideoItem") || isType("Game")
+            return isType(type: "Movie") || isType(type: "Series") || isType(type: "MusicAlbum") || isType(type: "MusicArtist") || isType(type: "Program") || isType(type: "Recording") || isType(type: "ChannelVideoItem") || isType(type: "Game")
         }
     }
     

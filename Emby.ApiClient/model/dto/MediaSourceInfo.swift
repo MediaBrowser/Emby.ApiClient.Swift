@@ -72,7 +72,7 @@ public struct MediaSourceInfo {
     var videoStream: MediaStream? {
         get {
             return mediaStreams
-                .filter({ $0.type != nil && $0.type == MediaStreamType.Video && $0.codec?.lowercaseString.rangeOfString("jpeg") == nil})
+                .filter({ $0.type != nil && $0.type == MediaStreamType.Video && $0.codec?.lowercased().range(of: "jpeg") == nil})
                 .first
         }
     }

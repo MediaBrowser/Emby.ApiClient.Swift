@@ -48,9 +48,9 @@ public struct MediaStream {
     
     public static func isTextFormat(format: String?) -> Bool {
         if let fmt = format {
-            return fmt.lowercaseString.rangeOfString("pgs") == nil &&
-                fmt.lowercaseString.rangeOfString("dvd") == nil &&
-                fmt.caseInsensitiveCompare("sub") != .OrderedSame
+            return fmt.lowercased().range(of: "pgs") == nil &&
+                fmt.lowercased().range(of: "dvd") == nil &&
+                fmt.caseInsensitiveCompare("sub") != .orderedSame
         } else {
             return true
         }

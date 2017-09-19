@@ -450,7 +450,7 @@ public class ApiClient: BaseApiClient {
         dict.addIfNotNil("IsMissing", value: query.isMissing)
         dict.addIfNotNil("IsVirtualUnaired", value: query.isVirtualUnaired)
         
-        let url = getApiUrl(handler: "Shows/\(query.seriesId)/Episodes", queryString: dict)
+        let url = getApiUrl(handler: "Shows/\(String(describing: query.seriesId))/Episodes", queryString: dict)
         
         getItemsFromUrl(url: url, success: success, failure: failure)
     }
@@ -464,7 +464,7 @@ public class ApiClient: BaseApiClient {
         dict.addIfNotNil("IsVirtualUnaired", value: query.isVirtualUnaired)
         dict.addIfNotNil("IsSpecialSeason", value: query.isSpecialSeason)
         
-        let url = getApiUrl(handler: "Shows/\(query.seriesId)/Seasons", queryString: dict)
+        let url = getApiUrl(handler: "Shows/\(String(describing: query.seriesId))/Seasons", queryString: dict)
         
         getItemsFromUrl(url: url, success: success, failure: failure)
     }

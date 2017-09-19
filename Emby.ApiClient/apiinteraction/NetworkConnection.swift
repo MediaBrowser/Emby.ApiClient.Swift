@@ -74,7 +74,7 @@ public class NetworkConnection: NSObject, INetworkConnection, GCDAsyncUdpSocketD
     /**
     * Called when the datagram with the given tag has been sent.
     **/
-    @objc public func udpSocket(sock: GCDAsyncUdpSocket!, didSendDataWithTag tag: Int) {
+    @objc public func udpSocket(_ sock: GCDAsyncUdpSocket, didSendDataWithTag tag: Int) {
         print("didSendDataWithTag")
     }
     
@@ -83,7 +83,7 @@ public class NetworkConnection: NSObject, INetworkConnection, GCDAsyncUdpSocketD
      * Called if an error occurs while trying to send a datagram.
      * This could be due to a timeout, or something more serious such as the data being too large to fit in a sigle packet.
      **/
-    @objc public func udpSocket(sock: GCDAsyncUdpSocket!, didNotSendDataWithTag tag: Int, dueToError error: NSError!) {
+    @objc public func udpSocket(_ sock: GCDAsyncUdpSocket, didNotSendDataWithTag tag: Int, dueToError error: Error?) {
         print("didNotSendDataWithTag")
     }
     
@@ -91,7 +91,7 @@ public class NetworkConnection: NSObject, INetworkConnection, GCDAsyncUdpSocketD
     /**
      * Called when the socket has received the requested datagram.
      **/
-    @objc public func udpSocket(sock: GCDAsyncUdpSocket!, didReceiveData data: NSData!, fromAddress address: NSData!, withFilterContext filterContext: AnyObject!) {
+    @objc public func udpSocket(_ sock: GCDAsyncUdpSocket, didReceive data: Data, fromAddress address: Data, withFilterContext filterContext: Any?) {
         
         print("didReceiveData: \(data) fromAddress: \(address)")
     }
@@ -100,7 +100,7 @@ public class NetworkConnection: NSObject, INetworkConnection, GCDAsyncUdpSocketD
     /**
      * Called when the socket is closed.
      **/
-    @objc public func udpSocketDidClose(sock: GCDAsyncUdpSocket!, withError error: NSError!) {
+    @objc public func udpSocketDidClose(_ sock: GCDAsyncUdpSocket, withError error: Error?) {
         print("udpSocketDidClose")
     }
 }

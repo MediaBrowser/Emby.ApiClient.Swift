@@ -11,7 +11,7 @@ public struct ContainerProfile {
     let container: String?
     var containers: [String] {
         get {
-            return splitToArray(container, delimiter: ",")
+            return splitToArray(stringToSplit: container, delimiter: ",")
         }
     }
 }

@@ -556,7 +556,7 @@ public class ConnectionManager: ConnectionManagerProtocol {
             
             if server.userId != nil {
                 
-                let request = HttpRequest(url: url + "/mediabrowser/users/\(server.userId)?format=json", method: .get)
+                let request = HttpRequest(url: url + "/mediabrowser/users/\(String(describing: server.userId))?format=json", method: .get)
                 self.httpClient.sendRequest(request: request, success: { (user: UserDto) -> Void in
                     
                     self.onLocalUserSignIn(user: user)

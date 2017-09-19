@@ -16,7 +16,7 @@ public struct SessionInfoDto : JSONSerializable {
 //    var additionalUsers = [SessionUserInfo]()
       let applicationVersion: String
       let client: String
-      var lastActivityDate = NSDate()
+      var lastActivityDate = Date()
 //    let nowViewingItem: BaseItemInfo
       let deviceName: String
 //    let nowPlayingItem: BaseItemInfo
@@ -56,11 +56,11 @@ public struct SessionInfoDto : JSONSerializable {
             self.supportedCommands = supportedCommands
             self.client = client
             
-            let formatter = NSDateFormatter()
+            let formatter = DateFormatter()
             formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-            formatter.timeZone = NSTimeZone(forSecondsFromGMT: 0)
+            formatter.timeZone = TimeZone(secondsFromGMT: 0)
             
-            self.lastActivityDate = formatter.dateFromString(lastActivityDateString)!
+            self.lastActivityDate = formatter.date(from: lastActivityDateString)!
             self.applicationVersion = applicationVersion
             
             //MARK: TODO Additional Users

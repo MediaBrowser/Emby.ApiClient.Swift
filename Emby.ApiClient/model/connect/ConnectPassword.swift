@@ -13,7 +13,8 @@ import Foundation
 extension String {
     
     func replace(what: String, with: String) -> String {
-        return self.stringByReplacingOccurrencesOfString(what, withString: with)
+        //return self.stringByReplacingOccurrencesOfString(what, withString: with)
+        return self.replacingOccurrences(of: what, with: with)
     }
 }
 
@@ -21,7 +22,7 @@ public final class ConnectPassword
 {
     public static func PerformPreHashFilter( password: String) -> String
     {
-        return password.replace("&", with: "&amp;").replace("/", with: "&#092;").replace("!", with: "&#33;").replace("$", with: "&#036;").replace("\"", with: "&quot;").replace("<", with: "&lt;").replace(">", with: "&gt;").replace("'", with: "&#39;");
+        return password.replace(what: "&", with: "&amp;").replace(what: "/", with: "&#092;").replace(what: "!", with: "&#33;").replace(what: "$", with: "&#036;").replace(what: "\"", with: "&quot;").replace(what: "<", with: "&lt;").replace(what: ">", with: "&gt;").replace(what: "'", with: "&#39;");
     }
     
 }
