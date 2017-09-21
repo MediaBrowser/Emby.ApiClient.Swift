@@ -29,6 +29,25 @@ public class ServerLocator: NSObject, ServerDiscoveryProtocol, GCDAsyncUdpSocket
     {
         let udpSocket = GCDAsyncUdpSocket(delegate: self, delegateQueue: DispatchQueue.main)
         
+        /*do
+        {
+            try udpSocket.bind(toPort: 7359)
+        }
+        
+        catch let error
+        {
+            print("Error binding: \(error)")
+        }
+        
+        do
+        {
+            try udpSocket.beginReceiving()
+        }
+        
+        catch let error{
+            print("Error receiving: \(error)")
+        }*/
+        
         // Find the server using UDP broadcast
         
         do {
@@ -63,7 +82,7 @@ public class ServerLocator: NSObject, ServerDiscoveryProtocol, GCDAsyncUdpSocket
         serverDiscoveryInfo = []
         let timeout = TimeInterval(Double(timeoutMs) / 1000.0)
         
-        Timer.scheduledTimer(timeInterval: timeout, target: self, selector: Selector("finished"), userInfo: nil, repeats: false)
+        Timer.scheduledTimer(timeInterval: timeout, target: self, selector: #selector(ServerLocator.finished), userInfo: nil, repeats: false)
         
         do {
             try c.beginReceiving()
@@ -83,7 +102,7 @@ public class ServerLocator: NSObject, ServerDiscoveryProtocol, GCDAsyncUdpSocket
     *
     * This method is called if one of the connect methods are invoked, and the connection is successful.
     **/
-    @objc public func udpSocket(sock: GCDAsyncUdpSocket!, didConnectToAddress address: NSData!) {
+    @objc public func udpSocket(_ sock: GCDAsyncUdpSocket, didConnectToAddress address: Data) {
         
         print("didConnectToAddress")
     }
@@ -97,7 +116,7 @@ public class ServerLocator: NSObject, ServerDiscoveryProtocol, GCDAsyncUdpSocket
      * This method is called if one of the connect methods are invoked, and the connection fails.
      * This may happen, for example, if a domain name is given for the host and the domain name is unable to be resolved.
      **/
-    @objc public func udpSocket(sock: GCDAsyncUdpSocket!, didNotConnect error: NSError!) {
+    @objc public func udpSocket(_ sock: GCDAsyncUdpSocket, didNotConnect error: Error?) {
         
         print("didNotConnect")
     }
@@ -106,7 +125,7 @@ public class ServerLocator: NSObject, ServerDiscoveryProtocol, GCDAsyncUdpSocket
     /**
      * Called when the datagram with the given tag has been sent.
      **/
-    @objc public func udpSocket(sock: GCDAsyncUdpSocket!, didSendDataWithTag tag: Int) {
+    @objc public func udpSocket(_ sock: GCDAsyncUdpSocket, didSendDataWithTag tag: Int) {
         
         print("didSendDataWithTag")
         do {
@@ -124,7 +143,7 @@ public class ServerLocator: NSObject, ServerDiscoveryProtocol, GCDAsyncUdpSocket
      * Called if an error occurs while trying to send a datagram.
      * This could be due to a timeout, or something more serious such as the data being too large to fit in a sigle packet.
      **/
-    @objc public func udpSocket(sock: GCDAsyncUdpSocket!, didNotSendDataWithTag tag: Int, dueToError error: NSError!) {
+    @objc public func udpSocket(_ sock: GCDAsyncUdpSocket, didNotSendDataWithTag tag: Int, dueToError error: Error?) {
         
         print("didNotSendDataWithTag")
     }
@@ -133,12 +152,12 @@ public class ServerLocator: NSObject, ServerDiscoveryProtocol, GCDAsyncUdpSocket
     /**
      * Called when the socket has received the requested datagram.
      **/
-    @objc public func udpSocket(sock: GCDAsyncUdpSocket!, didReceiveData data: NSData!, fromAddress address: NSData!, withFilterContext filterContext: AnyObject!) {
+    @objc public func udpSocket(_ sock: GCDAsyncUdpSocket, didReceive data: Data, fromAddress address: Data, withFilterContext filterContext: Any?) {
         
         let json = NSString(data: data as Data, encoding: String.Encoding.utf8.rawValue) as String?
         
         // We have a response
-        print("ServerLocator >>> Broadcast response from server: \(String(describing: sock.localAddress())): \(json)")
+        print("ServerLocator >>> Broadcast response from server: \(String(describing: sock.localAddress())): \(String(describing: json))")
         
         do {
             if let serverInfo: ServerDiscoveryInfo = try JsonSerializer().DeserializeFromString( text: json!, type:nil) {
@@ -154,7 +173,7 @@ public class ServerLocator: NSObject, ServerDiscoveryProtocol, GCDAsyncUdpSocket
     /**
      * Called when the socket is closed.
      **/
-    @objc public func udpSocketDidClose(sock: GCDAsyncUdpSocket!, withError error: NSError!) {
+    @objc public func udpSocketDidClose(_ sock: GCDAsyncUdpSocket, withError error: Error?) {
         
         print("udpSocketDidClose")
     }

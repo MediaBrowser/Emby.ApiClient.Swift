@@ -17,8 +17,7 @@ class Startup: UIViewController {
     var connectionResult: ConnectionResult?
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
+        super.viewWillAppear(animated)        
         connectionManager?.connect(onSuccess: { (result) -> Void in
             self.connectionFinished(result: result)
             }, onError: { (error) -> Void in

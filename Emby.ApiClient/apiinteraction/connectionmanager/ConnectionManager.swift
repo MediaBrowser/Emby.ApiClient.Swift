@@ -200,7 +200,6 @@ public class ConnectionManager: ConnectionManagerProtocol {
     
     public func connect(onSuccess: @escaping (ConnectionResult) -> Void, onError: @escaping (Error) -> Void) {
         getAvailableServers(onSuccess: { (servers) -> Void in
-            
             self.connect(servers: servers, onSuccess: { (connectionResult) -> Void in
                 onSuccess(connectionResult)
             }, onError: { (error) -> Void in

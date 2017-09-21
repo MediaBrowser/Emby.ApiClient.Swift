@@ -30,15 +30,15 @@ public struct HttpRequest : URLRequestConvertible
     
     public func asURLRequest() throws -> URLRequest {
         var encodedURL: URLRequest? = nil
-        let url = NSURL(string: self.url)!
-        let request = NSMutableURLRequest(url: url as URL)
+        let url = URL(string: self.url)!
+        var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
         
         
         let encoding: ParameterEncoding = (postData != nil) ? Alamofire.JSONEncoding.default : Alamofire.URLEncoding.default
         
         do {
-            encodedURL = try encoding.encode(request as! URLRequestConvertible, with: postData?.data)
+            encodedURL = try encoding.encode(request as URLRequestConvertible, with: postData?.data)
             
             if headers.data.count > 0 {
                 for (key, value) in headers.data {
@@ -68,5 +68,7 @@ public struct HttpRequest : URLRequestConvertible
         
         headers = newHeaders
     }
+    
+    
 }
 
