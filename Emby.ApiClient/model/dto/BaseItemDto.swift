@@ -372,6 +372,7 @@ public class BaseItemDto : JSONSerializable {
     public var currentProgram: BaseItemDto?
     
     public required init?(jSON: JSON_Object) {
-        fatalError("init(jSON:) has not been implemented: \(jSON)")
+        //fatalError("init(jSON:) has not been implemented: \(jSON)")
+        self.name = jSON["Name"] as? String
     }
 }

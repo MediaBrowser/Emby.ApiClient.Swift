@@ -47,9 +47,9 @@ public class ServerUserInfo: NSObject, NSCoding {
         aCoder.encode(self.id, forKey: "id")
         aCoder.encode(self.isSignedInOffline, forKey: "isSignedInOffline")
     }
-}
-
-//MARK: - Equatable
-public func ==(lhs: ServerUserInfo, rhs: ServerUserInfo) -> Bool {
-    return lhs.id == rhs.id
+    
+    //MARK: - Equatable
+    override public func isEqual(_ object: Any?) -> Bool {
+        return id == (object as? ServerUserInfo)?.id
+    }
 }

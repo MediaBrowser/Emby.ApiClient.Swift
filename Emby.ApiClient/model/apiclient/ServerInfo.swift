@@ -62,10 +62,9 @@ public class ServerInfo: NSObject, NSCoding {
     }
     
     func addOrUpdate(user: ServerUserInfo) {
-        if ( users.contains(user)) {
+        if (users.contains(user)) {
             users.remove(user)
         }
-        
         users.insert(user)
     }
     
@@ -125,9 +124,10 @@ public class ServerInfo: NSObject, NSCoding {
         }
         return false
     }*/
-}
+    
+    //MARK: - Equatable
+    override public func isEqual(_ object: Any?) -> Bool {
+        return id == (object as? ServerInfo)?.id
+    }
 
-//MARK: - Equatable
-public func ==(lhs: ServerInfo, rhs: ServerInfo) -> Bool {
-    return lhs.id == rhs.id
 }

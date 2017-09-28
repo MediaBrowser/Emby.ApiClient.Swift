@@ -36,7 +36,7 @@ class BaseApiClientTests: XCTestCase {
     func testSubtitleUrl() {
         let subtitleDownloadOptions = SubtitleDownloadOptions(itemId: "1", mediaSourceId: "2", streamIndex: 3, format: "x")
 
-        let subtitleUrl = baseApiClient!.getSubtitleUrl(subtitleDownloadOptions)
+        let subtitleUrl = baseApiClient!.getSubtitleUrl(options: subtitleDownloadOptions)
         
         XCTAssertEqual("\(serverAddress)/mediabrowser/Videos/1/2/Subtitles/3/Stream.x", subtitleUrl)
     }
@@ -69,7 +69,7 @@ class BaseApiClientTests: XCTestCase {
     func testGetApiUrlWithHandler() {
         let handler = "handler";
         
-        let apiUrl = baseApiClient!.getApiUrl(handler)
+        let apiUrl = baseApiClient!.getApiUrl(handler: handler)
         
         XCTAssertEqual("\(serverAddress)/mediabrowser/handler", apiUrl)
     }
@@ -83,7 +83,7 @@ class BaseApiClientTests: XCTestCase {
         options.imageType = ImageType.Backdrop
         options.imageIndex = 0
         
-        let imageUrl = baseApiClient!.getImageUrl(baseItemDto, options: options)
+        let imageUrl = baseApiClient!.getImageUrl(item: baseItemDto, options: options)
         
         XCTAssertEqual("\(serverAddress)/mediabrowser/Items/\(baseItemDto.id!)/Images/\(options.imageType)?EnableImageEnhancers=\(options.enableImageEnhancers)&Tag=png", imageUrl)
     }
@@ -97,7 +97,7 @@ class BaseApiClientTests: XCTestCase {
         options.imageType = ImageType.Screenshot
         options.imageIndex = 0
         
-        let imageUrl = baseApiClient!.getImageUrl(baseItemDto, options: options)
+        let imageUrl = baseApiClient!.getImageUrl(item: baseItemDto, options: options)
         
         XCTAssertEqual("\(serverAddress)/mediabrowser/Items/\(baseItemDto.id!)/Images/\(options.imageType)?EnableImageEnhancers=\(options.enableImageEnhancers)&Tag=png", imageUrl)
     }
@@ -115,7 +115,7 @@ class BaseApiClientTests: XCTestCase {
         options.imageType = ImageType.Chapter
         options.imageIndex = 0
         
-        let imageUrl = baseApiClient!.getImageUrl(baseItemDto, options: options)
+        let imageUrl = baseApiClient!.getImageUrl(item: baseItemDto, options: options)
         
         XCTAssertEqual("\(serverAddress)/mediabrowser/Items/\(baseItemDto.id!)/Images/\(options.imageType)?EnableImageEnhancers=\(options.enableImageEnhancers)&Tag=png", imageUrl)
     }
@@ -128,7 +128,7 @@ class BaseApiClientTests: XCTestCase {
         var options = ImageOptions()
         options.imageType = ImageType.Primary
         
-        let imageUrl = baseApiClient!.getImageUrl(baseItemDto, options: options)
+        let imageUrl = baseApiClient!.getImageUrl(item: baseItemDto, options: options)
         
         XCTAssertEqual("\(serverAddress)/mediabrowser/Items/\(baseItemDto.id!)/Images/\(options.imageType)?EnableImageEnhancers=\(options.enableImageEnhancers)&Tag=png", imageUrl)
     }
@@ -139,7 +139,7 @@ class BaseApiClientTests: XCTestCase {
         var options = ImageOptions()
         options.imageType = ImageType.Backdrop
         
-        let imageUrl = baseApiClient!.getImageUrl(itemId, options: options)
+        let imageUrl = baseApiClient!.getImageUrl(itemId: itemId, options: options)
         
         XCTAssertEqual("\(serverAddress)/mediabrowser/Items/\(itemId)/Images/\(options.imageType)?EnableImageEnhancers=\(options.enableImageEnhancers)", imageUrl)
     }
@@ -151,7 +151,7 @@ class BaseApiClientTests: XCTestCase {
         var options = ImageOptions()
         options.imageType = ImageType.Primary
         
-        let userImageUrl = baseApiClient!.getUserImageUrl(user, options: options)
+        let userImageUrl = baseApiClient!.getUserImageUrl(user: user, options: options)
         
         XCTAssertEqual("\(serverAddress)/mediabrowser/Users/\(user.id!)/Images/\(options.imageType)?EnableImageEnhancers=\(options.enableImageEnhancers)", userImageUrl)
     }
@@ -162,7 +162,7 @@ class BaseApiClientTests: XCTestCase {
         var options = ImageOptions()
         options.imageType = ImageType.Primary
         
-        let userImageUrl = baseApiClient!.getUserImageUrl(userId, options: options)
+        let userImageUrl = baseApiClient!.getUserImageUrl(userId: userId, options: options)
         
         XCTAssertEqual("\(serverAddress)/mediabrowser/Users/\(userId)/Images/\(options.imageType)?EnableImageEnhancers=\(options.enableImageEnhancers)", userImageUrl)
     }
@@ -173,7 +173,7 @@ class BaseApiClientTests: XCTestCase {
         baseItemPerson.primaryImageTag = "primaryImageTag"
         
         let options = ImageOptions()
-        let personImageUrl = baseApiClient!.getPersonImageUrl(baseItemPerson, options: options)
+        let personImageUrl = baseApiClient!.getPersonImageUrl(item: baseItemPerson, options: options)
         
         XCTAssertEqual("\(serverAddress)/mediabrowser/Items/\(baseItemPerson.id!)/Images/\(options.imageType)?EnableImageEnhancers=\(options.enableImageEnhancers)&Tag=\(baseItemPerson.primaryImageTag!)", personImageUrl)
     }
@@ -182,14 +182,14 @@ class BaseApiClientTests: XCTestCase {
         let name = "genre"
         let options = ImageOptions()
         
-        let genreImageUrl = try! baseApiClient!.getGenreImageUrl(name, options: options)
+        let genreImageUrl = try! baseApiClient!.getGenreImageUrl(name: name, options: options)
         
         XCTAssertEqual("\(serverAddress)/mediabrowser/Genres/\(name)/Images/\(options.imageType)?EnableImageEnhancers=\(options.enableImageEnhancers)", genreImageUrl)
     }
     
     func testGetGenreImageUrlThrowsErrorTypeForEmptyName() {
         do {
-            try baseApiClient!.getGenreImageUrl("", options: ImageOptions())
+            try baseApiClient!.getGenreImageUrl(name: "", options: ImageOptions())
             XCTFail("Expected IllegalArgumentError.EmptyString")
         } catch {
         }
@@ -199,14 +199,14 @@ class BaseApiClientTests: XCTestCase {
         let name = "musicGenre"
         let options = ImageOptions()
         
-        let musicGenreImageUrl = try! baseApiClient!.getMusicGenreImageUrl(name, options: options)
+        let musicGenreImageUrl = try! baseApiClient!.getMusicGenreImageUrl(name: name, options: options)
         
         XCTAssertEqual("\(serverAddress)/mediabrowser/MusicGenres/\(name)/Images/\(options.imageType)?EnableImageEnhancers=\(options.enableImageEnhancers)", musicGenreImageUrl)
     }
     
     func testGetMusicGenreImageUrlThrowsErrorTypeForEmptyName() {
         do {
-            try baseApiClient!.getMusicGenreImageUrl("", options: ImageOptions())
+            try baseApiClient!.getMusicGenreImageUrl(name: "", options: ImageOptions())
             XCTFail("Expected IllegalArgumentError.EmptyString")
         } catch {
         }
@@ -216,14 +216,14 @@ class BaseApiClientTests: XCTestCase {
         let name = "gameGenre"
         let options = ImageOptions()
         
-        let gameGenreImageUrl = try! baseApiClient!.getGameGenreImageUrl(name, options: options)
+        let gameGenreImageUrl = try! baseApiClient!.getGameGenreImageUrl(name: name, options: options)
         
         XCTAssertEqual("\(serverAddress)/mediabrowser/GameGenres/\(name)/Images/\(options.imageType)?EnableImageEnhancers=\(options.enableImageEnhancers)", gameGenreImageUrl)
     }
     
     func testGetGameGenreImageUrlThrowsErrorTypeForEmptyName() {
         do {
-            try baseApiClient!.getGameGenreImageUrl("", options: ImageOptions())
+            try baseApiClient!.getGameGenreImageUrl(name: "", options: ImageOptions())
             XCTFail("Expected IllegalArgumentError.EmptyString")
         } catch {
         }
@@ -233,14 +233,14 @@ class BaseApiClientTests: XCTestCase {
         let name = "studio"
         let options = ImageOptions()
         
-        let studioImageUrl = try! baseApiClient!.getStudioImageUrl(name, options: options)
+        let studioImageUrl = try! baseApiClient!.getStudioImageUrl(name: name, options: options)
         
         XCTAssertEqual("\(serverAddress)/mediabrowser/Studios/\(name)/Images/\(options.imageType)?EnableImageEnhancers=\(options.enableImageEnhancers)", studioImageUrl)
     }
     
     func testGetStudioImageUrlThrowsErrorTypeForEmptyName() {
         do {
-            try baseApiClient!.getStudioImageUrl("", options: ImageOptions())
+            try baseApiClient!.getStudioImageUrl(name: "", options: ImageOptions())
             XCTFail("Expected IllegalArgumentError.EmptyString")
         } catch {
         }
@@ -250,21 +250,21 @@ class BaseApiClientTests: XCTestCase {
         let name = "artist"
         let options = ImageOptions()
         
-        let artistImageUrl = try! baseApiClient!.getArtistImageUrl(name, options: options)
+        let artistImageUrl = try! baseApiClient!.getArtistImageUrl(name: name, options: options)
         
         XCTAssertEqual("\(serverAddress)/mediabrowser/Artists/\(name)/Images/\(options.imageType)?EnableImageEnhancers=\(options.enableImageEnhancers)", artistImageUrl)
     }
     
     func testGetArtistImageUrlThrowsErrorTypeForEmptyName() {
         do {
-            try baseApiClient!.getArtistImageUrl("", options: ImageOptions())
+            try baseApiClient!.getArtistImageUrl(name: "", options: ImageOptions())
             XCTFail("Expected IllegalArgumentError.EmptyString")
         } catch {
         }
     }
     
     func testGetBackdropImageUrlsForNoId() {
-        let backdropImageUrls = baseApiClient!.getBackdropImageUrls(BaseItemDto(jSON: JSON_Object())!, options: ImageOptions())
+        let backdropImageUrls = baseApiClient!.getBackdropImageUrls(item: BaseItemDto(jSON: JSON_Object())!, options: ImageOptions())
         
         XCTAssertNotNil(backdropImageUrls)
         XCTAssertTrue(backdropImageUrls!.isEmpty)

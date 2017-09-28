@@ -19,19 +19,19 @@ class StringHelpersTests: XCTestCase {
     }
 
     func testStringSplitByDelimiter() {
-        let stringArray = splitToArray("a,b,c", delimiter: ",")
+        let stringArray = splitToArray(stringToSplit: "a,b,c", delimiter: ",")
         
         XCTAssertEqual(3, stringArray.count)
     }
     
     func testEmptyArrayOnNilStringToSplit() {
-        let stringArray = splitToArray(nil, delimiter: ",")
+        let stringArray = splitToArray(stringToSplit: nil, delimiter: ",")
         
         XCTAssertEqual(0, stringArray.count)
     }
     
     func testNoEmptyStringOnSequentialCommas() {
-        let stringArray = splitToArray(",,a,b,c,,", delimiter: ",")
+        let stringArray = splitToArray(stringToSplit: ",,a,b,c,,", delimiter: ",")
         
         XCTAssertEqual(3, stringArray.count)
     }

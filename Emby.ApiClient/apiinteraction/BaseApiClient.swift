@@ -290,11 +290,12 @@ public class BaseApiClient// implements IDisposable
         dict.addIfNotNil("IsUnaired", value: query.isUnaired)
         dict.addIfNotNil("IsVirtualUnaired", value: query.isVirtualUnaired)
         dict.addIfNotNil("EnableImages", value: query.enableImages)
+        dict.addIfNotNil("EnableTotalRecordCount", value: query.enableTotalRecordCount)
         dict.addIfNotNil("ImageTypeLimit", value: query.imageTypeLimit)
         dict.add("EnableImageTypes", value: query.enableImageTypes?.map({$0.rawValue}))
         dict.addIfNotNil("AiredDuringSeason", value: query.airedDuringSeasion)
         
-        return getApiUrl(handler: "Users/\(query.userId)/Items", queryString: dict)
+        return getApiUrl(handler: "Users/\(query.userId!)/Items", queryString: dict)
     }
     
     internal final func getNextUpUrl(query: NextUpQuery) -> String {
@@ -379,21 +380,19 @@ public class BaseApiClient// implements IDisposable
         queryParams.addIfNotNil("UnPlayedCount", value: options.unplayedCount);
         queryParams.addIfNotNil("PercentPlayed", value: options.percentPlayed);
         queryParams.addIfNotNilOrEmpty("BackgroundColor", value: options.backgroundColor);
-
+        
         return getApiUrl(handler: baseUrl, queryString: queryParams);
     }
 
     public final func getImageUrl(item: BaseItemDto, options: ImageOptions) -> String? {
         var newOptions = options
         newOptions.tag = getImageTag(item: item, options: newOptions)
-        
         return getImageUrl(itemId: item.id, options: newOptions)
     }
 
     public final func getImageUrl(itemId: String?, options: ImageOptions) -> String? {
         if let id = itemId {
             let url = "Items/\(id)/Images/\(options.imageType)";
-            
             return getImageUrl(baseUrl: url, options: options, queryParams: QueryStringDictionary())
         }
         
@@ -421,7 +420,7 @@ public class BaseApiClient// implements IDisposable
         var newOptions = options
         newOptions.tag = item.primaryImageTag
         
-        return getImageUrl(itemId: item.id, options: options)
+        return getImageUrl(itemId: item.id, options: newOptions)
     }
 
     private func getImageTag(item: BaseItemDto, options: ImageOptions) -> String? {

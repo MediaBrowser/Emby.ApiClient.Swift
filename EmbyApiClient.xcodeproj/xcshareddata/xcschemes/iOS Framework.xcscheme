@@ -29,7 +29,26 @@
       language = ""
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "0479CFD81C01653800DFCEFB"
+               BuildableName = "EmbyTests.xctest"
+               BlueprintName = "EmbyTests"
+               ReferencedContainer = "container:EmbyApiClient.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "8838C5561BC514B500587F8E"
+            BuildableName = "EmbyApiClient.framework"
+            BlueprintName = "EmbyApiClient (iOS)"
+            ReferencedContainer = "container:EmbyApiClient.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>

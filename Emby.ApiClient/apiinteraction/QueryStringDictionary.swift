@@ -72,19 +72,20 @@ public class QueryStringDictionary //extends java.util.HashMap<String, String>
 //    }
 //    
     public final func addIfNotNil(_ name: String, value: String?) {
-        if let val = value {
+        if let val: String = value {
             data[name] = val
         }
     }
     
     public final func addIfNotNilOrEmpty(_ name: String, value: String?) {
-        if let val = value, !val.isEmpty {
-            addIfNotNil(name, value: Int(value!))
+        print("Primary Tag: \(value)")
+        if let val: String = value, !val.isEmpty {
+            addIfNotNil(name, value: value)
         }
     }
 
     public final func addIfNotNil(_ name: String, value: Int?) {
-        if let val = value {
+        if let val: Int = value {
             data[name] = String(val)
         }
     }
@@ -103,7 +104,7 @@ public class QueryStringDictionary //extends java.util.HashMap<String, String>
 //        }
 //    }
     public final func addIfNotNil(_ name: String, value: Double?) {
-        if let val = value {
+        if let val: Double = value {
             data[name] = String(val)
         }
     }
@@ -150,6 +151,7 @@ public class QueryStringDictionary //extends java.util.HashMap<String, String>
     public final func addIfNotNil(_ name: String, value: Bool?) {
         if let val = value {
             data[name] = String(val)
+            print("addIfNotNil Test: \(data[name])")
         }
     }
 //    
@@ -233,7 +235,7 @@ public class QueryStringDictionary //extends java.util.HashMap<String, String>
 //        }
 //    }
     public final func add(_ name: String, value: [Int]?) {
-        if let val = value {
+        if let val:[Int] = value {
             data[name] = val.map({String($0)}).joined(separator: ",")
         }
     }
@@ -256,7 +258,7 @@ public class QueryStringDictionary //extends java.util.HashMap<String, String>
 //    }
     
     public final func add(_ name: String, value: [String]?) {
-        if let val = value {
+        if let val:[String] = value {
             data[name] = val.joined(separator: ",")
         }
     }

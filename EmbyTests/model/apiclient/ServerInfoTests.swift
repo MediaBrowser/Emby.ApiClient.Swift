@@ -42,28 +42,28 @@ class ServerInfoTests: XCTestCase {
         let server = ServerInfo()
         server.localAddress = "localAddress"
         
-        XCTAssertEqual("localAddress", server.getAddress(ConnectionMode.Local))
+        XCTAssertEqual("localAddress", server.getAddress(mode: ConnectionMode.Local))
     }
     
     func testGetAddressManual() {
         let server = ServerInfo()
         server.manualAddress = "manualAddress"
         
-        XCTAssertEqual("manualAddress", server.getAddress(ConnectionMode.Manual))
+        XCTAssertEqual("manualAddress", server.getAddress(mode: ConnectionMode.Manual))
     }
     
     func testGetAddressRemote() {
         let server = ServerInfo()
         server.remoteAddress = "remoteAddress"
         
-        XCTAssertEqual("remoteAddress", server.getAddress(ConnectionMode.Remote))
+        XCTAssertEqual("remoteAddress", server.getAddress(mode: ConnectionMode.Remote))
     }
     
     func testImportInfo() {
         let publicSystemInfo = PublicSystemInfo(localAddress: "localAddress", wanAddress: "wanAddress", serverName: "serverName", version: "1.0", operatingSystem: "operatingSystem", id: "server")
         
         let server = ServerInfo()
-        server.importInfo(publicSystemInfo)
+        server.importInfo(systemInfo: publicSystemInfo)
         
         XCTAssertEqual(publicSystemInfo.localAddress, server.localAddress)
         XCTAssertEqual(publicSystemInfo.wanAddress, server.remoteAddress)
@@ -73,7 +73,7 @@ class ServerInfoTests: XCTestCase {
         let serverUserInfo = ServerUserInfo(id: "userA", isSignedInOffline: false)
         
         let server = ServerInfo()
-        server.addOrUpdate(serverUserInfo)
+        server.addOrUpdate(user: serverUserInfo)
         
         XCTAssertEqual(1, server.users.count)
         XCTAssertTrue(server.users.contains(serverUserInfo))
@@ -82,10 +82,10 @@ class ServerInfoTests: XCTestCase {
     func testAddOrUpdateServerUpdate() {
         let serverUserInfo = ServerUserInfo(id: "userA", isSignedInOffline: false)
         let server = ServerInfo()
-        server.addOrUpdate(serverUserInfo)
+        server.addOrUpdate(user: serverUserInfo)
         
         let updatedServerUserInfo = ServerUserInfo(id: "userA", isSignedInOffline: true)
-        server.addOrUpdate(updatedServerUserInfo)
+        server.addOrUpdate(user: updatedServerUserInfo)
         
         let users = server.users
         XCTAssertEqual(1, users.count)

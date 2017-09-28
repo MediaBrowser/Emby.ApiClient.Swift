@@ -27,7 +27,6 @@ public class HttpClient : IAsyncHttpClient {
                 return .success
             }
             .responseJSON { response in
-                
                 if case .success(let json) = response.result {
                     if  let jsonObject = json as? JSON_Object {
                         
@@ -53,12 +52,15 @@ public class HttpClient : IAsyncHttpClient {
         Alamofire.request(request)
             .validate { request, response, data in
                 // custom evalution clousre now includes data (allows you to parse data to dig out error messeages
+                print(response.description)
+
                 return .success
             }
             .responseJSON { response in
-                
-                if case .success(let json) = response.result {
-                    if let jsonArray = json as? JSON_Array {
+                //print(response.result.error?.localizedDescription)
+                /*if case .success(_) = response.result {
+                    print(response.result.value as? JSON_Object)
+                    if let jsonArray = response.result.value as? JSON_Array {
                         
                         var results: [T] = []
                         
@@ -76,7 +78,49 @@ public class HttpClient : IAsyncHttpClient {
                 }
                 else if case .failure(let error) = response.result {
                     failure(EmbyError.NetworkRequestError(error.localizedDescription))
+                }*/
+                
+                guard response.result.isSuccess else
+                {
+                    let error = response.result as! Error
+                    failure(EmbyError.NetworkRequestError(error.localizedDescription))
+                    return
                 }
+                //print("JSON_Object: \(response.result.value as? JSON_Object)")
+                //print("JSON_Array: \(response.result.value as? JSON_Array)")
+                //print("Raw result value: \(response.result.value)")
+                
+                if let jsonArray = response.result.value as? JSON_Array {
+                    
+                    var results: [T] = []
+                    
+                    for object in jsonArray {
+                        if let jsonObject = object as? JSON_Object, let object = T(jSON: jsonObject) {
+                            results.append(object)
+                        }
+                    }
+                    
+                    print(results)
+                    success(results)
+                }
+                else if let jsonArray = (response.result.value as! JSON_Object)["Items"] as? JSON_Array
+                {
+                    var results: [T] = []
+                    
+                    for object in jsonArray {
+                        if let jsonObject = object as? JSON_Object, let object = T(jSON: jsonObject) {
+                            results.append(object)
+                        }
+                    }
+                    
+                    success(results)
+                }
+                else
+                {
+                    failure(EmbyError.JsonDeserializationError)
+                }
+             
+                
         }
     }
 }

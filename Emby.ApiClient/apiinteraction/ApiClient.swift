@@ -62,6 +62,7 @@ public class ApiClient: BaseApiClient {
         
         var request = request
         request.addHeaders(newHeaders: httpHeaders)
+        print("Request: \(request)")
         httpClient.sendCollectionRequest(request: request, success: success, failure: failure)
     }
     
@@ -137,8 +138,9 @@ public class ApiClient: BaseApiClient {
      
      */
     public func getItemsAsync(query: ItemQuery, success: @escaping ([BaseItemDto]) -> Void, failure: @escaping (EmbyError) -> Void) {
+        //print(query)
         let url = getItemListUrl(query: query)
-        
+        print("URL: \(url)")
         getItemsFromUrl(url: url, success: success, failure: failure)
     }
     
