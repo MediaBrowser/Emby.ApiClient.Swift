@@ -12,7 +12,7 @@ import Foundation
 /**
 Interface ILogger
 */
-public protocol ILogger
+public protocol ILogger: class
 {
     /**
     Infoes the specified message.

@@ -159,7 +159,8 @@ public class iOSDevice: DeviceProtocol {
 
     private class func GetDeviceIdInternal() -> String {
         
-        return UIDevice.current.identifierForVendor?.uuidString ?? "<<unknown device>>"
+//        return UIDevice.current.identifierForVendor?.uuidString ?? "<<unknown device>>"
+        return ""
     }
     
     private class func GetDeviceNameInternal() -> String {
@@ -172,7 +173,8 @@ public class iOSDevice: DeviceProtocol {
 //            return manufacturer + " " + model;
 //        }
         
-        return UIDevice.current.systemName + UIDevice.current.model
+//        return UIDevice.current.systemName + UIDevice.current.model
+        return ""
     }
     
 //    private Observable resumeFromSleepObservable = new AutomaticObservable();
