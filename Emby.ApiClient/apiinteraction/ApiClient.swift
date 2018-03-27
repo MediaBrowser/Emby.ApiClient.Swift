@@ -85,6 +85,7 @@ public class ApiClient: BaseApiClient {
         
         let dict = QueryStringDictionary()
         dict.Add("Username", value: username)
+        dict.Add("Pw", value: password)
         dict.Add("Password", value: password.sha1())
         dict.Add("PasswordMd5", value: password.md5())
         

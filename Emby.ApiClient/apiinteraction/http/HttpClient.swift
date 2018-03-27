@@ -42,6 +42,9 @@ public class HttpClient : IAsyncHttpClient {
                     }
                 }
                 else if case .failure(let error) = response.result {
+                    if let data = response.data, let str = String(data: data, encoding: String.Encoding.utf8){
+                        print("Server Error: " + str)
+                    }
                     failure(EmbyError.NetworkRequestError(error.localizedDescription))
                 }
         }
