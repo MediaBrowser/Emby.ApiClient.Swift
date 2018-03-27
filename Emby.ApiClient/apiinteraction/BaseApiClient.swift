@@ -248,7 +248,7 @@ public class BaseApiClient// implements IDisposable
         dict.addIfNotNil("StartIndex", value: query.startIndex)
         dict.addIfNotNil("Limit", value: query.limit)
         dict.add("SortBy", value: query.sortBy)
-        dict.addIfNotNil("sortOrder", value: query.sortOrder?.rawValue)
+        dict.addIfNotNil("SortOrder", value: query.sortOrder?.rawValue)
         dict.add("SeriesStatues", value: query.seriesStatus?.map({$0.rawValue}))
         dict.add("Fields", value: query.fields?.map({$0.rawValue}))
         dict.add("Filters", value: query.filters?.map({$0.rawValue}))

@@ -60,38 +60,38 @@ public class HttpClient : IAsyncHttpClient {
                 return .success
             }
             .responseJSON { response in
-                //print(response.result.error?.localizedDescription)
-                /*if case .success(_) = response.result {
-                    print(response.result.value as? JSON_Object)
-                    if let jsonArray = response.result.value as? JSON_Array {
-                        
-                        var results: [T] = []
-                        
-                        for object in jsonArray {
-                            if let jsonObject = object as? JSON_Object, let object = T(jSON: jsonObject) {
-                                results.append(object)
-                            }
-                        }
-                        
-                        success(results)
-                    }
-                    else {
-                        failure(EmbyError.JsonDeserializationError)
-                    }
-                }
-                else if case .failure(let error) = response.result {
-                    failure(EmbyError.NetworkRequestError(error.localizedDescription))
-                }*/
+                print(response.result.error?.localizedDescription)
+//                if case .success(_) = response.result {
+//                    print(response.result.value as? JSON_Object)
+//                    if let jsonArray = response.result.value as? JSON_Array {
+//
+//                        var results: [T] = []
+//
+//                        for object in jsonArray {
+//                            if let jsonObject = object as? JSON_Object, let object = T(jSON: jsonObject) {
+//                                results.append(object)
+//                            }
+//                        }
+//
+//                        success(results)
+//                    }
+//                    else {
+//                        failure(EmbyError.JsonDeserializationError)
+//                    }
+//                }
+//                else if case .failure(let error) = response.result {
+//                    failure(EmbyError.NetworkRequestError(error.localizedDescription))
+//                }
                 
-                guard response.result.isSuccess else
-                {
-                    let error = response.result as! Error
-                    failure(EmbyError.NetworkRequestError(error.localizedDescription))
-                    return
-                }
-                //print("JSON_Object: \(response.result.value as? JSON_Object)")
-                //print("JSON_Array: \(response.result.value as? JSON_Array)")
-                //print("Raw result value: \(response.result.value)")
+//                guard response.result.isSuccess else
+//                {
+//                    let error = response.result as! Error
+//                    failure(EmbyError.NetworkRequestError(error.localizedDescription))
+//                    return
+//                }
+                print("JSON_Object: \(response.result.value as? JSON_Object)")
+                print("JSON_Array: \(response.result.value as? JSON_Array)")
+                print("Raw result value: \(response.result.value)")
                 
                 if let jsonArray = response.result.value as? JSON_Array {
                     

@@ -35,13 +35,15 @@ class SignIn: UITableViewController {
             let alert = UIAlertController(title: "Authentication Successful", message: "Access Token: \(result.accessToken)", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Continue", style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
-            /*var itemQuery = ItemQuery()
+            var itemQuery = ItemQuery()
             itemQuery.userId = result.user.id
-           // itemQuery.sortBy = [SortOrder.Descending.rawValue]
-            // Get media only, don't return folder items
+//            itemQuery.sortBy = [SortOrder.Descending.rawValue]
+            itemQuery.sortBy = ["DateCreated"]
+            itemQuery.sortOrder = SortOrder.Descending
+//             Get media only, don't return folder items
             itemQuery.filters = [ItemFilter.IsNotFolder]
             itemQuery.enableTotalRecordCount = false;
-            //itemQuery.limit = 10
+            itemQuery.limit = 10
             itemQuery.recursive = true
             _ = self.apiClient.getItemsAsync(query: itemQuery, success: { (itemResults) in
                 for item in itemResults
@@ -50,7 +52,7 @@ class SignIn: UITableViewController {
                 }
             }, failure: { (error) in
                 print("Failed to get items: \(error)")
-            })*/
+            })
             
             
             }, failure: { (error) -> Void in
