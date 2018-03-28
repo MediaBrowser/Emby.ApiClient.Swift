@@ -7,7 +7,7 @@ import Foundation
 
 public struct SessionInfoDto : JSONSerializable {
       var supportedCommands = [String]()
-      var queueableMediaTypes = [String]()
+      var queueableMediaTypes:[String]? = [String]()
       var playableMediaTypes = [String]()
       let id: String
       let userId: String
@@ -16,7 +16,7 @@ public struct SessionInfoDto : JSONSerializable {
 //    var additionalUsers = [SessionUserInfo]()
       let applicationVersion: String
       let client: String
-      var lastActivityDate = NSDate()
+      var lastActivityDate = Date()
 //    let nowViewingItem: BaseItemInfo
       let deviceName: String
 //    let nowPlayingItem: BaseItemInfo
@@ -27,7 +27,23 @@ public struct SessionInfoDto : JSONSerializable {
 //    let transcodingInfo: TranscodingInfo
     
     public init?(jSON: JSON_Object) {
-        if  let queueableMediaTypes = jSON["QueueableMediaTypes"] as? [String],
+        /*print("**********************")
+        print("QueueableMediaTypes: \(jSON["QueueableMediaTypes"] as? [String]?)")
+        print("PlayableMediaTypes: \(jSON["PlayableMediaTypes"] as? [String])")
+        print("DeviceId: \(jSON["DeviceId"] as? String)")
+        print("SupportsRemoteControl: \(jSON["SupportsRemoteControl"] as? Int)")
+        print("DeviceName: \(jSON["DeviceName"] as? String)")
+        print("UserId: \(jSON["UserId"] as? String)")
+        print("Id: \(jSON["Id"] as? String)")
+        print("UserName: \(jSON["UserName"] as? String)")
+        print("PlayState: \(PlayerStateInfo(jSON: (jSON["PlayState"] as? JSON_Object)!))")
+        print("SupportedCommands: \(jSON["SupportedCommands"] as? String)")
+        print("Client: \(jSON["Client"] as? String)")
+        print("LastActivityDate: \(jSON["LastActivityDate"] as? String)")
+        print("ApplicationVersion: \(jSON["ApplicationVersion"] as? String)")
+        print("**********************")*/
+        
+        if  let queueableMediaTypes = jSON["QueueableMediaTypes"] as? [String]?,
             let playableMediaTypes = jSON["PlayableMediaTypes"] as? [String],
             let deviceId = jSON["DeviceId"] as? String,
             let supportsRemoteControl = jSON["SupportsRemoteControl"] as? Int,
@@ -56,11 +72,11 @@ public struct SessionInfoDto : JSONSerializable {
             self.supportedCommands = supportedCommands
             self.client = client
             
-            let formatter = NSDateFormatter()
+            let formatter = DateFormatter()
             formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-            formatter.timeZone = NSTimeZone(forSecondsFromGMT: 0)
+            formatter.timeZone = TimeZone(secondsFromGMT: 0)
             
-            self.lastActivityDate = formatter.dateFromString(lastActivityDateString)!
+            self.lastActivityDate = formatter.date(from: lastActivityDateString)!
             self.applicationVersion = applicationVersion
             
             //MARK: TODO Additional Users

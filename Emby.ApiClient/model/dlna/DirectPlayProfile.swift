@@ -12,17 +12,17 @@ public struct DirectPlayProfile {
     var type = DlnaProfileType.Audio
     var containers: [String] {
         get {
-            return splitToArray(container, delimiter: ",")
+            return splitToArray(stringToSplit: container, delimiter: ",")
         }
     }
     var audioCodecs: [String] {
         get {
-            return splitToArray(audioCodec, delimiter: ",")
+            return splitToArray(stringToSplit: audioCodec, delimiter: ",")
         }
     }
     var videoCodecs: [String] {
         get {
-            return splitToArray(videoCodec, delimiter: ",")
+            return splitToArray(stringToSplit: videoCodec, delimiter: ",")
         }
     }
 }

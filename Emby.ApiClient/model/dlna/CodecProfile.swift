@@ -12,24 +12,24 @@ public struct CodecProfile {
     let container: String?
     var codecs: [String] {
         get {
-            return splitToArray(codec, delimiter: ",")
+            return splitToArray(stringToSplit: codec, delimiter: ",")
         }
     }
     var containers: [String] {
         get {
-            return splitToArray(container, delimiter: ",")
+            return splitToArray(stringToSplit: container, delimiter: ",")
         }
     }
     
     public func containsContainer(container: String) -> Bool {
-        return self.container == nil || containers.contains({ $0.lowercaseString == container.lowercaseString})
+        return self.container == nil || containers.contains(where: { $0.lowercased() == container.lowercased()})
     }
     
     public func containsCodec(codec: String, container: String) -> Bool {
-        if !containsContainer(container) {
+        if !containsContainer(container: container) {
             return false
         }
         
-        return codecs.isEmpty || codecs.contains({ $0.lowercaseString == codec.lowercaseString})
+        return codecs.isEmpty || codecs.contains(where: { $0.lowercased() == codec.lowercased()})
     }
 }

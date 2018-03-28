@@ -38,7 +38,7 @@ class ServerCredentialsTests: XCTestCase {
         updatedServerInfo.userId = "userIdUpdated"
         updatedServerInfo.accessToken = "accessTokenUpdated"
         updatedServerInfo.wakeOnLanInfos = [WakeOnLanInfo(macAddress: "99:99:99::99:99")]
-        updatedServerInfo.dateLastAccessed = serverInfo.dateLastAccessed!.dateByAddingTimeInterval(60*60*24)
+        updatedServerInfo.dateLastAccessed = serverInfo.dateLastAccessed!.addingTimeInterval(60*60*24)
         updatedServerInfo.exchangeToken = "exchangeTokenUpdated"
         updatedServerInfo.userLinkType = UserLinkType.LinkedUser
         updatedServerInfo.lastConnectionMode = ConnectionMode.Local
@@ -52,7 +52,7 @@ class ServerCredentialsTests: XCTestCase {
     func testServerIsAdded() {
         let serverCredentials = ServerCredentials(connectAccessToken: "connectAccessToken", connectUserId: "connectUserId")
         
-        serverCredentials.addOrUpdateServer(serverInfo)
+        serverCredentials.addOrUpdateServer(server: serverInfo)
         
         let servers = serverCredentials.servers
         
@@ -62,7 +62,7 @@ class ServerCredentialsTests: XCTestCase {
     func testServerIsUpdated() {
         let serverCredentials = ServerCredentials(connectAccessToken: "connectAccessToken", connectUserId: "connectUserId")
         
-        serverCredentials.addOrUpdateServer(updatedServerInfo)
+        serverCredentials.addOrUpdateServer(server: updatedServerInfo)
         
         let server = serverCredentials.servers.first!
         

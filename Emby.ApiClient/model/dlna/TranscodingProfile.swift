@@ -17,7 +17,7 @@ public struct TranscodingProfile {
     var context = EncodingContext.Streaming
     var audioCodecs: [String] {
         get {
-            return splitToArray(audioCodec, delimiter: ",")
+            return splitToArray(stringToSplit: audioCodec, delimiter: ",")
         }
     }
 }

@@ -34,7 +34,7 @@ public class QueryStringDictionary //extends java.util.HashMap<String, String>
     @param name The name.
     @param value The value.
     */
-    public final func Add(name: String, value: Int)
+    public final func Add(_ name: String, value: Int)
     {
         data[name] = String(value)
     }
@@ -44,7 +44,7 @@ public class QueryStringDictionary //extends java.util.HashMap<String, String>
     @param name The name.
     @param value The value.
     */
-    public final func Add(name: String, value: String?)
+    public final func Add(_ name: String, value: String?)
     {
         data[name] = value ?? ""
     }
@@ -71,20 +71,21 @@ public class QueryStringDictionary //extends java.util.HashMap<String, String>
 //        self.put(name, (new Double(value)).toString());
 //    }
 //    
-    public final func addIfNotNil(name: String, value: String?) {
-        if let val = value {
+    public final func addIfNotNil(_ name: String, value: String?) {
+        if let val: String = value {
             data[name] = val
         }
     }
     
-    public final func addIfNotNilOrEmpty(name: String, value: String?) {
-        if let val = value where !val.isEmpty {
+    public final func addIfNotNilOrEmpty(_ name: String, value: String?) {
+        print("Primary Tag: \(value)")
+        if let val: String = value, !val.isEmpty {
             addIfNotNil(name, value: value)
         }
     }
 
-    public final func addIfNotNil(name: String, value: Int?) {
-        if let val = value {
+    public final func addIfNotNil(_ name: String, value: Int?) {
+        if let val: Int = value {
             data[name] = String(val)
         }
     }
@@ -102,8 +103,8 @@ public class QueryStringDictionary //extends java.util.HashMap<String, String>
 //            self.Add(name, value);
 //        }
 //    }
-    public final func addIfNotNil(name: String, value: Double?) {
-        if let val = value {
+    public final func addIfNotNil(_ name: String, value: Double?) {
+        if let val: Double = value {
             data[name] = String(val)
         }
     }
@@ -147,9 +148,10 @@ public class QueryStringDictionary //extends java.util.HashMap<String, String>
 //        }
 //    }
     
-    public final func addIfNotNil(name: String, value: Bool?) {
+    public final func addIfNotNil(_ name: String, value: Bool?) {
         if let val = value {
             data[name] = String(val)
+            print("addIfNotNil Test: \(data[name])")
         }
     }
 //    
@@ -232,9 +234,9 @@ public class QueryStringDictionary //extends java.util.HashMap<String, String>
 //            self.Add(name, value);
 //        }
 //    }
-    public final func add(name: String, value: [Int]?) {
-        if let val = value {
-            data[name] = val.map({String($0)}).joinWithSeparator(",")
+    public final func add(_ name: String, value: [Int]?) {
+        if let val:[Int] = value {
+            data[name] = val.map({String($0)}).joined(separator: ",")
         }
     }
 //    
@@ -255,9 +257,9 @@ public class QueryStringDictionary //extends java.util.HashMap<String, String>
 //        Add(name, value, ",");
 //    }
     
-    public final func add(name: String, value: [String]?) {
-        if let val = value {
-            data[name] = val.joinWithSeparator(",")
+    public final func add(_ name: String, value: [String]?) {
+        if let val:[String] = value {
+            data[name] = val.joined(separator: ",")
         }
     }
 //    
@@ -353,12 +355,12 @@ public class QueryStringDictionary //extends java.util.HashMap<String, String>
         {
 //            let paramValue = data[index];
 //            vals[index] = String.format("%1$s=%2$s", key, GetEncodedValue(paramValue));
-            vals.append("\(index)=\(GetEncodedValue(value))")
+            vals.append("\(index)=\(GetEncodedValue(value: value))")
 //            index++;
         }
         
 //        return tangible.DotNetToJavaStringHelper.join("&", vals);
-        return vals.joinWithSeparator("&")
+        return vals.joined(separator: "&")
     }
     
     /**
@@ -369,7 +371,7 @@ public class QueryStringDictionary //extends java.util.HashMap<String, String>
     */
     private func GetEncodedValue(value: String) -> String
     {
-        return value.stringByAddingPercentEncodingWithAllowedCharacters(.URLHostAllowedCharacterSet()) ?? ""
+        return value.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? ""
     }
     
     public final func getUrl(prefix: String) -> String {

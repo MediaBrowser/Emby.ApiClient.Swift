@@ -28,8 +28,8 @@ public class ServerDiscoveryInfo: JSONSerializable {
     
     public func toJsonString() -> String {
         let dict = ["Address" : address, "Id": id, "Name": name]
-        let jsonData = try! NSJSONSerialization.dataWithJSONObject(dict, options: NSJSONWritingOptions.PrettyPrinted)
-        return String(data: jsonData, encoding: NSASCIIStringEncoding)!
+        let jsonData = try! JSONSerialization.data(withJSONObject: dict, options: JSONSerialization.WritingOptions.prettyPrinted)
+        return String(data: jsonData, encoding: String.Encoding.ascii)!
     }
 }
 

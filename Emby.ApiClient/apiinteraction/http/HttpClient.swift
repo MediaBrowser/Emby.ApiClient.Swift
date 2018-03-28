@@ -19,12 +19,15 @@ public class HttpClient : IAsyncHttpClient {
         self.context = context;
     }
     
-    public func sendRequest<T : JSONSerializable>(request: HttpRequest, success: (T) -> Void, failure: (EmbyError) -> Void) {
+    public func sendRequest<T : JSONSerializable>(request: HttpRequest, success: @escaping (T) -> Void, failure: @escaping (EmbyError) -> Void) {
         
         Alamofire.request(request)
-            .responseJSON { (res) -> Void in
-                
-                if case .Success(let json) = res.result {
+            .validate { request, response, data in
+                // custom evalution clousre now includes data (allows you to parse data to dig out error messeages
+                return .success
+            }
+            .responseJSON { response in
+                if case .success(let json) = response.result {
                     if  let jsonObject = json as? JSON_Object {
                         
                         if let object = T(jSON: jsonObject) {
@@ -38,42 +41,95 @@ public class HttpClient : IAsyncHttpClient {
                         failure(EmbyError.JsonDeserializationError)
                     }
                 }
-                else if case .Failure(let error) = res.result {
-                    failure(EmbyError.NetworkRequestError(error.description))
+                else if case .failure(let error) = response.result {
+                    if let data = response.data, let str = String(data: data, encoding: String.Encoding.utf8){
+                        print("Server Error: " + str)
+                    }
+                    failure(EmbyError.NetworkRequestError(error.localizedDescription))
                 }
         }
     }
     
-    public func sendCollectionRequest<T : JSONSerializable>(request: HttpRequest, success: ([T]) -> Void, failure: (EmbyError) -> Void) {
+    public func sendCollectionRequest<T : JSONSerializable>(request: HttpRequest, success: @escaping ([T]) -> Void, failure: @escaping (EmbyError) -> Void) {
         
         Alamofire.request(request)
-            .responseJSON { (res) -> Void in
+            .validate { request, response, data in
+                // custom evalution clousre now includes data (allows you to parse data to dig out error messeages
+                print(response.description)
+
+                return .success
+            }
+            .responseJSON { response in
+                print(response.result.error?.localizedDescription)
+//                if case .success(_) = response.result {
+//                    print(response.result.value as? JSON_Object)
+//                    if let jsonArray = response.result.value as? JSON_Array {
+//
+//                        var results: [T] = []
+//
+//                        for object in jsonArray {
+//                            if let jsonObject = object as? JSON_Object, let object = T(jSON: jsonObject) {
+//                                results.append(object)
+//                            }
+//                        }
+//
+//                        success(results)
+//                    }
+//                    else {
+//                        failure(EmbyError.JsonDeserializationError)
+//                    }
+//                }
+//                else if case .failure(let error) = response.result {
+//                    failure(EmbyError.NetworkRequestError(error.localizedDescription))
+//                }
                 
-                if case .Success(let json) = res.result {
-                    if let jsonArray = json as? JSON_Array {
-                        
-                        var results: [T] = []
-                        
-                        for object in jsonArray {
-                            if let jsonObject = object as? JSON_Object, let object = T(jSON: jsonObject) {
-                                results.append(object)
-                            }
+//                guard response.result.isSuccess else
+//                {
+//                    let error = response.result as! Error
+//                    failure(EmbyError.NetworkRequestError(error.localizedDescription))
+//                    return
+//                }
+                print("JSON_Object: \(response.result.value as? JSON_Object)")
+                print("JSON_Array: \(response.result.value as? JSON_Array)")
+                print("Raw result value: \(response.result.value)")
+                
+                if let jsonArray = response.result.value as? JSON_Array {
+                    
+                    var results: [T] = []
+                    
+                    for object in jsonArray {
+                        if let jsonObject = object as? JSON_Object, let object = T(jSON: jsonObject) {
+                            results.append(object)
                         }
-                        
-                        success(results)
                     }
-                    else {
-                        failure(EmbyError.JsonDeserializationError)
+                    
+                    print(results)
+                    success(results)
+                }
+                else if let jsonArray = (response.result.value as! JSON_Object)["Items"] as? JSON_Array
+                {
+                    var results: [T] = []
+                    
+                    for object in jsonArray {
+                        if let jsonObject = object as? JSON_Object, let object = T(jSON: jsonObject) {
+                            results.append(object)
+                        }
                     }
+                    
+                    success(results)
                 }
-                else if case .Failure(let error) = res.result {
-                    failure(EmbyError.NetworkRequestError(error.description))
+                else
+                {
+                    failure(EmbyError.JsonDeserializationError)
                 }
+             
+                
         }
     }
 }
 
-public enum EmbyError: ErrorType {
+public enum EmbyError: Error {
+    
     case JsonDeserializationError
     case NetworkRequestError(String)
 }

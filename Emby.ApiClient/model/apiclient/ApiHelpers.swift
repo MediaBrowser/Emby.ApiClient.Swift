@@ -7,6 +7,6 @@ import Foundation
 
 public final class ApiHelpers {
     public static func getSlugName(name: String?) -> String {
-        return name!.replace("/", with: "-").replace("?", with: "-").replace("&", with: "-")
+        return name!.replace(what: "/", with: "-").replace(what: "?", with: "-").replace(what: "&", with: "-")
     }
 }

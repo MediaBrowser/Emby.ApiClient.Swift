@@ -21,24 +21,24 @@ class ApiHelpersTests: XCTestCase {
     func testSlashesReplacedWithDashes() {
         let name = "/value/"
         
-        XCTAssertEqual("-value-", ApiHelpers.getSlugName(name))
+        XCTAssertEqual("-value-", ApiHelpers.getSlugName(name: name))
     }
 
     func testQuestionMarksReplacedWithDashes() {
         let name = "?value?"
         
-        XCTAssertEqual("-value-", ApiHelpers.getSlugName(name))
+        XCTAssertEqual("-value-", ApiHelpers.getSlugName(name: name))
     }
     
     func testAmpersandsReplacedWithDashes() {
         let name = "&value&"
         
-        XCTAssertEqual("-value-", ApiHelpers.getSlugName(name))
+        XCTAssertEqual("-value-", ApiHelpers.getSlugName(name: name))
     }
     
     func testAmpersandSlashesQuestionMarksReplacedWithDashes() {
         let name = "/&?value/?&"
         
-        XCTAssertEqual("---value---", ApiHelpers.getSlugName(name))
+        XCTAssertEqual("---value---", ApiHelpers.getSlugName(name: name))
     }
 }

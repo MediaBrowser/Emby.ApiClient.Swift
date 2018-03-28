@@ -6,6 +6,9 @@
 import Foundation
 
 public class ServerUserInfo: NSObject, NSCoding {
+    public func encode(with aCoder: NSCoder) {
+    }
+    
     var id: String
     var isSignedInOffline: Bool
     
@@ -22,31 +25,31 @@ public class ServerUserInfo: NSObject, NSCoding {
     
     // MARK: NSObject
     
-    override public func isEqual(object: AnyObject?) -> Bool {
+    /*override public func isEqual(object: AnyObject?) -> Bool {
         if let rhs = object as? ServerUserInfo {
             return id == rhs.id
         }
         return false
-    }
+    }*/
     
     // MARK: NSCoding
     
     public required convenience init?(coder aDecoder: NSCoder) {
-        guard let id = aDecoder.decodeObjectForKey("id") as? String
+        guard let id = aDecoder.decodeObject(forKey: "id") as? String
             else {
                 return nil
         }
         
-        self.init(id: id, isSignedInOffline: aDecoder.decodeBoolForKey("isSignedInOffline"))
+        self.init(id: id, isSignedInOffline: aDecoder.decodeBool(forKey: "isSignedInOffline"))
     }
     
     public func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(self.id, forKey: "id")
-        aCoder.encodeBool(self.isSignedInOffline, forKey: "isSignedInOffline")
+        aCoder.encode(self.id, forKey: "id")
+        aCoder.encode(self.isSignedInOffline, forKey: "isSignedInOffline")
     }
-}
-
-//MARK: - Equatable
-public func ==(lhs: ServerUserInfo, rhs: ServerUserInfo) -> Bool {
-    return lhs.id == rhs.id
+    
+    //MARK: - Equatable
+    override public func isEqual(_ object: Any?) -> Bool {
+        return id == (object as? ServerUserInfo)?.id
+    }
 }

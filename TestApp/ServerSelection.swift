@@ -19,37 +19,37 @@ class ServerSelection: UITableViewController {
     
 
     // MARK: - Table view data source
-
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return servers.count
     }
-
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
-
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        
         let server = servers[indexPath.row]
         
         cell.textLabel?.text = server.name
         cell.detailTextLabel?.text = server.localAddress
-
+        
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         
         let server = servers[indexPath.row]
-        connectToSelectedServer(server)
+        connectToSelectedServer(server: server)
     }
 
     // MARK: - Navigation
-
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let userSelection = segue.destinationViewController as? UserSelection {
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let userSelection = segue.destination as? UserSelection {
             userSelection.connectionResult = connectionResult!
         }
     }
@@ -59,11 +59,11 @@ class ServerSelection: UITableViewController {
     
     func connectToSelectedServer(server: ServerInfo) {
         
-        connectionManager.connect(server, onSuccess: { (result) -> Void in
+        connectionManager.connect(server: server, onSuccess: { (result) -> Void in
             
             if result.state == .ServerSignIn {
                 self.connectionResult = result
-                self.performSegueWithIdentifier("User Selection", sender: nil)
+                self.performSegue(withIdentifier: "User Selection", sender: nil)
             } else {
                 print("Connection State: \(result.state)")
             }

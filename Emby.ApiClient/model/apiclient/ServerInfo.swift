@@ -6,6 +6,9 @@
 import Foundation
 
 public class ServerInfo: NSObject, NSCoding {
+    public func encode(with aCoder: NSCoder) {
+    }
+    
     public var users = Set<ServerUserInfo>()
     public var name: String = ""
     public var id: String = ""
@@ -34,11 +37,11 @@ public class ServerInfo: NSObject, NSCoding {
         name = systemInfo.serverName
         id = systemInfo.id
         
-        if let lAddress = systemInfo.localAddress where !lAddress.isEmpty {
+        if let lAddress = systemInfo.localAddress, !lAddress.isEmpty {
             localAddress = lAddress
         }
         
-        if let wAddress = systemInfo.wanAddress where !wAddress.isEmpty {
+        if let wAddress = systemInfo.wanAddress, !wAddress.isEmpty {
             remoteAddress = wAddress
         }
         
@@ -59,10 +62,9 @@ public class ServerInfo: NSObject, NSCoding {
     }
     
     func addOrUpdate(user: ServerUserInfo) {
-        if ( users.contains(user)) {
+        if (users.contains(user)) {
             users.remove(user)
         }
-        
         users.insert(user)
     }
     
@@ -71,18 +73,18 @@ public class ServerInfo: NSObject, NSCoding {
     public required init?(coder aDecoder: NSCoder) {
         super.init()
         
-        guard let name = aDecoder.decodeObjectForKey("name") as? String,
-            let id = aDecoder.decodeObjectForKey("id") as? String,
-            let localAddress = aDecoder.decodeObjectForKey("localAddress") as? String?,
-            let remoteAddress = aDecoder.decodeObjectForKey("remoteAddress") as? String?,
-            let manualAddress = aDecoder.decodeObjectForKey("manualAddress") as? String?,
-            let userId = aDecoder.decodeObjectForKey("userId") as? String?,
-            let accessToken = aDecoder.decodeObjectForKey("accessToken") as? String?,
-            let dateLastAccessed = aDecoder.decodeObjectForKey("dateLastAccessed") as? NSDate?,
-            let userLinkTypeString = aDecoder.decodeObjectForKey("userLinkType") as? String?,
-            let lastConnectionModeString = aDecoder.decodeObjectForKey("lastConnectionMode") as? String?,
-            let users = aDecoder.decodeObjectForKey("users") as? Set<ServerUserInfo>,
-            let wakeOnLanInfos = aDecoder.decodeObjectForKey("wakeOnLanInfos") as? [WakeOnLanInfo]
+        guard let name = aDecoder.decodeObject(forKey: "name") as? String,
+            let id = aDecoder.decodeObject(forKey: "id") as? String,
+            let localAddress = aDecoder.decodeObject(forKey: "localAddress") as? String?,
+            let remoteAddress = aDecoder.decodeObject(forKey: "remoteAddress") as? String?,
+            let manualAddress = aDecoder.decodeObject(forKey: "manualAddress") as? String?,
+            let userId = aDecoder.decodeObject(forKey: "userId") as? String?,
+            let accessToken = aDecoder.decodeObject(forKey: "accessToken") as? String?,
+            let dateLastAccessed = aDecoder.decodeObject(forKey: "dateLastAccessed") as? NSDate?,
+            let userLinkTypeString = aDecoder.decodeObject(forKey: "userLinkType") as? String?,
+            let lastConnectionModeString = aDecoder.decodeObject(forKey: "lastConnectionMode") as? String?,
+            let users = aDecoder.decodeObject(forKey: "users") as? Set<ServerUserInfo>,
+            let wakeOnLanInfos = aDecoder.decodeObject(forKey: "wakeOnLanInfos") as? [WakeOnLanInfo]
             else { return nil }
         
         self.name = name
@@ -100,31 +102,32 @@ public class ServerInfo: NSObject, NSCoding {
     }
     
     public func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(self.name, forKey: "name")
-        aCoder.encodeObject(self.id, forKey: "id")
-        aCoder.encodeObject(self.localAddress, forKey: "localAddress")
-        aCoder.encodeObject(self.remoteAddress, forKey: "remoteAddress")
-        aCoder.encodeObject(self.manualAddress, forKey: "manualAddress")
-        aCoder.encodeObject(self.userId, forKey: "userId")
-        aCoder.encodeObject(self.accessToken, forKey: "accessToken")
-        aCoder.encodeObject(self.dateLastAccessed, forKey: "dateLastAccessed")
-        aCoder.encodeObject(self.userLinkType?.rawValue, forKey: "userLinkType")
-        aCoder.encodeObject(self.lastConnectionMode?.rawValue, forKey: "lastConnectionMode")
-        aCoder.encodeObject(self.users, forKey: "users")
-        aCoder.encodeObject(self.wakeOnLanInfos, forKey: "wakeOnLanInfos")
+        aCoder.encode(self.name, forKey: "name")
+        aCoder.encode(self.id, forKey: "id")
+        aCoder.encode(self.localAddress, forKey: "localAddress")
+        aCoder.encode(self.remoteAddress, forKey: "remoteAddress")
+        aCoder.encode(self.manualAddress, forKey: "manualAddress")
+        aCoder.encode(self.userId, forKey: "userId")
+        aCoder.encode(self.accessToken, forKey: "accessToken")
+        aCoder.encode(self.dateLastAccessed, forKey: "dateLastAccessed")
+        aCoder.encode(self.userLinkType?.rawValue, forKey: "userLinkType")
+        aCoder.encode(self.lastConnectionMode?.rawValue, forKey: "lastConnectionMode")
+        aCoder.encode(self.users, forKey: "users")
+        aCoder.encode(self.wakeOnLanInfos, forKey: "wakeOnLanInfos")
     }
     
     
     // MARK: - Equatable
-    public override func isEqual(object: AnyObject?) -> Bool {
+    /*public override func isEqual(object: AnyObject?) -> Bool {
         if let object = object as? ServerInfo {
             return self == object
         }
         return false
+    }*/
+    
+    //MARK: - Equatable
+    override public func isEqual(_ object: Any?) -> Bool {
+        return id == (object as? ServerInfo)?.id
     }
-}
 
-//MARK: - Equatable
-public func ==(lhs: ServerInfo, rhs: ServerInfo) -> Bool {
-    return lhs.id == rhs.id
 }

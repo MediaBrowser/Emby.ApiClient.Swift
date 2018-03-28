@@ -22,36 +22,36 @@ class CodecProfileTests: XCTestCase {
     func testContainsContainerTrue() {
         let codecProfile = CodecProfile(type: CodecType.Video, conditions: self.conditions, codec: nil, container: "containerA,containerB,containerC")
         
-        XCTAssertTrue(codecProfile.containsContainer("containerB"))
+        XCTAssertTrue(codecProfile.containsContainer(container: "containerB"))
     }
     
     func testContainsContainerFalseOnMissingContainer() {
         let codecProfile = CodecProfile(type: CodecType.Video, conditions: self.conditions, codec: nil, container: "containerA,containerB,containerC")
         
-        XCTAssertFalse(codecProfile.containsContainer("containerD"))
+        XCTAssertFalse(codecProfile.containsContainer(container: "containerD"))
     }
     
     func testContainsCodecFalseOnMissingContainer() {
         let codecProfile = CodecProfile(type: CodecType.Video, conditions: self.conditions, codec: "codecA,codecB,codecC", container: "containerA,containerB,containerC")
         
-        XCTAssertFalse(codecProfile.containsCodec("doesNotMatter", container: "containerD"))
+        XCTAssertFalse(codecProfile.containsCodec(codec: "doesNotMatter", container: "containerD"))
     }
     
     func testContainsCodecTrueOnEmptyCodecs() {
         let codecProfile = CodecProfile(type: CodecType.Video, conditions: self.conditions, codec: nil, container: "containerA,containerB,containerC")
         
-        XCTAssertTrue(codecProfile.containsCodec("doesNotMatter", container: "containerB"))
+        XCTAssertTrue(codecProfile.containsCodec(codec: "doesNotMatter", container: "containerB"))
     }
     
     func testContainsCodecTrueOnExistingCodec() {
         let codecProfile = CodecProfile(type: CodecType.Video, conditions: self.conditions, codec: "codecA,codecB,codecC", container: "containerA,containerB,containerC")
         
-        XCTAssertTrue(codecProfile.containsCodec("codecB", container: "containerC"))
+        XCTAssertTrue(codecProfile.containsCodec(codec: "codecB", container: "containerC"))
     }
     
     func testContainsCodecFalseOnMissingCodec() {
         let codecProfile = CodecProfile(type: CodecType.Video, conditions: self.conditions, codec: "codecA,codecB,codecC", container: "containerA,containerB,containerC")
         
-        XCTAssertFalse(codecProfile.containsCodec("codecD", container: "containerC"))
+        XCTAssertFalse(codecProfile.containsCodec(codec: "codecD", container: "containerC"))
     }
 }

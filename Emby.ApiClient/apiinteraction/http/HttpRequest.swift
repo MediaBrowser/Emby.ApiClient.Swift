@@ -11,8 +11,8 @@ import Foundation
 import Alamofire
 
 public struct HttpRequest : URLRequestConvertible
-{    
-    let method: Alamofire.Method
+{
+    let method: HTTPMethod
     let url: String
     
     let postData: QueryStringDictionary?
@@ -22,32 +22,35 @@ public struct HttpRequest : URLRequestConvertible
     
     var headers: HttpHeaders = HttpHeaders()
     
-    init(url: String, method: Alamofire.Method, postData: QueryStringDictionary? = nil) {
+    init(url: String, method: HTTPMethod, postData: QueryStringDictionary? = nil) {
         self.url = url
         self.method = method
         self.postData = postData
     }
     
-    public var URLRequest: NSMutableURLRequest {
-        let url = NSURL(string: self.url)!
-        let request = NSMutableURLRequest(URL: url)
-        request.HTTPMethod = method.rawValue
+    public func asURLRequest() throws -> URLRequest {
+        var encodedURL: URLRequest? = nil
+        let url = URL(string: self.url)!
+        var request = URLRequest(url: url)
+        request.httpMethod = method.rawValue
         
         
-        let encoding = postData != nil ? Alamofire.ParameterEncoding.JSON : Alamofire.ParameterEncoding.URL
+        let encoding: ParameterEncoding = (postData != nil) ? Alamofire.JSONEncoding.default : Alamofire.URLEncoding.default
         
-        let (encodedURL, error) = encoding.encode(request, parameters: postData?.data)
-        if let error = error {
+        do {
+            encodedURL = try encoding.encode(request as URLRequestConvertible, with: postData?.data)
+            
+            if headers.data.count > 0 {
+                for (key, value) in headers.data {
+                    encodedURL!.setValue(value, forHTTPHeaderField: key)
+                }
+            }
+            
+        } catch let error {
             print(error)
         }
         
-        if headers.data.count > 0 {
-            for (key, value) in headers.data {
-                encodedURL.setValue(value, forHTTPHeaderField: key)
-            }
-        }
-        
-        return encodedURL
+        return encodedURL!
     }
     
     mutating func addHeaders(newHeaders: HttpHeaders) {
@@ -58,12 +61,14 @@ public struct HttpRequest : URLRequestConvertible
             newHeaders["Content-Type"] = "application/json"
         }
         
-        if let authParameter = newHeaders.authorizationParameter, authScheme = newHeaders.authorizationScheme {
+        if let authParameter = newHeaders.authorizationParameter, let authScheme = newHeaders.authorizationScheme {
             let value = authScheme + " " + authParameter
             newHeaders["X-Emby-Authorization"] = value
         }
         
         headers = newHeaders
     }
+    
+    
 }
 

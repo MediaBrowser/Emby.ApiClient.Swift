@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     let device = iOSDevice()
     
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
         let logger = Logger()
         let jsonSerializer = JsonSerializer()
@@ -43,9 +43,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let connectionManager = connectionManager
         {
             vc.connectionManager = connectionManager
+            print(connectionManager)
         }
-        
         return true
     }
+    
+    
 }
 

@@ -22,7 +22,7 @@ class UserSelection: UITableViewController {
         title = connectionResult.servers[0].name
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         checkServerForUsers()
@@ -30,36 +30,35 @@ class UserSelection: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return users.count
     }
-
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         let user = users[indexPath.row]
         
         cell.textLabel?.text = user.name
-
+        
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         
         let user = users[indexPath.row]
         
-        performSegueWithIdentifier("Sign In", sender: user.name!)
+        performSegue(withIdentifier: "Sign In", sender: user.name!)
     }
 
-
     // MARK: - Navigation
-
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let signIn = segue.destinationViewController as? SignIn, let userName = sender as? String {
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let signIn = segue.destination as? SignIn, let userName = sender as? String {
             signIn.apiClient = connectionResult.apiClient!
             signIn.userName = userName
         }
@@ -68,7 +67,7 @@ class UserSelection: UITableViewController {
     func checkServerForUsers() {
         let apiClient = connectionResult.apiClient!
         
-        apiClient.getPublicUsersAsync({ users in
+        apiClient.getPublicUsersAsync(success: { users in
             self.users = users
             self.tableView.reloadData()
         }, failure: { error in

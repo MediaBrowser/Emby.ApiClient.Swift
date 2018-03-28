@@ -50,7 +50,7 @@ public struct DeviceProfile {
     var subtitleProfiles = [SubtitleProfile]()
     var supportedMediaTypes: [String] {
         get {
-            return splitToArray(supportedMediaType, delimiter: ",")
+            return splitToArray(stringToSplit: supportedMediaType, delimiter: ",")
         }
     }
     

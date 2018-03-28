@@ -6,61 +6,63 @@
 import Foundation
 
 public struct ItemQuery {
-    var userId: String?
-    var parentId: String?
-    var startIndex: Int?
-    var limit: Int?
-    var sortBy: [String]?
-    var artistIds: [String]?
-    var sortOrder: SortOrder?
-    var filters: [ItemFilter]?
-    var fields: [ItemFields]?
-    var mediaTypes: [String]?
-    var is3d: Bool?
-    var videoTypes: [VideoType]?
-    var recursive: Bool?
-    var genres: [String]?
-    var studioIds: [String]?
-    var excludeItemTypes: [String]?
-    var includeItemTypes: [String]?
-    var years: [Int]?
-    var personIds: [String]?
-    var personTypes: [String]?
-    var searchTerm: String?
-    var imageTypes: [ImageType]?
-    var airDays: [String]?
-    var seriesStatus: [SeriesStatus]?
-    var ids: [String]?
-    var minOfficialRating: String?
-    var maxOfficialRating: String?
-    var minIndexNumber: Int?
-    var hasParentRating: Bool?
-    var isHd: Bool?
-    var parentIndexNumber: Int?
-    var minPlayers: Int?
-    var maxPlayers: Int?
-    var nameStartsWithOrGreater: String?
-    var nameStartsWith: String?
-    var nameLessThan: String?
-    var albumArtistStartsWithOrGreater: String?
-    var includeIndexContainers: Bool?
-    var locationTypes: [LocationType]?
-    var isMissing: Bool?
-    var isUnaired: Bool?
-    var isVirtualUnaired: Bool?
-    var isInBoxSet: Bool?
-    var collapseBoxSetItem: Bool?
-    var isPlayed: Bool?
-    var excludeLocationTypes: [LocationType]?
-    var minCommunityRating: Double?
-    var minCriticRating: Double?
-    var airedDuringSeasion: Int?
-    var minPremiereDate: NSDate?
-    var maxPremiereDate: NSDate?
-    var enableImages: Bool?
-    var imageTypeLimit: Int?
-    var enableImageTypes: [ImageType]?
-    var artists: [String]?
-    var studios: [String]?
-    var person: String?
+    public init() {}
+    public var userId: String?
+    public var parentId: String?
+    public var startIndex: Int?
+    public var limit: Int?
+    public var sortBy: [String]?
+    public var artistIds: [String]?
+    public var sortOrder: SortOrder?
+    public var filters: [ItemFilter]?
+    public var fields: [ItemFields]?
+    public var mediaTypes: [String]?
+    public var is3d: Bool?
+    public var videoTypes: [VideoType]?
+    public var recursive: Bool?
+    public var genres: [String]?
+    public var studioIds: [String]?
+    public var excludeItemTypes: [String]?
+    public var includeItemTypes: [String]?
+    public var years: [Int]?
+    public var personIds: [String]?
+    public var personTypes: [String]?
+    public var searchTerm: String?
+    public var imageTypes: [ImageType]?
+    public var airDays: [String]?
+    public var seriesStatus: [SeriesStatus]?
+    public var ids: [String]?
+    public var minOfficialRating: String?
+    public var maxOfficialRating: String?
+    public var minIndexNumber: Int?
+    public var hasParentRating: Bool?
+    public var isHd: Bool?
+    public var parentIndexNumber: Int?
+    public var minPlayers: Int?
+    public var maxPlayers: Int?
+    public var nameStartsWithOrGreater: String?
+    public var nameStartsWith: String?
+    public var nameLessThan: String?
+    public var albumArtistStartsWithOrGreater: String?
+    public var includeIndexContainers: Bool?
+    public var locationTypes: [LocationType]?
+    public var isMissing: Bool?
+    public var isUnaired: Bool?
+    public var isVirtualUnaired: Bool?
+    public var isInBoxSet: Bool?
+    public var collapseBoxSetItem: Bool?
+    public var isPlayed: Bool?
+    public var excludeLocationTypes: [LocationType]?
+    public var minCommunityRating: Double?
+    public var minCriticRating: Double?
+    public var airedDuringSeasion: Int?
+    public var minPremiereDate: NSDate?
+    public var maxPremiereDate: NSDate?
+    public var enableImages: Bool?
+    public var enableTotalRecordCount: Bool?
+    public var imageTypeLimit: Int?
+    public var enableImageTypes: [ImageType]?
+    public var artists: [String]?
+    public var studios: [String]?
+    public var person: String?
 }

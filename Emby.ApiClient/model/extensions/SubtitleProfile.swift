@@ -12,11 +12,11 @@ public struct SubtitleProfile {
     let language: String?
     var languages: [String] {
         get {
-            return splitToArray(language, delimiter: ",")
+            return splitToArray(stringToSplit: language, delimiter: ",")
         }
     }
     
     public func supportsLanguage(subLanguage: String) -> Bool {
-        return language == nil || languages.contains({ $0.lowercaseString == subLanguage.lowercaseString})
+        return language == nil || languages.contains(where: { $0.lowercased() == subLanguage.lowercased()})
     }
 }

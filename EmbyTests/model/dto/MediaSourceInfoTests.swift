@@ -37,7 +37,7 @@ class MediaSourceInfoTests: XCTestCase {
         var mediaSourceInfo = MediaSourceInfo()
         mediaSourceInfo.mediaStreams = [audio1MediaStream, subtitleMediaStream, audio2MediaStream]
         
-        let defaultAudioStream = mediaSourceInfo.getDefaultAudioStream(2)
+        let defaultAudioStream = mediaSourceInfo.getDefaultAudioStream(defaultIndex: 2)
         
         XCTAssertEqual(audio2MediaStream.externalId, defaultAudioStream?.externalId)
     }
@@ -59,7 +59,7 @@ class MediaSourceInfoTests: XCTestCase {
         var mediaSourceInfo = MediaSourceInfo()
         mediaSourceInfo.mediaStreams = [audio1MediaStream, subtitleMediaStream, audio2MediaStream]
         
-        let defaultAudioStream = mediaSourceInfo.getDefaultAudioStream(nil)
+        let defaultAudioStream = mediaSourceInfo.getDefaultAudioStream(defaultIndex: nil)
         
         XCTAssertEqual(audio1MediaStream.externalId, defaultAudioStream?.externalId)
     }
@@ -80,7 +80,7 @@ class MediaSourceInfoTests: XCTestCase {
         var mediaSourceInfo = MediaSourceInfo()
         mediaSourceInfo.mediaStreams = [audio1MediaStream, subtitleMediaStream, audio2MediaStream]
         
-        let defaultAudioStream = mediaSourceInfo.getDefaultAudioStream(nil)
+        let defaultAudioStream = mediaSourceInfo.getDefaultAudioStream(defaultIndex: nil)
         
         XCTAssertEqual(MediaStreamType.Audio, defaultAudioStream!.type)
     }
@@ -143,9 +143,9 @@ class MediaSourceInfoTests: XCTestCase {
         var mediaSourceInfo = MediaSourceInfo()
         mediaSourceInfo.mediaStreams = [audio1MediaStream, subtitleMediaStream, audio2MediaStream]
         
-        XCTAssertEqual(2, mediaSourceInfo.getStreamCount(MediaStreamType.Audio))
-        XCTAssertEqual(1, mediaSourceInfo.getStreamCount(MediaStreamType.Subtitle))
-        XCTAssertEqual(0, mediaSourceInfo.getStreamCount(MediaStreamType.EmbeddedImage))
+        XCTAssertEqual(2, mediaSourceInfo.getStreamCount(type: MediaStreamType.Audio))
+        XCTAssertEqual(1, mediaSourceInfo.getStreamCount(type: MediaStreamType.Subtitle))
+        XCTAssertEqual(0, mediaSourceInfo.getStreamCount(type: MediaStreamType.EmbeddedImage))
 
     }
     
@@ -168,7 +168,7 @@ class MediaSourceInfoTests: XCTestCase {
         var mediaSourceInfo = MediaSourceInfo()
         mediaSourceInfo.mediaStreams = [audio1MediaStream, subtitleMediaStream, audio2MediaStream]
         
-        let defaultAudioStream = mediaSourceInfo.getMediaStream(MediaStreamType.Audio, index: 2)
+        let defaultAudioStream = mediaSourceInfo.getMediaStream(type: MediaStreamType.Audio, index: 2)
         
         XCTAssertEqual(audio2MediaStream.externalId, defaultAudioStream?.externalId)
     }
@@ -192,7 +192,7 @@ class MediaSourceInfoTests: XCTestCase {
         var mediaSourceInfo = MediaSourceInfo()
         mediaSourceInfo.mediaStreams = [audio1MediaStream, subtitleMediaStream]
         
-        XCTAssertTrue(mediaSourceInfo.isSecondaryAudio(audio2MediaStream))
-        XCTAssertFalse(mediaSourceInfo.isSecondaryAudio(audio1MediaStream))
+        XCTAssertTrue(mediaSourceInfo.isSecondaryAudio(stream: audio2MediaStream))
+        XCTAssertFalse(mediaSourceInfo.isSecondaryAudio(stream: audio1MediaStream))
     }
 }

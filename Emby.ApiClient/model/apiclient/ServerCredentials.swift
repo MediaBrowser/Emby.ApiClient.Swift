@@ -6,6 +6,9 @@
 import Foundation
 
 public class ServerCredentials: NSObject, NSCoding {
+    public func encode(with aCoder: NSCoder) {
+    }
+    
     var servers = [ServerInfo]()
     var connectUserId: String
     var connectAccessToken: String
@@ -18,13 +21,13 @@ public class ServerCredentials: NSObject, NSCoding {
     
     func addOrUpdateServer(server: ServerInfo!) {
         if ( servers.contains(server)) {
-            let index = servers.indexOf(server)!
+            let index = servers.index(of: server)!
             
             let existingServer = servers[index]
 
             if let serverDateLastAccessed = server.dateLastAccessed {
                 if let existingLastDateAccessed = existingServer.dateLastAccessed {
-                    if ( existingLastDateAccessed.compare(serverDateLastAccessed) == NSComparisonResult.OrderedDescending) {
+                    if ( existingLastDateAccessed.compare(serverDateLastAccessed as Date) == ComparisonResult.orderedDescending) {
                         existingServer.dateLastAccessed = serverDateLastAccessed
                     }
                 } else {
@@ -51,15 +54,15 @@ public class ServerCredentials: NSObject, NSCoding {
 
             }
             
-            if let serverRemoteAddress = server.remoteAddress where !serverRemoteAddress.isEmpty {
+            if let serverRemoteAddress = server.remoteAddress, !serverRemoteAddress.isEmpty {
                     existingServer.remoteAddress = serverRemoteAddress
             }
 
-            if let serverLocalAddress = server.localAddress where !serverLocalAddress.isEmpty {
+            if let serverLocalAddress = server.localAddress, !serverLocalAddress.isEmpty {
                 existingServer.localAddress = serverLocalAddress
             }
  
-            if let serverManualAddress = server.manualAddress where !serverManualAddress.isEmpty {
+            if let serverManualAddress = server.manualAddress, !serverManualAddress.isEmpty {
                 existingServer.manualAddress = serverManualAddress
             }
             
@@ -69,7 +72,7 @@ public class ServerCredentials: NSObject, NSCoding {
             
             if ( server.wakeOnLanInfos.count > 0 ) {
                 existingServer.wakeOnLanInfos.removeAll()
-                existingServer.wakeOnLanInfos.appendContentsOf(server.wakeOnLanInfos)
+                existingServer.wakeOnLanInfos.append(contentsOf: server.wakeOnLanInfos)
             }
         } else {
             servers.append(server)
@@ -79,17 +82,17 @@ public class ServerCredentials: NSObject, NSCoding {
     // MARK: NSCoding
     
     public required convenience init?(coder aDecoder: NSCoder) {
-        guard let connectUserId = aDecoder.decodeObjectForKey("connectUserId") as? String,
-            let connectAccessToken = aDecoder.decodeObjectForKey("connectAccessToken") as? String,
-            let servers = aDecoder.decodeObjectForKey("servers") as? [ServerInfo]
+        guard let connectUserId = aDecoder.decodeObject(forKey: "connectUserId") as? String,
+            let connectAccessToken = aDecoder.decodeObject(forKey: "connectAccessToken") as? String,
+            let servers = aDecoder.decodeObject(forKey: "servers") as? [ServerInfo]
             else { return nil }
         
         self.init(connectAccessToken: connectAccessToken, connectUserId: connectUserId, servers: servers)
     }
     
     public func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(self.connectUserId, forKey: "connectUserId")
-        aCoder.encodeObject(self.connectAccessToken, forKey: "connectAccessToken")
-        aCoder.encodeObject(self.servers, forKey: "servers")
+        aCoder.encode(self.connectUserId, forKey: "connectUserId")
+        aCoder.encode(self.connectAccessToken, forKey: "connectAccessToken")
+        aCoder.encode(self.servers, forKey: "servers")
     }
 }

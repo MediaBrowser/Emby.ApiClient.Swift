@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum Error:ErrorType {
+enum CSError: Error {
     case IllegalArgumentException(String)
     case LowBridge
 }
@@ -29,71 +29,71 @@ public class ConnectService {
         self.appVersion = appVersion
     }
     
-    public func Authenticate(username: String, password: String, success: (ConnectAuthenticationResult) -> Void, failure: (EmbyError) -> Void) {
+    public func Authenticate(username: String, password: String, success: @escaping (ConnectAuthenticationResult) -> Void, failure: @escaping (EmbyError) -> Void) {
         // UnsupportedEncodingException, NoSuchAlgorithmException {
         
         let args = QueryStringDictionary()
         
         args.Add("nameOrEmail", value: username)
-        args.Add("password", value: ConnectPassword.PerformPreHashFilter(password).md5())
+        args.Add("password", value: ConnectPassword.PerformPreHashFilter(password: password).md5())
         
-        let url = GetConnectUrl("user/authenticate")
+        let url = GetConnectUrl(handler: "user/authenticate")
         
-        let request = HttpRequest(url: url, method: .POST, postData: args)
+        let request = HttpRequest(url: url, method: .post, postData: args)
 
-        AddXApplicationName(request)
+        AddXApplicationName(request: request)
         
-        httpClient.sendRequest(request, success: success, failure: failure)
+        httpClient.sendRequest(request: request, success: success, failure: failure)
     }
     
-    public func CreatePin(deviceId: String, success: (PinCreationResult) -> Void, failure: (EmbyError) -> Void)
+    public func CreatePin(deviceId: String, success: @escaping (PinCreationResult) -> Void, failure: @escaping (EmbyError) -> Void)
     {
         let args = QueryStringDictionary()
         
         args.Add("deviceId", value: deviceId)
         
-        let url = GetConnectUrl("pin") + "?" + args.GetQueryString()
+        let url = GetConnectUrl(handler: "pin") + "?" + args.GetQueryString()
         
-        let request = HttpRequest(url: url, method: .POST, postData: args)
+        let request = HttpRequest(url: url, method: .post, postData: args)
         
-        AddXApplicationName(request)
+        AddXApplicationName(request: request)
         
-        httpClient.sendRequest(request, success: success, failure: failure)
+        httpClient.sendRequest(request: request, success: success, failure: failure)
     }
     
-    public func GetPinStatus(pin: PinCreationResult, success: (PinStatusResult) -> Void, failure: (EmbyError) -> Void)
+    public func GetPinStatus(pin: PinCreationResult, success: @escaping (PinStatusResult) -> Void, failure: @escaping (EmbyError) -> Void)
     {
         let dict = QueryStringDictionary()
         
         dict.Add("deviceId", value: pin.deviceId)
         dict.Add("pin", value: pin.pin)
         
-        let url = GetConnectUrl("pin") + "?" + dict.GetQueryString()
+        let url = GetConnectUrl(handler: "pin") + "?" + dict.GetQueryString()
         
-        let request = HttpRequest(url: url, method: .GET)
+        let request = HttpRequest(url: url, method: .get)
         
-        AddXApplicationName(request)
+        AddXApplicationName(request: request)
         
-        httpClient.sendRequest(request, success: success, failure: failure)
+        httpClient.sendRequest(request: request, success: success, failure: failure)
     }
     
-    public func ExchangePin(pin: PinCreationResult, success: (PinExchangeResult) -> Void, failure: (EmbyError) -> Void)
+    public func ExchangePin(pin: PinCreationResult, success: @escaping (PinExchangeResult) -> Void, failure: @escaping (EmbyError) -> Void)
     {
         let args = QueryStringDictionary()
         
         args.Add("deviceId", value: pin.deviceId)
         args.Add("pin", value: pin.pin)
         
-        let url = GetConnectUrl("pin/authenticate")
+        let url = GetConnectUrl(handler: "pin/authenticate")
         
-        let request = HttpRequest(url: url, method: .POST, postData: args)
+        let request = HttpRequest(url: url, method: .post, postData: args)
         
-        AddXApplicationName(request)
+        AddXApplicationName(request: request)
         
-        httpClient.sendRequest(request, success: success, failure: failure)
+        httpClient.sendRequest(request: request, success: success, failure: failure)
     }
     
-    public func GetConnectUser(query: ConnectUserQuery, connectAccessToken: String?, success: (ConnectUser) -> Void, failure: (EmbyError) -> Void) throws
+    public func GetConnectUser(query: ConnectUserQuery, connectAccessToken: String?, success: @escaping (ConnectUser) -> Void, failure: @escaping (EmbyError) -> Void) throws
     {
         let dict = QueryStringDictionary()
         
@@ -116,45 +116,45 @@ public class ConnectService {
         }
         else
         {
-            throw Error.IllegalArgumentException("Empty ConnectUserQuery")
+            throw CSError.IllegalArgumentException("Empty ConnectUserQuery")
         }
         
-        let url = GetConnectUrl("user") + "?" + dict.GetQueryString()
+        let url = GetConnectUrl(handler: "user") + "?" + dict.GetQueryString()
         
-        let request = HttpRequest(url: url, method: .GET)
+        let request = HttpRequest(url: url, method: .get)
         
-        try AddUserAccessToken(request, accessToken: connectAccessToken)
-        AddXApplicationName(request)
+        try AddUserAccessToken(request: request, accessToken: connectAccessToken)
+        AddXApplicationName(request: request)
         
-        httpClient.sendRequest(request, success: success, failure: failure)
+        httpClient.sendRequest(request: request, success: success, failure: failure)
     }
     
-    public func GetServers(userId: String, connectAccessToken: String, success: ([ConnectUserServer]) -> Void, failure: (EmbyError) -> Void) throws
+    public func GetServers(userId: String, connectAccessToken: String, success: @escaping ([ConnectUserServer]) -> Void, failure: @escaping (EmbyError) -> Void) throws
     {
         let dict = QueryStringDictionary()
         
         dict.Add("userId", value: userId)
         
-        let url = GetConnectUrl("servers") + "?" + dict.GetQueryString()
+        let url = GetConnectUrl(handler: "servers") + "?" + dict.GetQueryString()
         
-        let request = HttpRequest(url: url, method: .GET)
+        let request = HttpRequest(url: url, method: .get)
         
-        try AddUserAccessToken(request, accessToken: connectAccessToken)
-        AddXApplicationName(request)
+        try AddUserAccessToken(request: request, accessToken: connectAccessToken)
+        AddXApplicationName(request: request)
         
-        httpClient.sendCollectionRequest(request, success: success, failure: failure)
+        httpClient.sendCollectionRequest(request: request, success: success, failure: failure)
     }
     
-    public func Logout(connectAccessToken: String, success: (EmptyResponse) -> Void, failure: (EmbyError) -> Void) throws
+    public func Logout(connectAccessToken: String, success: @escaping (EmptyResponse) -> Void, failure: @escaping (EmbyError) -> Void) throws
     {
-        let url = GetConnectUrl("user/logout")
+        let url = GetConnectUrl(handler: "user/logout")
         
-        let request = HttpRequest(url: url, method: .POST)
+        let request = HttpRequest(url: url, method: .post)
         
-        try AddUserAccessToken(request, accessToken: connectAccessToken)
-        AddXApplicationName(request)
+        try AddUserAccessToken(request: request, accessToken: connectAccessToken)
+        AddXApplicationName(request: request)
         
-        httpClient.sendRequest(request, success: success, failure: failure)
+        httpClient.sendRequest(request: request, success: success, failure: failure)
     }
     
     private func GetConnectUrl(handler: String) -> String
@@ -168,7 +168,7 @@ public class ConnectService {
         {
             request.headers["X-Connect-UserToken"] = accessToken
         } else {
-            throw Error.IllegalArgumentException("accessToken")
+            throw CSError.IllegalArgumentException("accessToken")
         }
     }
     
@@ -177,21 +177,21 @@ public class ConnectService {
         request.headers["X-Application"] = appName + "/" + appVersion
     }
     
-    public func GetRegistrationInfo(userId: String, feature: String, connectAccessToken: String, success: (RegistrationInfo) -> Void, failure: (EmbyError) -> Void) throws
+    public func GetRegistrationInfo(userId: String, feature: String, connectAccessToken: String, success: @escaping (RegistrationInfo) -> Void, failure: @escaping (EmbyError) -> Void) throws
     {
         let dict = QueryStringDictionary()
         
         dict.Add("userId", value: userId)
         dict.Add("feature", value: feature)
         
-        let url = GetConnectUrl("registrationInfo") + "?" + dict.GetQueryString()
+        let url = GetConnectUrl(handler: "registrationInfo") + "?" + dict.GetQueryString()
         
-        let request = HttpRequest(url: url, method: .GET)
+        let request = HttpRequest(url: url, method: .get)
         
-        try AddUserAccessToken(request, accessToken: connectAccessToken)
+        try AddUserAccessToken(request: request, accessToken: connectAccessToken)
         
-        AddXApplicationName(request)
+        AddXApplicationName(request: request)
         
-        httpClient.sendRequest(request, success: success, failure: failure)
+        httpClient.sendRequest(request: request, success: success, failure: failure)
     }
 }

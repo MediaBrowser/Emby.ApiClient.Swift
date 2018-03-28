@@ -21,18 +21,18 @@ class SubtitleProfileTests: XCTestCase {
     func testSupportsLanguageTrueOnNilLanguage() {
         let subtitleProfile = SubtitleProfile(format: "format", method: SubtitleDeliveryMethod.Embed, didlMode: "didlMode", language: nil)
         
-        XCTAssertTrue(subtitleProfile.supportsLanguage("english"))
+        XCTAssertTrue(subtitleProfile.supportsLanguage(subLanguage: "english"))
     }
     
     func testSupportsLanguageTrueOnContainingLanguage() {
         let subtitleProfile = SubtitleProfile(format: "format", method: SubtitleDeliveryMethod.Embed, didlMode: "didlMode", language: "english,french,spanish")
         
-        XCTAssertTrue(subtitleProfile.supportsLanguage("french"))
+        XCTAssertTrue(subtitleProfile.supportsLanguage(subLanguage: "french"))
     }
     
     func testSupportsLanguageFalseOnMissingLanguage() {
         let subtitleProfile = SubtitleProfile(format: "format", method: SubtitleDeliveryMethod.Embed, didlMode: "didlMode", language: "english,french,spanish")
         
-        XCTAssertFalse(subtitleProfile.supportsLanguage("german"))
+        XCTAssertFalse(subtitleProfile.supportsLanguage(subLanguage: "german"))
     }
 }
